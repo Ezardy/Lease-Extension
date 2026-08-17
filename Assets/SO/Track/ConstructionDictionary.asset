@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8e33ad14c2a5244b748ea3b48ad74c, type: 3}
+  m_Name: ConstructionDictionary
+  m_EditorClassIdentifier: World::Aniki.World.ConstructionBlueprintDatabase
+  constructions:
+  - target: {fileID: 11400000, guid: 6db5d3d55e6e73e49af48c3753559ea6, type: 2}
+  - target: {fileID: 11400000, guid: 146d28c6eea9bb248b22af31343f1fbb, type: 2}
+  - target: {fileID: 11400000, guid: 9936068489468744da3592ff8c92ca97, type: 2}
+  - target: {fileID: 11400000, guid: 31a68180f32e72543adff347c80194cf, type: 2}

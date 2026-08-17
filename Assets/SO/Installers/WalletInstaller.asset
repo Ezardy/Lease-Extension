@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09ac8c79b3380b4fa747c0f0d3d014f, type: 3}
+  m_Name: WalletInstaller
+  m_EditorClassIdentifier: Wallet::Aniki.Wallet.WalletInstaller
+  useDefaults: 0
+  walletSave: {fileID: 11400000, guid: 32ed5fc3fc589ad4fb25381faece47cc, type: 2}

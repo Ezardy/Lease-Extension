@@ -1,0 +1,116 @@
+:root {
+    border-top-width: 0;
+    margin-top: 0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: center;
+    flex-shrink: 0;
+}
+
+.root-container {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
+.game-result-entry {
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    align-content: center;
+    width: 80%;
+    flex-grow: 1;
+    max-width: 500px;
+    height: 25%;
+    -unity-text-auto-size: best-fit 10px 197px;
+}
+
+.result-entry-label {
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+}
+
+.result-entry-value {
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+}
+
+.game-stats-container {
+    align-items: center;
+    -unity-text-align: middle-center;
+    width: 100%;
+    height: 9%;
+    flex-grow: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: center;
+    -unity-font-definition: url("project://database/Assets/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
+}
+
+.blink-2 {
+    -unity-material: url("project://database/Assets/Materials/UI/Blink%202.mat?fileID=2100000&guid=5deea5ac0e06d95488825b904ad7bc2a&type=2#Blink 2");
+}
+
+.prison-font {
+    -unity-font-definition: url("project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+}
+
+.protocol-label {
+    -unity-font-definition: url("project://database/Assets/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.protocol-value {
+    -unity-font-definition: url("project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+    background-color: rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(255, 255, 255);
+    -unity-text-outline-width: 0;
+    text-shadow: 0.4px 0.5px 0 rgb(184, 184, 184);
+    color: rgb(255, 255, 255);
+}
+
+.signature {
+    color: rgb(0, 0, 0);
+    -unity-font-definition: url("project://database/Assets/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
+}
+
+.signature:hover {
+    color: rgb(108, 100, 173);
+    -unity-font-definition: url("project://database/Assets/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
+}
+
+.signature:active {
+    color: rgb(16, 4, 120);
+    -unity-font-definition: url("project://database/Assets/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
+}
+
+.record-group {
+    flex-direction: row;
+    justify-content: flex-start;
+    border-top-left-radius: 0;
+    -unity-text-auto-size: best-fit 10px 100px;
+    width: auto;
+    height: 13%;
+    -unity-font-definition: url("project://database/Assets/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
+    color: rgb(191, 203, 199);
+    -unity-text-align: middle-center;
+}
+
+.game-stats-group {
+    flex-direction: row;
+    justify-content: center;
+    height: 45%;
+    align-self: center;
+    margin-right: 1%;
+    -unity-text-auto-size: best-fit 10px 100px;
+    color: rgb(228, 214, 104);
+    -unity-text-align: middle-center;
+}

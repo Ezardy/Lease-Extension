@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainStyles.uss?fileID=7433441132597879392&amp;guid=ee9a5807ee865a548a165d9265d0794f&amp;type=3#MainStyles"/>
+    <ui:VisualElement name="welcome" data-source-type="Aniki.UI.IWelcomeViewModel, Common" class="root-container" style="background-image: url(&quot;project://database/Assets/Sprites/Wall/brick%20wall.jpg?fileID=-1345487444&amp;guid=16620308affc2b943b23249bb6811c3c&amp;type=3#brick wall_0&quot;); background-repeat: round round; background-size: auto 22%; -unity-background-image-tint-color: rgb(255, 255, 255);">
+        <ui:Image name="welcome-image" scale-mode="ScaleToFit" style="height: 100%;">
+            <Bindings>
+                <ui:DataBinding property="source" data-source-path="Welcome" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Image>
+    </ui:VisualElement>
+</ui:UXML>

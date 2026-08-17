@@ -1,0 +1,20 @@
+{
+    "name": "Wallet",
+    "rootNamespace": "Aniki.Wallet",
+    "references": [
+        "GUID:e8bd2f4872af24d43842bf9b931b833e",
+        "GUID:5eb6977d055837a40843185997f022cc",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

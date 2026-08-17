@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44c934530b3f314aa1fb50a8e0f1798, type: 3}
+  m_Name: CosmeticsInstaller
+  m_EditorClassIdentifier: Cosmetics::Aniki.Cosmetics.CosmeticsInstaller
+  babHairstyleModelDependencies:
+    cosmeticsSave: {fileID: 11400000, guid: ef7c7394eaeb040439d08403336f9588, type: 2}
+    cosmeticsCollectionSave: {fileID: 11400000, guid: 91ba807f90b823141a4e625f6a0d4d73, type: 2}
+    database:
+      target: {fileID: 11400000, guid: 1ffa47ee5136cef419aa801d764d3f3a, type: 2}
+  pupHairstyleModelDependencies:
+    cosmeticsSave: {fileID: 11400000, guid: 0443a4d8fed1d5c4f8fb45561e2386fb, type: 2}
+    cosmeticsCollectionSave: {fileID: 11400000, guid: 478abc3bd6d63a34ebd91b5087132c19, type: 2}
+    database:
+      target: {fileID: 11400000, guid: acd5f82023113a24296b4ff237541a3b, type: 2}

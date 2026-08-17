@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72256f096727c814eba090aaec06baa5, type: 3}
+  m_Name: Tooth
+  m_EditorClassIdentifier: World::Aniki.World.BehaviourConstructionPartBlueprint
+  initialPool: 1
+  margin: 0
+  width: 1.32
+  autoWidth: 1
+  hasSpriteRenderer: 1
+  zOrdering: 0
+  prefab: {fileID: 4005860622661818052, guid: 265d62e562eb9e148bbcd494c8df76b7, type: 3}

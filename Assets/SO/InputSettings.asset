@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e685fabf2ee39bb499013a6caa595b52, type: 3}
+  m_Name: InputSettings
+  m_EditorClassIdentifier: Input::Aniki.Input.InputSettings
+  punchActionReference: {fileID: -1142419407917398182, guid: fa25e42e874160644ba3faf1a90e7cb5, type: 3}
+  tapActionReference: {fileID: 3001919216989983466, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

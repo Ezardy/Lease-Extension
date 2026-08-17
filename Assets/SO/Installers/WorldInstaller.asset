@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2d8ac70bc9c5429b3639083fbb65e, type: 3}
+  m_Name: WorldInstaller
+  m_EditorClassIdentifier: World::Aniki.World.WorldInstaller
+  cameraPrefab: {fileID: 1972103245537613537, guid: f24037cfdf18ccf4e89b7d643ef30da5, type: 3}
+  eventSystemPrefab: {fileID: 2665780981160896574, guid: 82b4a30c43bd39349a580b671da1f508, type: 3}

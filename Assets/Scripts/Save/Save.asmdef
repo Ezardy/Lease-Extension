@@ -1,0 +1,17 @@
+{
+    "name": "Save",
+    "rootNamespace": "Aniki.Save",
+    "references": [
+        "GUID:e8bd2f4872af24d43842bf9b931b833e",
+        "GUID:fea644fba1aaf4a46be8d92807dc7ae7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

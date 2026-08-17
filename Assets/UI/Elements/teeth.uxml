@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainStyles.uss?fileID=7433441132597879392&amp;guid=ee9a5807ee865a548a165d9265d0794f&amp;type=3#MainStyles"/>
+    <ui:VisualElement name="game-stats__earned-group" data-source-type="Aniki.Wallet.IWalletModel, Common" class="game-stats-group">
+        <ui:Label text="7" name="game-stats__earned" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="earned" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&amp;guid=85d0bf1ae551f99488bc0d838034a094&amp;type=3#octin-prison-free.regular&quot;);">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="Balance" binding-mode="ToTarget"/>
+            </Bindings>
+        </ui:Label>
+        <ui:Image source="project://database/Assets/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" picking-mode="Ignore" scale-mode="ScaleToFit" style="flex-grow: 0; height: 100%; aspect-ratio: 1.3;"/>
+    </ui:VisualElement>
+</ui:UXML>
