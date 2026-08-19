@@ -33,6 +33,9 @@ All of the paramteres except *Start Height* and *End Height*, which belong to *S
 - **Range Start** and **Range End** - start and points of a range, in which a construction's start track can be randomly set. 0 corresponds to a first track, 1 - to a last track.
 - **Is Range Reversed** splits the range of possible start positions into two ranges, so *range start/end* now describes a range where no start track is possible.
 - **Height** - a height of a construction. The parameter tries to set a height to underlying construction parts if it is applicable. 0 - floor, 1 - ceil. For example, the bars' heights equal 1.
-- **Min/Max Delay** 
+- **Min/Max Delay** - a range of a random delay in meters, with which a construction starts to be spawned
+- **Min/Max Margin** - a range of a random margin in meters, which must be between constructions of the same type. If the distance of a margin is passed, but a track can't accomodate at least one of the construction's parts, the construction will not be placed on the tracks.
+- **Parts** - a set of construction parts
+- **Start/End Height** - a range of a random altitude. 0 - floor, 1 - ceil
 
 <p align="center"><img width="603" height="335" alt="thumbnail" src="https://github.com/user-attachments/assets/b22f7d09-d243-4b39-b7a9-76cba741ecb8" /></p>
