@@ -1,7 +1,7 @@
 <p align="center"><img width="1088" height="522" alt="banner" src="https://github.com/user-attachments/assets/3384a357-f977-480d-92f7-e48d23de1eb6" /></p>
 
 # Play
-* [Unity Play](https://play.unity.com/en/games/fc2eb307-fd13-4d5b-8b4e-bdccd85a8cd7/webgl-release)
+* [Unity Play](https://play.unity.com/en/games/fc2eb307-fd13-4d5b-8b4e-bdccd85a8cd7/lease-extension)
 * [itch.io](https://peatacho.itch.io/lease-extension)
 # Updates Roadmap
 The first - the nearest
