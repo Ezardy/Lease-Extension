@@ -11,8 +11,8 @@ namespace Aniki.UI {
 
 		public GameView(PanelRenderer panelRenderer) : base(panelRenderer, "game") { }
 
-		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root) {
-			base.OnGUIReload(panelRenderer, root);
+		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version) {
+			base.OnGUIReload(panelRenderer, root, version);
 			effects = root.Q<VisualElement>("effects");
 		}
 	}

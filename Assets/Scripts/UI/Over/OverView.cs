@@ -8,8 +8,8 @@ namespace Aniki.UI {
 
 		public Button AcceptButton => acceptButton;
 
-		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root) {
-			base.OnGUIReload(panelRenderer, root);
+		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version) {
+			base.OnGUIReload(panelRenderer, root, version);
 			acceptButton = root.Q<Button>("game-over__accept-button");
 		}
 	}

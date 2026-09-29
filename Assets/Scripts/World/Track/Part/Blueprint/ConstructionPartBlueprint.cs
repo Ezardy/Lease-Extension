@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using Aniki.SceneManagment;
 using Aniki.World;
+using LeaseExtension.World.Entities.Internal;
+using LeaseExtension.World.Track.Part.Blank;
+using LeaseExtension.World.Track.Part.Concrete;
+using LeaseExtension.World.Track.Part.Order;
+using LeaseExtension.World.Track.Part.Size;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -115,145 +120,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint {
 
 			blank.Populate(height, size);
 			return blank;
-		}
-
-		private class ConstructionPart : IConstructionPart {
-			protected readonly IConstructionPartBlueprint		blueprint;
-			protected readonly IObjectPool<ConstructionPart>	pool;
-			protected readonly Transform						poolTransform;
-			protected readonly Transform						transform;
-			protected readonly Vector3							initScale;
-
-			public ConstructionPart(IConstructionPartBlueprint blueprint,
-				Transform transform,
-				IObjectPool<ConstructionPart> pool) {
-				this.blueprint = blueprint;
-				this.pool = pool;
-				this.transform = transform;
-				poolTransform = transform.parent;
-				initScale = transform.transform.localScale;
-			}
-
-			public IConstructionPartBlueprint	Blueprint => blueprint;
-
-			public float X => transform.position.x;
-
-			public virtual void	Place(Vector3 position, float scale, float s, int order) {
-				transform.parent = null;
-				transform.localScale *= scale;
-				transform.position = position;
-				transform.gameObject.SetActive(true);
-			}
-
-			public void	WipeOut() {
-				transform.parent = poolTransform;
-				transform.gameObject.SetActive(false);
-				transform.localScale = initScale;
-				pool.Release(this);
-			}
-
-			public void	Dispose() {
-				Destroy(transform.gameObject);
-			}
-
-			public void	Move(float shift) {
-				transform.Translate(shift, 0, 0);
-			}
-		}
-
-		private class SizedConstructionPart : ConstructionPart {
-			private readonly ISize	sizer;
-			private readonly IOrder	orderer;
-
-			public SizedConstructionPart(IConstructionPartBlueprint blueprint,
-				Transform transform, ISize sizer,
-				IObjectPool<ConstructionPart> pool, IOrder orderer)
-				: base(blueprint, transform, pool) {
-				this.sizer = sizer;
-				this.orderer = orderer;
-			}
-
-			public override void Place(Vector3 position, float scale, float s, int order) {
-				base.Place(position, scale, s, order);
-				if (s != 0)
-					sizer.Size = new(sizer.Size.x, s / transform.localScale.y);
-				transform.position += position - sizer.Min + blueprint.Margin * Vector3.right;
-				orderer.Order = order;
-			}
-		}
-
-		private interface IOrder {
-			public int	Order { get; set; }
-		}
-
-		private class SpriteOrder : IOrder {
-			private readonly SpriteRenderer	renderer;
-
-			public int	Order {
-				get => renderer.sortingOrder;
-				set => renderer.sortingOrder = value;
-			}
-
-			public SpriteOrder(SpriteRenderer renderer) {
-				this.renderer = renderer;
-			}
-		}
-
-		private class TransformOrder : IOrder {
-			private readonly Transform	transform;
-
-			public int	Order {
-				get => (int)transform.position.z;
-				set {
-					Vector3	position = transform.position;
-
-					position.z = value;
-					transform.position = position;
-				}
-			}
-
-			public TransformOrder(Transform transform) {
-				this.transform = transform;
-			}
-		}
-
-		private class VirtualOrder : IOrder {
-			public int	Order { get; set; }
-		}
-
-		private interface ISize {
-			public Vector2	Size { get; set; }
-			public Vector3	Min { get; }
-		}
-
-		private class RendererSize : ISize {
-			private readonly SpriteRenderer	renderer;
-
-			public Vector2	Size {
-				get => renderer.size;
-				set => renderer.size = value;
-			}
-
-			public Vector3	Min => renderer.bounds.min;
-
-			public RendererSize(SpriteRenderer renderer) {
-				this.renderer = renderer;
-			}
-		}
-
-		private class ColliderSize : ISize {
-			private readonly BoxCollider2D	collider;
-
-			public Vector2	Size {
-				get => collider.size;
-				set => collider.size = value;
-			}
-
-			public Vector3	Min => collider.bounds.min;
-
-			public ColliderSize(BoxCollider2D collider) {
-				this.collider = collider;
-			}
 		}
 	}
 }
