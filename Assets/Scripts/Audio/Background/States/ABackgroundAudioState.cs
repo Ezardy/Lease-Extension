@@ -1,33 +1,43 @@
-using Aniki.State;
+using LeaseExtension.State;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Audio {
-	internal abstract class ABackgroundAudioState<T> : AState<IBackgroundAudioContext>, IPoolable<IMemoryPool> where T : ABackgroundAudioState<T> {
-		protected readonly int	triggerHash;
+namespace LeaseExtension.Audio.Background.States
+{
+    [MovedFrom("Aniki.Audio")]
+    internal abstract class ABackgroundAudioState<T> : AState<IBackgroundAudioContext>, IPoolable<IMemoryPool> where T : ABackgroundAudioState<T>
+    {
+        protected readonly int TriggerHash;
+        private IMemoryPool _pool;
 
-		private IMemoryPool	pool;
+        protected ABackgroundAudioState(IBackgroundAudioContext context, string animatorStateName) : base(context)
+        {
+            TriggerHash = Animator.StringToHash(animatorStateName);
+        }
 
-		protected ABackgroundAudioState(IBackgroundAudioContext context, string animatorStateName) : base(context) {
-			triggerHash = Animator.StringToHash(animatorStateName);
-		}
+        public override void Start()
+        {
+            Context.Animator.SetTrigger(TriggerHash);
+        }
 
-		public void OnDespawned() {
-			pool = null;
-		}
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
-		public void OnSpawned(IMemoryPool pool) {
-			this.pool = pool;
-		}
+        public void OnSpawned(IMemoryPool pool)
+        {
+            _pool = pool;
+        }
 
-		public override void	Start() {
-			context.Animator.SetTrigger(triggerHash);
-		}
+        public override void Dispose()
+        {
+            _pool.Despawn(this);
+        }
 
-		public override void	Dispose() {
-			pool.Despawn(this);
-		}
-
-		public class Factory : PlaceholderFactory<T> { }
-	}
+        public class Factory : PlaceholderFactory<T>
+        {
+        }
+    }
 }

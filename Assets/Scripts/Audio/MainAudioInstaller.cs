@@ -1,62 +1,84 @@
-using Aniki.Character;
-using Aniki.UI;
+using LeaseExtension.Audio.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
-using LeaseExtension.World.Entities.Message;
+using LeaseExtension.World.Contract.Message;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using Zenject;
 
-namespace Aniki.Audio {
-	internal class MainAudioInstaller : MonoInstaller {
-		[SerializeField] private VolumeGeneratorPair	punch;
-		[SerializeField] private VolumeGeneratorPair	obstacle;
-		[SerializeField] private VolumeGeneratorPair	floor;
-		[SerializeField] private VolumeGeneratorPair	tooth;
+namespace LeaseExtension.Audio
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class MainAudioInstaller : MonoInstaller
+    {
+        [SerializeField]
+        [FormerlySerializedAs("punch")]
+        private VolumeGeneratorPair _punch;
 
-		[Space]
+        [SerializeField]
+        [FormerlySerializedAs("obstacle")]
+        private VolumeGeneratorPair _obstacle;
 
-		[SerializeField] private VolumeGeneratorPair	sign;
+        [SerializeField]
+        [FormerlySerializedAs("floor")]
+        private VolumeGeneratorPair _floor;
 
-		[Space]
+        [SerializeField]
+        [FormerlySerializedAs("tooth")]
+        private VolumeGeneratorPair _tooth;
 
-		[SerializeField] private VolumeGeneratorPair	weightSwing;
-		[SerializeField] private OneShotAudioBehaviour	swingPlayer;
+        [Space]
+        [SerializeField]
+        [FormerlySerializedAs("sign")]
+        private VolumeGeneratorPair _sign;
 
-		public override void	InstallBindings() {
-			InstallCharacterAudio();
-			InstallUIAudio();
-		}
+        [Space]
+        [SerializeField]
+        [FormerlySerializedAs("weightSwing")]
+        private VolumeGeneratorPair _weightSwing;
 
-		private void	InstallUIAudio() {
-			Container.BindInterfacesTo<EventAudio<RestartRequested>>().AsSingle()
-				.WithArguments(sign.ToParameters());
-		}
+        [SerializeField]
+        [FormerlySerializedAs("swingPlayer")]
+        private OneShotAudioBehaviour _swingPlayer;
 
-		private void	InstallCharacterAudio() {
-			Container.BindInterfacesTo<EventAudio<CharacterState>>().FromSubContainerResolve()
-				.ByMethod(InstallCharacterPunchAudio).AsCached();
-			Container.BindInterfacesTo<EventAudio<ObstacleCollided>>().AsSingle()
-				.WithArguments(obstacle.ToParameters());
-			Container.BindInterfacesTo<EventAudio<CharacterState>>().AsCached()
-				.WithArguments(floor.ToParameters(), CharacterStateFilter.Over);
-			Container.BindInterfacesTo<EventAudio<ToothPicked>>().AsSingle()
-				.WithArguments(tooth.ToParameters());
+        public override void InstallBindings()
+        {
+            InstallCharacterAudio();
+            InstallUIAudio();
+        }
 
-			Container.Bind<AudioPlayerParameters>().FromSubContainerResolve()
-				.ByMethod(InstallCharacterSwingAudio).AsCached();
-		}
+        private void InstallUIAudio()
+        {
+            Container.BindInterfacesTo<EventAudio<RestartRequested>>().AsSingle().WithArguments(_sign.ToParameters());
+        }
 
-		private void	InstallCharacterSwingAudio(DiContainer container) {
-			container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(1);
-			container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
-			container.BindInstance(weightSwing.ToParameters());
-			container.QueueForInject(swingPlayer);
-		}
+        private void InstallCharacterAudio()
+        {
+            Container.BindInterfacesTo<EventAudio<CharacterState>>().FromSubContainerResolve().ByMethod(InstallCharacterPunchAudio).AsCached();
+            Container.BindInterfacesTo<EventAudio<ObstacleCollided>>().AsSingle().WithArguments(_obstacle.ToParameters());
+            Container.BindInterfacesTo<EventAudio<CharacterState>>().AsCached().WithArguments(
+                _floor.ToParameters(),
+                CharacterStateFilter.Over);
+            Container.BindInterfacesTo<EventAudio<ToothPicked>>().AsSingle().WithArguments(_tooth.ToParameters());
+            Container.Bind<AudioPlayerParameters>().FromSubContainerResolve().ByMethod(InstallCharacterSwingAudio).AsCached();
+        }
 
-		private void	InstallCharacterPunchAudio(DiContainer container) {
-			container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(2);
-			container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
-			container.Bind<EventAudio<CharacterState>>().AsSingle().WithArguments(CharacterStateFilter.Punch, punch.ToParameters());
-		}
-	}
+        private void InstallCharacterSwingAudio(DiContainer container)
+        {
+            container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(1);
+            container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
+            container.BindInstance(_weightSwing.ToParameters());
+            container.QueueForInject(_swingPlayer);
+        }
+
+        private void InstallCharacterPunchAudio(DiContainer container)
+        {
+            container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(2);
+            container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
+            container.Bind<EventAudio<CharacterState>>().AsSingle().WithArguments(
+                CharacterStateFilter.Punch,
+                _punch.ToParameters());
+        }
+    }
 }

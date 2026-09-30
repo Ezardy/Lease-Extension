@@ -1,3 +1,6 @@
-namespace Aniki.Cosmetics {
-	internal interface ICosmeticsElementViewModel { }
+namespace LeaseExtension.Cosmetics.Contract
+{
+    internal interface ICosmeticsElementViewModel
+    {
+    }
 }

@@ -1,7 +1,8 @@
-using UnityEngine.Audio;
 
-namespace Aniki.Audio {
-	public interface IOneShotAudioPlayer {
-		public void	Play(AudioPlayerParameters parameters);
-	}
+namespace LeaseExtension.Audio.Contract
+{
+    public interface IOneShotAudioPlayer
+    {
+        public void Play(AudioPlayerParameters parameters);
+    }
 }

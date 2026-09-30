@@ -1,4 +1,6 @@
-namespace LeaseExtension
+namespace LeaseExtension.World.Contract.Message
 {
-	public struct BarPassed { }
+    public struct BarPassed
+    {
+    }
 }

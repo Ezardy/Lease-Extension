@@ -1,69 +1,82 @@
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Audio {
-	internal class AudioSourcePool : IObjectPool<AudioSource>, IInitializable, IDisposable {
-		private readonly AudioSourceFactory			factory;
-		private readonly IObjectPool<AudioSource>	pool;
+namespace LeaseExtension.Audio
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class AudioSourcePool : IObjectPool<AudioSource>, IInitializable, IDisposable
+    {
+        private readonly AudioSourceFactory _factory;
+        private readonly IObjectPool<AudioSource> _pool;
+        private Transform _poolTransform;
+        private bool _isQuiting = false;
 
-		private Transform	poolTransform;
-		private bool		isQuiting = false;
+        public int CountInactive => _pool.CountInactive;
 
-		public AudioSourcePool(AudioSourceFactory factory) {
-			this.factory = factory;
-			pool = new ObjectPool<AudioSource>(Create, OnGet, OnRelease, OnDestroy, true);
-		}
+        public AudioSourcePool(AudioSourceFactory factory)
+        {
+            _factory = factory;
+            _pool = new ObjectPool<AudioSource>(Create, OnGet, OnRelease, OnDestroy, true);
+        }
 
-		public void	Initialize() {
-			poolTransform = new GameObject("Audio Source pool").transform;
-			UnityEngine.Object.DontDestroyOnLoad(poolTransform);
-		}
+        public void Initialize()
+        {
+            _poolTransform = new GameObject("Audio Source pool").transform;
+            UnityEngine.Object.DontDestroyOnLoad(_poolTransform);
+        }
 
-		public int	CountInactive => pool.CountInactive;
+        public void Clear()
+        {
+            _pool.Clear();
+        }
 
-		public void	Clear() {
-			pool.Clear();
-		}
+        public AudioSource Get()
+        {
+            return _pool.Get();
+        }
 
-		public AudioSource	Get() {
-			return pool.Get();
-		}
+        public PooledObject<AudioSource> Get(out AudioSource v)
+        {
+            return _pool.Get(out v);
+        }
 
-		public PooledObject<AudioSource>	Get(out AudioSource v) {
-			return pool.Get(out v);
-		}
+        public void Release(AudioSource element)
+        {
+            _pool.Release(element);
+        }
 
-		public void	Release(AudioSource element) {
-			pool.Release(element);
-		}
+        public void Dispose()
+        {
+            _isQuiting = true;
+        }
 
-		private AudioSource	Create() {
-			AudioSource	instance = factory.Create();
+        private void OnDestroy(AudioSource instance)
+        {
+            UnityEngine.Object.Destroy(instance.gameObject);
+        }
 
-			OnRelease(instance);
-			return instance;
-		}
+        private AudioSource Create()
+        {
+            AudioSource instance = _factory.Create();
+            OnRelease(instance);
+            return instance;
+        }
 
-		private void	OnGet(AudioSource instance) {
-			instance.gameObject.SetActive(true);
-			instance.transform.parent = null;
-		}
+        private void OnGet(AudioSource instance)
+        {
+            instance.gameObject.SetActive(true);
+            instance.transform.parent = null;
+        }
 
-		private void	OnRelease(AudioSource instance) {
-			instance.generator = null;
-			if (!isQuiting)
-				instance.transform.parent = poolTransform;
-			instance.gameObject.SetActive(false);
-		}
-
-		private void	OnDestroy(AudioSource instance) {
-			UnityEngine.Object.Destroy(instance.gameObject);
-		}
-
-		public void	Dispose() {
-			isQuiting = true;
-		}
-	}
+        private void OnRelease(AudioSource instance)
+        {
+            instance.generator = null;
+            if (!_isQuiting)
+                instance.transform.parent = _poolTransform;
+            instance.gameObject.SetActive(false);
+        }
+    }
 }

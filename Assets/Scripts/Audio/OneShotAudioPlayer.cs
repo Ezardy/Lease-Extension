@@ -1,34 +1,42 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
+using LeaseExtension.Audio.Contract;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Audio {
-	internal class OneShotAudioPlayer : IOneShotAudioPlayer, IDisposable {
-		private readonly IObjectPool<AudioSource>	pool;
-		private readonly CancellationTokenSource	tokenSource = new();
+namespace LeaseExtension.Audio
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class OneShotAudioPlayer : IOneShotAudioPlayer, IDisposable
+    {
+        private readonly IObjectPool<AudioSource> _pool;
+        private readonly CancellationTokenSource _tokenSource = new();
 
-		public OneShotAudioPlayer(IObjectPool<AudioSource> pool) {
-			this.pool = pool;
-		}
+        public OneShotAudioPlayer(IObjectPool<AudioSource> pool)
+        {
+            _pool = pool;
+        }
 
-		public void	Play(AudioPlayerParameters parameters) {
-			PlayAsync(parameters).Forget();
-		}
+        public void Play(AudioPlayerParameters parameters)
+        {
+            PlayAsync(parameters).Forget();
+        }
 
-		private async UniTaskVoid	PlayAsync(AudioPlayerParameters parameters) {
-			AudioSource	audioSource = pool.Get();
+        public void Dispose()
+        {
+            _tokenSource.Cancel();
+        }
 
-			parameters.LoadParameters(audioSource);
-			audioSource.Play();
-			await UniTask.WaitWhile(() => audioSource.isPlaying, cancellationToken: tokenSource.Token);
-			AudioPlayerParameters.Default.LoadParameters(audioSource);
-			pool.Release(audioSource);
-		}
-
-		public void	Dispose() {
-			tokenSource.Cancel();
-		}
-	}
+        private async UniTaskVoid PlayAsync(AudioPlayerParameters parameters)
+        {
+            AudioSource audioSource = _pool.Get();
+            parameters.LoadParameters(audioSource);
+            audioSource.Play();
+            await UniTask.WaitWhile(() => audioSource.isPlaying, cancellationToken: _tokenSource.Token);
+            AudioPlayerParameters.Default.LoadParameters(audioSource);
+            _pool.Release(audioSource);
+        }
+    }
 }

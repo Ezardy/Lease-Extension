@@ -1,29 +1,40 @@
-using Aniki.State;
+using LeaseExtension.Audio.Background;
+using LeaseExtension.Audio.Background.States;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using Zenject;
 
-namespace Aniki.Audio {
-	[CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
-	internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller> {
-		[SerializeField] private AudioSource	poolPrefab;
-		[SerializeField] private Animator		backgroundPrefab;
+namespace LeaseExtension.Audio
+{
+    [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
+    [MovedFrom("Aniki.Audio")]
+    internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller>
+    {
+        [SerializeField]
+        [FormerlySerializedAs("poolPrefab")]
+        private AudioSource _poolPrefab;
 
-		public override void	InstallBindings() {
-			Container.BindFactory<AudioSource, AudioSourceFactory>().FromComponentInNewPrefab(poolPrefab);
-			Container.BindInterfacesTo<AudioSourcePool>().AsSingle();
-			Container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
+        [SerializeField]
+        [FormerlySerializedAs("backgroundPrefab")]
+        private Animator _backgroundPrefab;
 
-			InstallBackgrounAudio();
-		}
+        public override void InstallBindings()
+        {
+            Container.BindFactory<AudioSource, AudioSourceFactory>().FromComponentInNewPrefab(_poolPrefab);
+            Container.BindInterfacesTo<AudioSourcePool>().AsSingle();
+            Container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
+            InstallBackgrounAudio();
+        }
 
-		private void	InstallBackgrounAudio() {
-			Container.BindFactory<WelcomeAudioState, WelcomeAudioState.Factory>();
-			Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
-			Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
-			Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();
-
-			Container.Bind<Animator>().FromComponentInNewPrefab(backgroundPrefab.gameObject).AsSingle();
-			Container.BindInterfacesTo<BackgroundAudioContext>().AsSingle();
-		}
-	}
+        private void InstallBackgrounAudio()
+        {
+            Container.BindFactory<WelcomeAudioState, WelcomeAudioState.Factory>();
+            Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();
+            Container.Bind<Animator>().FromComponentInNewPrefab(_backgroundPrefab.gameObject).AsSingle();
+            Container.BindInterfacesTo<BackgroundAudioContext>().AsSingle();
+        }
+    }
 }

@@ -1,22 +1,26 @@
-using System;
+using LeaseExtension.UI.Contract;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal abstract class AView : IView  {
-		protected readonly string		rootName;
+namespace LeaseExtension.UI
+{
+    [MovedFrom("Aniki.UI")]
+    internal abstract class AView : IView
+    {
+        protected readonly string RootName;
 
-		public VisualElement	Root => root;
+        public VisualElement Root { get; private set; }
 
-		private VisualElement	root;
+        protected AView(PanelRenderer panelRenderer, string rootName)
+        {
+            this.RootName = rootName;
+            panelRenderer.RegisterUIReloadCallback(OnGUIReload);
+        }
 
-		protected AView(PanelRenderer panelRenderer, string rootName) {
-			this.rootName = rootName;
-			panelRenderer.RegisterUIReloadCallback(OnGUIReload);
-		}
-
-		protected virtual void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version) {
-			panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
-			this.root = root.Q<VisualElement>(rootName);
-		}
-	}
+        protected virtual void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
+            this.Root = root.Q<VisualElement>(RootName);
+        }
+    }
 }

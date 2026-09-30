@@ -1,31 +1,38 @@
-using Aniki.Character;
-using MessagePipe;
 using System;
+using LeaseExtension.Gameplay.Contract.Message;
+using MessagePipe;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Audio {
-	internal class ResultAudioState : ABackgroundAudioState<ResultAudioState> {
-		private readonly ISubscriber<CharacterState>	characterStateSubscriber;
-		private readonly IdleAudioState.Factory			idleFactory;
+namespace LeaseExtension.Audio.Background.States
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class ResultAudioState : ABackgroundAudioState<ResultAudioState>
+    {
+        private readonly ISubscriber<CharacterState> _characterStateSubscriber;
+        private readonly IdleAudioState.Factory _idleFactory;
+        private IDisposable _disposable;
 
-		private IDisposable	disposable;
+        public ResultAudioState(
+            IBackgroundAudioContext context,
+            ISubscriber<CharacterState> characterStateSubscriber,
+            IdleAudioState.Factory idleFactory) : base(context, "Result")
+        {
+            _characterStateSubscriber = characterStateSubscriber;
+            _idleFactory = idleFactory;
+        }
 
-		public ResultAudioState(IBackgroundAudioContext context,
-			ISubscriber<CharacterState> characterStateSubscriber,
-			IdleAudioState.Factory idleFactory) : base(context, "Result") {
-			this.characterStateSubscriber = characterStateSubscriber;
-			this.idleFactory = idleFactory;
-		}
+        public override void Start()
+        {
+            base.Start();
+            _disposable = _characterStateSubscriber.Subscribe(
+                _ => Context.State = _idleFactory.Create(),
+                CharacterStateFilter.Idle);
+        }
 
-		public override void	Start() {
-			base.Start();
-			disposable = characterStateSubscriber.Subscribe(_ =>
-				context.State = idleFactory.Create(),
-				CharacterStateFilter.Idle);
-		}
-
-		public override void	Dispose() {
-			disposable.Dispose();
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            _disposable.Dispose();
+            base.Dispose();
+        }
+    }
 }

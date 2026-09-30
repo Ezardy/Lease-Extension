@@ -1,22 +1,24 @@
-using Aniki.World;
+using LeaseExtension.World.Contract;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
-    internal class VirtualConstructionPart : IConstructionPart {
-        private float	x = 0;
+    internal class VirtualConstructionPart : IConstructionPart
+    {
+        public IConstructionPartBlueprint Blueprint { get; }
+        public float X { get; private set; } = 0;
 
-        public VirtualConstructionPart(IConstructionPartBlueprint blueprint) {
+        public VirtualConstructionPart(IConstructionPartBlueprint blueprint)
+        {
             Blueprint = blueprint;
         }
 
-        public IConstructionPartBlueprint	Blueprint { get; }
-
-        public float	X => x;
-
-        public void	Move(float shift) {
-            x += shift;
+        public void Move(float shift)
+        {
+            X += shift;
         }
 
-        public void	WipeOut() { }
+        public void WipeOut()
+        {
+        }
     }
 }

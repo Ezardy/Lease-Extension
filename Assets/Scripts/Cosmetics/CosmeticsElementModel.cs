@@ -1,33 +1,40 @@
+using System.Collections.Generic;
+using LeaseExtension.Cosmetics.Contract;
 using ObservableCollections;
 using R3;
-using System.Collections.Generic;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Cosmetics {
-	internal class CosmeticsElementModel : ICosmeticsElementModel {
-		private readonly ReactiveProperty<string>	id;
-		private readonly ObservableHashSet<string>	idCollection;
+namespace LeaseExtension.Cosmetics
+{
+    [MovedFrom("Aniki.Cosmetics")]
+    internal class CosmeticsElementModel : ICosmeticsElementModel
+    {
+        private readonly ReactiveProperty<string> _id;
+        private readonly ObservableHashSet<string> _idCollection;
 
-		public CosmeticsElementModel(string id, IReadOnlyCollection<string> idCollection) {
-			this.id = new(id);
-			this.idCollection = new(idCollection);
-		}
+        public string Id
+        {
+            get => _id.CurrentValue;
+            set
+            {
+                if (_idCollection.Contains(value))
+                    _id.Value = value;
+            }
+        }
 
-		public string	Id {
-			get => id.CurrentValue;
-			set {
-				if (idCollection.Contains(value))
-					id.Value = value;
-			}
-		}
+        public IReadOnlyCollection<string> IdCollection => _idCollection;
+        public Observable<string> IdChanged => _id;
+        public Observable<CollectionAddEvent<string>> IdCollectionChanged => _idCollection.ObserveAdd();
 
-		public IReadOnlyCollection<string> IdCollection => idCollection;
+        public CosmeticsElementModel(string id, IReadOnlyCollection<string> idCollection)
+        {
+            _id = new(id);
+            _idCollection = new(idCollection);
+        }
 
-		public void	AddId(in string id) {
-			idCollection.Add(id);
-		}
-
-		public Observable<string>	IdChanged => id;
-
-		public Observable<CollectionAddEvent<string>>	IdCollectionChanged => idCollection.ObserveAdd();
-	}
+        public void AddId(in string id)
+        {
+            _idCollection.Add(id);
+        }
+    }
 }

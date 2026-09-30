@@ -1,47 +1,57 @@
-using Aniki.Common;
+using System.Collections.Generic;
+using LeaseExtension.Common.Utilities;
 using ObservableCollections;
 using R3;
-using System.Collections.Generic;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Cosmetics {
-	internal class BabHairstyle : ACosmeticsDecorator<BabHairstyle> { }
-	internal class PupHairstyle : ACosmeticsDecorator<PupHairstyle> { }
+namespace LeaseExtension.Cosmetics.Contract
+{
+    [MovedFrom("Aniki.Cosmetics")]
+    internal abstract class ACosmeticsDecorator<T>
+        where T : class
+    {
+        public class Database : ICosmeticsItemModelDatabase, ITyped<T>
+        {
+            private readonly ICosmeticsItemModelDatabase _database;
 
-	internal abstract class ACosmeticsDecorator<T> where T : class {
-		public class Database : ICosmeticsItemModelDatabase, ITyped<T> {
-			private readonly ICosmeticsItemModelDatabase	database;
+            public Database(ICosmeticsItemModelDatabase database)
+            {
+                _database = database;
+            }
 
-			public Database(ICosmeticsItemModelDatabase database) {
-				this.database = database;
-			}
+            public IEnumerable<ICosmeticsItemModel> GetCosmeticsItemModels()
+            {
+                return _database.GetCosmeticsItemModels();
+            }
 
-			public IEnumerable<ICosmeticsItemModel>	GetCosmeticsItemModels() {
-				return database.GetCosmeticsItemModels();
-			}
+            public ICosmeticsItemModel GetCosmeticsItemModel(string id)
+            {
+                return _database.GetCosmeticsItemModel(id);
+            }
+        }
 
-			public ICosmeticsItemModel	GetCosmeticsItemModel(string id) {
-				return database.GetCosmeticsItemModel(id);
-			}
-		}
+        public class ElementModel : ICosmeticsElementModel, ITyped<T>
+        {
+            private readonly ICosmeticsElementModel _model;
 
-		public class ElementModel : ICosmeticsElementModel, ITyped<T> {
-			private readonly ICosmeticsElementModel	model;
+            public string Id
+            {
+                get => _model.Id;
+                set => _model.Id = value;
+            }
+            public IReadOnlyCollection<string> IdCollection => _model.IdCollection;
+            public Observable<string> IdChanged => _model.IdChanged;
+            public Observable<CollectionAddEvent<string>> IdCollectionChanged => _model.IdCollectionChanged;
 
-			public ElementModel(ICosmeticsElementModel model) {
-				this.model = model;
-			}
+            public ElementModel(ICosmeticsElementModel model)
+            {
+                _model = model;
+            }
 
-			public string	Id { get => model.Id; set => model.Id = value; }
-
-			public IReadOnlyCollection<string>	IdCollection => model.IdCollection;
-
-			public Observable<string>	IdChanged => model.IdChanged;
-
-			public Observable<CollectionAddEvent<string>>	IdCollectionChanged => model.IdCollectionChanged;
-
-			public void	AddId(in string hair) {
-				model.AddId(in hair);
-			}
-		}
-	}
+            public void AddId(in string hair)
+            {
+                _model.AddId(in hair);
+            }
+        }
+    }
 }

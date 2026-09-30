@@ -1,29 +1,37 @@
-using Aniki.Character;
-using Aniki.UI;
+using System;
+using LeaseExtension.Gameplay.Contract;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.Record.Contract;
+using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using R3;
-using System;
-using LeaseExtension;
-using LeaseExtension.Gameplay.Contract.Message;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Record {
-	internal class RecordIncrementer : IDisposable {
-		private readonly IDisposable		disposable;
+namespace LeaseExtension.Record
+{
+    [MovedFrom("Aniki.Record")]
+    internal class RecordIncrementer : IDisposable
+    {
+        private readonly IDisposable _disposable;
 
-		public RecordIncrementer(IRecordModel model,
-			ICharacterModel characterModel,
-			ISubscriber<RestartRequested> resetSubscriber,
-			ISubscriber<BarPassed> barPassedSubscriber) {
-			IDisposable	d2 = resetSubscriber.Subscribe(_ => model.SetRecord());
-			IDisposable	d1 = barPassedSubscriber.Subscribe(_ => {
-				if (characterModel.State != CharacterState.FALL)
-					model.Increment();
-			});
-			disposable = Disposable.Combine(d1, d2);
-		}
+        public RecordIncrementer(
+            IRecordModel model,
+            ICharacterModel characterModel,
+            ISubscriber<RestartRequested> resetSubscriber,
+            ISubscriber<BarPassed> barPassedSubscriber)
+        {
+            IDisposable d2 = resetSubscriber.Subscribe(_ => model.SetRecord());
+            IDisposable d1 = barPassedSubscriber.Subscribe(_ =>
+            {
+                if (characterModel.State != CharacterState.Fall)
+                    model.Increment();
+            });
+            _disposable = Disposable.Combine(d1, d2);
+        }
 
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-	}
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+    }
 }

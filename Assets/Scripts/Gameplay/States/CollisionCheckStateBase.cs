@@ -1,38 +1,47 @@
-using Aniki.State;
-using MessagePipe;
 using System;
-using LeaseExtension.World.Entities.Message;
+using LeaseExtension.State;
+using LeaseExtension.State.Contract;
+using LeaseExtension.World.Contract.Message;
+using MessagePipe;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Character {
-	internal class CollisionCheckStateBase : AState<IContext> {
-		private readonly ISubscriber<ObstacleCollided>	wallSubscriber;
-		private readonly ISubscriber<FloorCollided>		floorSubscriber;
-		private readonly FallState.Factory						fallFactory;
-		private readonly OverState.Factory						overFactory;
+namespace LeaseExtension.Gameplay.States
+{
+    [MovedFrom("Aniki.Character")]
+    internal class CollisionCheckStateBase : AState<IContext>
+    {
+        private readonly ISubscriber<ObstacleCollided> _wallSubscriber;
+        private readonly ISubscriber<FloorCollided> _floorSubscriber;
+        private readonly FallState.Factory _fallFactory;
+        private readonly OverState.Factory _overFactory;
+        private IDisposable _wallSubscription;
+        private IDisposable _floorSubscription;
 
-		private IDisposable	wallSubscription;
-		private IDisposable	floorSubscription;
+        public CollisionCheckStateBase(
+            IContext context,
+            ISubscriber<ObstacleCollided> wallSubscriber,
+            ISubscriber<FloorCollided> floorSubscriber,
+            FallState.Factory fallFactory,
+            OverState.Factory overFactory) : base(context)
+        {
+            _wallSubscriber = wallSubscriber;
+            _floorSubscriber = floorSubscriber;
+            _fallFactory = fallFactory;
+            _overFactory = overFactory;
+        }
 
-		public CollisionCheckStateBase(IContext context,
-			ISubscriber<ObstacleCollided> wallSubscriber,
-			ISubscriber<FloorCollided> floorSubscriber,
-			FallState.Factory fallFactory, OverState.Factory overFactory) : base(context) {
-			this.wallSubscriber = wallSubscriber;
-			this.floorSubscriber = floorSubscriber;
-			this.fallFactory = fallFactory;
-			this.overFactory = overFactory;
-		}
+        public override void Start()
+        {
+            _wallSubscription = _wallSubscriber.Subscribe((_) => Context.State = _fallFactory.Create());
+            _floorSubscription = _floorSubscriber.Subscribe((_) => Context.State = _overFactory.Create());
+        }
 
-		public override void	Start() {
-			wallSubscription = wallSubscriber.Subscribe((_) => context.State =  fallFactory.Create());
-			floorSubscription = floorSubscriber.Subscribe((_) => context.State =  overFactory.Create());
-		}
-
-		public override void	Dispose() {
-			wallSubscription.Dispose();
-			floorSubscription.Dispose();
-			wallSubscription = null;
-			floorSubscription = null;
-		}
-	}
+        public override void Dispose()
+        {
+            _wallSubscription.Dispose();
+            _floorSubscription.Dispose();
+            _wallSubscription = null;
+            _floorSubscription = null;
+        }
+    }
 }

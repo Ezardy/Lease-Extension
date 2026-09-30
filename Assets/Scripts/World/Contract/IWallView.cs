@@ -1,5 +1,7 @@
-namespace Aniki.World {
-	public interface IWallView {
-		public float	Speed { get ;set; }
-	}
+namespace LeaseExtension.World.Contract
+{
+    public interface IWallView
+    {
+        public float Speed { get; set; }
+    }
 }

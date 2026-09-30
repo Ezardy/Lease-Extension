@@ -1,50 +1,56 @@
-using Aniki.World;
+using LeaseExtension.World.Contract;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
-    internal class ConstructionPart : IConstructionPart {
-        protected readonly IConstructionPartBlueprint		blueprint;
-        protected readonly IObjectPool<ConstructionPart>	pool;
-        protected readonly Transform						poolTransform;
-        protected readonly Transform						transform;
-        protected readonly Vector3							initScale;
+    internal class ConstructionPart : IConstructionPart
+    {
+        protected readonly IConstructionPartBlueprint PartBlueprint;
+        protected readonly IObjectPool<ConstructionPart> Pool;
+        protected readonly Transform PoolTransform;
+        protected readonly Transform Transform;
+        protected readonly Vector3 InitScale;
 
-        public ConstructionPart(IConstructionPartBlueprint blueprint,
+        public IConstructionPartBlueprint Blueprint => PartBlueprint;
+        public float X => Transform.position.x;
+
+        public ConstructionPart(
+            IConstructionPartBlueprint blueprint,
             Transform transform,
-            IObjectPool<ConstructionPart> pool) {
-            this.blueprint = blueprint;
-            this.pool = pool;
-            this.transform = transform;
-            poolTransform = transform.parent;
-            initScale = transform.transform.localScale;
+            IObjectPool<ConstructionPart> pool)
+        {
+            this.PartBlueprint = blueprint;
+            this.Pool = pool;
+            this.Transform = transform;
+            PoolTransform = transform.parent;
+            InitScale = transform.transform.localScale;
         }
 
-        public IConstructionPartBlueprint	Blueprint => blueprint;
-
-        public float X => transform.position.x;
-
-        public virtual void	Place(Vector3 position, float scale, float s, int order) {
-            transform.parent = null;
-            transform.localScale *= scale;
-            transform.position = position;
-            transform.gameObject.SetActive(true);
+        public virtual void Place(Vector3 position, float scale, float s, int order)
+        {
+            Transform.parent = null;
+            Transform.localScale *= scale;
+            Transform.position = position;
+            Transform.gameObject.SetActive(true);
         }
 
-        public void	WipeOut() {
-            transform.parent = poolTransform;
-            transform.gameObject.SetActive(false);
-            transform.localScale = initScale;
-            pool.Release(this);
+        public void WipeOut()
+        {
+            Transform.parent = PoolTransform;
+            Transform.gameObject.SetActive(false);
+            Transform.localScale = InitScale;
+            Pool.Release(this);
         }
 
-        public void	Dispose() {
-            Object.Destroy(transform.gameObject);
+        public void Dispose()
+        {
+            Object.Destroy(Transform.gameObject);
         }
 
-        public void	Move(float shift) {
-            transform.Translate(shift, 0, 0);
+        public void Move(float shift)
+        {
+            Transform.Translate(shift, 0, 0);
         }
     }
 }

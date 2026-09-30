@@ -1,34 +1,47 @@
-using Aniki.Cosmetics;
 using System;
+using LeaseExtension.Cosmetics.Contract;
+using LeaseExtension.Cosmetics.Contract.Target;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
-internal class CosmeticsMonoInstaller : MonoInstaller {
-	[SerializeField] private CosmeticsElementViewDependencies	babViewDependencies;
-	[SerializeField] private CosmeticsElementViewDependencies	pupViewDependencies;
+namespace LeaseExtension.Cosmetics
+{
+    internal class CosmeticsMonoInstaller : MonoInstaller
+    {
+        [SerializeField]
+        [FormerlySerializedAs("babViewDependencies")]
+        private CosmeticsElementViewDependencies _babViewDependencies;
 
-	public override void	InstallBindings() {
-		Container.BindInterfacesTo<CosmeticsElementViewModel<BabHairstyle>>()
-			.FromSubContainerResolve().ByMethod(c =>
-				Install<CosmeticsElementView<BabHairstyle>, CosmeticsElementViewModel<BabHairstyle>>(c, babViewDependencies))
-			.AsCached();
-		Container.BindInterfacesTo<CosmeticsElementViewModel<PupHairstyle>>()
-			.FromSubContainerResolve().ByMethod(c =>
-				Install<CosmeticsElementView<PupHairstyle>, CosmeticsElementViewModel<PupHairstyle>>(c, pupViewDependencies))
-			.AsCached();
-	}
+        [SerializeField]
+        [FormerlySerializedAs("pupViewDependencies")]
+        private CosmeticsElementViewDependencies _pupViewDependencies;
 
-	private void	Install<V, VM>(DiContainer container, CosmeticsElementViewDependencies viewDeps)
-		where V : ICosmeticsElementView where VM : class {
-		container.BindInstance(viewDeps.backSpriteRenderer);
-		container.BindInstance(viewDeps.frontSpriteRenderer);
-		container.BindInterfacesTo<V>().AsSingle();
-		container.Bind<VM>().AsSingle();
-	}
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesTo<CosmeticsElementViewModel<BabHairstyle>>().FromSubContainerResolve().ByMethod(
+                c => Install<CosmeticsElementView<BabHairstyle>, CosmeticsElementViewModel<BabHairstyle>>(c, _babViewDependencies)).AsCached();
+            Container.BindInterfacesTo<CosmeticsElementViewModel<PupHairstyle>>().FromSubContainerResolve().ByMethod(
+                c => Install<CosmeticsElementView<PupHairstyle>, CosmeticsElementViewModel<PupHairstyle>>(c, _pupViewDependencies)).AsCached();
+        }
 
-	[Serializable]
-	private class CosmeticsElementViewDependencies {
-		public SpriteRenderer	backSpriteRenderer;
-		public SpriteRenderer	frontSpriteRenderer;
-	}
+        private void Install<V, VM>(DiContainer container, CosmeticsElementViewDependencies viewDeps)
+            where V : ICosmeticsElementView where VM : class
+        {
+            container.BindInstance(viewDeps.BackSpriteRenderer);
+            container.BindInstance(viewDeps.FrontSpriteRenderer);
+            container.BindInterfacesTo<V>().AsSingle();
+            container.Bind<VM>().AsSingle();
+        }
+
+        [Serializable]
+        private class CosmeticsElementViewDependencies
+        {
+            [FormerlySerializedAs("backSpriteRenderer")]
+            public SpriteRenderer BackSpriteRenderer;
+
+            [FormerlySerializedAs("frontSpriteRenderer")]
+            public SpriteRenderer FrontSpriteRenderer;
+        }
+    }
 }

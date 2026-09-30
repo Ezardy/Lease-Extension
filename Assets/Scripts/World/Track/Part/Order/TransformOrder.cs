@@ -1,27 +1,26 @@
-using LeaseExtension.World.Entities.Internal;
+using LeaseExtension.World.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track.Part.Order
 {
     internal class TransformOrder : IOrder
     {
-        private readonly Transform	transform;
+        private readonly Transform _transform;
 
-        public int	Order
+        public int Order
         {
-            get => (int)transform.position.z;
+            get => (int)_transform.position.z;
             set
             {
-                Vector3	position = transform.position;
-
+                Vector3 position = _transform.position;
                 position.z = value;
-                transform.position = position;
+                _transform.position = position;
             }
         }
 
         public TransformOrder(Transform transform)
         {
-            this.transform = transform;
+            _transform = transform;
         }
     }
 }

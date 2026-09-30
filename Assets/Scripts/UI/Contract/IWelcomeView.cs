@@ -1,3 +1,6 @@
-namespace Aniki.UI {
-	internal interface IWelcomeView : IView { }
+namespace LeaseExtension.UI.Contract
+{
+    internal interface IWelcomeView : IView
+    {
+    }
 }

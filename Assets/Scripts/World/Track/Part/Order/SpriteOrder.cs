@@ -1,21 +1,21 @@
-using LeaseExtension.World.Entities.Internal;
+using LeaseExtension.World.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track.Part.Order
 {
     internal class SpriteOrder : IOrder
     {
-        private readonly SpriteRenderer	renderer;
+        private readonly SpriteRenderer _renderer;
 
-        public int	Order
+        public int Order
         {
-            get => renderer.sortingOrder;
-            set => renderer.sortingOrder = value;
+            get => _renderer.sortingOrder;
+            set => _renderer.sortingOrder = value;
         }
 
         public SpriteOrder(SpriteRenderer renderer)
         {
-            this.renderer = renderer;
+            _renderer = renderer;
         }
     }
 }

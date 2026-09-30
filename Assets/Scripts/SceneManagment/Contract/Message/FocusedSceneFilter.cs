@@ -1,10 +1,16 @@
-using Aniki.Common;
+using LeaseExtension.Common.Utilities;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.SceneManagment {
-	public class FocusedSceneFilter : EqualityFilter<FocusedScene> {
-		public static readonly FocusedSceneFilter	Welcome = new(FocusedScene.WELCOME);
-		public static readonly FocusedSceneFilter	Main = new(FocusedScene.MAIN);
+namespace LeaseExtension.SceneManagment.Contract.Message
+{
+    [MovedFrom("Aniki.SceneManagment")]
+    public class FocusedSceneFilter : EqualityFilter<FocusedScene>
+    {
+        public static readonly FocusedSceneFilter Welcome = new(FocusedScene.Welcome);
+        public static readonly FocusedSceneFilter Main = new(FocusedScene.Main);
 
-		public FocusedSceneFilter(FocusedScene sample) : base(sample) { }
-	}
+        public FocusedSceneFilter(FocusedScene sample) : base(sample)
+        {
+        }
+    }
 }

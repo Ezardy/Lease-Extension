@@ -1,35 +1,40 @@
-using Aniki.State;
-using Aniki.UI;
-using MessagePipe;
 using System;
 using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.State;
+using MessagePipe;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Character {
-	internal class OverState : APoolablePublishingState<OverState, ICharacterContext, CharacterState> {
-		private readonly ISubscriber<RestartRequested>	resetSubscriber;
-		private readonly IdleState.Factory					idleFactory;
+namespace LeaseExtension.Gameplay.States
+{
+    [MovedFrom("Aniki.Character")]
+    internal class OverState : APoolablePublishingState<OverState, ICharacterContext, CharacterState>
+    {
+        private readonly ISubscriber<RestartRequested> _resetSubscriber;
+        private readonly IdleState.Factory _idleFactory;
+        private IDisposable _disposable;
 
-		private IDisposable	disposable;
+        public OverState(
+            ICharacterContext context,
+            ISubscriber<RestartRequested> resetSubscriber,
+            StatePublisher<CharacterState>.Factory publisherFactory,
+            IdleState.Factory idleFactory) : base(
+            context,
+            publisherFactory.Create(CharacterState.Over))
+        {
+            _idleFactory = idleFactory;
+            _resetSubscriber = resetSubscriber;
+        }
 
-		public OverState(ICharacterContext context,
-			ISubscriber<RestartRequested> resetSubscriber,
-			StatePublisher<CharacterState>.Factory publisherFactory,
-			IdleState.Factory idleFactory)
-			: base(context, publisherFactory.Create(CharacterState.OVER)) {
-			this.idleFactory = idleFactory;
-			this.resetSubscriber = resetSubscriber;
-		}
+        public override void Start()
+        {
+            base.Start();
+            _disposable = _resetSubscriber.Subscribe(_ => Context.State = _idleFactory.Create());
+        }
 
-		public override void Start() {
-			base.Start();
-			disposable = resetSubscriber.Subscribe(_ =>
-				context.State = idleFactory.Create()
-			);
-		}
-
-		public override void	Dispose() {
-			disposable.Dispose();
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            _disposable.Dispose();
+            base.Dispose();
+        }
+    }
 }

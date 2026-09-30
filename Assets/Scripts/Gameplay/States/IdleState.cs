@@ -1,39 +1,51 @@
-using Aniki.State;
-using MessagePipe;
 using System;
+using LeaseExtension.Gameplay.Contract;
+using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Input.Contract;
+using LeaseExtension.State;
+using MessagePipe;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Character {
-	internal class IdleState : APoolablePublishingState<IdleState, ICharacterContext, CharacterState> {
-		private readonly ICharacterModel				characterModel;
-		private readonly PunchState.Factory				punchFactory;
-		private readonly ISubscriber<PunchRequested>	punchInput;
+namespace LeaseExtension.Gameplay.States
+{
+    [MovedFrom("Aniki.Character")]
+    internal class IdleState : APoolablePublishingState<IdleState, ICharacterContext, CharacterState>
+    {
+        private readonly ICharacterModel _characterModel;
+        private readonly PunchState.Factory _punchFactory;
+        private readonly ISubscriber<PunchRequested> _punchInput;
+        private IDisposable _disposable;
 
-		private IDisposable	disposable;
+        public IdleState(
+            ICharacterContext context,
+            PunchState.Factory punchFactory,
+            StatePublisher<CharacterState>.Factory publisherFactory,
+            ISubscriber<PunchRequested> punchInput,
+            ICharacterModel characterModel) : base(
+            context,
+            publisherFactory.Create(CharacterState.Idle))
+        {
+            _characterModel = characterModel;
+            _punchFactory = punchFactory;
+            _punchInput = punchInput;
+        }
 
-		public IdleState(ICharacterContext context,
-			PunchState.Factory punchFactory,
-			StatePublisher<CharacterState>.Factory publisherFactory,
-			ISubscriber<PunchRequested> punchInput, ICharacterModel characterModel)
-			: base(context, publisherFactory.Create(CharacterState.IDLE)) {
-			this.characterModel = characterModel;
-			this.punchFactory = punchFactory;
-			this.punchInput = punchInput;
-		}
+        public override void Start()
+        {
+            base.Start();
+            _disposable = _punchInput.Subscribe(Punch);
+        }
 
-		private void	Punch(PunchRequested _) {
-			context.State = punchFactory.Create(characterModel.InitialPunchHeight);
-		}
+        public override void Dispose()
+        {
+            _disposable.Dispose();
+            _disposable = null;
+            base.Dispose();
+        }
 
-		public override void	Dispose() {
-			disposable.Dispose();
-			disposable = null;
-			base.Dispose();
-		}
-
-		public override void	Start() {
-			base.Start();
-			disposable = punchInput.Subscribe(Punch);
-		}
-	}
+        private void Punch(PunchRequested _)
+        {
+            Context.State = _punchFactory.Create(_characterModel.InitialPunchHeight);
+        }
+    }
 }

@@ -1,63 +1,68 @@
-using Aniki.Character;
-using Aniki.Record;
-using Aniki.Wallet;
-using Cysharp.Threading.Tasks;
-using MessagePipe;
 using System;
+using Cysharp.Threading.Tasks;
+using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.Record.Contract;
+using LeaseExtension.UI.Contract;
+using LeaseExtension.Wallet.Contract;
+using MessagePipe;
 using Unity.Properties;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal class OverViewModel : IOverViewModel, IDisposable {
-		private readonly IOverView					view;
-		private readonly ICharacterModel			characterModel;
-		private readonly IRecordModel				recordModel;
-		private readonly IWalletModel				walletModel;
-		private readonly IPublisher<RestartRequested>	publisher;
+namespace LeaseExtension.UI.Game.Over
+{
+    [MovedFrom("Aniki.UI")]
+    internal class OverViewModel : IOverViewModel, IDisposable
+    {
+        private readonly IOverView _view;
+        private readonly ICharacterModel _characterModel;
+        private readonly IRecordModel _recordModel;
+        private readonly IWalletModel _walletModel;
+        private readonly IPublisher<RestartRequested> _publisher;
 
-		public OverViewModel(IOverView view, ICharacterModel characterModel,
-			IRecordModel recordModel, IWalletModel walletModel,
-			IPublisher<RestartRequested> publisher) {
-			this.view = view;
-			this.characterModel = characterModel;
-			this.recordModel = recordModel;
-			this.walletModel = walletModel;
-			this.publisher = publisher;
+        [CreateProperty]
+        public StyleEnum<DisplayStyle> OverDisplayStyle => _characterModel.State == CharacterState.Over ? DisplayStyle.Flex : DisplayStyle.None;
 
-			UniTask.WaitWhile(() => view.Root == null).ContinueWith(Initialize).Forget();
-		}
+        [CreateProperty]
+        public StyleEnum<DisplayStyle> NewRecordDisplayStyle => _recordModel.BarsPassed > _recordModel.Record ? DisplayStyle.Flex : DisplayStyle.None;
 
-		[CreateProperty]
-		public StyleEnum<DisplayStyle>	OverDisplayStyle =>
-			characterModel.State == CharacterState.OVER
-			? DisplayStyle.Flex
-			: DisplayStyle.None;
+        [CreateProperty]
+        public uint BarsPassed => _recordModel.BarsPassed;
 
-		[CreateProperty]
-		public StyleEnum<DisplayStyle>	NewRecordDisplayStyle =>
-			recordModel.BarsPassed > recordModel.Record
-			? DisplayStyle.Flex
-			: DisplayStyle.None;
+        [CreateProperty]
+        public uint Earned => _walletModel.Earned;
 
-		[CreateProperty]
-		public uint	BarsPassed => recordModel.BarsPassed;
+        public OverViewModel(
+            IOverView view,
+            ICharacterModel characterModel,
+            IRecordModel recordModel,
+            IWalletModel walletModel,
+            IPublisher<RestartRequested> publisher)
+        {
+            _view = view;
+            _characterModel = characterModel;
+            _recordModel = recordModel;
+            _walletModel = walletModel;
+            _publisher = publisher;
+            UniTask.WaitWhile(() => view.Root == null).ContinueWith(Initialize).Forget();
+        }
 
-		[CreateProperty]
-		public uint	Earned => walletModel.Earned;
+        public void Dispose()
+        {
+            if (_view.Root != null)
+                _view.AcceptButton.clicked -= OnClick;
+        }
 
-		private void	Initialize() {
-			view.Root.dataSource = this;
-			view.AcceptButton.clicked += OnClick;
-		}
+        private void Initialize()
+        {
+            _view.Root.dataSource = this;
+            _view.AcceptButton.clicked += OnClick;
+        }
 
-		public void	Dispose() {
-			if (view.Root != null)
-				view.AcceptButton.clicked -= OnClick;
-		}
-
-		private void	OnClick() {
-			publisher.Publish(new());
-		}
-	}
+        private void OnClick()
+        {
+            _publisher.Publish(new());
+        }
+    }
 }

@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace Aniki.UI {
-	internal interface IWelcomeViewModel {
-		public Sprite	Welcome { get; }
-	}
+namespace LeaseExtension.UI.Contract
+{
+    internal interface IWelcomeViewModel
+    {
+        public Sprite Welcome { get; }
+    }
 }

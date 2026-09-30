@@ -1,20 +1,22 @@
-using LeaseExtension.World.Entities.Internal;
+using LeaseExtension.World.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track.Part.Size
 {
-    internal class RendererSize : ISize {
-        private readonly SpriteRenderer	renderer;
+    internal class RendererSize : ISize
+    {
+        private readonly SpriteRenderer _renderer;
 
-        public Vector2	Size {
-            get => renderer.size;
-            set => renderer.size = value;
+        public Vector2 Size
+        {
+            get => _renderer.size;
+            set => _renderer.size = value;
         }
+        public Vector3 Min => _renderer.bounds.min;
 
-        public Vector3	Min => renderer.bounds.min;
-
-        public RendererSize(SpriteRenderer renderer) {
-            this.renderer = renderer;
+        public RendererSize(SpriteRenderer renderer)
+        {
+            _renderer = renderer;
         }
     }
 }

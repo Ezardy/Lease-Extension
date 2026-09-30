@@ -1,36 +1,42 @@
 using Cysharp.Threading.Tasks;
+using LeaseExtension.Cosmetics.Contract;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Aniki.Cosmetics {
-	internal struct CosmeticsSpriteHandles : ICosmeticsSpriteHandles {
-		private AsyncOperationHandle<Sprite>	back;
-		private AsyncOperationHandle<Sprite>	front;
+namespace LeaseExtension.Cosmetics
+{
+    internal struct CosmeticsSpriteHandles : ICosmeticsSpriteHandles
+    {
+        private AsyncOperationHandle<Sprite> _back;
+        private AsyncOperationHandle<Sprite> _front;
 
-		public Sprite	Back => back.IsValid() ? back.Result : null;
-		public Sprite	Front => front.IsValid() ? front.Result : null;
+        public Sprite Back => _back.IsValid() ? _back.Result : null;
+        public Sprite Front => _front.IsValid() ? _front.Result : null;
 
-		public CosmeticsSpriteHandles(AsyncOperationHandle<Sprite> back, AsyncOperationHandle<Sprite> front) {
-			this.back = back;
-			this.front = front;
-		}
+        public CosmeticsSpriteHandles(AsyncOperationHandle<Sprite> back, AsyncOperationHandle<Sprite> front)
+        {
+            _back = back;
+            _front = front;
+        }
 
-		public UniTask	LoadTask() {
-			UniTask	awaitable;
-			if (back.IsValid() && front.IsValid())
-				awaitable = UniTask.WhenAll(back.ToUniTask(), front.ToUniTask());
-			else if (back.IsValid())
-				awaitable = back.ToUniTask();
-			else
-				awaitable = front.ToUniTask();
-			return awaitable;
-		}
+        public UniTask LoadTask()
+        {
+            UniTask awaitable;
+            if (_back.IsValid() && _front.IsValid())
+                awaitable = UniTask.WhenAll(_back.ToUniTask(), _front.ToUniTask());
+            else if (_back.IsValid())
+                awaitable = _back.ToUniTask();
+            else
+                awaitable = _front.ToUniTask();
+            return awaitable;
+        }
 
-		public void	Release() {
-			if (back.IsValid())
-				back.Release();
-			if (front.IsValid())
-				front.Release();
-		}
-	}
+        public void Release()
+        {
+            if (_back.IsValid())
+                _back.Release();
+            if (_front.IsValid())
+                _front.Release();
+        }
+    }
 }

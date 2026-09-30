@@ -1,25 +1,36 @@
-using Aniki.State;
+using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.State;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.SceneManagment {
-	internal class MainSceneState : APoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState, ISceneContext, FocusedScene> {
-		private AsyncOperationHandle<SceneInstance>	sceneHandle;
+namespace LeaseExtension.SceneManagment.States
+{
+    [MovedFrom("Aniki.SceneManagment")]
+    internal class MainSceneState : APoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState, ISceneContext, FocusedScene>
+    {
+        private AsyncOperationHandle<SceneInstance> _sceneHandle;
 
-		public MainSceneState(ISceneContext context,
-			StatePublisher<FocusedScene>.Factory publisherFactory)
-			: base(context, publisherFactory.Create(FocusedScene.MAIN)) { }
+        public MainSceneState(
+            ISceneContext context,
+            StatePublisher<FocusedScene>.Factory publisherFactory) : base(
+            context,
+            publisherFactory.Create(FocusedScene.Main))
+        {
+        }
 
-		public override void	OnSpawned(AsyncOperationHandle<SceneInstance> sceneHandle, IMemoryPool pool) {
-			base.OnSpawned(sceneHandle, pool);
-			this.sceneHandle = sceneHandle;
-		}
+        public override void OnSpawned(AsyncOperationHandle<SceneInstance> sceneHandle, IMemoryPool pool)
+        {
+            base.OnSpawned(sceneHandle, pool);
+            _sceneHandle = sceneHandle;
+        }
 
-		public override void	Dispose() {
-			sceneHandle.Release();
-			sceneHandle = new();
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            _sceneHandle.Release();
+            _sceneHandle = new();
+            base.Dispose();
+        }
+    }
 }

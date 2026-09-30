@@ -1,6 +1,11 @@
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Audio {
-	internal class AudioSourceFactory : PlaceholderFactory<AudioSource> { }
+namespace LeaseExtension.Audio
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class AudioSourceFactory : PlaceholderFactory<AudioSource>
+    {
+    }
 }

@@ -1,4 +1,6 @@
 namespace LeaseExtension.Gameplay.Contract.Message
 {
-    public struct RestartRequested { }
+    public struct RestartRequested
+    {
+    }
 }

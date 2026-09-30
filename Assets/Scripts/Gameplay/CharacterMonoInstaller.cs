@@ -1,35 +1,46 @@
-using Aniki.Character;
-using Aniki.State;
 using System.Collections.Generic;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.Gameplay.States;
+using LeaseExtension.State;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
-internal class CharacterMonoInstaller : MonoInstaller {
-	[SerializeField] private List<MonoBehaviour>	forInject;
-	[SerializeField] private Rigidbody2D			characterRigidbody;
+namespace LeaseExtension.Gameplay
+{
+    internal class CharacterMonoInstaller : MonoInstaller
+    {
+        [SerializeField]
+        [FormerlySerializedAs("forInject")]
+        private List<MonoBehaviour> _forInject;
 
-	public override void	InstallBindings() {
-		InstallStates();
+        [SerializeField]
+        [FormerlySerializedAs("characterRigidbody")]
+        private Rigidbody2D _characterRigidbody;
 
-		Container.BindInterfacesTo<CharacterStateMachine>().AsSingle();
-		Container.BindInstance(characterRigidbody);
+        public override void InstallBindings()
+        {
+            InstallStates();
+            Container.BindInterfacesTo<CharacterStateMachine>().AsSingle();
+            Container.BindInstance(_characterRigidbody);
+            QueueForInject();
+        }
 
-		QueueForInject();
-	}
+        private void QueueForInject()
+        {
+            foreach (MonoBehaviour c in _forInject)
+                Container.QueueForInject(c);
+        }
 
-	private void	QueueForInject() {
-		foreach (MonoBehaviour c in forInject)
-			Container.QueueForInject(c);
-	}
-
-	private void	InstallStates() {
-		Container.BindFactory<CharacterState, StatePublisher<CharacterState>, StatePublisher<CharacterState>.Factory>();
-		Container.Bind<CollisionCheckStateBase>().AsTransient();
-
-		Container.BindFactory<IdleState, IdleState.Factory>().FromPoolableMemoryPool();
-		Container.BindFactory<float, PunchState, PunchState.Factory>().FromPoolableMemoryPool();
-		Container.BindFactory<WaitState, WaitState.Factory>().FromPoolableMemoryPool();
-		Container.BindFactory<FallState, FallState.Factory>().FromPoolableMemoryPool();
-		Container.BindFactory<OverState, OverState.Factory>().FromPoolableMemoryPool();
-	}
+        private void InstallStates()
+        {
+            Container.BindFactory<CharacterState, StatePublisher<CharacterState>, StatePublisher<CharacterState>.Factory>();
+            Container.Bind<CollisionCheckStateBase>().AsTransient();
+            Container.BindFactory<IdleState, IdleState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<float, PunchState, PunchState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<WaitState, WaitState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<FallState, FallState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<OverState, OverState.Factory>().FromPoolableMemoryPool();
+        }
+    }
 }

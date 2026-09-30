@@ -1,5 +1,8 @@
-using Aniki.State;
+using LeaseExtension.State.Contract;
 
-namespace Aniki.Character {
-	internal interface ICharacterContext : IContext { }
+namespace LeaseExtension.Gameplay
+{
+    internal interface ICharacterContext : IContext
+    {
+    }
 }

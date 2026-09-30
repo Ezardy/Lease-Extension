@@ -1,19 +1,28 @@
+using LeaseExtension.UI.Contract;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal class RaceView : AView, IGameView {
-		private VisualElement	effects;
+namespace LeaseExtension.UI.Game.Race
+{
+    [MovedFrom("Aniki.UI")]
+    internal class RaceView : AView, IRaceView
+    {
+        private VisualElement _effects;
 
-		public void	AddEffect(string id, float duration, Texture texture) {
-			throw new System.NotImplementedException();
-		}
+        public RaceView(PanelRenderer panelRenderer) : base(panelRenderer, "race")
+        {
+        }
 
-		public RaceView(PanelRenderer panelRenderer) : base(panelRenderer, "game") { }
+        public void AddEffect(string id, float duration, Texture texture)
+        {
+            throw new System.NotImplementedException();
+        }
 
-		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version) {
-			base.OnGUIReload(panelRenderer, root, version);
-			effects = root.Q<VisualElement>("effects");
-		}
-	}
+        protected override void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            base.OnGUIReload(panelRenderer, root, version);
+            _effects = root.Q<VisualElement>("effects");
+        }
+    }
 }

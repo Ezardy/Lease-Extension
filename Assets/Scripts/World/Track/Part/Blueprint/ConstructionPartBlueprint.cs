@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Aniki.SceneManagment;
-using Aniki.World;
-using LeaseExtension.World.Entities.Internal;
+using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.World.Contract;
 using LeaseExtension.World.Track.Part.Blank;
 using LeaseExtension.World.Track.Part.Concrete;
 using LeaseExtension.World.Track.Part.Order;
@@ -9,117 +8,170 @@ using LeaseExtension.World.Track.Part.Size;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using Zenject;
 
-namespace LeaseExtension.World.Track.Part.Blueprint {
-	[CreateAssetMenu(fileName = "ConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Part Blueprint")]
-	internal class ConstructionPartBlueprint : ScriptableObject, IConstructionPartBlueprint {
-		[SerializeField] private byte	initialPool = 5;
+namespace LeaseExtension.World.Track.Part.Blueprint
+{
+    [CreateAssetMenu(fileName = "ConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Part Blueprint")]
+    internal class ConstructionPartBlueprint : ScriptableObject, IConstructionPartBlueprint
+    {
+        [SerializeField]
+        [FormerlySerializedAs("prefab")]
+        protected GameObject Prefab;
 
-		[Space]
+        [SerializeField]
+        [FormerlySerializedAs("initialPool")]
+        private byte _initialPool = 5;
 
-		[SerializeField] private float	margin = 0;
-		[SerializeField] private float	width = 0;
-		[SerializeField] private bool	autoWidth = true;
+        [Space]
+        [SerializeField]
+        [FormerlySerializedAs("margin")]
+        private float _margin = 0;
 
-		[Space]
+        [SerializeField]
+        [FormerlySerializedAs("width")]
+        private float _width = 0;
 
-		[SerializeField] private float	interfereWidth = 0;
-		[SerializeField] private bool	autoInterfereWidth = true;
-		[SerializeField] private bool	sameWidth = true;
+        [SerializeField]
+        [FormerlySerializedAs("autoWidth")]
+        private bool _autoWidth = true;
 
-		[Space]
+        [Space]
+        [SerializeField]
+        [FormerlySerializedAs("interfereWidth")]
+        private float _interfereWidth = 0;
 
-		[SerializeField] private bool			useSpriteRenderer = true;
-		[SerializeField] private bool			zOrdering = false;
-		[SerializeField] protected GameObject	prefab;
+        [SerializeField]
+        [FormerlySerializedAs("autoInterfereWidth")]
+        private bool _autoInterfereWidth = true;
 
-		private IObjectPool<ConstructionPart>	partPool;
-		private IObjectPool<ConstructionBlank>	blankPool;
-		private GameObject						poolGameObject;
-		private System.IDisposable				disposable;
+        [SerializeField]
+        [FormerlySerializedAs("sameWidth")]
+        private bool _sameWidth = true;
 
-		public IReadOnlyCollection<IConstructionPartBlueprint>	SubPartBlueprints => System.Array.Empty<IConstructionPartBlueprint>();
+        [Space]
+        [SerializeField]
+        [FormerlySerializedAs("useSpriteRenderer")]
+        private bool _useSpriteRenderer = true;
 
-		public float	InterfereWidth => interfereWidth + margin;
-		public float	Width => width + margin;
-		public float	Margin => margin;
+        [SerializeField]
+        [FormerlySerializedAs("zOrdering")]
+        private bool _zOrdering = false;
+        private IObjectPool<ConstructionPart> _partPool;
+        private IObjectPool<ConstructionBlank> _blankPool;
+        private GameObject _poolGameObject;
+        private System.IDisposable _disposable;
 
-		private void	OnEnable() {
-			float	aWidth = 0;
+        public IReadOnlyCollection<IConstructionPartBlueprint> SubPartBlueprints => System.Array.Empty<IConstructionPartBlueprint>();
+        public float InterfereWidth => _interfereWidth + _margin;
+        public float Width => _width + _margin;
+        public float Margin => _margin;
 
-			if (prefab != null) {
-				if (autoWidth || (!sameWidth && autoInterfereWidth)) {
-					aWidth = useSpriteRenderer
-						? prefab.GetComponent<SpriteRenderer>().bounds.size.x
-						: prefab.GetComponent<BoxCollider2D>().bounds.size.x;
-				}
-				if (autoWidth)
-					width = aWidth;
-				if (sameWidth)
-					interfereWidth = width;
-				else if (autoInterfereWidth)
-					interfereWidth = aWidth;
-			}
-		}
+        private void OnEnable()
+        {
+            float aWidth = 0;
+            if (Prefab != null)
+            {
+                if (_autoWidth || (!_sameWidth && _autoInterfereWidth))
+                    aWidth = _useSpriteRenderer ? Prefab.GetComponent<SpriteRenderer>().bounds.size.x : Prefab.GetComponent<BoxCollider2D>().bounds.size.x;
+                if (_autoWidth)
+                    _width = aWidth;
+                if (_sameWidth)
+                    _interfereWidth = _width;
+                else if (_autoInterfereWidth)
+                    _interfereWidth = aWidth;
+            }
+        }
 
-		[Inject]
-		public void	Construct(ISubscriber<FocusedScene> sceneSubscriber) {
-			disposable = sceneSubscriber.Subscribe(_ => {
-				if (poolGameObject == null) {
-					poolGameObject = new($"{prefab.name} pool");
-					partPool = new ObjectPool<ConstructionPart>(Create, actionOnDestroy: Wipeout, defaultCapacity: initialPool);
-					blankPool = new ObjectPool<ConstructionBlank>(() => new(this, partPool, blankPool));
-				}
-			}, FocusedSceneFilter.Main);
-		}
+        private void OnDisable()
+        {
+            _disposable?.Dispose();
+            _disposable = null;
+        }
 
-		private void	OnDisable() {
-			disposable?.Dispose();
-			disposable = null;
-		}
+        [Inject]
+        public void Construct(ISubscriber<FocusedScene> sceneSubscriber)
+        {
+            _disposable = sceneSubscriber.Subscribe(_ =>
+            {
+                if (_poolGameObject == null)
+                {
+                    _poolGameObject = new($"{Prefab.name} pool");
+                    _partPool = new ObjectPool<ConstructionPart>(
+                        Create,
+                        actionOnDestroy: Wipeout,
+                        defaultCapacity: _initialPool);
+                    _blankPool = new ObjectPool<ConstructionBlank>(() => new(this, _partPool, _blankPool));
+                }
+            }, FocusedSceneFilter.Main);
+        }
 
-		private ConstructionPart	Create() {
-			GameObject			instance = CreateInstance();
-			ISize				sizer;
-			IOrder				orderer;
-			ConstructionPart	part;
+        public IConstructionBlank MakeBlank(float height, float size)
+        {
+            ConstructionBlank blank = _blankPool.Get();
+            blank.Populate(height, size);
+            return blank;
+        }
 
-			instance.transform.parent = poolGameObject.transform;
-			instance.SetActive(false);
-			if (useSpriteRenderer) {
-				SpriteRenderer	renderer = instance.GetComponent<SpriteRenderer>();
+        protected virtual GameObject CreateInstance()
+        {
+            return Instantiate(Prefab);
+        }
 
-				sizer = new RendererSize(renderer);
-				orderer = new SpriteOrder(renderer);
-				part = new SizedConstructionPart(this, instance.transform, sizer,
-					partPool, orderer);
-			} else if (instance.TryGetComponent(out BoxCollider2D collider)) {
-				sizer = new ColliderSize(collider);
-				if (zOrdering)
-					orderer = new TransformOrder(instance.transform);
-				else
-					orderer = new VirtualOrder();
-				part = new SizedConstructionPart(this, instance.transform, sizer,
-					partPool, orderer);
-			} else
-				part = new(this, instance.transform, partPool);
-			return part;
-		}
+        private ConstructionPart Create()
+        {
+            GameObject instance = CreateInstance();
+            ISize sizer;
+            IOrder orderer;
+            ConstructionPart part;
+            instance.transform.parent = _poolGameObject.transform;
+            instance.SetActive(false);
+            if (_useSpriteRenderer)
+            {
+                SpriteRenderer renderer = instance.GetComponent<SpriteRenderer>();
+                sizer = new RendererSize(renderer);
+                orderer = new SpriteOrder(renderer);
+                part = new SizedConstructionPart(this, instance.transform, sizer, _partPool, orderer);
+            }
+            else if (instance.TryGetComponent(out BoxCollider2D collider))
+            {
+                sizer = new ColliderSize(collider);
+                if (_zOrdering)
+                    orderer = new TransformOrder(instance.transform);
+                else
+                    orderer = new VirtualOrder();
+                part = new SizedConstructionPart(this, instance.transform, sizer, _partPool, orderer);
+            }
+            else
+            {
+                part = new(this, instance.transform, _partPool);
+            }
 
-		protected virtual GameObject	CreateInstance() {
-			return Instantiate(prefab);
-		}
+            return part;
+        }
 
-		private static void	Wipeout(ConstructionPart part) {
-			part.Dispose();
-		}
+        private static void Wipeout(ConstructionPart part)
+        {
+            part.Dispose();
+        }
+    }
 
-		public IConstructionBlank	MakeBlank(float height, float size) {
-			ConstructionBlank	blank = blankPool.Get();
+    [MovedFrom("Aniki.World")]
+    internal class ConstructionPartBlueprint<T, F> : ConstructionPartBlueprint where T : MonoBehaviour where F : IFactory<Object, T>
+    {
+        private F _factory;
 
-			blank.Populate(height, size);
-			return blank;
-		}
-	}
+        [Inject]
+        public virtual void Init(F factory)
+        {
+            _factory = factory;
+        }
+
+        protected override GameObject CreateInstance()
+        {
+            return _factory.Create(Prefab).gameObject;
+        }
+    }
 }

@@ -1,32 +1,41 @@
-using Aniki.Character;
-using Aniki.Record;
-using Aniki.Wallet;
 using Cysharp.Threading.Tasks;
+using LeaseExtension.Gameplay.Contract;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.Record.Contract;
+using LeaseExtension.UI.Contract;
+using LeaseExtension.Wallet.Contract;
 using Unity.Properties;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal class RaceViewModel : IGameViewModel {
-		private readonly ICharacterModel	characterModel;
-		private readonly IRecordModel		recordModel;
-		private readonly IWalletModel		walletModel;
+namespace LeaseExtension.UI.Game.Race
+{
+    [MovedFrom("Aniki.UI")]
+    internal class RaceViewModel : IRaceViewModel
+    {
+        private readonly ICharacterModel _characterModel;
+        private readonly IRecordModel _recordModel;
+        private readonly IWalletModel _walletModel;
 
-		[CreateProperty] public StyleEnum<DisplayStyle>	GameDisplayStyle =>
-			characterModel.State != CharacterState.IDLE
-			&& characterModel.State != CharacterState.OVER
-			? DisplayStyle.Flex : DisplayStyle.None;
+        [CreateProperty]
+        public StyleEnum<DisplayStyle> GameDisplayStyle => _characterModel.State != CharacterState.Idle && _characterModel.State != CharacterState.Over ? DisplayStyle.Flex : DisplayStyle.None;
 
-		[CreateProperty] public uint BarsPassed => recordModel.BarsPassed;
+        [CreateProperty]
+        public uint BarsPassed => _recordModel.BarsPassed;
 
-		[CreateProperty] public uint Earned => walletModel.Earned;
+        [CreateProperty]
+        public uint Earned => _walletModel.Earned;
 
-		public RaceViewModel(IGameView view, ICharacterModel characterModel,
-			IRecordModel recordModel, IWalletModel walletModel) {
-			this.characterModel = characterModel;
-			this.recordModel = recordModel;
-			this.walletModel = walletModel;
-
-			UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Root.dataSource = this).Forget();
-		}
-	}
+        public RaceViewModel(
+            IRaceView view,
+            ICharacterModel characterModel,
+            IRecordModel recordModel,
+            IWalletModel walletModel)
+        {
+            _characterModel = characterModel;
+            _recordModel = recordModel;
+            _walletModel = walletModel;
+            UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Root.dataSource = this).Forget();
+        }
+    }
 }

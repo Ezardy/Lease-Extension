@@ -1,42 +1,48 @@
-using Aniki.State;
-using Aniki.World;
+using System;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.State;
+using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using R3;
-using System;
-using LeaseExtension.World.Entities.Message;
 using UnityEngine;
-using Zenject;
+using UnityEngine.Scripting.APIUpdating;
 
-namespace Aniki.Character {
-	internal class FallState : APoolablePublishingState<FallState, ICharacterContext, CharacterState> {
-		private readonly ISubscriber<FloorCollided>	subscriber;
-		private readonly OverState.Factory					overStateFactory;
-		private readonly Rigidbody2D						rigidbody;
+namespace LeaseExtension.Gameplay.States
+{
+    [MovedFrom("Aniki.Character")]
+    internal class FallState : APoolablePublishingState<FallState, ICharacterContext, CharacterState>
+    {
+        private readonly ISubscriber<FloorCollided> _subscriber;
+        private readonly OverState.Factory _overStateFactory;
+        private readonly Rigidbody2D _rigidbody;
+        private IDisposable _subscription;
 
-		private IDisposable	subscription;
+        public FallState(
+            ICharacterContext context,
+            StatePublisher<CharacterState>.Factory publisherFactory,
+            Rigidbody2D rigidbody,
+            ISubscriber<FloorCollided> subscriber,
+            OverState.Factory overStateFactory) : base(
+            context,
+            publisherFactory.Create(CharacterState.Fall))
+        {
+            _rigidbody = rigidbody;
+            _subscriber = subscriber;
+            _overStateFactory = overStateFactory;
+        }
 
-		public FallState(ICharacterContext context,
-			StatePublisher<CharacterState>.Factory publisherFactory,
-			Rigidbody2D rigidbody,
-			ISubscriber<FloorCollided> subscriber,
-			OverState.Factory overStateFactory)
-			: base(context, publisherFactory.Create(CharacterState.FALL)) {
-			this.rigidbody = rigidbody;
-			this.subscriber = subscriber;
-			this.overStateFactory = overStateFactory;
-		}
+        public override void Start()
+        {
+            base.Start();
+            _subscription = _subscriber.Subscribe(_ => Context.State = _overStateFactory.Create());
+            _rigidbody.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
+        }
 
-		public override void	Start() {
-			base.Start();
-			subscription = subscriber.Subscribe(_ => context.State = overStateFactory.Create());
-
-			rigidbody.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
-		}
-
-		public override void	Dispose() {
-			subscription.Dispose();
-			subscription = null;
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            _subscription.Dispose();
+            _subscription = null;
+            base.Dispose();
+        }
+    }
 }

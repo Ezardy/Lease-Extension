@@ -1,5 +1,8 @@
-using Aniki.State;
+using LeaseExtension.State.Contract;
 
-namespace Aniki.SceneManagment {
-	internal interface ISceneContext : IContext { }
+namespace LeaseExtension.SceneManagment
+{
+    internal interface ISceneContext : IContext
+    {
+    }
 }

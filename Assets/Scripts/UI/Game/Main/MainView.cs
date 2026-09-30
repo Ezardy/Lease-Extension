@@ -1,19 +1,24 @@
+using LeaseExtension.UI.Contract;
+using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal class MainView : AView, IMainView {
-		private Button			storeButton;
-		private VisualElement	earnedGroup;
+namespace LeaseExtension.UI.Game.Main
+{
+    [MovedFrom("Aniki.UI")]
+    internal class MainView : AView, IMainView
+    {
+        public Button StoreButton { get; private set; }
+        public VisualElement EarnedGroup { get; private set; }
 
-		public MainView(PanelRenderer panelRenderer) : base(panelRenderer, "main") { }
+        public MainView(PanelRenderer panelRenderer) : base(panelRenderer, "main")
+        {
+        }
 
-		public Button			StoreButton => storeButton;
-		public VisualElement	EarnedGroup => earnedGroup;
-
-		protected override void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version) {
-			base.OnGUIReload(panelRenderer, root, version);
-			storeButton = root.Q<Button>("store-button");
-			earnedGroup = root.Q<VisualElement>("game-stats__earned-group");
-		}
-	}
+        protected override void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            base.OnGUIReload(panelRenderer, root, version);
+            StoreButton = root.Q<Button>("store-button");
+            EarnedGroup = root.Q<VisualElement>("game-stats__earned-group");
+        }
+    }
 }

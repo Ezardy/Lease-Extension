@@ -1,10 +1,12 @@
-namespace Aniki.Common {
-	public enum Layers: byte {
-		Default,
-		TransparentFX,
-		IgnoreRaycast,
-		Water,
-		UI,
-		Player
-	}
+namespace LeaseExtension.Common.Layer
+{
+    public enum Layers : byte
+    {
+        Default,
+        TransparentFX,
+        IgnoreRaycast,
+        Water,
+        Ui,
+        Player
+    }
 }

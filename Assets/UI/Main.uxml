@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="teeth" src="project://database/Assets/UI/Elements/teeth.uxml?fileID=9197481963319205126&amp;guid=bcaf52f5d4ff91a43b9470d5904afaa4&amp;type=3#teeth"/>
     <Style src="project://database/Assets/UI/MainStyles.uss?fileID=7433441132597879392&amp;guid=ee9a5807ee865a548a165d9265d0794f&amp;type=3#MainStyles"/>
-    <ui:VisualElement name="main" picking-mode="Ignore" data-source-type="Aniki.UI.IMainViewModel, Common" class="root-container" style="display: flex; justify-content: space-between;">
+    <ui:VisualElement name="main" picking-mode="Ignore" data-source-type="LeaseExtension.UI.Contract.IMainViewModel, LeaseExtension.UI" class="root-container" style="display: flex; justify-content: space-between;">
         <ui:VisualElement name="logo-group" picking-mode="Ignore" style="flex-grow: 0; flex-direction: column-reverse; height: 60%;">
             <ui:VisualElement name="record-group" picking-mode="Ignore" class="record-group" style="justify-content: space-around;">
                 <ui:Label text="Record" name="record-label" picking-mode="Ignore" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" style="flex-shrink: 1;"/>
@@ -20,24 +20,24 @@
             <ui:DataBinding property="style.display" data-source-path="MainDisplayStyle" binding-mode="ToTarget" update-trigger="OnSourceChanged"/>
         </Bindings>
     </ui:VisualElement>
-    <ui:VisualElement name="game" data-source-type="Aniki.UI.IGameViewModel, Common" picking-mode="Ignore" class="root-container" style="flex-grow: 1; display: none; justify-content: space-between;">
-        <ui:VisualElement name="game-stats" picking-mode="Ignore" class="game-stats-container">
-            <ui:VisualElement name="game-stats__bars-passed-group" class="game-stats-group" style="flex-direction: row; justify-content: center; height: 45%; align-self: center; margin-left: 1%; color: rgb(221, 221, 221);">
-                <ui:Label text="42" name="game-stats__bars-passed" picking-mode="Ignore" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" enable-rich-text="false" emoji-fallback-support="false" style="-unity-text-auto-size: best-fit 10px 100px; flex-shrink: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 5px; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+    <ui:VisualElement name="race" data-source-type="LeaseExtension.UI.Contract.IRaceViewModel, LeaseExtension.UI" picking-mode="Ignore" class="root-container" style="flex-grow: 1; display: none; justify-content: space-between;">
+        <ui:VisualElement name="race-stats" picking-mode="Ignore" class="game-stats-container">
+            <ui:VisualElement name="race-stats__bars-passed-group" class="game-stats-group" style="flex-direction: row; justify-content: center; height: 45%; align-self: center; margin-left: 1%; color: rgb(221, 221, 221);">
+                <ui:Label text="42" name="race-stats__bars-passed" picking-mode="Ignore" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" enable-rich-text="false" emoji-fallback-support="false" style="-unity-text-auto-size: best-fit 10px 100px; flex-shrink: 1; -unity-text-align: middle-center; margin-top: 0; margin-right: 5px; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="BarsPassed" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
                 <ui:Image source="project://database/Assets/Sprites/Parts/bar.png?fileID=5156776694448688124&amp;guid=ce644bb53df6fe142931432592f54e2c&amp;type=3#bar_0" picking-mode="Ignore" uv="0,0,5.04,1" scale-mode="StretchToFill" style="flex-grow: 0; height: 100%; margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; aspect-ratio: 1;"/>
             </ui:VisualElement>
-            <ui:Label text="12 y 12 m 30 d" name="game-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="sentence" style="-unity-text-auto-size: best-fit 10px 100px; -unity-text-align: lower-center; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 65%; align-self: flex-end; flex-shrink: 1; color: rgb(255, 255, 255);">
+            <ui:Label text="12 y 12 m 30 d" name="race-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="sentence" style="-unity-text-auto-size: best-fit 10px 100px; -unity-text-align: lower-center; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 65%; align-self: flex-end; flex-shrink: 1; color: rgb(255, 255, 255);">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="BarsPassed" binding-mode="ToTarget" source-to-ui-converters="Record"/>
                 </Bindings>
             </ui:Label>
-            <ui:VisualElement name="game-stats__earned-group" class="game-stats-group">
+            <ui:VisualElement name="race-stats__earned-group" class="game-stats-group">
                 <ui:Image source="project://database/Assets/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" picking-mode="Ignore" scale-mode="ScaleToFit" style="flex-grow: 0; height: 100%; aspect-ratio: 1.3;"/>
-                <ui:Label text="7" name="game-stats__earned" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="earned" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                <ui:Label text="7" name="race-stats__earned" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="earned" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="Earned" binding-mode="ToTarget"/>
                     </Bindings>
@@ -53,9 +53,9 @@
             <ui:DataBinding property="style.display" data-source-path="GameDisplayStyle" binding-mode="ToTarget"/>
         </Bindings>
     </ui:VisualElement>
-    <ui:VisualElement name="game-over" data-source-type="Aniki.UI.IOverViewModel, Common" class="root-container" style="display: none; align-items: center; justify-content: space-evenly; align-content: center; background-color: rgba(228, 227, 222, 0.592); background-size: 100% 100%;">
-        <ui:Label text="SENTENCED" name="game-over-label" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" style="flex-grow: 0; flex-shrink: 1; -unity-text-auto-size: best-fit 10px 100px; -unity-text-align: middle-center; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 100%; aspect-ratio: auto; color: rgb(193, 28, 38); -unity-font-style: bold; align-self: center; align-items: center; height: 20%; -unity-font-definition: url(&quot;project://database/Assets/Fonts/old-stamper.regular.ttf?fileID=12800000&amp;guid=ddd82dba6a3109d47a4126df7a868ae7&amp;type=3#old-stamper.regular&quot;);"/>
-        <ui:VisualElement name="game-over__label-group" style="flex-direction: column; justify-content: space-between; align-self: center; align-items: center; width: 95%; height: 45%;">
+    <ui:VisualElement name="over" data-source-type="LeaseExtension.UI.Contract.IOverViewModel, LeaseExtension.UI" class="root-container" style="display: none; align-items: center; justify-content: space-evenly; align-content: center; background-color: rgba(228, 227, 222, 0.592); background-size: 100% 100%;">
+        <ui:Label text="SENTENCED" name="over-label" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" style="flex-grow: 0; flex-shrink: 1; -unity-text-auto-size: best-fit 10px 100px; -unity-text-align: middle-center; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 100%; aspect-ratio: auto; color: rgb(193, 28, 38); -unity-font-style: bold; align-self: center; align-items: center; height: 20%; -unity-font-definition: url(&quot;project://database/Assets/Fonts/old-stamper.regular.ttf?fileID=12800000&amp;guid=ddd82dba6a3109d47a4126df7a868ae7&amp;type=3#old-stamper.regular&quot;);"/>
+        <ui:VisualElement name="over__label-group" style="flex-direction: column; justify-content: space-between; align-self: center; align-items: center; width: 95%; height: 45%;">
             <ui:VisualElement name="sentence-vertical-group" style="justify-content: center; -unity-text-align: middle-center; -unity-text-auto-size: best-fit 10px 100px; max-width: 100%; flex-basis: 252%;">
                 <ui:Label text="New Record" name="new-record-label" class="wall-sentence protocol-label" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 22%; flex-shrink: 1; display: flex;">
                     <Bindings>
@@ -90,7 +90,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Button text="Sign" name="game-over__accept-button" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" class="signature" style="margin-top: 0; height: 10%; margin-right: 0%; margin-bottom: 0; margin-left: 0; -unity-text-auto-size: best-fit 10px 100px; aspect-ratio: 2.398122; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(188, 188, 188, 0); border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"/>
+        <ui:Button text="Sign" name="over__accept-button" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" class="signature" style="margin-top: 0; height: 10%; margin-right: 0%; margin-bottom: 0; margin-left: 0; -unity-text-auto-size: best-fit 10px 100px; aspect-ratio: 2.398122; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(188, 188, 188, 0); border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"/>
         <Bindings>
             <ui:DataBinding property="style.display" data-source-path="OverDisplayStyle" binding-mode="ToTarget"/>
         </Bindings>

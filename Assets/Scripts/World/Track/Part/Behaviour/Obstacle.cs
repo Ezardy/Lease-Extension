@@ -1,24 +1,29 @@
-using Aniki.Common;
-using LeaseExtension.World.Entities.Message;
+using LeaseExtension.Common.Layer;
+using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.World {
-	internal class Obstacle : AConstructionPartBehaviour {
-		private IPublisher<ObstacleCollided>	publisher;
-		private int										layer;
+namespace LeaseExtension.World.Track.Part.Behaviour
+{
+    [MovedFrom("Aniki.World")]
+    internal class Obstacle : AConstructionPartBehaviour
+    {
+        private IPublisher<ObstacleCollided> _publisher;
+        private int _layer;
 
-		[Inject]
-		public void	Init(IPublisher<ObstacleCollided> publisher,
-			LayerNames layerNames) {
-			this.publisher = publisher;
-			layer = LayerMask.NameToLayer(layerNames.Player);
-		}
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.gameObject.layer == _layer)
+                _publisher.Publish(new());
+        }
 
-		private void	OnTriggerEnter2D(Collider2D collider) {
-			if (collider.gameObject.layer == layer)
-				publisher.Publish(new());
-		}
-	}
+        [Inject]
+        public void Init(IPublisher<ObstacleCollided> publisher, LayerNames layerNames)
+        {
+            _publisher = publisher;
+            _layer = LayerMask.NameToLayer(layerNames.Player);
+        }
+    }
 }

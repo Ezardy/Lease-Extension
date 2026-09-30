@@ -1,8 +1,10 @@
-using Aniki.State;
+using LeaseExtension.State.Contract;
 using UnityEngine;
 
-namespace Aniki.Audio {
-	internal interface IBackgroundAudioContext : IContext {
-		public Animator	Animator { get; }
-	}
+namespace LeaseExtension.Audio.Background
+{
+    internal interface IBackgroundAudioContext : IContext
+    {
+        public Animator Animator { get; }
+    }
 }

@@ -1,60 +1,90 @@
-using Aniki.Common;
 using System.Collections;
 using System.Collections.Generic;
+using LeaseExtension.Common.Utilities;
+using LeaseExtension.World.Contract;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 
-namespace Aniki.World {
-	[CreateAssetMenu(fileName = "ConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Blueprint")]
-	internal class ConstructionBlueprint : ScriptableObject, IConstructionBlueprint, IReadOnlyCollection<IConstructionPartBlueprint> {
-		[SerializeField] private bool										isRangeInversed = false;
-		[Tooltip("0 - use implicit height, 1 - stretch to the ceil")]
-		[SerializeField, Range(0, 1)] protected float						height = 1;
-		[SerializeField, Range(0, 1)] private float							rangeStart = 0;
-		[SerializeField, Range(0, 1)] private float							rangeEnd = 1;
-		[SerializeField] private float										minDelay = 5;
-		[SerializeField] private float										maxDelay = 20;
-		[SerializeField] private float										minMargin = 30;
-		[SerializeField] private float										maxMargin = 50;
-		[SerializeField] protected List<IRef<IConstructionPartBlueprint>>	parts;
+namespace LeaseExtension.World.Track.Construction
+{
+    [CreateAssetMenu(fileName = "ConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Blueprint")]
+    [MovedFrom("Aniki.World")]
+    internal class ConstructionBlueprint : ScriptableObject, IConstructionBlueprint, IReadOnlyCollection<IConstructionPartBlueprint>
+    {
+        [Tooltip("0 - use implicit height, 1 - stretch to the ceil")]
+        [SerializeField]
+        [Range(0, 1)]
+        [FormerlySerializedAs("height")]
+        protected float Height = 1;
 
-		protected List<IConstructionBlank>	blanks;
+        [SerializeField]
+        [FormerlySerializedAs("parts")]
+        protected List<IRef<IConstructionPartBlueprint>> PartReferences;
+        protected List<IConstructionBlank> Blanks;
 
-		public IReadOnlyCollection<IConstructionPartBlueprint>	Parts => this;
+        [SerializeField]
+        [FormerlySerializedAs("isRangeInversed")]
+        private bool _isRangeInversed = false;
 
-		public float	MinDelay => minDelay;
+        [SerializeField]
+        [Range(0, 1)]
+        [FormerlySerializedAs("rangeStart")]
+        private float _rangeStart = 0;
 
-		public float	MaxDelay => maxDelay;
+        [SerializeField]
+        [Range(0, 1)]
+        [FormerlySerializedAs("rangeEnd")]
+        private float _rangeEnd = 1;
 
-		public float	MinMargin => minMargin;
+        [SerializeField]
+        [FormerlySerializedAs("minDelay")]
+        private float _minDelay = 5;
 
-		public float	MaxMargin => maxMargin;
+        [SerializeField]
+        [FormerlySerializedAs("maxDelay")]
+        private float _maxDelay = 20;
 
-		public float	RangeStart => rangeStart;
+        [SerializeField]
+        [FormerlySerializedAs("minMargin")]
+        private float _minMargin = 30;
 
-		public float	RangeEnd => rangeEnd;
+        [SerializeField]
+        [FormerlySerializedAs("maxMargin")]
+        private float _maxMargin = 50;
 
-		public bool	IsRangeInversed => isRangeInversed;
+        public IReadOnlyCollection<IConstructionPartBlueprint> Parts => this;
+        public float MinDelay => _minDelay;
+        public float MaxDelay => _maxDelay;
+        public float MinMargin => _minMargin;
+        public float MaxMargin => _maxMargin;
+        public float RangeStart => _rangeStart;
+        public float RangeEnd => _rangeEnd;
+        public bool IsRangeInversed => _isRangeInversed;
+        public int Count => PartReferences.Count;
 
-		public int	Count => parts.Count;
+        private void OnEnable()
+        {
+            if (PartReferences != null && PartReferences.Count > 0)
+                Blanks = new(PartReferences.Count);
+        }
 
-		public IEnumerator<IConstructionPartBlueprint>	GetEnumerator() {
-			return new RefEnumerator<IConstructionPartBlueprint>(parts);
-		}
+        public IEnumerator<IConstructionPartBlueprint> GetEnumerator()
+        {
+            return new RefEnumerator<IConstructionPartBlueprint>(PartReferences);
+        }
 
-		IEnumerator	IEnumerable.GetEnumerator() {
-			return GetEnumerator();
-		}
+        public virtual IReadOnlyCollection<IConstructionBlank> MakeBlanks()
+        {
+            Blanks.Clear();
+            foreach (IConstructionPartBlueprint part in this)
+                Blanks.Add(part.MakeBlank(0, Height));
+            return Blanks;
+        }
 
-		public virtual IReadOnlyCollection<IConstructionBlank>	MakeBlanks() {
-			blanks.Clear();
-			foreach (IConstructionPartBlueprint part in this)
-				blanks.Add(part.MakeBlank(0, height));
-			return blanks;
-		}
-
-		private void	OnEnable() {
-			if (parts != null && parts.Count > 0)
-				blanks = new(parts.Count);
-		}
-	}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

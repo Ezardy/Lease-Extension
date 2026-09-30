@@ -1,15 +1,25 @@
-using Aniki.Common;
 using System;
+using LeaseExtension.Audio.Contract;
+using LeaseExtension.Common.Utilities;
 using UnityEngine.Audio;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 
-namespace Aniki.Audio {
-	[Serializable]
-	internal class VolumeGeneratorPair {
-		public float					volume = 1;
-		public IRef<IAudioGenerator>	generator;
+namespace LeaseExtension.Audio
+{
+    [Serializable]
+    [MovedFrom("Aniki.Audio")]
+    internal class VolumeGeneratorPair
+    {
+        [FormerlySerializedAs("volume")]
+        public float Volume = 1;
 
-		public AudioPlayerParameters	ToParameters() {
-			return new(generator.I, volume);
-		}
-	}
+        [FormerlySerializedAs("generator")]
+        public IRef<IAudioGenerator> Generator;
+
+        public AudioPlayerParameters ToParameters()
+        {
+            return new(Generator.I, Volume);
+        }
+    }
 }

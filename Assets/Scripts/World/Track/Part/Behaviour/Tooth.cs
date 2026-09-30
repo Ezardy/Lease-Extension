@@ -1,26 +1,32 @@
-using Aniki.Common;
-using LeaseExtension.World.Entities.Message;
+using LeaseExtension.Common.Layer;
+using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.World {
-	internal class Tooth : AConstructionPartBehaviour {
-		private IPublisher<ToothPicked>	publisher;
-		private int									layer;
+namespace LeaseExtension.World.Track.Part.Behaviour
+{
+    [MovedFrom("Aniki.World")]
+    internal class Tooth : AConstructionPartBehaviour
+    {
+        private IPublisher<ToothPicked> _publisher;
+        private int _layer;
 
-		[Inject]
-		public void	Init(IPublisher<ToothPicked> publisher,
-			LayerNames layerNames) {
-			this.publisher = publisher;
-			layer = LayerMask.NameToLayer(layerNames.Player);
-		}
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.gameObject.layer == _layer)
+            {
+                _publisher.Publish(new());
+                gameObject.SetActive(false);
+            }
+        }
 
-		private void	OnTriggerEnter2D(Collider2D collider) {
-			if (collider.gameObject.layer == layer) {
-				publisher.Publish(new());
-				gameObject.SetActive(false);
-			}
-		}
-	}
+        [Inject]
+        public void Init(IPublisher<ToothPicked> publisher, LayerNames layerNames)
+        {
+            _publisher = publisher;
+            _layer = LayerMask.NameToLayer(layerNames.Player);
+        }
+    }
 }

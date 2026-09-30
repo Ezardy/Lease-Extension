@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace Aniki.Cosmetics {
-	internal interface ICosmeticsElementView {
-		public void	Set(Sprite back, Sprite front);
-	}
+namespace LeaseExtension.Cosmetics.Contract
+{
+    internal interface ICosmeticsElementView
+    {
+        public void Set(Sprite back, Sprite front);
+    }
 }

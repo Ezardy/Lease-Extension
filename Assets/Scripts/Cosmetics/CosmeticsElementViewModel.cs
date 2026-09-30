@@ -1,39 +1,50 @@
-using Aniki.Common;
-using Cysharp.Threading.Tasks;
-using R3;
 using System;
+using Cysharp.Threading.Tasks;
+using LeaseExtension.Common.Utilities;
+using LeaseExtension.Cosmetics.Contract;
+using R3;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Cosmetics {
-	internal class CosmeticsElementViewModel<T> : ICosmeticsElementViewModel, ITyped<T>, IInitializable, IDisposable where T : class {
-		private readonly ICosmeticsItemModelDatabase	hairstyleDatabase;
-		private readonly ICosmeticsElementModel		cosmeticsModel;
-		private readonly ICosmeticsElementView		cosmeticsView;
+namespace LeaseExtension.Cosmetics
+{
+    [MovedFrom("Aniki.Cosmetics")]
+    internal class CosmeticsElementViewModel<T> : ICosmeticsElementViewModel, ITyped<T>, IInitializable, IDisposable where T : class
+    {
+        private readonly ICosmeticsItemModelDatabase _hairstyleDatabase;
+        private readonly ICosmeticsElementModel _cosmeticsModel;
+        private readonly ICosmeticsElementView _cosmeticsView;
+        private ICosmeticsSpriteHandles _handles;
+        private IDisposable _disposable;
 
-		private ICosmeticsSpriteHandles	handles;
-		private IDisposable				disposable;
+        public CosmeticsElementViewModel(
+            ICosmeticsItemModelDatabase database,
+            ICosmeticsElementModel cosmeticsModel,
+            ICosmeticsElementView cosmeticsView)
+        {
+            _hairstyleDatabase = database;
+            _cosmeticsModel = cosmeticsModel;
+            _cosmeticsView = cosmeticsView;
+        }
 
-		public	CosmeticsElementViewModel(ICosmeticsItemModelDatabase database, ICosmeticsElementModel cosmeticsModel, ICosmeticsElementView cosmeticsView) {
-			hairstyleDatabase = database;
-			this.cosmeticsModel = cosmeticsModel;
-			this.cosmeticsView = cosmeticsView;
-		}
-		
-		private async UniTaskVoid	Set(string id) {
-			handles?.Release();
-			handles = hairstyleDatabase.GetCosmeticsItemModel(id).GetSpriteHandles();
-			await handles.LoadTask();
-			cosmeticsView.Set(handles.Back, handles.Front);
-		}
+        public void Initialize()
+        {
+            _disposable = _cosmeticsModel.IdChanged.Subscribe(h => Set(h).Forget());
+        }
 
-		public void	Initialize() {
-			disposable = cosmeticsModel.IdChanged.Subscribe(h => Set(h).Forget());
-		}
+        public void Dispose()
+        {
+            _cosmeticsView.Set(null, null);
+            _handles.Release();
+            _disposable?.Dispose();
+        }
 
-		public void	Dispose() {
-			cosmeticsView.Set(null, null);
-			handles.Release();
-			disposable?.Dispose();
-		}
-	}
+        private async UniTaskVoid Set(string id)
+        {
+            _handles?.Release();
+            _handles = _hairstyleDatabase.GetCosmeticsItemModel(id).GetSpriteHandles();
+            await _handles.LoadTask();
+            _cosmeticsView.Set(_handles.Back, _handles.Front);
+        }
+    }
 }

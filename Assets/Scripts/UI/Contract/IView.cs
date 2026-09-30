@@ -1,7 +1,9 @@
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal interface IView {
-		public VisualElement	Root { get; }
-	}
+namespace LeaseExtension.UI.Contract
+{
+    internal interface IView
+    {
+        public VisualElement Root { get; }
+    }
 }

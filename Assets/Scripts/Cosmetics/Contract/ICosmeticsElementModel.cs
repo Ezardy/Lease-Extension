@@ -1,13 +1,17 @@
+using System.Collections.Generic;
 using ObservableCollections;
 using R3;
-using System.Collections.Generic;
 
-namespace Aniki.Cosmetics {
-	internal interface ICosmeticsElementModel {
-		public string										Id { get; set; }
-		public void											AddId(in string hair);
-		public IReadOnlyCollection<string>					IdCollection { get; }
-		public Observable<string>							IdChanged { get; }
-		public Observable<CollectionAddEvent<string>>		IdCollectionChanged { get; }
-	}
+namespace LeaseExtension.Cosmetics.Contract
+{
+    internal interface ICosmeticsElementModel
+    {
+        public string Id { get; set; }
+
+        public IReadOnlyCollection<string> IdCollection { get; }
+        public Observable<string> IdChanged { get; }
+        public Observable<CollectionAddEvent<string>> IdCollectionChanged { get; }
+
+        public void AddId(in string hair);
+    }
 }

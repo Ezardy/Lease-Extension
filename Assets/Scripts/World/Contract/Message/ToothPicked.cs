@@ -1,4 +1,6 @@
-namespace LeaseExtension.World.Entities.Message
+namespace LeaseExtension.World.Contract.Message
 {
-	public struct ToothPicked { }
+    public struct ToothPicked
+    {
+    }
 }

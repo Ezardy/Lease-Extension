@@ -1,24 +1,29 @@
-using Aniki.Common;
-using LeaseExtension;
+using LeaseExtension.Common.Layer;
+using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.World {
-	internal class Gap : AConstructionPartBehaviour {
-		private IPublisher<BarPassed>	publisher;
-		private int								layer;
+namespace LeaseExtension.World.Track.Part.Behaviour
+{
+    [MovedFrom("Aniki.World")]
+    internal class Gap : AConstructionPartBehaviour
+    {
+        private IPublisher<BarPassed> _publisher;
+        private int _layer;
 
-		private void	OnTriggerExit2D(Collider2D collider) {
-			if (collider.gameObject.layer == layer)
-				publisher.Publish(new());
-		}
+        private void OnTriggerExit2D(Collider2D collider)
+        {
+            if (collider.gameObject.layer == _layer)
+                _publisher.Publish(new());
+        }
 
-		[Inject]
-		public void	Init(IPublisher<BarPassed> publisher,
-			LayerNames layerNames) {
-			this.publisher = publisher;
-			layer = LayerMask.NameToLayer(layerNames.Player);
-		}
-	}
+        [Inject]
+        public void Init(IPublisher<BarPassed> publisher, LayerNames layerNames)
+        {
+            _publisher = publisher;
+            _layer = LayerMask.NameToLayer(layerNames.Player);
+        }
+    }
 }

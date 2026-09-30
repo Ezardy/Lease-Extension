@@ -1,25 +1,25 @@
 {
-    "name": "LeaseExtension.Audio",
-    "rootNamespace": "LeaseExtension",
-    "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:77221876cc6b8244180b96e320b1bcd4",
-        "GUID:e8bd2f4872af24d43842bf9b931b833e",
-        "GUID:2ef80108f62097141b2b19eaf1201843",
-        "GUID:484bae09cd188874c8b6cc80f65f5532",
-        "GUID:8649d731b0525804cb93d94e81b4f81a",
-        "GUID:8bae442a0c387434db8da533aef67fcc",
-        "GUID:683d0ace5ddb312429856117275c8e68"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "LeaseExtension.Audio",
+  "rootNamespace": "LeaseExtension",
+  "references": [
+    "GUID:f51ebe6a0ceec4240a699833d6309b23",
+    "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+    "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+    "GUID:77221876cc6b8244180b96e320b1bcd4",
+    "GUID:e8bd2f4872af24d43842bf9b931b833e",
+    "GUID:2ef80108f62097141b2b19eaf1201843",
+    "GUID:484bae09cd188874c8b6cc80f65f5532",
+    "GUID:8649d731b0525804cb93d94e81b4f81a",
+    "GUID:8bae442a0c387434db8da533aef67fcc",
+    "GUID:683d0ace5ddb312429856117275c8e68"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

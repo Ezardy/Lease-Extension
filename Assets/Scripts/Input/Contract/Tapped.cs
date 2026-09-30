@@ -1,3 +1,6 @@
-namespace LeaseExtension.Input.Contract {
-	public struct Tapped { }
+namespace LeaseExtension.Input.Contract
+{
+    public struct Tapped
+    {
+    }
 }

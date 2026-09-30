@@ -1,7 +1,7 @@
-namespace LeaseExtension.World.Entities.Internal
+namespace LeaseExtension.World.Contract
 {
     public interface IOrder
     {
-        public int	Order { get; set; }
+        public int Order { get; set; }
     }
 }

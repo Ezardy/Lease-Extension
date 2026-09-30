@@ -1,35 +1,39 @@
-using Aniki.Cosmetics;
-using R3;
 using System;
+using LeaseExtension.Cosmetics.Contract;
+using LeaseExtension.Save;
+using R3;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Save {
-	[CreateAssetMenu(fileName = "CosmeticsSave", menuName = "Scriptable Objects/Saves/Cosmetics")]
-	internal class CosmeticsSave : ASave<CosmeticsSave.Cosmetics, ICosmeticsElementModel>, IInitializable, IDisposable {
-		[Serializable]
-		public struct Cosmetics {
-			public string	id;
-		}
+namespace LeaseExtension.Cosmetics
+{
+    [CreateAssetMenu(fileName = "CosmeticsSave", menuName = "Scriptable Objects/Saves/Cosmetics")]
+    [MovedFrom("Aniki.Save")]
+    internal class CosmeticsSave : ASave<Cosmetics, ICosmeticsElementModel>, IInitializable, IDisposable
+    {
+        private ICosmeticsElementModel _cosmetics;
+        private IDisposable _disposable;
 
-		private ICosmeticsElementModel	cosmetics;
-		private IDisposable				disposable;
+        [Inject]
+        public void Init(ICosmeticsElementModel cosmetics)
+        {
+            _cosmetics = cosmetics;
+        }
 
-		[Inject]
-		public void	Init(ICosmeticsElementModel cosmetics) {
-			this.cosmetics = cosmetics;
-		}
+        public void Initialize()
+        {
+            Init();
+            _disposable = _cosmetics.IdChanged.Skip(1).Subscribe(h =>
+            {
+                SaveData.Id = h;
+                Save();
+            });
+        }
 
-		public void	Initialize() {
-			Init();
-			disposable = cosmetics.IdChanged.Skip(1).Subscribe(h => {
-				data.id = h;
-				Save();
-			});
-		}
-
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-	}
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+    }
 }

@@ -1,9 +1,11 @@
-namespace Aniki.Character {
-	public enum CharacterState : byte {
-		IDLE,
-		WAIT,
-		PUNCH,
-		FALL,
-		OVER
-	}
+namespace LeaseExtension.Gameplay.Contract.Message
+{
+    public enum CharacterState : byte
+    {
+        Idle,
+        Wait,
+        Punch,
+        Fall,
+        Over
+    }
 }

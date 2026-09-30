@@ -1,20 +1,27 @@
-using LeaseExtension;
-using LeaseExtension.World.Entities.Message;
-using MessagePipe;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Serialization;
 using Zenject;
 
-namespace Aniki.World {
-	[CreateAssetMenu(fileName = "WorldInstaller", menuName = "Installers/World Installer")]
-	internal class WorldInstaller : ScriptableObjectInstaller<WorldInstaller> {
-		[SerializeField] private Camera			cameraPrefab;
-		[SerializeField] private EventSystem	eventSystemPrefab;
+namespace LeaseExtension.World
+{
+    [CreateAssetMenu(fileName = "WorldInstaller", menuName = "Installers/World Installer")]
+    [MovedFrom("Aniki.World")]
+    internal class WorldInstaller : ScriptableObjectInstaller<WorldInstaller>
+    {
+        [SerializeField]
+        [FormerlySerializedAs("cameraPrefab")]
+        private Camera _cameraPrefab;
 
-		public override void	InstallBindings()
-		{
-			Container.Bind<Camera>().FromComponentInNewPrefab(cameraPrefab.gameObject).AsSingle().NonLazy();
-			Container.Bind<EventSystem>().FromComponentInNewPrefab(eventSystemPrefab.gameObject).AsSingle().NonLazy();
-		}
-	}
+        [SerializeField]
+        [FormerlySerializedAs("eventSystemPrefab")]
+        private EventSystem _eventSystemPrefab;
+
+        public override void InstallBindings()
+        {
+            Container.Bind<Camera>().FromComponentInNewPrefab(_cameraPrefab.gameObject).AsSingle().NonLazy();
+            Container.Bind<EventSystem>().FromComponentInNewPrefab(_eventSystemPrefab.gameObject).AsSingle().NonLazy();
+        }
+    }
 }

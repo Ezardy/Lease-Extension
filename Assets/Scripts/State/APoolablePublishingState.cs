@@ -1,62 +1,73 @@
 using System;
+using LeaseExtension.State.Contract;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.State {
-	public abstract class APoolablePublishingState<C, S>
-		: AState<C> where C : IContext where S : Enum {
-		private readonly StatePublisher<S>	statePublisher;
+namespace LeaseExtension.State
+{
+    [MovedFrom("Aniki.State")]
+    public abstract class APoolablePublishingState<C, S> : AState<C> where C : IContext where S : Enum
+    {
+        private readonly StatePublisher<S> _statePublisher;
+        private IMemoryPool _pool;
 
-		private IMemoryPool	pool;
-	
-		protected APoolablePublishingState(C context,
-			StatePublisher<S> statePublisher) : base(context) {
-			this.statePublisher = statePublisher;
-		}
-	
-		protected void	SetPool(IMemoryPool pool) {
-			this.pool = pool;
-		}
-	
-		public override void	Dispose() {
-			pool.Despawn(this);
-		}
-	
-		public void	OnDespawned() {
-			pool = null;
-		}
-	
-		public override void	Start() {
-			statePublisher.Publish();
-		}
-	}
+        protected APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context)
+        {
+            _statePublisher = statePublisher;
+        }
 
-	public abstract class APoolablePublishingState<T, C, S>
-		: APoolablePublishingState<C, S>, IPoolable<IMemoryPool>
-		where T : APoolablePublishingState<T, C, S>
-		where C : IContext
-		where S : Enum {
-		public APoolablePublishingState(C context,
-			StatePublisher<S> statePublisher) : base(context, statePublisher) { }
+        public override void Start()
+        {
+            _statePublisher.Publish();
+        }
 
-		public void	OnSpawned(IMemoryPool pool) {
-			SetPool(pool);
-		}
+        public override void Dispose()
+        {
+            _pool.Despawn(this);
+        }
 
-		public class Factory : PlaceholderFactory<T> { }
-	}
+        public void OnDespawned()
+        {
+            _pool = null;
+        }
 
-	public abstract class APoolablePublishingState<P, T, C, S>
-		: APoolablePublishingState<C, S>, IPoolable<P, IMemoryPool>
-		where T : APoolablePublishingState<P, T, C, S>
-		where C : IContext
-		where S : Enum {
-		public APoolablePublishingState(C context,
-			StatePublisher<S> statePublisher) : base(context, statePublisher) { }
+        protected void SetPool(IMemoryPool pool)
+        {
+            _pool = pool;
+        }
+    }
 
-		public virtual void	OnSpawned(P param, IMemoryPool pool) {
-			SetPool(pool);
-		}
+    [MovedFrom("Aniki.State")]
+    public abstract class APoolablePublishingState<T, C, S> : APoolablePublishingState<C, S>, IPoolable<IMemoryPool> where T : APoolablePublishingState<T, C, S> where C : IContext where S : Enum
+    {
+        public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)
+        {
+        }
 
-		public class Factory : PlaceholderFactory<P, T> { }
-	}
+        public void OnSpawned(IMemoryPool pool)
+        {
+            SetPool(pool);
+        }
+
+        public class Factory : PlaceholderFactory<T>
+        {
+        }
+    }
+
+    [MovedFrom("Aniki.State")]
+    public abstract class APoolablePublishingState<P, T, C, S> : APoolablePublishingState<C, S>, IPoolable<P, IMemoryPool> where T : APoolablePublishingState<P, T, C, S> where C : IContext where S : Enum
+    {
+        public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)
+        {
+        }
+
+        public virtual void OnSpawned(P param, IMemoryPool pool)
+        {
+            SetPool(pool);
+        }
+
+        public class Factory : PlaceholderFactory<P, T>
+        {
+        }
+    }
 }

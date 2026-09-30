@@ -1,26 +1,32 @@
-using Aniki.Character;
-using Aniki.SceneManagment;
-using Aniki.State;
-using MessagePipe;
 using System;
+using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.State;
+using MessagePipe;
+using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
-namespace Aniki.Audio {
-	internal class WelcomeAudioState : AState<IBackgroundAudioContext> {
-		private readonly IDisposable	disposable;
+namespace LeaseExtension.Audio.Background.States
+{
+    [MovedFrom("Aniki.Audio")]
+    internal class WelcomeAudioState : AState<IBackgroundAudioContext>
+    {
+        private readonly IDisposable _disposable;
 
-		public WelcomeAudioState(IBackgroundAudioContext context,
-			ISubscriber<FocusedScene> sceneSubscriber,
-			IdleAudioState.Factory idleFactory) : base(context) {
-			disposable = sceneSubscriber.Subscribe(_ =>
-				context.State = idleFactory.Create(),
-				FocusedSceneFilter.Main);
-		}
+        public WelcomeAudioState(
+            IBackgroundAudioContext context,
+            ISubscriber<FocusedScene> sceneSubscriber,
+            IdleAudioState.Factory idleFactory) : base(context)
+        {
+            _disposable = sceneSubscriber.Subscribe(_ => context.State = idleFactory.Create(), FocusedSceneFilter.Main);
+        }
 
-		public override void	Dispose() {
-			disposable.Dispose();
-		}
+        public override void Dispose()
+        {
+            _disposable.Dispose();
+        }
 
-		public class Factory : PlaceholderFactory<WelcomeAudioState> { }
-	}
+        public class Factory : PlaceholderFactory<WelcomeAudioState>
+        {
+        }
+    }
 }

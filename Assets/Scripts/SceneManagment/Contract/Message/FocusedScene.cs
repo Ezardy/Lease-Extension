@@ -1,6 +1,8 @@
-namespace Aniki.SceneManagment {
-	public enum FocusedScene : byte {
-		WELCOME,
-		MAIN
-	}
+namespace LeaseExtension.SceneManagment.Contract.Message
+{
+    public enum FocusedScene : byte
+    {
+        Welcome,
+        Main
+    }
 }
