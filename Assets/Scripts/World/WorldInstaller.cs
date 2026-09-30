@@ -1,3 +1,6 @@
+using LeaseExtension;
+using LeaseExtension.World.Entities.Message;
+using MessagePipe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -8,7 +11,8 @@ namespace Aniki.World {
 		[SerializeField] private Camera			cameraPrefab;
 		[SerializeField] private EventSystem	eventSystemPrefab;
 
-		public override void	InstallBindings() {
+		public override void	InstallBindings()
+		{
 			Container.Bind<Camera>().FromComponentInNewPrefab(cameraPrefab.gameObject).AsSingle().NonLazy();
 			Container.Bind<EventSystem>().FromComponentInNewPrefab(eventSystemPrefab.gameObject).AsSingle().NonLazy();
 		}

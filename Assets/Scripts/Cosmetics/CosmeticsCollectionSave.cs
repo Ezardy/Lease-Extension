@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Aniki.Cosmetics {
 	[CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
-	public class CosmeticsCollectionSave : ASave<CosmeticsCollectionSave.CosmeticsCollection, ICosmeticsElementModel>, IInitializable, IDisposable {
+	internal class CosmeticsCollectionSave : ASave<CosmeticsCollectionSave.CosmeticsCollection, ICosmeticsElementModel>, IInitializable, IDisposable {
 		[Serializable]
 		public struct CosmeticsCollection {
 			public List<string>	idCollection;

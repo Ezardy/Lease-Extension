@@ -1,15 +1,16 @@
 using Aniki.Common;
+using LeaseExtension.World.Entities.Message;
 using MessagePipe;
 using UnityEngine;
 using Zenject;
 
 namespace Aniki.World {
 	internal class Tooth : AConstructionPartBehaviour {
-		private IPublisher<ToothCollisionMessage>	publisher;
+		private IPublisher<ToothPicked>	publisher;
 		private int									layer;
 
 		[Inject]
-		public void	Init(IPublisher<ToothCollisionMessage> publisher,
+		public void	Init(IPublisher<ToothPicked> publisher,
 			LayerNames layerNames) {
 			this.publisher = publisher;
 			layer = LayerMask.NameToLayer(layerNames.Player);

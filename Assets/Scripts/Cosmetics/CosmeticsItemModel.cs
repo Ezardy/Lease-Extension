@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Aniki.Cosmetics {
 	[CreateAssetMenu(fileName = "CosmeticsVariant", menuName = "Scriptable Objects/Cosmetics Variant")]
-	public class CosmeticsItemModel : ScriptableObject, ICosmeticsItemModel {
+	internal class CosmeticsItemModel : ScriptableObject, ICosmeticsItemModel {
 		[SerializeField] private string					id;
 		[SerializeField] private uint					price;
 		[SerializeField] private AssetReferenceSprite	backSpriteAssetReference;

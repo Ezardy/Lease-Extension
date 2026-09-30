@@ -34,7 +34,7 @@ namespace Aniki.State {
 		: APoolablePublishingState<C, S>, IPoolable<IMemoryPool>
 		where T : APoolablePublishingState<T, C, S>
 		where C : IContext
-		where S : Enum{
+		where S : Enum {
 		public APoolablePublishingState(C context,
 			StatePublisher<S> statePublisher) : base(context, statePublisher) { }
 

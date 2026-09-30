@@ -4,6 +4,7 @@ using MessagePipe;
 using R3;
 using System;
 using System.Collections.Generic;
+using LeaseExtension;
 using UnityEngine;
 using Zenject;
 
@@ -90,7 +91,7 @@ namespace Aniki.World {
 		}
 
 		public TrackOrchectrator(byte trackCount, float floorDepth,
-			float floorCenterY, byte maxConstructons, byte reservedOrders,
+			float floorCenterY, byte maxConstructions, byte reservedOrders,
 			IWorldModel worldModel, ITrackFactory trackFactory,
 			IConstructionBlueprintDatabase database,
 			IScreenSizeObserver screenSizeObserver,
@@ -114,8 +115,8 @@ namespace Aniki.World {
 			for (byte i = 0; i < trackCount; i += 1)
 				tracks.Add(trackFactory.Create(
 						start + trackDepth * i,
-						(1 - scalerStep * i) * scalerScale, maxConstructons,
-						(maxConstructons + reservedOrders) * (trackCount - i - 1)));
+						(1 - scalerStep * i) * scalerScale, maxConstructions,
+						(maxConstructions + reservedOrders) * (trackCount - i - 1)));
 		}
 
 		public void	Initialize() {

@@ -1,6 +1,7 @@
 using Aniki.Character;
 using Aniki.UI;
-using Aniki.World;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.World.Entities.Message;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -27,18 +28,18 @@ namespace Aniki.Audio {
 		}
 
 		private void	InstallUIAudio() {
-			Container.BindInterfacesTo<EventAudio<AcceptSentenceMessage>>().AsSingle()
+			Container.BindInterfacesTo<EventAudio<RestartRequested>>().AsSingle()
 				.WithArguments(sign.ToParameters());
 		}
 
 		private void	InstallCharacterAudio() {
 			Container.BindInterfacesTo<EventAudio<CharacterState>>().FromSubContainerResolve()
 				.ByMethod(InstallCharacterPunchAudio).AsCached();
-			Container.BindInterfacesTo<EventAudio<ObstacleCollisionMessage>>().AsSingle()
+			Container.BindInterfacesTo<EventAudio<ObstacleCollided>>().AsSingle()
 				.WithArguments(obstacle.ToParameters());
 			Container.BindInterfacesTo<EventAudio<CharacterState>>().AsCached()
 				.WithArguments(floor.ToParameters(), CharacterStateFilter.Over);
-			Container.BindInterfacesTo<EventAudio<ToothCollisionMessage>>().AsSingle()
+			Container.BindInterfacesTo<EventAudio<ToothPicked>>().AsSingle()
 				.WithArguments(tooth.ToParameters());
 
 			Container.Bind<AudioPlayerParameters>().FromSubContainerResolve()

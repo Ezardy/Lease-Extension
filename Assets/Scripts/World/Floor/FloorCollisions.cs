@@ -1,4 +1,5 @@
 using Aniki.Common;
+using LeaseExtension.World.Entities.Message;
 using MessagePipe;
 using UnityEngine;
 using Zenject;
@@ -6,10 +7,10 @@ using Zenject;
 namespace Aniki.World.Floor {
 	internal class FloorCollisions : MonoBehaviour {
 		private int									playerLayerId;
-		private IPublisher<FloorCollisionMessage>	publisher;
+		private IPublisher<FloorCollided>	publisher;
 
 		[Inject]
-		public void	Init(IPublisher<FloorCollisionMessage> publisher, LayerNames layerNames) {
+		public void	Init(IPublisher<FloorCollided> publisher, LayerNames layerNames) {
 			this.publisher = publisher;
 			playerLayerId = LayerMask.NameToLayer(layerNames.Player);
 		}

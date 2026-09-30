@@ -1,10 +1,10 @@
-using Aniki.Input;
 using Aniki.State;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
 using System;
 using System.Text;
 using System.Threading;
+using LeaseExtension.Input.Contract;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -26,7 +26,7 @@ namespace Aniki.SceneManagment {
 		public WelcomeSceneState(ISceneContext context,
 			StatePublisher<FocusedScene>.Factory publisherFactory,
 			[Inject(Id = FocusedScene.MAIN)] AssetReference mainScene,
-			ISubscriber<TapInputMessage> tapSubscriber,
+			ISubscriber<Tapped> tapSubscriber,
 			MainSceneState.Factory mainFactory)
 			: base(context) {
 			this.mainScene = mainScene;

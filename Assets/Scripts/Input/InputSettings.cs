@@ -1,5 +1,6 @@
 using MessagePipe;
 using System.Collections.Generic;
+using LeaseExtension.Input.Contract;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -11,15 +12,15 @@ namespace Aniki.Input {
 		[SerializeField] private InputActionReference	punchActionReference;
 		[SerializeField] private InputActionReference	tapActionReference;
 
-		private IPublisher<PunchInputMessage>	punchPublisher;
-		private IPublisher<TapInputMessage>		tapPublisher;
+		private IPublisher<PunchRequested>	punchPublisher;
+		private IPublisher<Tapped>		tapPublisher;
 
 		private InputAction	punchAction;
 		private InputAction	tapAction;
 
 		[Inject]
-		public void	Init(IPublisher<PunchInputMessage> punchPublisher,
-			IPublisher<TapInputMessage> tapPublisher) {
+		public void	Init(IPublisher<PunchRequested> punchPublisher,
+			IPublisher<Tapped> tapPublisher) {
 			this.punchPublisher = punchPublisher;
 			this.tapPublisher = tapPublisher;
 		}

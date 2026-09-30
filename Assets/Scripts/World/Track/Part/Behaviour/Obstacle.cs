@@ -1,15 +1,16 @@
 using Aniki.Common;
+using LeaseExtension.World.Entities.Message;
 using MessagePipe;
 using UnityEngine;
 using Zenject;
 
 namespace Aniki.World {
 	internal class Obstacle : AConstructionPartBehaviour {
-		private IPublisher<ObstacleCollisionMessage>	publisher;
+		private IPublisher<ObstacleCollided>	publisher;
 		private int										layer;
 
 		[Inject]
-		public void	Init(IPublisher<ObstacleCollisionMessage> publisher,
+		public void	Init(IPublisher<ObstacleCollided> publisher,
 			LayerNames layerNames) {
 			this.publisher = publisher;
 			layer = LayerMask.NameToLayer(layerNames.Player);

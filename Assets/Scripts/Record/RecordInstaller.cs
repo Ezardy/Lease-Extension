@@ -12,7 +12,7 @@ namespace Aniki.Record {
 			Container.BindInterfacesTo<RecordModel>().AsSingle().WithArguments(recordSave.Data.record);
 			Container.QueueForInject(recordSave);
 			Container.BindInterfacesTo<RecordSave>().FromInstance(recordSave);
-			Container.BindInterfacesTo<RecordViewModel>().AsSingle();
+			Container.BindInterfacesTo<RecordIncrementer>().AsSingle();
 		}
 	}
 }

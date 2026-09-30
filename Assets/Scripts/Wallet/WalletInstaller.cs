@@ -12,7 +12,7 @@ namespace Aniki.Wallet {
 			Container.BindInterfacesTo<WalletModel>().AsSingle().WithArguments(walletSave.Data.balance);
 			Container.BindInterfacesTo<WalletSave>().FromInstance(walletSave);
 			Container.QueueForInject(walletSave);
-			Container.BindInterfacesTo<WalletViewModel>().AsSingle();
+			Container.BindInterfacesTo<WalletUpdater>().AsSingle();
 		}
 	}
 }
