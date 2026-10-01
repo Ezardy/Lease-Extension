@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
@@ -11,6 +12,7 @@ using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Over
 {
+    [UsedImplicitly]
     internal class OverViewModel : IOverViewModel, IDisposable
     {
         private readonly IOverView _view;

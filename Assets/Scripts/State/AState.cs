@@ -8,7 +8,7 @@ namespace LeaseExtension.State
 
         public AState(T context)
         {
-            this.Context = context;
+            Context = context;
         }
 
         public virtual void Start()

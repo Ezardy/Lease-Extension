@@ -20,7 +20,7 @@ namespace LeaseExtension.World.Track.Part.Blank
             IObjectPool<GapConstructionBlank> blankPool,
             IObjectPool<GapConstructionPart> partPool)
         {
-            this.Blueprint = blueprint;
+            Blueprint = blueprint;
             _blankPool = blankPool;
             _partPool = partPool;
         }

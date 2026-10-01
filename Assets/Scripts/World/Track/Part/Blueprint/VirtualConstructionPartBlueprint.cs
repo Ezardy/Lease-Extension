@@ -12,11 +12,8 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     [CreateAssetMenu(fileName = "VirtualConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Virtual Construction Part Blueprint")]
     internal class VirtualConstructionPartBlueprint : ScriptableObject, IConstructionPartBlueprint, IConstructionBlank
     {
-        [SerializeField]
-        private byte _initialPool = 5;
-
-        [SerializeField]
-        private float _width = 1;
+        [SerializeField] private byte _initialPool = 5;
+        [SerializeField] private float _width = 1;
         private IObjectPool<VirtualConstructionPart> _pool;
         private System.IDisposable _disposable;
 

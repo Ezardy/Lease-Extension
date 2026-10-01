@@ -9,16 +9,11 @@ namespace LeaseExtension.Gameplay
     [CreateAssetMenu(fileName = "CharacterModel", menuName = "Scriptable Objects/Character Model")]
     internal class CharacterModel : ScriptableObject, ICharacterModel
     {
-        [SerializeField]
-        [DontCreateProperty]
+        [SerializeField, DontCreateProperty]
         private SerializableReactiveProperty<float> _punchHeight;
-
-        [SerializeField]
-        [DontCreateProperty]
+        [SerializeField, DontCreateProperty]
         private SerializableReactiveProperty<float> _initialPunchHeight;
-
-        [SerializeField]
-        [DontCreateProperty]
+        [SerializeField, DontCreateProperty]
         private SerializableReactiveProperty<float> _punchPeriod;
         private readonly SerializableReactiveProperty<CharacterState> _state = new(CharacterState.Idle);
 

@@ -1,9 +1,11 @@
+using JetBrains.Annotations;
 using Zenject;
 
 namespace LeaseExtension.MessagePipe
 {
     internal partial class MessagePipeInstaller
     {
+        [UsedImplicitly]
         private class MessagePipeDiagnosticsBootstrap : IInitializable
         {
             private readonly MessagePipeDiagnostics.Factory _factory;

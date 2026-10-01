@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Zenject;
 
 namespace LeaseExtension.MessagePipe
@@ -6,6 +7,7 @@ namespace LeaseExtension.MessagePipe
     {
         private class MessagePipeDiagnostics
         {
+            [UsedImplicitly]
             public class Factory : PlaceholderFactory<MessagePipeDiagnostics>
             {
             }

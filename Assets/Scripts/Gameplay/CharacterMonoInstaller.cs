@@ -9,11 +9,8 @@ namespace LeaseExtension.Gameplay
 {
     internal class CharacterMonoInstaller : MonoInstaller
     {
-        [SerializeField]
-        private List<MonoBehaviour> _forInject;
-
-        [SerializeField]
-        private Rigidbody2D _characterRigidbody;
+        [SerializeField] private List<MonoBehaviour> _forInject;
+        [SerializeField] private Rigidbody2D _characterRigidbody;
 
         public override void InstallBindings()
         {

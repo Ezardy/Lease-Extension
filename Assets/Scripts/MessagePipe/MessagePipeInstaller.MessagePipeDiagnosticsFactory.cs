@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using MessagePipe;
 using Zenject;
 
@@ -5,6 +6,7 @@ namespace LeaseExtension.MessagePipe
 {
     internal partial class MessagePipeInstaller
     {
+        [UsedImplicitly]
         private class MessagePipeDiagnosticsFactory : IFactory<MessagePipeDiagnostics>
         {
             private readonly DiContainer _container;

@@ -6,8 +6,7 @@ namespace LeaseExtension.Record
     [CreateAssetMenu(fileName = "RecordInstaller", menuName = "Installers/Record Installer")]
     public class RecordInstaller : ScriptableObjectInstaller<RecordInstaller>
     {
-        [SerializeField]
-        private RecordSave _recordSave;
+        [SerializeField] private RecordSave _recordSave;
 
         public override void InstallBindings()
         {

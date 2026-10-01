@@ -10,11 +10,8 @@ namespace LeaseExtension.Cosmetics
     [CreateAssetMenu(fileName = "CosmeticsInstaller", menuName = "Installers/Cosmetics Installer")]
     internal class CosmeticsInstaller : ScriptableObjectInstaller<CosmeticsInstaller>
     {
-        [SerializeField]
-        private CosmeticsElementModelDependencies _babHairstyleModelDependencies;
-
-        [SerializeField]
-        private CosmeticsElementModelDependencies _pupHairstyleModelDependencies;
+        [SerializeField] private CosmeticsElementModelDependencies _babHairstyleModelDependencies;
+        [SerializeField] private CosmeticsElementModelDependencies _pupHairstyleModelDependencies;
 
         public override void InstallBindings()
         {
@@ -69,9 +66,7 @@ namespace LeaseExtension.Cosmetics
         private class CosmeticsElementModelDependencies
         {
             public CosmeticsSave CosmeticsSave;
-
             public CosmeticsCollectionSave CosmeticsCollectionSave;
-
             public IRef<ICosmeticsItemModelDatabase> Database;
         }
     }

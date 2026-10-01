@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Gameplay.States;
@@ -9,6 +10,7 @@ using Zenject;
 
 namespace LeaseExtension.Gameplay
 {
+    [UsedImplicitly]
     internal class CharacterStateMachine : AContext, ICharacterContext, IInitializable, IFixedTickable
     {
         private readonly IdleState.Factory _idleFactory;

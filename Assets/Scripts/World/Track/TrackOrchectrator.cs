@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.World.Contract;
@@ -10,6 +11,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Track
 {
+    [UsedImplicitly]
     internal class TrackOrchectrator : IInitializable, ITickable, IDisposable
     {
         private readonly IWorldModel _worldModel;

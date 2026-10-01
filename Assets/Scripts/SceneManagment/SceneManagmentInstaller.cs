@@ -12,8 +12,7 @@ namespace LeaseExtension.SceneManagment
     [CreateAssetMenu(fileName = "SceneManagmentInstaller", menuName = "Installers/Scene Managment Installer")]
     internal class SceneManagmentInstaller : ScriptableObjectInstaller<SceneManagmentInstaller>
     {
-        [SerializeField]
-        private AssetReference _mainScene;
+        [SerializeField] private AssetReference _mainScene;
 
         public override void InstallBindings()
         {

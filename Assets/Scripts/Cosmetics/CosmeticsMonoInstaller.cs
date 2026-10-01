@@ -8,11 +8,8 @@ namespace LeaseExtension.Cosmetics
 {
     internal class CosmeticsMonoInstaller : MonoInstaller
     {
-        [SerializeField]
-        private CosmeticsElementViewDependencies _babViewDependencies;
-
-        [SerializeField]
-        private CosmeticsElementViewDependencies _pupViewDependencies;
+        [SerializeField] private CosmeticsElementViewDependencies _babViewDependencies;
+        [SerializeField] private CosmeticsElementViewDependencies _pupViewDependencies;
 
         public override void InstallBindings()
         {
@@ -35,7 +32,6 @@ namespace LeaseExtension.Cosmetics
         private class CosmeticsElementViewDependencies
         {
             public SpriteRenderer BackSpriteRenderer;
-
             public SpriteRenderer FrontSpriteRenderer;
         }
     }

@@ -1,12 +1,14 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Audio.Contract;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace LeaseExtension.Audio
 {
+    [UsedImplicitly]
     internal class OneShotAudioPlayer : IOneShotAudioPlayer, IDisposable
     {
         private readonly IObjectPool<AudioSource> _pool;

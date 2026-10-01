@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.World.Contract;
 using R3;
@@ -7,6 +8,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Wall
 {
+    [UsedImplicitly]
     internal class WallView : IWallView, IInitializable, ITickable, IDisposable
     {
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");

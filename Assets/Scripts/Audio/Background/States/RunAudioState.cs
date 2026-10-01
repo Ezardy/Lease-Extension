@@ -1,9 +1,11 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using MessagePipe;
 
 namespace LeaseExtension.Audio.Background.States
 {
+    [UsedImplicitly]
     internal class RunAudioState : ABackgroundAudioState<RunAudioState>
     {
         private readonly ISubscriber<CharacterState> _characterStateSubscriber;

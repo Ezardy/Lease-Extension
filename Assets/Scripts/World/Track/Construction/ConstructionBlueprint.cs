@@ -9,35 +9,23 @@ namespace LeaseExtension.World.Track.Construction
     [CreateAssetMenu(fileName = "ConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Blueprint")]
     internal class ConstructionBlueprint : ScriptableObject, IConstructionBlueprint, IReadOnlyCollection<IConstructionPartBlueprint>
     {
-        [Tooltip("0 - use implicit height, 1 - stretch to the ceil")]
-        [SerializeField]
-        [Range(0, 1)]
+        [SerializeField, Tooltip("0 - use implicit height, 1 - stretch to the ceil"), Range(0, 1)]
         protected float Height = 1;
-
         [SerializeField]
         protected List<IRef<IConstructionPartBlueprint>> PartReferences;
         protected List<IConstructionBlank> Blanks;
-
         [SerializeField]
         private bool _isRangeInversed = false;
-
-        [SerializeField]
-        [Range(0, 1)]
+        [SerializeField, Range(0, 1)]
         private float _rangeStart = 0;
-
-        [SerializeField]
-        [Range(0, 1)]
+        [SerializeField, Range(0, 1)]
         private float _rangeEnd = 1;
-
         [SerializeField]
         private float _minDelay = 5;
-
         [SerializeField]
         private float _maxDelay = 20;
-
         [SerializeField]
         private float _minMargin = 30;
-
         [SerializeField]
         private float _maxMargin = 50;
 

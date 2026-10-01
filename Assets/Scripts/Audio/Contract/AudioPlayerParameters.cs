@@ -12,9 +12,9 @@ namespace LeaseExtension.Audio.Contract
 
         public AudioPlayerParameters(IAudioGenerator generator, float volume, Vector2 position)
         {
-            this.Generator = generator;
-            this.Volume = volume;
-            this.Position = position;
+            Generator = generator;
+            Volume = volume;
+            Position = position;
         }
 
         public AudioPlayerParameters(

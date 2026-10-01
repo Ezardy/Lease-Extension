@@ -15,16 +15,12 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     [CreateAssetMenu(fileName = "GapConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Gap Construction Part Blueprint")]
     internal class GapConstructionPartBlueprint : ScriptableObject, IGapConstructionPartBlueprint
     {
-        [SerializeField]
-        [Range(0, 1)]
+        [SerializeField, Range(0, 1)]
         private float _gapSize;
-
         [SerializeField]
         private IRef<IConstructionPartBlueprint> _bottomPart;
-
         [SerializeField]
         private IRef<IConstructionPartBlueprint> _gapPart;
-
         [SerializeField]
         private IRef<IConstructionPartBlueprint> _topPart;
         private IObjectPool<GapConstructionPart> _partPool;
@@ -47,7 +43,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
                     _bottomPart.I.InterfereWidth,
                     _gapPart.I.InterfereWidth,
                     _topPart.I.InterfereWidth);
-                SubPartBlueprints = new IConstructionPartBlueprint[3]
+                SubPartBlueprints = new[]
                 {
                     _bottomPart.I,
                     _gapPart.I,

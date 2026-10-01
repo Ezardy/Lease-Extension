@@ -9,14 +9,9 @@ namespace LeaseExtension.World
     [CreateAssetMenu(fileName = "WorldModel", menuName = "Scriptable Objects/World Model")]
     internal class WorldModel : ScriptableObject, IWorldModel, IInitializable, IDisposable
     {
-        [SerializeField]
-        private SerializableReactiveProperty<float> _speed;
-
-        [SerializeField]
-        private SerializableReactiveProperty<float> _perspective;
-
-        [SerializeField]
-        private SerializableReactiveProperty<float> _gravity;
+        [SerializeField] private SerializableReactiveProperty<float> _speed;
+        [SerializeField] private SerializableReactiveProperty<float> _perspective;
+        [SerializeField] private SerializableReactiveProperty<float> _gravity;
         private readonly ReactiveProperty<float> _actualSpeed = new(1);
         private float _amplifier = 1;
         private IDisposable _disposable;

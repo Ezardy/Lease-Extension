@@ -5,8 +5,7 @@ namespace LeaseExtension.Common.Utilities
     [System.Serializable]
     public class IRef<T> : ISerializationCallbackReceiver where T : class
     {
-        [SerializeField]
-        private Object _target;
+        [SerializeField] private Object _target;
 
         public T I => _target as T;
 

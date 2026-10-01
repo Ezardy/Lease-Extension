@@ -1,10 +1,12 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
+    [UsedImplicitly]
     internal class AudioSourcePool : IObjectPool<AudioSource>, IInitializable, IDisposable
     {
         private readonly AudioSourceFactory _factory;

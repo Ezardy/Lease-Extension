@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Wallet.Contract;
 using LeaseExtension.World.Contract.Message;
@@ -7,6 +8,7 @@ using R3;
 
 namespace LeaseExtension.Wallet
 {
+    [UsedImplicitly]
     internal class WalletUpdater : IDisposable
     {
         private readonly IDisposable _disposable;

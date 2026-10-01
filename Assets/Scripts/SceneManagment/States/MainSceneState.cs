@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -6,6 +7,7 @@ using Zenject;
 
 namespace LeaseExtension.SceneManagment.States
 {
+    [UsedImplicitly]
     internal class MainSceneState : APoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState, ISceneContext, FocusedScene>
     {
         private AsyncOperationHandle<SceneInstance> _sceneHandle;

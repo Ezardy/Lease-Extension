@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Over
 {
+    [UsedImplicitly]
     internal class OverView : AView, IOverView
     {
         public Button AcceptButton { get; private set; }

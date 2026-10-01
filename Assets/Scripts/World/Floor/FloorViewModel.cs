@@ -13,9 +13,7 @@ namespace LeaseExtension.World.Floor
         private static readonly int _runHash = Animator.StringToHash("Run");
         private static readonly int _wallHash = Animator.StringToHash("Wall");
         private static readonly int _floorHash = Animator.StringToHash("Floor");
-
-        [SerializeField]
-        private float _speed = 1;
+        [SerializeField] private float _speed = 1;
         private ISubscriber<CharacterState> _subscriber;
         private bool _over = false;
         private IDisposable _runSubscription;

@@ -9,7 +9,6 @@ namespace LeaseExtension.Audio
     internal class VolumeGeneratorPair
     {
         public float Volume = 1;
-
         public IRef<IAudioGenerator> Generator;
 
         public AudioPlayerParameters ToParameters()

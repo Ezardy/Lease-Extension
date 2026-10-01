@@ -8,11 +8,8 @@ namespace LeaseExtension.Gameplay
 {
     public class CharacterAnimator : MonoBehaviour
     {
-        [SerializeField]
-        private Animator _babAnimator;
-
-        [SerializeField]
-        private Animator _pupAnimator;
+        [SerializeField] private Animator _babAnimator;
+        [SerializeField] private Animator _pupAnimator;
         private static readonly int _overHash = Animator.StringToHash("Over");
         private static readonly int _punchHash = Animator.StringToHash("Punch");
 

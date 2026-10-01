@@ -17,34 +17,22 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     {
         [SerializeField]
         protected GameObject Prefab;
-
         [SerializeField]
         private byte _initialPool = 5;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private float _margin = 0;
-
         [SerializeField]
         private float _width = 0;
-
         [SerializeField]
         private bool _autoWidth = true;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private float _interfereWidth = 0;
-
         [SerializeField]
         private bool _autoInterfereWidth = true;
-
         [SerializeField]
         private bool _sameWidth = true;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private bool _useSpriteRenderer = true;
-
         [SerializeField]
         private bool _zOrdering = false;
         private IObjectPool<ConstructionPart> _partPool;
@@ -146,12 +134,12 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         }
     }
 
-    internal class ConstructionPartBlueprint<T, F> : ConstructionPartBlueprint where T : MonoBehaviour where F : IFactory<Object, T>
+    internal class ConstructionPartBlueprint<T, TF> : ConstructionPartBlueprint where T : MonoBehaviour where TF : IFactory<Object, T>
     {
-        private F _factory;
+        private TF _factory;
 
         [Inject]
-        public virtual void Init(F factory)
+        public virtual void Init(TF factory)
         {
             _factory = factory;
         }

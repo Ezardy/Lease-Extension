@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
@@ -7,6 +8,7 @@ using Zenject;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class PunchState : APoolablePublishingState<float, PunchState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;

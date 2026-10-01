@@ -7,14 +7,9 @@ namespace LeaseExtension.UI.Welcome
 {
     internal class WelcomeMonoInstaller : MonoInstaller
     {
-        [SerializeField]
-        private PanelRenderer _panelRenderer;
-
-        [SerializeField]
-        private AssetReferenceSprite _horizontalWelcome;
-
-        [SerializeField]
-        private AssetReferenceSprite _verticalWelcome;
+        [SerializeField] private PanelRenderer _panelRenderer;
+        [SerializeField] private AssetReferenceSprite _horizontalWelcome;
+        [SerializeField] private AssetReferenceSprite _verticalWelcome;
 
         public override void InstallBindings()
         {

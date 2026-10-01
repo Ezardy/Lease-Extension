@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
@@ -9,6 +10,7 @@ using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Main
 {
+    [UsedImplicitly]
     internal class MainViewModel : IMainViewModel
     {
         private readonly ICharacterModel _characterModel;

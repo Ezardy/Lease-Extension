@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using LeaseExtension.State;
 using UnityEngine;
 using Zenject;
@@ -34,6 +35,7 @@ namespace LeaseExtension.Audio.Background.States
             _pool.Despawn(this);
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<T>
         {
         }

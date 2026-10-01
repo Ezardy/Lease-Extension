@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.UI.Contract;
 using R3;
@@ -10,6 +11,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace LeaseExtension.UI.Welcome
 {
+    [UsedImplicitly]
     internal class WelcomeViewModel : IWelcomeViewModel, IDisposable
     {
         private readonly AssetReferenceSprite _horizontalWelcome;

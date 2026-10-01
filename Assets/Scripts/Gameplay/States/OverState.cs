@@ -1,10 +1,12 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class OverState : APoolablePublishingState<OverState, ICharacterContext, CharacterState>
     {
         private readonly ISubscriber<RestartRequested> _resetSubscriber;

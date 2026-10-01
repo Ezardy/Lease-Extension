@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.World.Contract;
 using MessagePipe;
@@ -8,6 +9,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Floor
 {
+    [UsedImplicitly]
     internal class FloorView : IFloorView, IInitializable, ITickable, IDisposable
     {
         private readonly ReactiveProperty<float> _perspective = new(0.15f);

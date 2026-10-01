@@ -8,8 +8,7 @@ namespace LeaseExtension.Gameplay
     [CreateAssetMenu(fileName = "CharacterInstaller", menuName = "Installers/Character Installer")]
     public class CharacterInstaller : ScriptableObjectInstaller<CharacterInstaller>
     {
-        [SerializeField]
-        private IRef<ICharacterModel> _characterModel;
+        [SerializeField] private IRef<ICharacterModel> _characterModel;
 
         public override void InstallBindings()
         {

@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.State.Contract;
 using Zenject;
 
@@ -46,6 +47,7 @@ namespace LeaseExtension.State
             SetPool(pool);
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<T>
         {
         }
@@ -62,6 +64,7 @@ namespace LeaseExtension.State
             SetPool(pool);
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<P, T>
         {
         }

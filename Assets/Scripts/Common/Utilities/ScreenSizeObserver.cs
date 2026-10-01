@@ -1,10 +1,12 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using R3;
 using UnityEngine;
 
 namespace LeaseExtension.Common.Utilities
 {
+    [UsedImplicitly]
     internal class ScreenSizeObserver : IScreenSizeObserver, IDisposable
     {
         private readonly IDisposable _disposable;

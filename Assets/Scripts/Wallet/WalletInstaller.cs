@@ -6,8 +6,7 @@ namespace LeaseExtension.Wallet
     [CreateAssetMenu(fileName = "WalletInstaller", menuName = "Installers/Wallet Installer")]
     internal class WalletInstaller : ScriptableObjectInstaller<WalletInstaller>
     {
-        [SerializeField]
-        private WalletSave _walletSave;
+        [SerializeField] private WalletSave _walletSave;
 
         public override void InstallBindings()
         {

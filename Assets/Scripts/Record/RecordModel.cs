@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using LeaseExtension.Record.Contract;
 using R3;
 
 namespace LeaseExtension.Record
 {
+    [UsedImplicitly]
     public class RecordModel : IRecordModel
     {
         private readonly ReactiveProperty<uint> _record;

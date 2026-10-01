@@ -1,9 +1,11 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using R3;
 
 namespace LeaseExtension.World.Wall
 {
+    [UsedImplicitly]
     internal class WallViewModel : IDisposable
     {
         private readonly IDisposable _disposable;

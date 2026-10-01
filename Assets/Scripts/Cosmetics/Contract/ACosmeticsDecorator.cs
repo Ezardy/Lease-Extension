@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Utilities;
 using ObservableCollections;
 using R3;
@@ -8,6 +9,7 @@ namespace LeaseExtension.Cosmetics.Contract
     internal abstract class ACosmeticsDecorator<T>
         where T : class
     {
+        [UsedImplicitly]
         public class Database : ICosmeticsItemModelDatabase, ITyped<T>
         {
             private readonly ICosmeticsItemModelDatabase _database;
@@ -28,6 +30,7 @@ namespace LeaseExtension.Cosmetics.Contract
             }
         }
 
+        [UsedImplicitly]
         public class ElementModel : ICosmeticsElementModel, ITyped<T>
         {
             private readonly ICosmeticsElementModel _model;

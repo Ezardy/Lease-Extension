@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track
 {
+    [UsedImplicitly]
     internal class Track : ITrack
     {
         private readonly float _y;

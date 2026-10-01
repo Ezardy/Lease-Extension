@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.Cosmetics.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.Cosmetics
 {
+    [UsedImplicitly]
     internal class CosmeticsElementView<T> : ICosmeticsElementView, ITyped<T> where T : class
     {
         private readonly SpriteRenderer _backRenderer;

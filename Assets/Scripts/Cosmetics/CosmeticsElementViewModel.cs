@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.Cosmetics.Contract;
 using R3;
@@ -7,6 +8,7 @@ using Zenject;
 
 namespace LeaseExtension.Cosmetics
 {
+    [UsedImplicitly]
     internal class CosmeticsElementViewModel<T> : ICosmeticsElementViewModel, ITyped<T>, IInitializable, IDisposable where T : class
     {
         private readonly ICosmeticsItemModelDatabase _hairstyleDatabase;

@@ -20,9 +20,9 @@ namespace LeaseExtension.World.Track.Part.Concrete
             Transform transform,
             IObjectPool<ConstructionPart> pool)
         {
-            this.PartBlueprint = blueprint;
-            this.Pool = pool;
-            this.Transform = transform;
+            PartBlueprint = blueprint;
+            Pool = pool;
+            Transform = transform;
             PoolTransform = transform.parent;
             InitScale = transform.transform.localScale;
         }

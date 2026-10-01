@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using LeaseExtension.Input.Contract;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
@@ -14,6 +15,7 @@ using Zenject;
 
 namespace LeaseExtension.SceneManagment.States
 {
+    [UsedImplicitly]
     internal class WelcomeSceneState : AState<ISceneContext>
     {
         private readonly AssetReference _mainScene;
@@ -76,6 +78,7 @@ namespace LeaseExtension.SceneManagment.States
                 go.SetActive(active);
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<WelcomeSceneState>
         {
         }

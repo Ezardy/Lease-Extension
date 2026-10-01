@@ -8,8 +8,7 @@ namespace LeaseExtension.Common
     [CreateAssetMenu(fileName = "CommonInstaller", menuName = "Installers/Common Installer")]
     internal class CommonInstaller : ScriptableObjectInstaller<CommonInstaller>
     {
-        [SerializeField]
-        private LayerNames _layerNames;
+        [SerializeField] private LayerNames _layerNames;
 
         public override void InstallBindings()
         {

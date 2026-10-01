@@ -9,8 +9,7 @@ namespace LeaseExtension.UI.Game
 {
     internal class UIMonoInstaller : MonoInstaller
     {
-        [SerializeField]
-        private PanelRenderer _panelRenderer;
+        [SerializeField] private PanelRenderer _panelRenderer;
 
         public override void InstallBindings()
         {

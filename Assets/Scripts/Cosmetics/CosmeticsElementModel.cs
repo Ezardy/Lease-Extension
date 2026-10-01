@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
 using ObservableCollections;
 using R3;
 
 namespace LeaseExtension.Cosmetics
 {
+    [UsedImplicitly]
     internal class CosmeticsElementModel : ICosmeticsElementModel
     {
         private readonly ReactiveProperty<string> _id;

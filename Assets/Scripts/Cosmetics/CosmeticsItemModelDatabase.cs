@@ -8,8 +8,7 @@ namespace LeaseExtension.Cosmetics
     [CreateAssetMenu(fileName = "CosmeticsDatabase", menuName = "Scriptable Objects/Cosmetics Database")]
     internal class CosmeticsItemModelDatabase : ScriptableObject, ICosmeticsItemModelDatabase
     {
-        [SerializeField]
-        private List<CosmeticsItemModel> _variants;
+        [SerializeField] private List<CosmeticsItemModel> _variants;
         private Dictionary<string, CosmeticsItemModel> _variantsDict;
 
         private void OnEnable()

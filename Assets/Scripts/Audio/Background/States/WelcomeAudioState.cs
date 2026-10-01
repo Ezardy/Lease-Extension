@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
@@ -6,6 +7,7 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Background.States
 {
+    [UsedImplicitly]
     internal class WelcomeAudioState : AState<IBackgroundAudioContext>
     {
         private readonly IDisposable _disposable;
@@ -23,6 +25,7 @@ namespace LeaseExtension.Audio.Background.States
             _disposable.Dispose();
         }
 
+        [UsedImplicitly]
         public class Factory : PlaceholderFactory<WelcomeAudioState>
         {
         }

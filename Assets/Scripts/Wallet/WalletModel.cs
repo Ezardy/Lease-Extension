@@ -1,9 +1,11 @@
+using JetBrains.Annotations;
 using LeaseExtension.Wallet.Contract;
 using R3;
 using Unity.Properties;
 
 namespace LeaseExtension.Wallet
 {
+    [UsedImplicitly]
     public class WalletModel : IWalletModel
     {
         private readonly ReactiveProperty<uint> _balance;

@@ -8,11 +8,8 @@ namespace LeaseExtension.Audio
     [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
     internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller>
     {
-        [SerializeField]
-        private AudioSource _poolPrefab;
-
-        [SerializeField]
-        private Animator _backgroundPrefab;
+        [SerializeField] private AudioSource _poolPrefab;
+        [SerializeField] private Animator _backgroundPrefab;
 
         public override void InstallBindings()
         {

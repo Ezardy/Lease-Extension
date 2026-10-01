@@ -1,9 +1,11 @@
+using JetBrains.Annotations;
 using LeaseExtension.UI.Contract;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Race
 {
+    [UsedImplicitly]
     internal class RaceView : AView, IRaceView
     {
         private VisualElement _effects;

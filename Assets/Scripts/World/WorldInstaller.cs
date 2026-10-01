@@ -7,11 +7,8 @@ namespace LeaseExtension.World
     [CreateAssetMenu(fileName = "WorldInstaller", menuName = "Installers/World Installer")]
     internal class WorldInstaller : ScriptableObjectInstaller<WorldInstaller>
     {
-        [SerializeField]
-        private Camera _cameraPrefab;
-
-        [SerializeField]
-        private EventSystem _eventSystemPrefab;
+        [SerializeField] private Camera _cameraPrefab;
+        [SerializeField] private EventSystem _eventSystemPrefab;
 
         public override void InstallBindings()
         {

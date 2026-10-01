@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Input.Contract;
@@ -7,6 +8,7 @@ using MessagePipe;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class IdleState : APoolablePublishingState<IdleState, ICharacterContext, CharacterState>
     {
         private readonly ICharacterModel _characterModel;

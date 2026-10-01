@@ -1,8 +1,10 @@
+using JetBrains.Annotations;
 using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Main
 {
+    [UsedImplicitly]
     internal class MainView : AView, IMainView
     {
         public Button StoreButton { get; private set; }

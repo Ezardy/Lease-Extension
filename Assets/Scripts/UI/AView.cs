@@ -11,14 +11,14 @@ namespace LeaseExtension.UI
 
         protected AView(PanelRenderer panelRenderer, string rootName)
         {
-            this.RootName = rootName;
+            RootName = rootName;
             panelRenderer.RegisterUIReloadCallback(OnGUIReload);
         }
 
         protected virtual void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
         {
             panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
-            this.Root = root.Q<VisualElement>(RootName);
+            Root = root.Q<VisualElement>(RootName);
         }
     }
 }

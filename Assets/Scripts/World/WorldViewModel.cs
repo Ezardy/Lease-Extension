@@ -1,10 +1,12 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using R3;
 using UnityEngine;
 
 namespace LeaseExtension.World
 {
+    [UsedImplicitly]
     internal class WorldViewModel : IDisposable
     {
         private readonly IDisposable _disposable;

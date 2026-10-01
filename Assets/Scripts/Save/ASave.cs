@@ -15,14 +15,9 @@ namespace LeaseExtension.Save
         private static string _persistentDataPath;
 #endif
 
-        [SerializeField]
-        protected TData SaveData;
-
-        [SerializeField]
-        private bool _doLoad = true;
-
-        [SerializeField]
-        private string _filename;
+        [SerializeField] protected TData SaveData;
+        [SerializeField] private bool _doLoad = true;
+        [SerializeField] private string _filename;
 
         public string Path { get; private set; }
         public TData Data => SaveData;

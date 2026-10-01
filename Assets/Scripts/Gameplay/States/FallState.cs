@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using LeaseExtension.World.Contract.Message;
@@ -8,6 +9,7 @@ using UnityEngine;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class FallState : APoolablePublishingState<FallState, ICharacterContext, CharacterState>
     {
         private readonly ISubscriber<FloorCollided> _subscriber;

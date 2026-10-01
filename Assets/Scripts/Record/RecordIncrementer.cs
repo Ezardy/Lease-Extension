@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
@@ -8,6 +9,7 @@ using R3;
 
 namespace LeaseExtension.Record
 {
+    [UsedImplicitly]
     internal class RecordIncrementer : IDisposable
     {
         private readonly IDisposable _disposable;

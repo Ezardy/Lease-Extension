@@ -7,17 +7,10 @@ namespace LeaseExtension.Cosmetics
     [CreateAssetMenu(fileName = "CosmeticsVariant", menuName = "Scriptable Objects/Cosmetics Variant")]
     internal class CosmeticsItemModel : ScriptableObject, ICosmeticsItemModel
     {
-        [SerializeField]
-        private string _id;
-
-        [SerializeField]
-        private uint _price;
-
-        [SerializeField]
-        private AssetReferenceSprite _backSpriteAssetReference;
-
-        [SerializeField]
-        private AssetReferenceSprite _frontSpriteAssetReference;
+        [SerializeField] private string _id;
+        [SerializeField] private uint _price;
+        [SerializeField] private AssetReferenceSprite _backSpriteAssetReference;
+        [SerializeField] private AssetReferenceSprite _frontSpriteAssetReference;
 
         public string Id => _id;
         public uint Price => _price;

@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Input.Contract;
@@ -9,6 +10,7 @@ using R3;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class WaitState : APoolablePublishingState<WaitState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;

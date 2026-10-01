@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using LeaseExtension.State;
 using LeaseExtension.State.Contract;
 using LeaseExtension.World.Contract.Message;
@@ -6,6 +7,7 @@ using MessagePipe;
 
 namespace LeaseExtension.Gameplay.States
 {
+    [UsedImplicitly]
     internal class CollisionCheckStateBase : AState<IContext>
     {
         private readonly ISubscriber<ObstacleCollided> _wallSubscriber;

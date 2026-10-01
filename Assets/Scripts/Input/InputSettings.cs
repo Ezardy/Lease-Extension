@@ -11,11 +11,8 @@ namespace LeaseExtension.Input
     [CreateAssetMenu(fileName = "InputSettings", menuName = "Scriptable Objects/Input Settings")]
     public class InputSettings : ScriptableObject
     {
-        [SerializeField]
-        private InputActionReference _punchActionReference;
-
-        [SerializeField]
-        private InputActionReference _tapActionReference;
+        [SerializeField] private InputActionReference _punchActionReference;
+        [SerializeField] private InputActionReference _tapActionReference;
         private IPublisher<PunchRequested> _punchPublisher;
         private IPublisher<Tapped> _tapPublisher;
         private InputAction _punchAction;

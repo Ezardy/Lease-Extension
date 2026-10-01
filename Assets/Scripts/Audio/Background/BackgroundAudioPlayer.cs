@@ -8,17 +8,12 @@ namespace LeaseExtension.Audio.Background
     {
         [SerializeField]
         private AudioSource _audioSource1;
-
         [SerializeField]
         private AudioSource _audioSource2;
-
         [SerializeField]
         private AudioClip _clip;
-
-        [SerializeField]
-        [Range(0f, 1f)]
+        [SerializeField, Range(0f, 1f)]
         private float _transition = 1;
-
         [SerializeField]
         private SerializableReactiveProperty<float> _volume = new(1);
         private IDisposable _disposable;

@@ -11,24 +11,16 @@ namespace LeaseExtension.Audio
     {
         [SerializeField]
         private VolumeGeneratorPair _punch;
-
         [SerializeField]
         private VolumeGeneratorPair _obstacle;
-
         [SerializeField]
         private VolumeGeneratorPair _floor;
-
         [SerializeField]
         private VolumeGeneratorPair _tooth;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private VolumeGeneratorPair _sign;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private VolumeGeneratorPair _weightSwing;
-
         [SerializeField]
         private OneShotAudioBehaviour _swingPlayer;
 

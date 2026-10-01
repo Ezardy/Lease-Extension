@@ -15,30 +15,20 @@ namespace LeaseExtension.World
     {
         [SerializeField]
         private SpriteRenderer _floorSpriteRenderer;
-
         [SerializeField]
         private Animator _floorAnimator;
-
         [SerializeField]
         private MonoBehaviour _floorViewModel;
-
         [SerializeField]
         private SpriteRenderer _wallSpriteRenderer;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private byte _trackCount = 11;
-
         [SerializeField]
         private byte _maxConstructionCount = 100;
-
         [SerializeField]
         private byte _reservedOrderCount = 5;
-
-        [Space]
-        [SerializeField]
+        [SerializeField, Space]
         private IRef<IWorldModel> _worldModel;
-
         [SerializeField]
         private IRef<IConstructionBlueprintDatabase> _constructionDatabase;
 
