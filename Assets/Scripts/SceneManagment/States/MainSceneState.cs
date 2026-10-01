@@ -2,12 +2,10 @@ using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.SceneManagment.States
 {
-    [MovedFrom("Aniki.SceneManagment")]
     internal class MainSceneState : APoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState, ISceneContext, FocusedScene>
     {
         private AsyncOperationHandle<SceneInstance> _sceneHandle;

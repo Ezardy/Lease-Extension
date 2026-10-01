@@ -11,4 +11,4 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8de738670846454f9a69934fc78a8d0, type: 3}
   m_Name: MessagePipeInstaller
-  m_EditorClassIdentifier: LeaseExtension.MessagePipe::Aniki.Common.MessagePipeInstaller
+  m_EditorClassIdentifier: LeaseExtension.MessagePipe::LeaseExtension.MessagePipe.MessagePipeInstaller

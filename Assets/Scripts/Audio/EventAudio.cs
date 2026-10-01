@@ -1,12 +1,10 @@
 using System;
 using LeaseExtension.Audio.Contract;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class EventAudio<T> : IDisposable where T : struct
     {
         private readonly IDisposable _disposable;

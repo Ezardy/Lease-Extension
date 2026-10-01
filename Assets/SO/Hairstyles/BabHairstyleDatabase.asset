@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 072b047c583ec304d80c40262cc7843a, type: 3}
   m_Name: BabHairstyleDatabase
-  m_EditorClassIdentifier: Cosmetics::CosmeticsDatabase
-  variants:
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsItemModelDatabase
+  _variants:
   - {fileID: 11400000, guid: 2f61f703dfd1840408c2849fbd596e21, type: 2}

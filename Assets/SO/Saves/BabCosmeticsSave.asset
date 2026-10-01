@@ -11,7 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38718ee6a7f3d0742964a9894a45658d, type: 3}
   m_Name: BabCosmeticsSave
-  m_EditorClassIdentifier: Save::Aniki.Save.CosmeticsSave
-  filename: bab_cosmetics.json
-  data:
-    id: curles
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsSave
+  SaveData:
+    Id: curles
+  _doLoad: 1
+  _filename: bab_cosmetics.json

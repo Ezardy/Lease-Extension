@@ -10,12 +10,10 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.SceneManagment.States
 {
-    [MovedFrom("Aniki.SceneManagment")]
     internal class WelcomeSceneState : AState<ISceneContext>
     {
         private readonly AssetReference _mainScene;

@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Common.Utilities
 {
-    [MovedFrom("Aniki.Common")]
     public class RefEnumerator<T> : IEnumerator<T> where T : class
     {
         private readonly IEnumerator<IRef<T>> _refEnumerator;

@@ -5,18 +5,14 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.SceneManagment
 {
     [CreateAssetMenu(fileName = "SceneManagmentInstaller", menuName = "Installers/Scene Managment Installer")]
-    [MovedFrom("Aniki.SceneManagment")]
     internal class SceneManagmentInstaller : ScriptableObjectInstaller<SceneManagmentInstaller>
     {
         [SerializeField]
-        [FormerlySerializedAs("mainScene")]
         private AssetReference _mainScene;
 
         public override void InstallBindings()

@@ -1,15 +1,11 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.Common.Utilities
 {
     [System.Serializable]
-    [MovedFrom("Aniki.Common")]
     public class IRef<T> : ISerializationCallbackReceiver where T : class
     {
         [SerializeField]
-        [FormerlySerializedAs("target")]
         private Object _target;
 
         public T I => _target as T;

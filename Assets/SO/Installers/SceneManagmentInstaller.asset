@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 276c8339b9c231b47bf1abd62f860808, type: 3}
   m_Name: SceneManagmentInstaller
-  m_EditorClassIdentifier: SceneManagment::Aniki.SceneManagment.SceneManagmentInstaller
-  mainScene:
+  m_EditorClassIdentifier: LeaseExtension.SceneManagment::LeaseExtension.SceneManagment.SceneManagmentInstaller
+  _mainScene:
     m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
     m_SubObjectName: 
     m_SubObjectType: 

@@ -59,7 +59,7 @@
             <ui:VisualElement name="sentence-vertical-group" style="justify-content: center; -unity-text-align: middle-center; -unity-text-auto-size: best-fit 10px 100px; max-width: 100%; flex-basis: 252%;">
                 <ui:Label text="New Record" name="new-record-label" class="wall-sentence protocol-label" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 22%; flex-shrink: 1; display: flex;">
                     <Bindings>
-                        <ui:DataBinding property="style.display" data-source-path="NewRecordDisplayStyle" data-source-type="Aniki.UI.OverViewModel, UI" binding-mode="ToTarget"/>
+                        <ui:DataBinding property="style.display" data-source-path="NewRecordDisplayStyle" data-source-type="LeaseExtension.UI.Game.Over.OverViewModel, LeaseExtension.UI" binding-mode="ToTarget"/>
                     </Bindings>
                 </ui:Label>
                 <ui:VisualElement name="sentence-horizontal-group" style="flex-direction: row;">

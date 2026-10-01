@@ -6,12 +6,10 @@ using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.World.Track
 {
-    [MovedFrom("Aniki.World")]
     internal class TrackOrchectrator : IInitializable, ITickable, IDisposable
     {
         private readonly IWorldModel _worldModel;

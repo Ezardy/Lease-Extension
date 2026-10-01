@@ -2,11 +2,9 @@ using System;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class OverState : APoolablePublishingState<OverState, ICharacterContext, CharacterState>
     {
         private readonly ISubscriber<RestartRequested> _resetSubscriber;

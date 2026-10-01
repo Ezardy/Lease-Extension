@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.World.Track.Construction
 {
     [CreateAssetMenu(fileName = "ConstructionDatabase", menuName = "Scriptable Objects/Construction Database")]
-    [MovedFrom("Aniki.World")]
     internal class ConstructionBlueprintDatabase : ScriptableObject, IConstructionBlueprintDatabase, IReadOnlyCollection<IConstructionBlueprint>
     {
         [SerializeField]
-        [FormerlySerializedAs("constructions")]
         private List<IRef<IConstructionBlueprint>> _constructions;
 
         public int Count => _constructions.Count;

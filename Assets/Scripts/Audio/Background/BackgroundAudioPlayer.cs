@@ -1,33 +1,25 @@
 using System;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.Audio.Background
 {
-    [MovedFrom("Aniki.Audio")]
     internal class BackgroundAudioPlayer : MonoBehaviour
     {
         [SerializeField]
-        [FormerlySerializedAs("audioSource1")]
         private AudioSource _audioSource1;
 
         [SerializeField]
-        [FormerlySerializedAs("audioSource2")]
         private AudioSource _audioSource2;
 
         [SerializeField]
-        [FormerlySerializedAs("clip")]
         private AudioClip _clip;
 
         [SerializeField]
         [Range(0f, 1f)]
-        [FormerlySerializedAs("transition")]
         private float _transition = 1;
 
         [SerializeField]
-        [FormerlySerializedAs("volume")]
         private SerializableReactiveProperty<float> _volume = new(1);
         private IDisposable _disposable;
         private bool _isFirst = false;

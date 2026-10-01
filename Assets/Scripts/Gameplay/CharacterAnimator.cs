@@ -2,21 +2,16 @@ using LeaseExtension.Gameplay.Contract.Message;
 using MessagePipe;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Gameplay
 {
-    [MovedFrom("Aniki.Character")]
     public class CharacterAnimator : MonoBehaviour
     {
         [SerializeField]
-        [FormerlySerializedAs("babAnimator")]
         private Animator _babAnimator;
 
         [SerializeField]
-        [FormerlySerializedAs("pupAnimator")]
         private Animator _pupAnimator;
         private static readonly int _overHash = Animator.StringToHash("Over");
         private static readonly int _punchHash = Animator.StringToHash("Punch");

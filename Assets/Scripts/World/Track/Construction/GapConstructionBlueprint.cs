@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.World.Track.Construction
 {
     [CreateAssetMenu(fileName = "GapConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Gap Construction Blueprint")]
-    [MovedFrom("Aniki.World")]
     internal class GapConstructionBlueprint : ConstructionBlueprint
     {
         public override IReadOnlyCollection<IConstructionBlank> MakeBlanks()

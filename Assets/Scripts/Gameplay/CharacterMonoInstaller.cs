@@ -3,7 +3,6 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Gameplay.States;
 using LeaseExtension.State;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Gameplay
@@ -11,11 +10,9 @@ namespace LeaseExtension.Gameplay
     internal class CharacterMonoInstaller : MonoInstaller
     {
         [SerializeField]
-        [FormerlySerializedAs("forInject")]
         private List<MonoBehaviour> _forInject;
 
         [SerializeField]
-        [FormerlySerializedAs("characterRigidbody")]
         private Rigidbody2D _characterRigidbody;
 
         public override void InstallBindings()

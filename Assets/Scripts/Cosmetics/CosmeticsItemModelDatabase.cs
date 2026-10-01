@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LeaseExtension.Cosmetics.Contract;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.Cosmetics
 {
@@ -10,7 +9,6 @@ namespace LeaseExtension.Cosmetics
     internal class CosmeticsItemModelDatabase : ScriptableObject, ICosmeticsItemModelDatabase
     {
         [SerializeField]
-        [FormerlySerializedAs("variants")]
         private List<CosmeticsItemModel> _variants;
         private Dictionary<string, CosmeticsItemModel> _variantsDict;
 

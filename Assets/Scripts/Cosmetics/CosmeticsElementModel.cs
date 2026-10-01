@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using LeaseExtension.Cosmetics.Contract;
 using ObservableCollections;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Cosmetics
 {
-    [MovedFrom("Aniki.Cosmetics")]
     internal class CosmeticsElementModel : ICosmeticsElementModel
     {
         private readonly ReactiveProperty<string> _id;

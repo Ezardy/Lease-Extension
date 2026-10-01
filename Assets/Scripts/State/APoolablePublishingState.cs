@@ -1,11 +1,9 @@
 using System;
 using LeaseExtension.State.Contract;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.State
 {
-    [MovedFrom("Aniki.State")]
     public abstract class APoolablePublishingState<C, S> : AState<C> where C : IContext where S : Enum
     {
         private readonly StatePublisher<S> _statePublisher;
@@ -37,7 +35,6 @@ namespace LeaseExtension.State
         }
     }
 
-    [MovedFrom("Aniki.State")]
     public abstract class APoolablePublishingState<T, C, S> : APoolablePublishingState<C, S>, IPoolable<IMemoryPool> where T : APoolablePublishingState<T, C, S> where C : IContext where S : Enum
     {
         public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)
@@ -54,7 +51,6 @@ namespace LeaseExtension.State
         }
     }
 
-    [MovedFrom("Aniki.State")]
     public abstract class APoolablePublishingState<P, T, C, S> : APoolablePublishingState<C, S>, IPoolable<P, IMemoryPool> where T : APoolablePublishingState<P, T, C, S> where C : IContext where S : Enum
     {
         public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)

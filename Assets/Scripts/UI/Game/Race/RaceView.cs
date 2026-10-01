@@ -1,11 +1,9 @@
 using LeaseExtension.UI.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Race
 {
-    [MovedFrom("Aniki.UI")]
     internal class RaceView : AView, IRaceView
     {
         private VisualElement _effects;

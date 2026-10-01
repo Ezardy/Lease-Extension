@@ -4,13 +4,10 @@ using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World.Floor
 {
-    [MovedFrom("Aniki.World")]
     internal class FloorViewModel : MonoBehaviour
     {
         private static readonly int _runHash = Animator.StringToHash("Run");
@@ -18,7 +15,6 @@ namespace LeaseExtension.World.Floor
         private static readonly int _floorHash = Animator.StringToHash("Floor");
 
         [SerializeField]
-        [FormerlySerializedAs("speed")]
         private float _speed = 1;
         private ISubscriber<CharacterState> _subscriber;
         private bool _over = false;

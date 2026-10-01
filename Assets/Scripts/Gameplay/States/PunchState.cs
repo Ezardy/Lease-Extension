@@ -3,12 +3,10 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class PunchState : APoolablePublishingState<float, PunchState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;

@@ -6,11 +6,9 @@ using LeaseExtension.State;
 using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class WaitState : APoolablePublishingState<WaitState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;

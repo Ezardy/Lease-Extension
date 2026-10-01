@@ -42,7 +42,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: transition
+    attribute: _transition
     path: 
     classID: 114
     script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}
@@ -52,7 +52,7 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 8300000, guid: d14c4944631d65543962a4cabf5f8bce, type: 3}
-    attribute: clip
+    attribute: _clip
     path: 
     classID: 114
     script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}
@@ -66,7 +66,7 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 0
-      attribute: 4145391450
+      attribute: 2489210658
       script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}
       typeID: 114
       customType: 0
@@ -76,7 +76,7 @@ AnimationClip:
       metaData: 0
     - serializedVersion: 2
       path: 0
-      attribute: 2904560743
+      attribute: 4026885244
       script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}
       typeID: 114
       customType: 0
@@ -132,7 +132,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: transition
+    attribute: _transition
     path: 
     classID: 114
     script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}

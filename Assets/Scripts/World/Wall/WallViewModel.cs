@@ -1,11 +1,9 @@
 using System;
 using LeaseExtension.World.Contract;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.World.Wall
 {
-    [MovedFrom("Aniki.World")]
     internal class WallViewModel : IDisposable
     {
         private readonly IDisposable _disposable;

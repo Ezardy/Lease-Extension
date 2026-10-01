@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Common.Utilities
 {
-    [MovedFrom("Aniki.Common")]
     public static class ZenjectExtensions
     {
         public static CopyNonLazyBinder WithType<T>(this ConcreteIdArgConditionCopyNonLazyBinder binder)

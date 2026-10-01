@@ -5,12 +5,10 @@ using LeaseExtension.Record.Contract;
 using LeaseExtension.UI.Contract;
 using LeaseExtension.Wallet.Contract;
 using Unity.Properties;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Race
 {
-    [MovedFrom("Aniki.UI")]
     internal class RaceViewModel : IRaceViewModel
     {
         private readonly ICharacterModel _characterModel;

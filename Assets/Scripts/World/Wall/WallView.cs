@@ -3,12 +3,10 @@ using LeaseExtension.Common.Contract;
 using LeaseExtension.World.Contract;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.World.Wall
 {
-    [MovedFrom("Aniki.World")]
     internal class WallView : IWallView, IInitializable, ITickable, IDisposable
     {
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");

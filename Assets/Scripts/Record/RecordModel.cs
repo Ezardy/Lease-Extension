@@ -1,10 +1,8 @@
 using LeaseExtension.Record.Contract;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Record
 {
-    [MovedFrom("Aniki.Record")]
     public class RecordModel : IRecordModel
     {
         private readonly ReactiveProperty<uint> _record;

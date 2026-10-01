@@ -2,12 +2,10 @@ using LeaseExtension.Common.Layer;
 using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Behaviour
 {
-    [MovedFrom("Aniki.World")]
     internal class Gap : AConstructionPartBehaviour
     {
         private IPublisher<BarPassed> _publisher;

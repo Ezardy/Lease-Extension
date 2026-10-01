@@ -68,12 +68,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faa2e235ae84939438ca474e41e77903, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Audio::Aniki.Audio.BackgroundAudioPlayer
-  audioSource1: {fileID: 6802124042365349758}
-  audioSource2: {fileID: 6482608716994681873}
-  clip: {fileID: 0}
-  transition: 1
-  volume:
+  m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.Background.BackgroundAudioPlayer
+  _audioSource1: {fileID: 6802124042365349758}
+  _audioSource2: {fileID: 6482608716994681873}
+  _clip: {fileID: 0}
+  _transition: 1
+  _volume:
     value: 0.3
 --- !u!1 &5868121790005977903
 GameObject:

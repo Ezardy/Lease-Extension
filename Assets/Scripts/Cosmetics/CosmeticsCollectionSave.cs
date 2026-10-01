@@ -3,13 +3,11 @@ using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Save;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Cosmetics
 {
     [CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
-    [MovedFrom("Aniki.Cosmetics")]
     internal class CosmeticsCollectionSave : ASave<CosmeticsCollection, ICosmeticsElementModel>, IInitializable, IDisposable
     {
         private ICosmeticsElementModel _cosmetics;

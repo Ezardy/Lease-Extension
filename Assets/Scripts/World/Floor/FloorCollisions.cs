@@ -2,12 +2,10 @@ using LeaseExtension.Common.Layer;
 using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.World.Floor
 {
-    [MovedFrom("Aniki.World.Floor")]
     internal class FloorCollisions : MonoBehaviour
     {
         private int _playerLayerId;

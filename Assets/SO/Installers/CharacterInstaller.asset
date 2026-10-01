@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c6ed6a2435308d429a61e6d0f7d4fa3, type: 3}
   m_Name: CharacterInstaller
-  m_EditorClassIdentifier: Character::Aniki.Character.CharacterInstaller
-  characterModel:
-    target: {fileID: 11400000, guid: 762f93b221b2cb64bae4c0335c2564f7, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterInstaller
+  _characterModel:
+    _target: {fileID: 11400000, guid: 762f93b221b2cb64bae4c0335c2564f7, type: 2}

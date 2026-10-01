@@ -4,13 +4,11 @@ using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.MessagePipe
 {
     [CreateAssetMenu(fileName = "MessagePipeInstaller", menuName = "Installers/Message Pipe Installer")]
-    [MovedFrom("Aniki.Common")]
     internal partial class MessagePipeInstaller : ScriptableObjectInstaller<MessagePipeInstaller>
     {
         public override void InstallBindings()

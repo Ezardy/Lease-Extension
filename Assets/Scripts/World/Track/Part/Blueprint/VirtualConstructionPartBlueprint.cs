@@ -5,7 +5,6 @@ using LeaseExtension.World.Track.Part.Concrete;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
@@ -14,11 +13,9 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     internal class VirtualConstructionPartBlueprint : ScriptableObject, IConstructionPartBlueprint, IConstructionBlank
     {
         [SerializeField]
-        [FormerlySerializedAs("initialPool")]
         private byte _initialPool = 5;
 
         [SerializeField]
-        [FormerlySerializedAs("width")]
         private float _width = 1;
         private IObjectPool<VirtualConstructionPart> _pool;
         private System.IDisposable _disposable;

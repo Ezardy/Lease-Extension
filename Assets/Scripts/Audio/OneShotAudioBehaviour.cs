@@ -1,11 +1,9 @@
 using LeaseExtension.Audio.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class OneShotAudioBehaviour : MonoBehaviour
     {
         private AudioPlayerParameters _parameters;

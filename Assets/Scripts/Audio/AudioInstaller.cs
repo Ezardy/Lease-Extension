@@ -1,22 +1,17 @@
 using LeaseExtension.Audio.Background;
 using LeaseExtension.Audio.Background.States;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
     [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
-    [MovedFrom("Aniki.Audio")]
     internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller>
     {
         [SerializeField]
-        [FormerlySerializedAs("poolPrefab")]
         private AudioSource _poolPrefab;
 
         [SerializeField]
-        [FormerlySerializedAs("backgroundPrefab")]
         private Animator _backgroundPrefab;
 
         public override void InstallBindings()

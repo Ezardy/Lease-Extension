@@ -8,31 +8,24 @@ using LeaseExtension.World.Track.Part.Concrete;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
 {
     [CreateAssetMenu(fileName = "GapConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Gap Construction Part Blueprint")]
-    [MovedFrom("Aniki.World")]
     internal class GapConstructionPartBlueprint : ScriptableObject, IGapConstructionPartBlueprint
     {
         [SerializeField]
         [Range(0, 1)]
-        [FormerlySerializedAs("gapSize")]
         private float _gapSize;
 
         [SerializeField]
-        [FormerlySerializedAs("bottomPart")]
         private IRef<IConstructionPartBlueprint> _bottomPart;
 
         [SerializeField]
-        [FormerlySerializedAs("gapPart")]
         private IRef<IConstructionPartBlueprint> _gapPart;
 
         [SerializeField]
-        [FormerlySerializedAs("topPart")]
         private IRef<IConstructionPartBlueprint> _topPart;
         private IObjectPool<GapConstructionPart> _partPool;
         private IObjectPool<GapConstructionBlank> _blankPool;

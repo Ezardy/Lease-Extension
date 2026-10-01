@@ -5,12 +5,10 @@ using LeaseExtension.Gameplay.States;
 using LeaseExtension.State;
 using MessagePipe;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Gameplay
 {
-    [MovedFrom("Aniki.Character")]
     internal class CharacterStateMachine : AContext, ICharacterContext, IInitializable, IFixedTickable
     {
         private readonly IdleState.Factory _idleFactory;

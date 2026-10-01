@@ -1,11 +1,9 @@
 using LeaseExtension.State;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio.Background.States
 {
-    [MovedFrom("Aniki.Audio")]
     internal abstract class ABackgroundAudioState<T> : AState<IBackgroundAudioContext>, IPoolable<IMemoryPool> where T : ABackgroundAudioState<T>
     {
         protected readonly int TriggerHash;

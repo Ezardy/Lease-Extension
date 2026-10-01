@@ -2,12 +2,10 @@ using System;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio.Background.States
 {
-    [MovedFrom("Aniki.Audio")]
     internal class WelcomeAudioState : AState<IBackgroundAudioContext>
     {
         private readonly IDisposable _disposable;

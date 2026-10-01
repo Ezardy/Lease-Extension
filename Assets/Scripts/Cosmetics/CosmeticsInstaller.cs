@@ -3,22 +3,17 @@ using LeaseExtension.Common.Utilities;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Cosmetics.Contract.Target;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Cosmetics
 {
     [CreateAssetMenu(fileName = "CosmeticsInstaller", menuName = "Installers/Cosmetics Installer")]
-    [MovedFrom("Aniki.Cosmetics")]
     internal class CosmeticsInstaller : ScriptableObjectInstaller<CosmeticsInstaller>
     {
         [SerializeField]
-        [FormerlySerializedAs("babHairstyleModelDependencies")]
         private CosmeticsElementModelDependencies _babHairstyleModelDependencies;
 
         [SerializeField]
-        [FormerlySerializedAs("pupHairstyleModelDependencies")]
         private CosmeticsElementModelDependencies _pupHairstyleModelDependencies;
 
         public override void InstallBindings()
@@ -73,13 +68,10 @@ namespace LeaseExtension.Cosmetics
         [Serializable]
         private class CosmeticsElementModelDependencies
         {
-            [FormerlySerializedAs("cosmeticsSave")]
             public CosmeticsSave CosmeticsSave;
 
-            [FormerlySerializedAs("cosmeticsCollectionSave")]
             public CosmeticsCollectionSave CosmeticsCollectionSave;
 
-            [FormerlySerializedAs("database")]
             public IRef<ICosmeticsItemModelDatabase> Database;
         }
     }

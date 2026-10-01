@@ -3,13 +3,11 @@ using LeaseExtension.Record.Contract;
 using LeaseExtension.Save;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Record
 {
     [CreateAssetMenu(fileName = "RecordSave", menuName = "Scriptable Objects/Saves/Record")]
-    [MovedFrom("Aniki.Record")]
     internal class RecordSave : ASave<Record, IRecordModel>, IInitializable, IDisposable
     {
         private IRecordModel _record;

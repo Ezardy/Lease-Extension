@@ -1,11 +1,9 @@
 using LeaseExtension.SceneManagment.States;
 using LeaseExtension.State;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.SceneManagment
 {
-    [MovedFrom("Aniki.SceneManagment")]
     internal class SceneManagmentContext : AContext, ISceneContext, IInitializable
     {
         private readonly WelcomeSceneState.Factory _welcomeFactory;

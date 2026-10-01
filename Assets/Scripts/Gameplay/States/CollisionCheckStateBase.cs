@@ -3,11 +3,9 @@ using LeaseExtension.State;
 using LeaseExtension.State.Contract;
 using LeaseExtension.World.Contract.Message;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class CollisionCheckStateBase : AState<IContext>
     {
         private readonly ISubscriber<ObstacleCollided> _wallSubscriber;

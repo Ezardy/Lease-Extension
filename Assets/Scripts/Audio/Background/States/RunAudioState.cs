@@ -1,11 +1,9 @@
 using System;
 using LeaseExtension.Gameplay.Contract.Message;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Audio.Background.States
 {
-    [MovedFrom("Aniki.Audio")]
     internal class RunAudioState : ABackgroundAudioState<RunAudioState>
     {
         private readonly ISubscriber<CharacterState> _characterStateSubscriber;

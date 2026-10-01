@@ -3,28 +3,22 @@ using LeaseExtension.Gameplay.Contract.Message;
 using R3;
 using Unity.Properties;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.Gameplay
 {
     [CreateAssetMenu(fileName = "CharacterModel", menuName = "Scriptable Objects/Character Model")]
-    [MovedFrom("Aniki.Character")]
     internal class CharacterModel : ScriptableObject, ICharacterModel
     {
         [SerializeField]
         [DontCreateProperty]
-        [FormerlySerializedAs("punchHeight")]
         private SerializableReactiveProperty<float> _punchHeight;
 
         [SerializeField]
         [DontCreateProperty]
-        [FormerlySerializedAs("initialPunchHeight")]
         private SerializableReactiveProperty<float> _initialPunchHeight;
 
         [SerializeField]
         [DontCreateProperty]
-        [FormerlySerializedAs("punchPeriod")]
         private SerializableReactiveProperty<float> _punchPeriod;
         private readonly SerializableReactiveProperty<CharacterState> _state = new(CharacterState.Idle);
 

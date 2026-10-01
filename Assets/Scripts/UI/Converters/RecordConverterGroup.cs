@@ -3,12 +3,10 @@ using System.Text;
 using UnityEditor;
 #endif
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Converters
 {
-    [MovedFrom("Aniki.UI")]
     internal static class RecordConverterGroup
     {
 #if UNITY_EDITOR

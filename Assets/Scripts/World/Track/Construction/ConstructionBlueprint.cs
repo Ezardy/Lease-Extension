@@ -3,54 +3,42 @@ using System.Collections.Generic;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 
 namespace LeaseExtension.World.Track.Construction
 {
     [CreateAssetMenu(fileName = "ConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Blueprint")]
-    [MovedFrom("Aniki.World")]
     internal class ConstructionBlueprint : ScriptableObject, IConstructionBlueprint, IReadOnlyCollection<IConstructionPartBlueprint>
     {
         [Tooltip("0 - use implicit height, 1 - stretch to the ceil")]
         [SerializeField]
         [Range(0, 1)]
-        [FormerlySerializedAs("height")]
         protected float Height = 1;
 
         [SerializeField]
-        [FormerlySerializedAs("parts")]
         protected List<IRef<IConstructionPartBlueprint>> PartReferences;
         protected List<IConstructionBlank> Blanks;
 
         [SerializeField]
-        [FormerlySerializedAs("isRangeInversed")]
         private bool _isRangeInversed = false;
 
         [SerializeField]
         [Range(0, 1)]
-        [FormerlySerializedAs("rangeStart")]
         private float _rangeStart = 0;
 
         [SerializeField]
         [Range(0, 1)]
-        [FormerlySerializedAs("rangeEnd")]
         private float _rangeEnd = 1;
 
         [SerializeField]
-        [FormerlySerializedAs("minDelay")]
         private float _minDelay = 5;
 
         [SerializeField]
-        [FormerlySerializedAs("maxDelay")]
         private float _maxDelay = 20;
 
         [SerializeField]
-        [FormerlySerializedAs("minMargin")]
         private float _minMargin = 30;
 
         [SerializeField]
-        [FormerlySerializedAs("maxMargin")]
         private float _maxMargin = 50;
 
         public IReadOnlyCollection<IConstructionPartBlueprint> Parts => this;

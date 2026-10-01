@@ -5,11 +5,9 @@ using LeaseExtension.Record.Contract;
 using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Record
 {
-    [MovedFrom("Aniki.Record")]
     internal class RecordIncrementer : IDisposable
     {
         private readonly IDisposable _disposable;

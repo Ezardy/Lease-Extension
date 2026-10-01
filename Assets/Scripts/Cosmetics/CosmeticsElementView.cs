@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.Cosmetics.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Cosmetics
 {
-    [MovedFrom("Aniki.Cosmetics")]
     internal class CosmeticsElementView<T> : ICosmeticsElementView, ITyped<T> where T : class
     {
         private readonly SpriteRenderer _backRenderer;

@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using LeaseExtension.Common.Utilities;
 using ObservableCollections;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Cosmetics.Contract
 {
-    [MovedFrom("Aniki.Cosmetics")]
     internal abstract class ACosmeticsDecorator<T>
         where T : class
     {

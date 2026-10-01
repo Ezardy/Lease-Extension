@@ -2,11 +2,9 @@ using System;
 using LeaseExtension.World.Contract;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.World
 {
-    [MovedFrom("Aniki.World")]
     internal class WorldViewModel : IDisposable
     {
         private readonly IDisposable _disposable;

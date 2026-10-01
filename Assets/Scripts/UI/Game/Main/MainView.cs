@@ -1,10 +1,8 @@
 using LeaseExtension.UI.Contract;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Main
 {
-    [MovedFrom("Aniki.UI")]
     internal class MainView : AView, IMainView
     {
         public Button StoreButton { get; private set; }

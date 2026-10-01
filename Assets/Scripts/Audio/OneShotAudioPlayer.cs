@@ -4,11 +4,9 @@ using Cysharp.Threading.Tasks;
 using LeaseExtension.Audio.Contract;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class OneShotAudioPlayer : IOneShotAudioPlayer, IDisposable
     {
         private readonly IObjectPool<AudioSource> _pool;

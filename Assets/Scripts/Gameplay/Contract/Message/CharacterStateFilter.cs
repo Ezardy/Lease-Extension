@@ -1,9 +1,7 @@
 using LeaseExtension.Common.Utilities;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.Contract.Message
 {
-    [MovedFrom("Aniki.Character")]
     public class CharacterStateFilter : EqualityFilter<CharacterState>
     {
         public static readonly CharacterStateFilter Idle = new(CharacterState.Idle);

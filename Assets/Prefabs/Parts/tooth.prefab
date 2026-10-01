@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b21913112c91d3e4899b3d4478a1ed69, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: World::Aniki.World.Tooth
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Behaviour.Tooth
 --- !u!61 &8252134237897081002
 BoxCollider2D:
   m_ObjectHideFlags: 0

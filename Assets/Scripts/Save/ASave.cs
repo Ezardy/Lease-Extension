@@ -1,14 +1,11 @@
 using System.IO;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using LeaseExtension.WebPlugin.SyncFS;
 #endif
 
 namespace LeaseExtension.Save
 {
-    [MovedFrom("Aniki.Save")]
     public abstract class ASave<TData, TModel> : ScriptableObject, ISave where TData : struct
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -19,15 +16,12 @@ namespace LeaseExtension.Save
 #endif
 
         [SerializeField]
-        [FormerlySerializedAs("data")]
         protected TData SaveData;
 
         [SerializeField]
-        [FormerlySerializedAs("doLoad")]
         private bool _doLoad = true;
 
         [SerializeField]
-        [FormerlySerializedAs("filename")]
         private string _filename;
 
         public string Path { get; private set; }

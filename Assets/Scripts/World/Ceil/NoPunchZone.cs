@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.World.Ceil
 {
-    [MovedFrom("Aniki.World")]
     internal class NoPunchZone : MonoBehaviour
     {
         private static int _zoneCount = 0;

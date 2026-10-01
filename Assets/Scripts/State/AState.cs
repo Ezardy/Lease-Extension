@@ -1,9 +1,7 @@
 using LeaseExtension.State.Contract;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.State
 {
-    [MovedFrom("Aniki.State")]
     public abstract class AState<T> : IState where T : IContext
     {
         protected readonly T Context;

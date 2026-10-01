@@ -3,43 +3,33 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.World.Contract.Message;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class MainAudioInstaller : MonoInstaller
     {
         [SerializeField]
-        [FormerlySerializedAs("punch")]
         private VolumeGeneratorPair _punch;
 
         [SerializeField]
-        [FormerlySerializedAs("obstacle")]
         private VolumeGeneratorPair _obstacle;
 
         [SerializeField]
-        [FormerlySerializedAs("floor")]
         private VolumeGeneratorPair _floor;
 
         [SerializeField]
-        [FormerlySerializedAs("tooth")]
         private VolumeGeneratorPair _tooth;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("sign")]
         private VolumeGeneratorPair _sign;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("weightSwing")]
         private VolumeGeneratorPair _weightSwing;
 
         [SerializeField]
-        [FormerlySerializedAs("swingPlayer")]
         private OneShotAudioBehaviour _swingPlayer;
 
         public override void InstallBindings()

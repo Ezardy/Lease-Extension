@@ -1,10 +1,8 @@
 using LeaseExtension.UI.Contract;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Over
 {
-    [MovedFrom("Aniki.UI")]
     internal class OverView : AView, IOverView
     {
         public Button AcceptButton { get; private set; }

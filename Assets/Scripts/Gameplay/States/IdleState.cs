@@ -4,11 +4,9 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Input.Contract;
 using LeaseExtension.State;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class IdleState : APoolablePublishingState<IdleState, ICharacterContext, CharacterState>
     {
         private readonly ICharacterModel _characterModel;

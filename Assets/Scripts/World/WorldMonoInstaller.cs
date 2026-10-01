@@ -7,7 +7,6 @@ using LeaseExtension.World.Track;
 using LeaseExtension.World.Track.Part.Behaviour;
 using LeaseExtension.World.Wall;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World
@@ -15,41 +14,32 @@ namespace LeaseExtension.World
     internal class WorldMonoInstaller : MonoInstaller
     {
         [SerializeField]
-        [FormerlySerializedAs("floorSpriteRenderer")]
         private SpriteRenderer _floorSpriteRenderer;
 
         [SerializeField]
-        [FormerlySerializedAs("floorAnimator")]
         private Animator _floorAnimator;
 
         [SerializeField]
-        [FormerlySerializedAs("floorViewModel")]
         private MonoBehaviour _floorViewModel;
 
         [SerializeField]
-        [FormerlySerializedAs("wallSpriteRenderer")]
         private SpriteRenderer _wallSpriteRenderer;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("trackCount")]
         private byte _trackCount = 11;
 
         [SerializeField]
-        [FormerlySerializedAs("maxConstructionCount")]
         private byte _maxConstructionCount = 100;
 
         [SerializeField]
-        [FormerlySerializedAs("reservedOrderCount")]
         private byte _reservedOrderCount = 5;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("worldModel")]
         private IRef<IWorldModel> _worldModel;
 
         [SerializeField]
-        [FormerlySerializedAs("constructionDatabase")]
         private IRef<IConstructionBlueprintDatabase> _constructionDatabase;
 
         public override void InstallBindings()

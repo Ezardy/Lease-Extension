@@ -7,11 +7,9 @@ using Unity.Properties;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.UI.Welcome
 {
-    [MovedFrom("Aniki.UI")]
     internal class WelcomeViewModel : IWelcomeViewModel, IDisposable
     {
         private readonly AssetReferenceSprite _horizontalWelcome;

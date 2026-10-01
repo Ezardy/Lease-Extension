@@ -5,11 +5,9 @@ using LeaseExtension.World.Contract.Message;
 using MessagePipe;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Gameplay.States
 {
-    [MovedFrom("Aniki.Character")]
     internal class FallState : APoolablePublishingState<FallState, ICharacterContext, CharacterState>
     {
         private readonly ISubscriber<FloorCollided> _subscriber;

@@ -8,8 +8,6 @@ using LeaseExtension.World.Track.Part.Size;
 using MessagePipe;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
@@ -18,46 +16,36 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     internal class ConstructionPartBlueprint : ScriptableObject, IConstructionPartBlueprint
     {
         [SerializeField]
-        [FormerlySerializedAs("prefab")]
         protected GameObject Prefab;
 
         [SerializeField]
-        [FormerlySerializedAs("initialPool")]
         private byte _initialPool = 5;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("margin")]
         private float _margin = 0;
 
         [SerializeField]
-        [FormerlySerializedAs("width")]
         private float _width = 0;
 
         [SerializeField]
-        [FormerlySerializedAs("autoWidth")]
         private bool _autoWidth = true;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("interfereWidth")]
         private float _interfereWidth = 0;
 
         [SerializeField]
-        [FormerlySerializedAs("autoInterfereWidth")]
         private bool _autoInterfereWidth = true;
 
         [SerializeField]
-        [FormerlySerializedAs("sameWidth")]
         private bool _sameWidth = true;
 
         [Space]
         [SerializeField]
-        [FormerlySerializedAs("useSpriteRenderer")]
         private bool _useSpriteRenderer = true;
 
         [SerializeField]
-        [FormerlySerializedAs("zOrdering")]
         private bool _zOrdering = false;
         private IObjectPool<ConstructionPart> _partPool;
         private IObjectPool<ConstructionBlank> _blankPool;
@@ -158,7 +146,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         }
     }
 
-    [MovedFrom("Aniki.World")]
     internal class ConstructionPartBlueprint<T, F> : ConstructionPartBlueprint where T : MonoBehaviour where F : IFactory<Object, T>
     {
         private F _factory;

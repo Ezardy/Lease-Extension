@@ -2,26 +2,20 @@ using System;
 using LeaseExtension.World.Contract;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.World
 {
     [CreateAssetMenu(fileName = "WorldModel", menuName = "Scriptable Objects/World Model")]
-    [MovedFrom("Aniki.World")]
     internal class WorldModel : ScriptableObject, IWorldModel, IInitializable, IDisposable
     {
         [SerializeField]
-        [FormerlySerializedAs("speed")]
         private SerializableReactiveProperty<float> _speed;
 
         [SerializeField]
-        [FormerlySerializedAs("perspective")]
         private SerializableReactiveProperty<float> _perspective;
 
         [SerializeField]
-        [FormerlySerializedAs("gravity")]
         private SerializableReactiveProperty<float> _gravity;
         private readonly ReactiveProperty<float> _actualSpeed = new(1);
         private float _amplifier = 1;

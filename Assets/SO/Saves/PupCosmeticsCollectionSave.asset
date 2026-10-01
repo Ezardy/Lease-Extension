@@ -11,8 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 842ead20567841e4892681946119f6aa, type: 3}
   m_Name: PupCosmeticsCollectionSave
-  m_EditorClassIdentifier: Save::Aniki.Save.CosmeticsCollectionSave
-  filename: pup_cosmetics_collection.json
-  data:
-    idCollection:
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsCollectionSave
+  SaveData:
+    IdCollection:
     - bowl
+  _doLoad: 1
+  _filename: pup_cosmetics_collection.json

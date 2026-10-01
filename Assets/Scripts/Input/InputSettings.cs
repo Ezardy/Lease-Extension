@@ -4,22 +4,17 @@ using MessagePipe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Input
 {
     [CreateAssetMenu(fileName = "InputSettings", menuName = "Scriptable Objects/Input Settings")]
-    [MovedFrom("Aniki.Input")]
     public class InputSettings : ScriptableObject
     {
         [SerializeField]
-        [FormerlySerializedAs("punchActionReference")]
         private InputActionReference _punchActionReference;
 
         [SerializeField]
-        [FormerlySerializedAs("tapActionReference")]
         private InputActionReference _tapActionReference;
         private IPublisher<PunchRequested> _punchPublisher;
         private IPublisher<Tapped> _tapPublisher;

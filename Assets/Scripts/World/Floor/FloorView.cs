@@ -4,12 +4,10 @@ using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.World.Floor
 {
-    [MovedFrom("Aniki.World")]
     internal class FloorView : IFloorView, IInitializable, ITickable, IDisposable
     {
         private readonly ReactiveProperty<float> _perspective = new(0.15f);

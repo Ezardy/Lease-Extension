@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class AudioSourcePool : IObjectPool<AudioSource>, IInitializable, IDisposable
     {
         private readonly AudioSourceFactory _factory;

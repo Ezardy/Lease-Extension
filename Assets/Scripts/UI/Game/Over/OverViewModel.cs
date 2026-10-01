@@ -7,12 +7,10 @@ using LeaseExtension.UI.Contract;
 using LeaseExtension.Wallet.Contract;
 using MessagePipe;
 using Unity.Properties;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Over
 {
-    [MovedFrom("Aniki.UI")]
     internal class OverViewModel : IOverViewModel, IDisposable
     {
         private readonly IOverView _view;

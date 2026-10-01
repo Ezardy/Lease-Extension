@@ -2,7 +2,6 @@ using System;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Cosmetics.Contract.Target;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace LeaseExtension.Cosmetics
@@ -10,11 +9,9 @@ namespace LeaseExtension.Cosmetics
     internal class CosmeticsMonoInstaller : MonoInstaller
     {
         [SerializeField]
-        [FormerlySerializedAs("babViewDependencies")]
         private CosmeticsElementViewDependencies _babViewDependencies;
 
         [SerializeField]
-        [FormerlySerializedAs("pupViewDependencies")]
         private CosmeticsElementViewDependencies _pupViewDependencies;
 
         public override void InstallBindings()
@@ -37,10 +34,8 @@ namespace LeaseExtension.Cosmetics
         [Serializable]
         private class CosmeticsElementViewDependencies
         {
-            [FormerlySerializedAs("backSpriteRenderer")]
             public SpriteRenderer BackSpriteRenderer;
 
-            [FormerlySerializedAs("frontSpriteRenderer")]
             public SpriteRenderer FrontSpriteRenderer;
         }
     }

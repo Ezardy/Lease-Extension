@@ -3,12 +3,10 @@ using Cysharp.Threading.Tasks;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.Cosmetics.Contract;
 using R3;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Cosmetics
 {
-    [MovedFrom("Aniki.Cosmetics")]
     internal class CosmeticsElementViewModel<T> : ICosmeticsElementViewModel, ITyped<T>, IInitializable, IDisposable where T : class
     {
         private readonly ICosmeticsItemModelDatabase _hairstyleDatabase;

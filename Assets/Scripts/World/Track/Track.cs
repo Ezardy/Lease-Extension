@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.World.Track
 {
-    [MovedFrom("Aniki.World")]
     internal class Track : ITrack
     {
         private readonly float _y;

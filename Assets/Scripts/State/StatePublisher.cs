@@ -1,11 +1,9 @@
 using System;
 using MessagePipe;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.State
 {
-    [MovedFrom("Aniki.State")]
     public class StatePublisher<T>
         where T : Enum
     {

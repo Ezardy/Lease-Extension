@@ -1,11 +1,9 @@
 using LeaseExtension.Wallet.Contract;
 using R3;
 using Unity.Properties;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Wallet
 {
-    [MovedFrom("Aniki.Wallet")]
     public class WalletModel : IWalletModel
     {
         private readonly ReactiveProperty<uint> _balance;

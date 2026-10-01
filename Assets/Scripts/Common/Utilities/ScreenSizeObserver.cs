@@ -2,11 +2,9 @@ using System;
 using LeaseExtension.Common.Contract;
 using R3;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Common.Utilities
 {
-    [MovedFrom("Aniki.UI")]
     internal class ScreenSizeObserver : IScreenSizeObserver, IDisposable
     {
         private readonly IDisposable _disposable;

@@ -1,11 +1,9 @@
 using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.Scripting.APIUpdating;
 
 namespace LeaseExtension.Audio
 {
-    [MovedFrom("Aniki.Audio")]
     internal class ReusingAudioSourcePool : IObjectPool<AudioSource>
     {
         private readonly IObjectPool<AudioSource> _pool;

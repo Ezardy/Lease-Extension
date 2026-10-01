@@ -1,12 +1,10 @@
 using LeaseExtension.Audio.Background.States;
 using LeaseExtension.State;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 using Zenject;
 
 namespace LeaseExtension.Audio.Background
 {
-    [MovedFrom("Aniki.Audio")]
     internal class BackgroundAudioContext : AContext, IBackgroundAudioContext, IInitializable
     {
         private readonly WelcomeAudioState.Factory _welcomeFactory;
@@ -15,7 +13,7 @@ namespace LeaseExtension.Audio.Background
 
         public BackgroundAudioContext(Animator animator, WelcomeAudioState.Factory welcomeFactory)
         {
-            this.Animator = animator;
+            Animator = animator;
             _welcomeFactory = welcomeFactory;
         }
 

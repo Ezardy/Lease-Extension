@@ -1,10 +1,8 @@
 using LeaseExtension.UI.Contract;
-using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI
 {
-    [MovedFrom("Aniki.UI")]
     internal abstract class AView : IView
     {
         protected readonly string RootName;
