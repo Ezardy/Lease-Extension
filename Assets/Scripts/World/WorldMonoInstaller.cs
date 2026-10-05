@@ -28,9 +28,9 @@ namespace LeaseExtension.World
         [SerializeField]
         private byte _reservedOrderCount = 5;
         [SerializeField, Space]
-        private IRef<IWorldModel> _worldModel;
+        private Ref<IWorldModel> _worldModel;
         [SerializeField]
-        private IRef<IConstructionBlueprintDatabase> _constructionDatabase;
+        private Ref<IConstructionBlueprintDatabase> _constructionDatabase;
 
         public override void InstallBindings()
         {

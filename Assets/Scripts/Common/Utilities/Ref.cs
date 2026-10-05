@@ -3,13 +3,13 @@ using UnityEngine;
 namespace LeaseExtension.Common.Utilities
 {
     [System.Serializable]
-    public class IRef<T> : ISerializationCallbackReceiver where T : class
+    public class Ref<T> : ISerializationCallbackReceiver where T : class
     {
         [SerializeField] private Object _target;
 
         public T I => _target as T;
 
-        public static implicit operator bool (IRef<T> ir)
+        public static implicit operator bool (Ref<T> ir)
         {
             return ir._target != null;
         }

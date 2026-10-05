@@ -67,7 +67,7 @@ namespace LeaseExtension.Cosmetics
         {
             public CosmeticsSave CosmeticsSave;
             public CosmeticsCollectionSave CosmeticsCollectionSave;
-            public IRef<ICosmeticsItemModelDatabase> Database;
+            public Ref<ICosmeticsItemModelDatabase> Database;
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace LeaseExtension.Common.Editor
 {
-    [CustomPropertyDrawer(typeof(IRef<>), true)]
-    public class IRefDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(Ref<>), true)]
+    public class RefDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

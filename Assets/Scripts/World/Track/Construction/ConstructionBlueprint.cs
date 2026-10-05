@@ -12,7 +12,7 @@ namespace LeaseExtension.World.Track.Construction
         [SerializeField, Tooltip("0 - use implicit height, 1 - stretch to the ceil"), Range(0, 1)]
         protected float Height = 1;
         [SerializeField]
-        protected List<IRef<IConstructionPartBlueprint>> PartReferences;
+        protected List<Ref<IConstructionPartBlueprint>> PartReferences;
         protected List<IConstructionBlank> Blanks;
         [SerializeField]
         private bool _isRangeInversed = false;

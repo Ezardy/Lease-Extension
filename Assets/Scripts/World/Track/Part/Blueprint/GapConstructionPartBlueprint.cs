@@ -18,11 +18,11 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         [SerializeField, Range(0, 1)]
         private float _gapSize;
         [SerializeField]
-        private IRef<IConstructionPartBlueprint> _bottomPart;
+        private Ref<IConstructionPartBlueprint> _bottomPart;
         [SerializeField]
-        private IRef<IConstructionPartBlueprint> _gapPart;
+        private Ref<IConstructionPartBlueprint> _gapPart;
         [SerializeField]
-        private IRef<IConstructionPartBlueprint> _topPart;
+        private Ref<IConstructionPartBlueprint> _topPart;
         private IObjectPool<GapConstructionPart> _partPool;
         private IObjectPool<GapConstructionBlank> _blankPool;
         private IDisposable _disposable;

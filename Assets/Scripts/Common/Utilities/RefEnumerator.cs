@@ -5,13 +5,13 @@ namespace LeaseExtension.Common.Utilities
 {
     public class RefEnumerator<T> : IEnumerator<T> where T : class
     {
-        private readonly IEnumerator<IRef<T>> _refEnumerator;
+        private readonly IEnumerator<Ref<T>> _refEnumerator;
 
         public T Current => _refEnumerator.Current.I;
 
         object IEnumerator.Current => Current;
 
-        public RefEnumerator(IEnumerable<IRef<T>> refEnumerable)
+        public RefEnumerator(IEnumerable<Ref<T>> refEnumerable)
         {
             _refEnumerator = refEnumerable.GetEnumerator();
         }

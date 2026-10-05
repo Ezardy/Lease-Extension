@@ -12,7 +12,7 @@ namespace LeaseExtension.Audio.Installer
         [SerializeField, Range(0, 1)]
         private float _volume = 1;
         [SerializeField]
-        private IRef<IAudioGenerator> _generator;
+        private Ref<IAudioGenerator> _generator;
 
         public AudioPlayerParameters ToParameters()
         {

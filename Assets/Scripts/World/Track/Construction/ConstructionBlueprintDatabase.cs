@@ -9,7 +9,7 @@ namespace LeaseExtension.World.Track.Construction
     [CreateAssetMenu(fileName = "ConstructionDatabase", menuName = "Scriptable Objects/Construction Database")]
     internal class ConstructionBlueprintDatabase : ScriptableObject, IConstructionBlueprintDatabase, IReadOnlyCollection<IConstructionBlueprint>
     {
-        [SerializeField] private List<IRef<IConstructionBlueprint>> _constructions;
+        [SerializeField] private List<Ref<IConstructionBlueprint>> _constructions;
 
         public int Count => _constructions.Count;
         public IReadOnlyCollection<IConstructionBlueprint> Constructions => this;
