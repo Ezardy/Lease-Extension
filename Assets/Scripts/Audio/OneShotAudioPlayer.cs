@@ -32,10 +32,10 @@ namespace LeaseExtension.Audio
         private async UniTaskVoid PlayAsync(AudioPlayerParameters parameters)
         {
             AudioSource audioSource = _pool.Get();
-            parameters.LoadParameters(audioSource);
+            parameters.ApplyTo(audioSource);
             audioSource.Play();
             await UniTask.WaitWhile(() => audioSource.isPlaying, cancellationToken: _tokenSource.Token);
-            AudioPlayerParameters.Default.LoadParameters(audioSource);
+            AudioPlayerParameters.Default.ApplyTo(audioSource);
             _pool.Release(audioSource);
         }
     }

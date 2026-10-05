@@ -23,7 +23,7 @@ namespace LeaseExtension.Audio.Contract
         {
         }
 
-        public void LoadParameters(AudioSource source)
+        public void ApplyTo(AudioSource source)
         {
             source.generator = Generator;
             source.volume = Volume;
