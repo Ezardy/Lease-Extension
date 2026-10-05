@@ -8,7 +8,7 @@ using Zenject;
 namespace LeaseExtension.Record
 {
     [CreateAssetMenu(fileName = "RecordSave", menuName = "Scriptable Objects/Saves/Record")]
-    internal class RecordSave : ASave<Record, IRecordModel>, IInitializable, IDisposable
+    internal class RecordSave : ASave<Record>, IInitializable, IDisposable
     {
         private IRecordModel _record;
         private IDisposable _disposable;

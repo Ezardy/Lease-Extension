@@ -8,7 +8,7 @@ using Zenject;
 namespace LeaseExtension.Wallet
 {
     [CreateAssetMenu(fileName = "WalletSave", menuName = "Scriptable Objects/Saves/Wallet")]
-    internal class WalletSave : ASave<Wallet, IWalletModel>, IInitializable, IDisposable
+    internal class WalletSave : ASave<Wallet>, IInitializable, IDisposable
     {
         private IWalletModel _wallet;
         private IDisposable _disposable;

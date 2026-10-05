@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -6,7 +7,7 @@ using LeaseExtension.WebPlugin.SyncFS;
 
 namespace LeaseExtension.Save
 {
-    public abstract class ASave<TData, TModel> : ScriptableObject, ISave where TData : struct
+    public abstract class ASave<TData> : ScriptableObject, ISave where TData : struct
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         private const string PERSISTENT_DATA_PATH =
@@ -19,7 +20,7 @@ namespace LeaseExtension.Save
         [SerializeField] private bool _doLoad = true;
         [SerializeField] private string _filename;
 
-        public string Path { get; private set; }
+        private string _path;
         public TData Data => SaveData;
         private static string PersistentDataPath
         {
@@ -30,19 +31,19 @@ namespace LeaseExtension.Save
 #endif
         }
 
-        public void OnEnable()
+        private void OnEnable()
         {
 #if !UNITY_WEBGL || UNITY_EDITOR
             _persistentDataPath = Application.persistentDataPath;
 #endif
-            Path = System.IO.Path.Join(PersistentDataPath, _filename);
+            _path = Path.Join(PersistentDataPath, _filename);
         }
 
-        public void Init()
+        protected void Init()
         {
             if (!Directory.Exists(PersistentDataPath))
                 Directory.CreateDirectory(PersistentDataPath);
-            if (!File.Exists(Path))
+            if (!File.Exists(_path))
                 Save();
         }
 
@@ -51,16 +52,17 @@ namespace LeaseExtension.Save
             if (_doLoad)
                 try
                 {
-                    SaveData = JsonUtility.FromJson<TData>(File.ReadAllText(Path));
+                    SaveData = JsonUtility.FromJson<TData>(File.ReadAllText(_path));
                 }
-                catch (IOException)
+                catch (Exception e)
                 {
+                    Debug.LogException(e);
                 }
         }
 
         public void Save()
         {
-            File.WriteAllText(Path, JsonUtility.ToJson(SaveData));
+            File.WriteAllText(_path, JsonUtility.ToJson(SaveData));
 #if UNITY_WEBGL && !UNITY_EDITOR
             Plugin.SyncFS();
 #endif
