@@ -2,9 +2,9 @@ using LeaseExtension.Audio.Contract;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Player
 {
-    internal class OneShotAudioBehaviour : MonoBehaviour
+    internal class OneShotAudioBehaviourPlayer : MonoBehaviour
     {
         private AudioPlayerParameters _parameters;
         private IOneShotAudioPlayer _player;

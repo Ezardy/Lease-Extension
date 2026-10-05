@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Pool
 {
     [UsedImplicitly]
     internal class AudioSourcePool : IObjectPool<AudioSource>, IInitializable, IDisposable

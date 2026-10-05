@@ -1,19 +1,22 @@
 using System;
 using LeaseExtension.Audio.Contract;
 using LeaseExtension.Common.Utilities;
+using UnityEngine;
 using UnityEngine.Audio;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Installer
 {
     [Serializable]
     internal class VolumeGeneratorPair
     {
-        public float Volume = 1;
-        public IRef<IAudioGenerator> Generator;
+        [SerializeField, Range(0, 1)]
+        private float _volume = 1;
+        [SerializeField]
+        private IRef<IAudioGenerator> _generator;
 
         public AudioPlayerParameters ToParameters()
         {
-            return new(Generator.I, Volume);
+            return new(_generator.I, _volume);
         }
     }
 }

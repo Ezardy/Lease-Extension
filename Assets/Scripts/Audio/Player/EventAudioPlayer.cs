@@ -4,14 +4,14 @@ using LeaseExtension.Audio.Contract;
 using MessagePipe;
 using Zenject;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Player
 {
     [UsedImplicitly]
-    internal class EventAudio<T> : IDisposable where T : struct
+    internal class EventAudioPlayer<T> : IDisposable where T : struct
     {
         private readonly IDisposable _disposable;
 
-        public EventAudio(
+        public EventAudioPlayer(
             IOneShotAudioPlayer player,
             ISubscriber<T> subscriber,
             [InjectOptional] MessageHandlerFilter<T> filter,

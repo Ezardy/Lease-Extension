@@ -6,7 +6,7 @@ using LeaseExtension.Audio.Contract;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Player
 {
     [UsedImplicitly]
     internal class OneShotAudioPlayer : IOneShotAudioPlayer, IDisposable

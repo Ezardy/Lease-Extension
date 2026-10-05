@@ -1,9 +1,11 @@
 using LeaseExtension.Audio.Background;
 using LeaseExtension.Audio.Background.States;
+using LeaseExtension.Audio.Player;
+using LeaseExtension.Audio.Pool;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Installer
 {
     [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
     internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller>

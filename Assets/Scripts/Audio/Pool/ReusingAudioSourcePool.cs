@@ -1,9 +1,11 @@
 using System.Collections.Specialized;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Pool
 {
+    [UsedImplicitly]
     internal class ReusingAudioSourcePool : IObjectPool<AudioSource>
     {
         private readonly IObjectPool<AudioSource> _pool;

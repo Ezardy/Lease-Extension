@@ -1356,28 +1356,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.MainAudioInstaller
   _punch:
-    Volume: 0.45
-    Generator:
+    _volume: 0.45
+    _generator:
       _target: {fileID: 6418180475301049370, guid: da6b862fa1c996243b2efc5e83aa8d7b, type: 2}
   _obstacle:
-    Volume: 1
-    Generator:
+    _volume: 1
+    _generator:
       _target: {fileID: 8300000, guid: a87d45ea18a37754cacb489d93fa3af1, type: 3}
   _floor:
-    Volume: 1
-    Generator:
+    _volume: 1
+    _generator:
       _target: {fileID: 8300000, guid: ea8a6e142b83f6d469bed8460d5dd2df, type: 3}
   _tooth:
-    Volume: 1
-    Generator:
+    _volume: 1
+    _generator:
       _target: {fileID: 8300000, guid: f9b59ca61ffd6a347b81dd8a76a0153f, type: 3}
   _sign:
-    Volume: 1
-    Generator:
+    _volume: 1
+    _generator:
       _target: {fileID: 8300000, guid: b683439ed05a834408e6b1b5660ae378, type: 3}
   _weightSwing:
-    Volume: 0.3
-    Generator:
+    _volume: 0.3
+    _generator:
       _target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}
   _swingPlayer: {fileID: 1610371250}
 --- !u!1 &1592930375

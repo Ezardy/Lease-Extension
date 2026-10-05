@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Audio
+namespace LeaseExtension.Audio.Pool
 {
     [UsedImplicitly]
     internal class AudioSourceFactory : PlaceholderFactory<AudioSource>
