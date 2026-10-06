@@ -44,7 +44,7 @@ namespace LeaseExtension.World.Track
             trackCount = (byte)(trackCount / 2 * 2 + 1);
             float trackDepth = floorDepth / trackCount;
             float start = floorCenterY - floorDepth / 2 + trackDepth / 2;
-            float scalerStep = trackCount == 0 ? 0 : (1 - worldModel.Perspective) / (trackCount - 1);
+            float scalerStep = trackCount == 1 ? 0 : (1 - worldModel.Perspective) / (trackCount - 1);
             float scalerScale = 1 / ((1 + worldModel.Perspective) / 2);
             int constructionCount = database.Constructions.Count;
             _constructionQueue = new(constructionCount);
