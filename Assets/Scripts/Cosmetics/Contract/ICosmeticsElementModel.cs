@@ -4,7 +4,7 @@ using R3;
 
 namespace LeaseExtension.Cosmetics.Contract
 {
-    internal interface ICosmeticsElementModel
+    public interface ICosmeticsElementModel
     {
         public string Id { get; set; }
 

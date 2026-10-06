@@ -49,7 +49,7 @@ namespace LeaseExtension.Save
 
         public void Load()
         {
-            if (_doLoad)
+            if (_doLoad && File.Exists(_path))
                 try
                 {
                     SaveData = JsonUtility.FromJson<TData>(File.ReadAllText(_path));

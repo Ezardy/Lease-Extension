@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace LeaseExtension.Cosmetics.Contract
 {
-    internal interface ICosmeticsItemModelDatabase
+    public interface ICosmeticsItemModelDatabase
     {
         public IEnumerable<ICosmeticsItemModel> GetCosmeticsItemModels();
 

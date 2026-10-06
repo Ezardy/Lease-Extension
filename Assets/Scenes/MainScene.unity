@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 370017668}
   - component: {fileID: 370017670}
   - component: {fileID: 370017669}
-  - component: {fileID: 370017666}
   - component: {fileID: 370017671}
   - component: {fileID: 370017667}
   m_Layer: 10
@@ -513,24 +512,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &370017666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370017665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsMonoInstaller
-  _babViewDependencies:
-    BackSpriteRenderer: {fileID: 492324202}
-    FrontSpriteRenderer: {fileID: 370675421}
-  _pupViewDependencies:
-    BackSpriteRenderer: {fileID: 1289783940}
-    FrontSpriteRenderer: {fileID: 59505938}
 --- !u!114 &370017667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,6 +1081,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1057585158}
+  - component: {fileID: 1057585160}
+  - component: {fileID: 1057585159}
   m_Layer: 10
   m_Name: Hairs
   m_TagString: Untagged
@@ -1124,6 +1107,40 @@ Transform:
   - {fileID: 59505937}
   m_Father: {fileID: 778176653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057585159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057585157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsMonoInstaller
+  _target: 1
+  _backRenderer: {fileID: 1289783940}
+  _frontRenderer: {fileID: 59505938}
+--- !u!114 &1057585160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057585157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1057585159}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &1226644005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,6 +1150,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1226644006}
+  - component: {fileID: 1226644008}
+  - component: {fileID: 1226644007}
   m_Layer: 10
   m_Name: Hairs
   m_TagString: Untagged
@@ -1157,6 +1176,40 @@ Transform:
   - {fileID: 370675420}
   m_Father: {fileID: 1610371248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226644007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226644005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsMonoInstaller
+  _target: 0
+  _backRenderer: {fileID: 492324202}
+  _frontRenderer: {fileID: 370675421}
+--- !u!114 &1226644008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226644005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1226644007}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &1289783938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,7 +1336,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1290385284}
-  - {fileID: 370017666}
   - {fileID: 370017671}
   - {fileID: 6003574216855412968}
   - {fileID: 1290385285}

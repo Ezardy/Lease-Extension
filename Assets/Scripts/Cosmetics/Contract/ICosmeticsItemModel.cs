@@ -1,6 +1,6 @@
 namespace LeaseExtension.Cosmetics.Contract
 {
-    internal interface ICosmeticsItemModel
+    public interface ICosmeticsItemModel
     {
         public string Id { get; }
         public uint Price { get; }

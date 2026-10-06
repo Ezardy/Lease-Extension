@@ -38,11 +38,10 @@
       "url": "https://package.openupm.com"
     },
     "com.svermeulen.extenject": {
-      "version": "https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source",
+      "version": "file:com.svermeulen.extenject",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ec31a279be809bc98f5d1ed9f2add1ce3ddc77fc"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.2d.animation": {
       "version": "16.0.1",
