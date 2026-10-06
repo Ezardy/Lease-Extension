@@ -51,7 +51,7 @@ namespace LeaseExtension.World
         {
             float depth = _floorSpriteRenderer.bounds.size.y;
             float centerY = _floorSpriteRenderer.transform.position.y;
-            Container.BindInterfacesTo<TrackOrchectrator>().AsSingle().WithArguments(
+            Container.BindInterfacesTo<TrackOrchestrator>().AsSingle().WithArguments(
                 _trackCount,
                 depth,
                 centerY,

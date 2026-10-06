@@ -12,7 +12,7 @@ using Zenject;
 namespace LeaseExtension.World.Track
 {
     [UsedImplicitly]
-    internal class TrackOrchectrator : IInitializable, ITickable, IDisposable
+    internal class TrackOrchestrator : IInitializable, ITickable, IDisposable
     {
         private readonly IWorldModel _worldModel;
         private readonly IConstructionBlueprintDatabase _database;
@@ -25,7 +25,7 @@ namespace LeaseExtension.World.Track
         private float _distance = 0;
         private float _lastX;
 
-        public TrackOrchectrator(
+        public TrackOrchestrator(
             byte trackCount,
             float floorDepth,
             float floorCenterY,
@@ -112,12 +112,12 @@ namespace LeaseExtension.World.Track
             byte endIndex = (byte)(trackStartIndex + partCount);
             if (endIndex <= _tracks.Count)
             {
-                bool placable = true;
-                for (byte trackIndex = trackStartIndex; trackIndex < endIndex && placable; placable = _tracks[trackIndex].IsFree, trackIndex += 1)
+                bool placeable = true;
+                for (byte trackIndex = trackStartIndex; trackIndex < endIndex && placeable; placeable = _tracks[trackIndex].IsFree, trackIndex += 1)
                     ;
-                if (placable)
+                if (placeable)
                 {
-                    IEnumerator<IConstructionBlank> enumerator = construction.MakeBlanks().GetEnumerator();
+                    using IEnumerator<IConstructionBlank> enumerator = construction.MakeBlanks().GetEnumerator();
                     for (byte i = trackStartIndex; enumerator.MoveNext() && i < endIndex; i += 1)
                         _tracks[i].Construct(enumerator.Current);
                     while (!_oldToNewDistances.TryAdd(distance, _distance + UnityEngine.Random.Range(
@@ -180,7 +180,6 @@ namespace LeaseExtension.World.Track
             foreach (ITrack track in _tracks)
             {
                 track.StartX = xNorm;
-                //track.EndX = -xNorm;
                 track.EndX = -x;
                 xNorm -= step;
             }
