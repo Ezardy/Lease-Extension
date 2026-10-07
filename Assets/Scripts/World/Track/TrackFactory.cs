@@ -5,7 +5,7 @@ using Zenject;
 namespace LeaseExtension.World.Track
 {
     [UsedImplicitly]
-    public class ITrackFactory : PlaceholderFactory<float, float, byte, int, ITrack>
+    public class TrackFactory : PlaceholderFactory<float, float, byte, int, ITrack>
     {
         public override ITrack Create(float y, float scale, byte maxConstructions, int order)
         {

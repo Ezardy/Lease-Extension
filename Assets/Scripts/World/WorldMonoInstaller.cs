@@ -42,7 +42,7 @@ namespace LeaseExtension.World
             Container.BindInstance(_constructionDatabase.I);
             Container.Bind<INoPunchZone>().To<NoPunchZoneManager>().AsSingle();
             Container.BindInterfacesTo<WorldViewModel>().AsSingle();
-            Container.BindFactory<float, float, byte, int, ITrack, ITrackFactory>().To<LeaseExtension.World.Track.Track>();
+            Container.BindFactory<float, float, byte, int, ITrack, TrackFactory>().To<LeaseExtension.World.Track.Track>();
             Container.BindFactory<Object, AConstructionPartBehaviour, AConstructionPartBehaviour.Factory>().FromFactory<PrefabFactory<AConstructionPartBehaviour>>();
             InstallPartBlueprints();
         }

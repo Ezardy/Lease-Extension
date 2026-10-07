@@ -33,7 +33,7 @@ namespace LeaseExtension.World.Track
             byte maxConstructions,
             byte reservedOrders,
             IWorldModel worldModel,
-            ITrackFactory trackFactory,
+            TrackFactory trackFactory,
             IConstructionBlueprintDatabase database,
             IScreenSizeObserver screenSizeObserver,
             ISubscriber<CharacterState> stateSubscriber)
