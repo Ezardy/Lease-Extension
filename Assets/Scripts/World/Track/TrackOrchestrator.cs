@@ -95,9 +95,12 @@ namespace LeaseExtension.World.Track
 
         private void Place()
         {
-            foreach (KeyValuePair<float, IConstructionBlueprint> pair in _constructionQueue)
-                if (pair.Key <= _distance)
-                    PlaceConstruction(pair.Key, pair.Value);
+            IList<float> distances = _constructionQueue.Keys;
+            IList<IConstructionBlueprint> constructions = _constructionQueue.Values;
+            for (int i = 0; i < distances.Count && distances[i] <= _distance; i += 1)
+            {
+                    PlaceConstruction(distances[i], constructions[i]);
+            }
             foreach (KeyValuePair<float, float> oldNew in _oldToNewDistances)
             {
                 _constructionQueue.Add(oldNew.Value, _constructionQueue[oldNew.Key]);
@@ -116,20 +119,18 @@ namespace LeaseExtension.World.Track
             if (endIndex <= _tracks.Count)
             {
                 bool placeable = true;
-                for (byte trackIndex = trackStartIndex; trackIndex < endIndex && placeable; placeable = _tracks[trackIndex].IsFree, trackIndex += 1)
+                for (byte trackIndex = trackStartIndex;
+                     trackIndex < endIndex && placeable;
+                     placeable = _tracks[trackIndex].IsFree, trackIndex += 1)
                     ;
                 if (placeable)
                 {
                     using IEnumerator<IConstructionBlank> enumerator = construction.MakeBlanks().GetEnumerator();
                     for (byte i = trackStartIndex; enumerator.MoveNext() && i < endIndex; i += 1)
                         _tracks[i].Construct(enumerator.Current);
-                    float newDistance;
-                    do
-                    {
-                        newDistance = _distance
-                                      + UnityEngine.Random.Range(construction.MinMargin, construction.MaxMargin);
-                    } while (!_newDistances.Add(newDistance));
-                    _oldToNewDistances.Add(distance, newDistance);
+                    _oldToNewDistances.Add(distance,
+                        AddRandomDistance(construction.MinMargin, construction.MaxMargin,
+                            d => !_oldToNewDistances.ContainsKey(d) && _newDistances.Add(d)));
                 }
             }
         }
@@ -169,10 +170,32 @@ namespace LeaseExtension.World.Track
         {
             foreach (IConstructionBlueprint construction in _database.Constructions)
                 if (construction.Parts.Count <= _tracks.Count && construction.Parts.Count > 0)
-                    while (!_constructionQueue.TryAdd(UnityEngine.Random.Range(
-                        construction.MinDelay,
-                        construction.MaxDelay), construction))
-                        ;
+                    AddRandomDistance(construction.MinDelay, construction.MaxDelay,
+                        d => _constructionQueue.TryAdd(d, construction));
+        }
+        
+        private float AddRandomDistance(float min, float max, Func<float, bool> predicate)
+        {
+            float newDistance = _distance + UnityEngine.Random.Range(min, max);
+            if (!predicate(newDistance))
+            {
+                if (min == max)
+                {
+                    do
+                    {
+                        newDistance = BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(newDistance) + 1);
+                    } while (!predicate(newDistance));
+                }
+                else
+                {
+                    do
+                    {
+                        newDistance = _distance + UnityEngine.Random.Range(min, max);
+                    } while (!predicate(newDistance));
+                }
+            }
+
+            return newDistance;
         }
 
         private void Resize(Vector2Int size)
