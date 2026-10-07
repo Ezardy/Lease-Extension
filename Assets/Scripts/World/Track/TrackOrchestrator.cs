@@ -18,6 +18,7 @@ namespace LeaseExtension.World.Track
         private readonly IConstructionBlueprintDatabase _database;
         private readonly SortedList<float, IConstructionBlueprint> _constructionQueue;
         private readonly Dictionary<float, float> _oldToNewDistances;
+        private readonly HashSet<float> _newDistances;
         private readonly List<ITrack> _tracks;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private readonly ISubscriber<CharacterState> _stateSubscriber;
@@ -49,6 +50,7 @@ namespace LeaseExtension.World.Track
             int constructionCount = database.Constructions.Count;
             _constructionQueue = new(constructionCount);
             _oldToNewDistances = new(constructionCount);
+            _newDistances = new(constructionCount);
             _tracks = new(trackCount);
             for (byte i = 0; i < trackCount; i += 1)
                 _tracks.Add(trackFactory.Create(
@@ -103,6 +105,7 @@ namespace LeaseExtension.World.Track
             }
 
             _oldToNewDistances.Clear();
+            _newDistances.Clear();
         }
 
         private void PlaceConstruction(float distance, IConstructionBlueprint construction)
@@ -120,10 +123,13 @@ namespace LeaseExtension.World.Track
                     using IEnumerator<IConstructionBlank> enumerator = construction.MakeBlanks().GetEnumerator();
                     for (byte i = trackStartIndex; enumerator.MoveNext() && i < endIndex; i += 1)
                         _tracks[i].Construct(enumerator.Current);
-                    while (!_oldToNewDistances.TryAdd(distance, _distance + UnityEngine.Random.Range(
-                        construction.MinMargin,
-                        construction.MaxMargin)))
-                        ;
+                    float newDistance;
+                    do
+                    {
+                        newDistance = _distance
+                                      + UnityEngine.Random.Range(construction.MinMargin, construction.MaxMargin);
+                    } while (!_newDistances.Add(newDistance));
+                    _oldToNewDistances.Add(distance, newDistance);
                 }
             }
         }
