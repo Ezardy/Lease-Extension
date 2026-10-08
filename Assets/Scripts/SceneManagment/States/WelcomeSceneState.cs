@@ -18,6 +18,7 @@ namespace LeaseExtension.SceneManagment.States
     [UsedImplicitly]
     internal class WelcomeSceneState : AState<ISceneContext>
     {
+        private readonly Scene _welcomeScene;
         private readonly AssetReference _mainScene;
         private readonly StatePublisher<FocusedScene> _statePublisher;
         private readonly MainSceneState.Factory _mainFactory;
@@ -28,11 +29,13 @@ namespace LeaseExtension.SceneManagment.States
 
         public WelcomeSceneState(
             ISceneContext context,
+            Scene welcomeScene,
             StatePublisher<FocusedScene>.Factory publisherFactory,
             [Inject(Id = FocusedScene.Main)] AssetReference mainScene,
             ISubscriber<Tapped> tapSubscriber,
             MainSceneState.Factory mainFactory) : base(context)
         {
+            _welcomeScene = welcomeScene;
             _mainScene = mainScene;
             _statePublisher = publisherFactory.Create(FocusedScene.Welcome);
             _mainFactory = mainFactory;
@@ -55,7 +58,7 @@ namespace LeaseExtension.SceneManagment.States
                 _handle.Release();
             _cts.Cancel();
             _disposable?.Dispose();
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            SceneManager.UnloadSceneAsync(_welcomeScene);
         }
 
         private async UniTaskVoid StartAsync()

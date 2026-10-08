@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace LeaseExtension.SceneManagment
@@ -21,6 +22,7 @@ namespace LeaseExtension.SceneManagment
 
         private void InstallSceneStates()
         {
+            Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindInstance(_mainScene).WithId(FocusedScene.Main);
             Container.BindFactory<FocusedScene, StatePublisher<FocusedScene>, StatePublisher<FocusedScene>.Factory>();
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>();
