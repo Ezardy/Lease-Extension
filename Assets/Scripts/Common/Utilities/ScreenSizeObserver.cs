@@ -18,19 +18,10 @@ namespace LeaseExtension.Common.Utilities
         public ScreenSizeObserver()
         {
             _size = new(new(Screen.width, Screen.height));
-            IDisposable d1 = Observable.EveryValueChanged(this, _ => Screen.width).Subscribe(w =>
+            _disposable = Observable.EveryValueChanged(this, _ => new Vector2Int(Screen.width, Screen.height)).Subscribe(s =>
             {
-                Vector2Int nsize = _size.CurrentValue;
-                nsize.x = w;
-                _size.Value = nsize;
+                _size.Value = s;
             });
-            IDisposable d2 = Observable.EveryValueChanged(this, _ => Screen.height).Subscribe(h =>
-            {
-                Vector2Int nsize = _size.CurrentValue;
-                nsize.y = h;
-                _size.Value = nsize;
-            });
-            _disposable = Disposable.Combine(d1, d2);
         }
 
         public void Dispose()
