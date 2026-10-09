@@ -8,13 +8,13 @@ namespace LeaseExtension.Audio.Background.States
     [UsedImplicitly]
     internal class IdleAudioState : ABackgroundAudioState<IdleAudioState>
     {
-        private readonly ReadOnlyReactiveProperty<CharacterState> _characterStateSubscriber;
+        private readonly Observable<CharacterState> _characterStateSubscriber;
         private readonly RunAudioState.Factory _runFactory;
         private IDisposable _disposable;
 
         public IdleAudioState(
             IBackgroundAudioContext context,
-            ReadOnlyReactiveProperty<CharacterState> characterStateSubscriber,
+            Observable<CharacterState> characterStateSubscriber,
             RunAudioState.Factory runFactory) : base(context, "Idle")
         {
             _characterStateSubscriber = characterStateSubscriber;

@@ -63,7 +63,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         }
 
         [Inject]
-        public void Construct(ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber)
+        public void Construct(Observable<FocusedScene> sceneSubscriber)
         {
             _disposable = sceneSubscriber.Subscribe(s =>
             {

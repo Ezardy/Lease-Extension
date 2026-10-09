@@ -1,17 +1,14 @@
 {
-  "name": "LeaseExtension.Gameplay.Contract",
-  "rootNamespace": "LeaseExtension",
-  "references": [
-    "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
-    "GUID:e8bd2f4872af24d43842bf9b931b833e"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "LeaseExtension.Gameplay.Contract",
+    "rootNamespace": "LeaseExtension",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

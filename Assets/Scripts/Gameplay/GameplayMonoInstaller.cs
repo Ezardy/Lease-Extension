@@ -35,6 +35,8 @@ namespace LeaseExtension.Gameplay
             Container.Bind<ReactiveProperty<CharacterState>>().AsSingle();
             Container.Bind<ReadOnlyReactiveProperty<CharacterState>>().To<ReactiveProperty<CharacterState>>()
                 .FromResolve();
+            Container.Bind<Observable<CharacterState>>().To<ReactiveProperty<CharacterState>>()
+                .FromResolve();
             Container.Bind<CollisionCheckStateBase>().AsTransient();
             Container.BindFactory<IdleState, IdleState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<float, PunchState, PunchState.Factory>().FromPoolableMemoryPool();

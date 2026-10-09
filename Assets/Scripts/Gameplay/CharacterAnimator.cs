@@ -1,6 +1,4 @@
-using System;
 using LeaseExtension.Gameplay.Contract.Message;
-using MessagePipe;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -15,7 +13,7 @@ namespace LeaseExtension.Gameplay
         private static readonly int _punchHash = Animator.StringToHash("Punch");
 
         [Inject]
-        public void Init(ReadOnlyReactiveProperty<CharacterState> subscriber)
+        public void Init(Observable<CharacterState> subscriber)
         {
             subscriber.Subscribe(s =>
             {

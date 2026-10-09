@@ -5,7 +5,6 @@ using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.World.Contract;
 using LeaseExtension.World.Track.Part.Blank;
 using LeaseExtension.World.Track.Part.Concrete;
-using MessagePipe;
 using R3;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -35,7 +34,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         public float InterfereWidth { get; private set; }
         
         [Inject]
-        public void Construct(ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber)
+        public void Construct(Observable<FocusedScene> sceneSubscriber)
         {
             _disposable = sceneSubscriber.Subscribe(s =>
             {

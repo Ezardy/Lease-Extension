@@ -24,7 +24,7 @@ namespace LeaseExtension.SceneManagment
         private void InstallSceneStates()
         {
             Container.Bind<ReactiveProperty<FocusedScene>>().AsSingle();
-            Container.Bind<ReadOnlyReactiveProperty<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
+            Container.Bind<Observable<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindInstance(_mainScene).WithId(FocusedScene.Main);
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();

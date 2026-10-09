@@ -14,7 +14,7 @@ namespace LeaseExtension.World.Floor
         private static readonly int _wallHash = Animator.StringToHash("Wall");
         private static readonly int _floorHash = Animator.StringToHash("Floor");
         [SerializeField] private float _speed = 1;
-        private ReadOnlyReactiveProperty<CharacterState> _subscriber;
+        private Observable<CharacterState> _subscriber;
         private bool _over = false;
         private IDisposable _runSubscription;
         private Animator _animator;
@@ -28,7 +28,7 @@ namespace LeaseExtension.World.Floor
         public void Init(
             IWorldModel worldModel,
             IFloorView floorView,
-            ReadOnlyReactiveProperty<CharacterState> subscriber,
+            Observable<CharacterState> subscriber,
             Animator animator)
         {
             worldModel.SpeedChanged.Subscribe(s => floorView.Speed = s / (1 + worldModel.Perspective) * 2).AddTo(this);

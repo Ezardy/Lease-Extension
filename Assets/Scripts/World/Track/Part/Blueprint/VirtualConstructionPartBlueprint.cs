@@ -23,7 +23,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         public float Margin => 0;
         
         [Inject]
-        public void Init(ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber)
+        public void Init(Observable<FocusedScene> sceneSubscriber)
         {
             _disposable = sceneSubscriber.Subscribe(s =>
             {

@@ -20,7 +20,7 @@ namespace LeaseExtension.World.Track
         private readonly HashSet<float> _newDistances;
         private readonly List<ITrack> _tracks;
         private readonly IScreenSizeObserver _screenSizeObserver;
-        private readonly ReadOnlyReactiveProperty<CharacterState> _stateSubscriber;
+        private readonly Observable<CharacterState> _stateSubscriber;
         private IDisposable _disposable;
         private float _distance = 0;
         private float _lastX;
@@ -35,7 +35,7 @@ namespace LeaseExtension.World.Track
             TrackFactory trackFactory,
             IConstructionBlueprintDatabase database,
             IScreenSizeObserver screenSizeObserver,
-            ReadOnlyReactiveProperty<CharacterState> stateSubscriber)
+            Observable<CharacterState> stateSubscriber)
         {
             _worldModel = worldModel;
             _database = database;

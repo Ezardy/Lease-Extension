@@ -12,7 +12,7 @@ namespace LeaseExtension.Audio.Background
     {
         private readonly IDisposable _disposable;
 
-        public CrossSceneAudioStateTransition(FocusedScene scene, ReadOnlyReactiveProperty<FocusedScene> subscriber, IBackgroundAudioContext context, TFactory stateFactory)
+        public CrossSceneAudioStateTransition(FocusedScene scene, Observable<FocusedScene> subscriber, IBackgroundAudioContext context, TFactory stateFactory)
         {
             _disposable = subscriber.Subscribe(s =>
             {
