@@ -1,27 +1,24 @@
-using System;
+using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 
-namespace Aniki.UI {
-	internal abstract class AView : IView, IDisposable {
-		private readonly PanelRenderer	panelRenderer;
-		protected readonly string		rootName;
+namespace LeaseExtension.UI
+{
+    internal abstract class AView : IView
+    {
+        protected readonly string RootName;
 
-		public VisualElement	Root => root;
+        public VisualElement Root { get; private set; }
 
-		private VisualElement	root;
+        protected AView(PanelRenderer panelRenderer, string rootName)
+        {
+            RootName = rootName;
+            panelRenderer.RegisterUIReloadCallback(OnGUIReload);
+        }
 
-		public AView(PanelRenderer panelRenderer, string rootName) {
-			this.panelRenderer = panelRenderer;
-			this.rootName = rootName;
-			panelRenderer.RegisterUIReloadCallback(OnGUIReload);
-		}
-
-		protected virtual void	OnGUIReload(PanelRenderer panelRenderer, VisualElement root) {
-			this.root = root.Q<VisualElement>(rootName);
-		}
-
-		public void	Dispose() {
-			panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
-		}
-	}
+        protected virtual void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
+            Root = root.Q<VisualElement>(RootName);
+        }
+    }
 }

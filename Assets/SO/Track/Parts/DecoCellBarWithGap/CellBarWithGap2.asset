@@ -11,11 +11,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c7bfbe84827a5949bccda968ea194e7, type: 3}
   m_Name: CellBarWithGap2
-  m_EditorClassIdentifier: World::Aniki.World.GapConstructionPartBlueprint
-  gapSize: 0.4
-  bottomPart:
-    target: {fileID: 11400000, guid: 1a042ba38606a424cbe5f8a8b420dc10, type: 2}
-  gapPart:
-    target: {fileID: 11400000, guid: 84518c1bb615dad42a9b276e77f0b86e, type: 2}
-  topPart:
-    target: {fileID: 11400000, guid: fe7339d30dfe495419a1a76a719571f5, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.GapConstructionPartBlueprint
+  _gapSize: 0.4
+  _bottomPart:
+    _target: {fileID: 11400000, guid: 1a042ba38606a424cbe5f8a8b420dc10, type: 2}
+  _gapPart:
+    _target: {fileID: 11400000, guid: 84518c1bb615dad42a9b276e77f0b86e, type: 2}
+  _topPart:
+    _target: {fileID: 11400000, guid: fe7339d30dfe495419a1a76a719571f5, type: 2}

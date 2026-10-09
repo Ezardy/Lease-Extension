@@ -11,17 +11,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
   m_Name: CurlesHairstyle
-  m_EditorClassIdentifier: Cosmetics::Aniki.Cosmetics.CosmeticsItemModel
-  id: curles
-  price: 0
-  backSpriteAssetReference:
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsItemModel
+  _id: curles
+  _price: 0
+  _backSpriteAssetReference:
     m_AssetGUID: a56f95af983f43440af49f6ead37b17b
     m_SubObjectName: Back_0
-    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
-  frontSpriteAssetReference:
+  _frontSpriteAssetReference:
     m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 

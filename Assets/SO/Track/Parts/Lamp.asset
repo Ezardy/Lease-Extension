@@ -11,14 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60cd76ce98964b745b9fd0bb71da6e74, type: 3}
   m_Name: Lamp
-  m_EditorClassIdentifier: World::Aniki.World.ConstructionPartBlueprint
-  initialPool: 2
-  margin: 6
-  width: 6
-  autoWidth: 0
-  interfereWidth: 1.4484001
-  autoInterfereWidth: 1
-  sameWidth: 0
-  hasSpriteRenderer: 1
-  zOrdering: 0
-  prefab: {fileID: 5380204875562634844, guid: d9d6cbfd212b5994fb6bdda5362b06e8, type: 3}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.ConstructionPartBlueprint
+  Prefab: {fileID: 5380204875562634844, guid: d9d6cbfd212b5994fb6bdda5362b06e8, type: 3}
+  _initialPool: 2
+  _margin: 6
+  _width: 6
+  _autoWidth: 0
+  _interfereWidth: 1.4484001
+  _autoInterfereWidth: 1
+  _sameWidth: 0
+  _useSpriteRenderer: 1
+  _zOrdering: 0

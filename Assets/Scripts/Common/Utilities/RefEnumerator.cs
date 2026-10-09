@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Aniki.Common {
-	public class RefEnumerator<T> : IEnumerator<T> where T : class {
-		private readonly IEnumerator<IRef<T>>	refEnumerator;
+namespace LeaseExtension.Common.Utilities
+{
+    public class RefEnumerator<T> : IEnumerator<T> where T : class
+    {
+        private readonly IEnumerator<Ref<T>> _refEnumerator;
 
-		public T	Current => refEnumerator.Current.I;
+        public T Current => _refEnumerator.Current.I;
 
-		object IEnumerator.Current => Current;
+        object IEnumerator.Current => Current;
 
-		public bool	MoveNext() {
-			return refEnumerator.MoveNext();
-		}
+        public RefEnumerator(IEnumerable<Ref<T>> refEnumerable)
+        {
+            _refEnumerator = refEnumerable.GetEnumerator();
+        }
 
-		public void	Reset() {
-			refEnumerator.Reset();
-		}
+        public void Reset()
+        {
+            _refEnumerator.Reset();
+        }
 
-		public void	Dispose() {
-			refEnumerator.Dispose();
-		}
+        public bool MoveNext()
+        {
+            return _refEnumerator.MoveNext();
+        }
 
-		public RefEnumerator(IEnumerable<IRef<T>> refEnumerable) {
-			refEnumerator = refEnumerable.GetEnumerator();
-		}
-	}
+        public void Dispose()
+        {
+            _refEnumerator.Dispose();
+        }
+    }
 }

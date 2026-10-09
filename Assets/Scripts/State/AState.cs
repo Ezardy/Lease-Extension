@@ -1,13 +1,26 @@
-namespace Aniki.State {
-	public abstract class AState<T> : IState where T : IContext {
-		protected readonly T	context;
+using LeaseExtension.State.Contract;
 
-		public AState(T context) {
-			this.context = context;
-		}
+namespace LeaseExtension.State
+{
+    public abstract class AState<T> : IState where T : IContext
+    {
+        protected readonly T Context;
 
-		public virtual void	Dispose() { }
-		public virtual void	Start() { }
-		public virtual void	Update() { }
-	}
+        public AState(T context)
+        {
+            Context = context;
+        }
+
+        public virtual void Start()
+        {
+        }
+
+        public virtual void Update()
+        {
+        }
+
+        public virtual void Dispose()
+        {
+        }
+    }
 }

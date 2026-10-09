@@ -456,7 +456,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0e2304af86452a4cb8bc065c7a9182d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: World::Aniki.World.Floor.FloorCollisions
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Floor.FloorCollisions
 --- !u!95 &128790926
 Animator:
   serializedVersion: 7
@@ -490,8 +490,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf302891dfceaeb469183e8f838f626a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: World::Aniki.World.FloorViewModel
-  speed: 1
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Floor.FloorViewModel
+  _speed: 1
 --- !u!1 &370017665
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 370017668}
   - component: {fileID: 370017670}
   - component: {fileID: 370017669}
-  - component: {fileID: 370017666}
   - component: {fileID: 370017671}
   - component: {fileID: 370017667}
   m_Layer: 10
@@ -513,24 +512,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &370017666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370017665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Cosmetics::CosmeticsMonoInstaller
-  babViewDependencies:
-    backSpriteRenderer: {fileID: 492324202}
-    frontSpriteRenderer: {fileID: 370675421}
-  pupViewDependencies:
-    backSpriteRenderer: {fileID: 1289783940}
-    frontSpriteRenderer: {fileID: 59505938}
 --- !u!114 &370017667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,9 +523,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8f66745e757648429e8582099dbc3be, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Character::Aniki.Character.CharacterAnimator
-  babAnimator: {fileID: 1610371249}
-  pupAnimator: {fileID: 778176652}
+  m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterAnimator
+  _babAnimator: {fileID: 1610371249}
+  _pupAnimator: {fileID: 778176652}
 --- !u!4 &370017668
 Transform:
   m_ObjectHideFlags: 0
@@ -646,10 +627,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20ccc964a1b2471418b43510074c3295, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Character::CharacterMonoInstaller
-  forInject:
+  m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterMonoInstaller
+  _characterModel:
+    _target: {fileID: 11400000, guid: 762f93b221b2cb64bae4c0335c2564f7, type: 2}
+  _forInject:
   - {fileID: 370017667}
-  characterRigidbody: {fileID: 370017670}
+  _characterRigidbody: {fileID: 370017670}
 --- !u!1 &370675419
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +950,7 @@ MonoBehaviour:
   m_Intensity: 0.76
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000i
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -982,6 +965,9 @@ MonoBehaviour:
   m_ShadowSoftnessFalloffIntensity: 0.5
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
@@ -1097,6 +1083,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1057585158}
+  - component: {fileID: 1057585160}
+  - component: {fileID: 1057585159}
   m_Layer: 10
   m_Name: Hairs
   m_TagString: Untagged
@@ -1121,6 +1109,40 @@ Transform:
   - {fileID: 59505937}
   m_Father: {fileID: 778176653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057585159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057585157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsMonoInstaller
+  _target: 1
+  _backRenderer: {fileID: 1289783940}
+  _frontRenderer: {fileID: 59505938}
+--- !u!114 &1057585160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057585157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1057585159}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &1226644005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1152,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1226644006}
+  - component: {fileID: 1226644008}
+  - component: {fileID: 1226644007}
   m_Layer: 10
   m_Name: Hairs
   m_TagString: Untagged
@@ -1154,6 +1178,40 @@ Transform:
   - {fileID: 370675420}
   m_Father: {fileID: 1610371248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226644007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226644005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e654fe68b42827745b7bfcbd03aae6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsMonoInstaller
+  _target: 0
+  _backRenderer: {fileID: 492324202}
+  _frontRenderer: {fileID: 370675421}
+--- !u!114 &1226644008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226644005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.GameObjectContext
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1226644007}
+  _installerPrefabs: []
+  _findSiblingMonoInstallers: 0
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!1 &1289783938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1316,7 @@ GameObject:
   - component: {fileID: 1290385282}
   - component: {fileID: 1290385284}
   - component: {fileID: 1290385285}
+  - component: {fileID: 1290385286}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1280,10 +1339,10 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1290385284}
-  - {fileID: 370017666}
   - {fileID: 370017671}
   - {fileID: 6003574216855412968}
   - {fileID: 1290385285}
+  - {fileID: 1290385286}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -1328,18 +1387,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d0ed8b7b5914254e9951f8cac51b9e3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: World::WorldMonoInstaller
-  floorSpriteRenderer: {fileID: 128790920}
-  floorAnimator: {fileID: 128790926}
-  floorViewModel: {fileID: 128790927}
-  wallSpriteRenderer: {fileID: 1775396250}
-  trackCount: 11
-  maxConstructionCount: 100
-  reservedOrderCount: 5
-  worldModel:
-    target: {fileID: 11400000, guid: 6024f10655c6a9b4f8597f38672304f3, type: 2}
-  constructionDatabase:
-    target: {fileID: 11400000, guid: 349f70f89c36a5c468d0eef906062aeb, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.WorldMonoInstaller
+  _floorSpriteRenderer: {fileID: 128790920}
+  _floorAnimator: {fileID: 128790926}
+  _floorViewModel: {fileID: 128790927}
+  _wallSpriteRenderer: {fileID: 1775396250}
+  _trackCount: 11
+  _maxConstructionCount: 100
+  _reservedOrderCount: 5
+  _worldModel:
+    _target: {fileID: 11400000, guid: 6024f10655c6a9b4f8597f38672304f3, type: 2}
+  _constructionDatabase:
+    _target: {fileID: 11400000, guid: 349f70f89c36a5c468d0eef906062aeb, type: 2}
 --- !u!114 &1290385285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1351,32 +1410,44 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae8ad21f3270c0d4491426ae80f27b93, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Audio::Aniki.Audio.MainAudioInstaller
-  punch:
-    volume: 0.45
-    generator:
-      target: {fileID: 6418180475301049370, guid: da6b862fa1c996243b2efc5e83aa8d7b, type: 2}
-  obstacle:
-    volume: 1
-    generator:
-      target: {fileID: 8300000, guid: a87d45ea18a37754cacb489d93fa3af1, type: 3}
-  floor:
-    volume: 1
-    generator:
-      target: {fileID: 8300000, guid: ea8a6e142b83f6d469bed8460d5dd2df, type: 3}
-  tooth:
-    volume: 1
-    generator:
-      target: {fileID: 8300000, guid: f9b59ca61ffd6a347b81dd8a76a0153f, type: 3}
-  sign:
-    volume: 1
-    generator:
-      target: {fileID: 8300000, guid: b683439ed05a834408e6b1b5660ae378, type: 3}
-  weightSwing:
-    volume: 0.3
-    generator:
-      target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}
-  swingPlayer: {fileID: 1610371250}
+  m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.MainAudioInstaller
+  _punch:
+    _volume: 0.45
+    _generator:
+      _target: {fileID: 6418180475301049370, guid: da6b862fa1c996243b2efc5e83aa8d7b, type: 2}
+  _obstacle:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: a87d45ea18a37754cacb489d93fa3af1, type: 3}
+  _floor:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: ea8a6e142b83f6d469bed8460d5dd2df, type: 3}
+  _tooth:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: f9b59ca61ffd6a347b81dd8a76a0153f, type: 3}
+  _sign:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: b683439ed05a834408e6b1b5660ae378, type: 3}
+  _weightSwing:
+    _volume: 0.3
+    _generator:
+      _target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}
+  _swingPlayer: {fileID: 1610371250}
+--- !u!114 &1290385286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290385281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427790f3133719a4f9771b35cc0e8d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Record::RecordMonoInstaller
 --- !u!1 &1592930375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1610,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42f234aa9cc6dcb4ead9cc5da6512ce7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Audio::Aniki.Audio.OneShotAudioBehaviour
+  m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.OneShotAudioBehaviour
 --- !u!1 &1775396249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1793,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d24f3094a5368c40a79c0d18479a14c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: World::Aniki.World.NoPunchZone
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Ceil.NoPunchZone
 --- !u!1 &2005235165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,8 +2080,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4ab8a00b56d8b745a9ee6c42da7c333, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UI::UIMonoInstaller
-  panelRenderer: {fileID: 765702860669062530}
+  m_EditorClassIdentifier: LeaseExtension.UI::LeaseExtension.UI.Game.UIMonoInstaller
+  _panelRenderer: {fileID: 765702860669062530}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

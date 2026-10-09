@@ -1,19 +1,24 @@
-using R3;
 using System;
+using JetBrains.Annotations;
+using LeaseExtension.World.Contract;
+using R3;
 using UnityEngine;
 
-namespace Aniki.World {
-	internal class WorldViewModel : IDisposable {
-		private readonly IDisposable	disposable;
+namespace LeaseExtension.World
+{
+    [UsedImplicitly]
+    internal class WorldViewModel : IDisposable
+    {
+        private readonly IDisposable _disposable;
 
-		public WorldViewModel (IWorldModel model) {
-			disposable = model.GravityChanged.Subscribe(g =>
-				Physics2D.gravity = new(0, g)
-			);
-		}
+        public WorldViewModel(IWorldModel model)
+        {
+            _disposable = model.GravityChanged.Subscribe(g => Physics2D.gravity = new(0, g));
+        }
 
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-	}
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+    }
 }

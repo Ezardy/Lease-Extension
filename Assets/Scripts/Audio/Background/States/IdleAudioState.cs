@@ -1,34 +1,42 @@
-using Aniki.Character;
-using MessagePipe;
 using System;
+using JetBrains.Annotations;
+using LeaseExtension.Gameplay.Contract.Message;
+using R3;
 
-namespace Aniki.Audio {
-	internal class IdleAudioState : ABackgroundAudioState<IdleAudioState> {
-		private readonly ISubscriber<CharacterState>	characterStateSubscriber;
-		private readonly RunAudioState.Factory			runFactory;
+namespace LeaseExtension.Audio.Background.States
+{
+    [UsedImplicitly]
+    internal class IdleAudioState : ABackgroundAudioState<IdleAudioState>
+    {
+        private readonly Observable<CharacterState> _characterStateSubscriber;
+        private readonly RunAudioState.Factory _runFactory;
+        private IDisposable _disposable;
 
-		private IDisposable	disposable;
+        public IdleAudioState(
+            IBackgroundAudioContext context,
+            Observable<CharacterState> characterStateSubscriber,
+            RunAudioState.Factory runFactory) : base(context, "Idle")
+        {
+            _characterStateSubscriber = characterStateSubscriber;
+            _runFactory = runFactory;
+        }
 
-		public IdleAudioState(IBackgroundAudioContext context,
-			ISubscriber<CharacterState> characterStateSubscriber,
-			RunAudioState.Factory runFactory) : base(context, "Idle") {
-			this.characterStateSubscriber = characterStateSubscriber;
-			this.runFactory = runFactory;
-		}
+        public override void Start()
+        {
+            base.Start();
+            _disposable = _characterStateSubscriber.Subscribe(s =>
+            {
+                if (s == CharacterState.Punch)
+                {
+                    Context.State = _runFactory.Create();
+                }
+            });
+        }
 
-		public override void	Start() {
-			base.Start();
-			disposable = characterStateSubscriber.Subscribe(_ => {
-					disposable.Dispose();
-					disposable = null;
-					context.State = runFactory.Create();
-				},
-				CharacterStateFilter.Punch);
-		}
-
-		public override void	Dispose() {
-			disposable?.Dispose();
-			base.Dispose();
-		}
-	}
+        public override void Dispose()
+        {
+            _disposable.Dispose();
+            base.Dispose();
+        }
+    }
 }

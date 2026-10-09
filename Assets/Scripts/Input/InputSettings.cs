@@ -1,69 +1,82 @@
-using MessagePipe;
 using System.Collections.Generic;
+using LeaseExtension.Input.Contract;
+using MessagePipe;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Aniki.Input {
-	[CreateAssetMenu(fileName = "InputSettings", menuName = "Scriptable Objects/Input Settings")]
-	public class InputSettings : ScriptableObject {
-		[SerializeField] private InputActionReference	punchActionReference;
-		[SerializeField] private InputActionReference	tapActionReference;
+namespace LeaseExtension.Input
+{
+    [CreateAssetMenu(fileName = "InputSettings", menuName = "Scriptable Objects/Input Settings")]
+    public class InputSettings : ScriptableObject
+    {
+        [SerializeField] private InputActionReference _punchActionReference;
+        [SerializeField] private InputActionReference _tapActionReference;
+        private IPublisher<PunchRequested> _punchPublisher;
+        private IPublisher<Tapped> _tapPublisher;
+        private InputAction _punchAction;
+        private InputAction _tapAction;
 
-		private IPublisher<PunchInputMessage>	punchPublisher;
-		private IPublisher<TapInputMessage>		tapPublisher;
+        private void OnEnable()
+        {
+            if (_punchActionReference != null)
+            {
+                _punchAction = _punchActionReference.action;
+                _punchAction.Enable();
+                _punchAction.performed += PunchPerformed;
+            }
 
-		private InputAction	punchAction;
-		private InputAction	tapAction;
+            if (_tapActionReference != null)
+            {
+                _tapAction = _tapActionReference.action;
+                _tapAction.Enable();
+                _tapAction.performed += TapPerformed;
+            }
+        }
 
-		[Inject]
-		public void	Init(IPublisher<PunchInputMessage> punchPublisher,
-			IPublisher<TapInputMessage> tapPublisher) {
-			this.punchPublisher = punchPublisher;
-			this.tapPublisher = tapPublisher;
-		}
+        private void OnDisable()
+        {
+            if (_punchAction != null)
+            {
+                _punchAction.performed -= PunchPerformed;
+                _punchAction.Disable();
+            }
 
-		private void	OnEnable() {
-			if (punchActionReference != null) {
-				punchAction = punchActionReference.action;
-				punchAction.Enable();
-				punchAction.performed += PunchPerformed;
-			}
-			if (tapActionReference != null) {
-				tapAction = tapActionReference.action;
-				tapAction.Enable();
-				tapAction.performed += TapPerformed;
-			}
-		}
+            if (_tapAction != null)
+            {
+                _tapAction.performed -= TapPerformed;
+                _tapAction.Disable();
+            }
+        }
 
-		private void	OnDisable() {
-			if (punchAction != null) {
-				punchAction.performed -= PunchPerformed;
-				punchAction.Disable();
-			}
-			if(tapAction != null) {
-				tapAction.performed -= TapPerformed;
-				tapAction.Disable();
-			}
-		}
+        [Inject]
+        public void Init(IPublisher<PunchRequested> punchPublisher, IPublisher<Tapped> tapPublisher)
+        {
+            _punchPublisher = punchPublisher;
+            _tapPublisher = tapPublisher;
+        }
 
-		private void	PunchPerformed(InputAction.CallbackContext context) {
-			if (context.control.device is Pointer pointer) {
-				List<RaycastResult>	hits = new();
+        private void PunchPerformed(InputAction.CallbackContext context)
+        {
+            if (context.control.device is Pointer pointer)
+            {
+                List<RaycastResult> hits = new();
+                EventSystem.current.RaycastAll(
+                    new(EventSystem.current) { position = pointer.position.ReadValue() },
+                    hits);
+                if (hits.Count == 0)
+                    _punchPublisher.Publish(new());
+            }
+            else
+            {
+                _punchPublisher.Publish(new());
+            }
+        }
 
-				EventSystem.current.RaycastAll(
-					new(EventSystem.current) { position = pointer.position.ReadValue() },
-					hits
-				);
-				if (hits.Count == 0)
-					punchPublisher.Publish(new());
-			} else
-				punchPublisher.Publish(new());
-		}
-
-		private void	TapPerformed(InputAction.CallbackContext context) {
-			tapPublisher.Publish(new());
-		}
-	}
+        private void TapPerformed(InputAction.CallbackContext context)
+        {
+            _tapPublisher.Publish(new());
+        }
+    }
 }

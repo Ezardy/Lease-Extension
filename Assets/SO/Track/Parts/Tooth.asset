@@ -11,11 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72256f096727c814eba090aaec06baa5, type: 3}
   m_Name: Tooth
-  m_EditorClassIdentifier: World::Aniki.World.BehaviourConstructionPartBlueprint
-  initialPool: 1
-  margin: 0
-  width: 1.32
-  autoWidth: 1
-  hasSpriteRenderer: 1
-  zOrdering: 0
-  prefab: {fileID: 4005860622661818052, guid: 265d62e562eb9e148bbcd494c8df76b7, type: 3}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Behaviour.BehaviourConstructionPartBlueprint
+  Prefab: {fileID: 4005860622661818052, guid: 265d62e562eb9e148bbcd494c8df76b7, type: 3}
+  _initialPool: 1
+  _margin: 0
+  _width: 1.32
+  _autoWidth: 1
+  _interfereWidth: 1.32
+  _autoInterfereWidth: 1
+  _sameWidth: 1
+  _useSpriteRenderer: 1
+  _zOrdering: 0

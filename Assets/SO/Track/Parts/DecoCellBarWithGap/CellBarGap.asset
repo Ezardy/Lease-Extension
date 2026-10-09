@@ -11,7 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f4d31a32e691a846b5e5c4c1f47fb3c, type: 3}
   m_Name: CellBarGap
-  m_EditorClassIdentifier: World::Aniki.World.VirtualConstructionPartBlueprint
-  initialPool: 5
-  margin: 1
-  width: 1
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.VirtualConstructionPartBlueprint
+  _initialPool: 5
+  _width: 1

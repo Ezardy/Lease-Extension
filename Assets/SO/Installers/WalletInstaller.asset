@@ -11,6 +11,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f09ac8c79b3380b4fa747c0f0d3d014f, type: 3}
   m_Name: WalletInstaller
-  m_EditorClassIdentifier: Wallet::Aniki.Wallet.WalletInstaller
-  useDefaults: 0
-  walletSave: {fileID: 11400000, guid: 32ed5fc3fc589ad4fb25381faece47cc, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.Wallet::LeaseExtension.Wallet.WalletInstaller
+  _walletSave: {fileID: 11400000, guid: 32ed5fc3fc589ad4fb25381faece47cc, type: 2}

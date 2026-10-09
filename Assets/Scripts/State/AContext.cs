@@ -1,18 +1,25 @@
-namespace Aniki.State {
-	public abstract class AContext: IContext {
-		private IState	state;
+using LeaseExtension.State.Contract;
 
-		public IState	State {
-			get => state;
-			set {
-				state?.Dispose();
-				state = value;
-				state.Start();
-			}
-		}
+namespace LeaseExtension.State
+{
+    public abstract class AContext : IContext
+    {
+        private IState _state;
 
-		public virtual void	Dispose() {
-			state?.Dispose();
-		}
-	}
+        public IState State
+        {
+            get => _state;
+            set
+            {
+                _state?.Dispose();
+                _state = value;
+                _state.Start();
+            }
+        }
+
+        public virtual void Dispose()
+        {
+            _state?.Dispose();
+        }
+    }
 }

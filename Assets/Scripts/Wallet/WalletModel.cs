@@ -1,37 +1,47 @@
+using JetBrains.Annotations;
+using LeaseExtension.Wallet.Contract;
 using R3;
 using Unity.Properties;
 
-namespace Aniki.Wallet {
-	public class WalletModel : IWalletModel {
-		private readonly ReactiveProperty<uint>	balance;
-		private readonly ReactiveProperty<uint>	earned;
+namespace LeaseExtension.Wallet
+{
+    [UsedImplicitly]
+    public class WalletModel : IWalletModel
+    {
+        private readonly ReactiveProperty<uint> _balance;
+        private readonly ReactiveProperty<uint> _earned;
 
-		public WalletModel(uint balance) {
-			this.balance = new(balance);
-			earned = new(0);
-		}
+        [CreateProperty]
+        public uint Balance => _balance.CurrentValue;
 
-		[CreateProperty] public uint	Balance => balance.CurrentValue;
+        [CreateProperty]
+        public uint Earned => _earned.CurrentValue;
+        public Observable<uint> BalanceChanged => _balance;
+        public Observable<uint> EarnedChanged => _earned;
 
-		[CreateProperty] public uint	Earned => earned.CurrentValue;
+        public WalletModel(uint balance)
+        {
+            _balance = new(balance);
+            _earned = new(0);
+        }
 
-		public void	Increment() {
-			earned.Value += 1;
-		}
+        public void Increment()
+        {
+            _earned.Value += 1;
+        }
 
-		public void	TopUp() {
-			balance.Value += earned.Value;
-			earned.Value = 0;
-		}
+        public void TopUp()
+        {
+            _balance.Value += _earned.Value;
+            _earned.Value = 0;
+        }
 
-		public bool	Withdraw(uint amount) {
-			bool	toWithdraw = amount <= Balance;
-			if (toWithdraw)
-				balance.Value -= amount;
-			return toWithdraw;
-		}
-
-		public Observable<uint>	BalanceChanged => balance;
-		public Observable<uint> EarnedChanged => earned;
-	}
+        public bool Withdraw(uint amount)
+        {
+            bool toWithdraw = amount <= Balance;
+            if (toWithdraw)
+                _balance.Value -= amount;
+            return toWithdraw;
+        }
+    }
 }

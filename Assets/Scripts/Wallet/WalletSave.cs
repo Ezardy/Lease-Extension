@@ -1,35 +1,37 @@
-using Aniki.Save;
-using R3;
 using System;
+using LeaseExtension.Save;
+using LeaseExtension.Wallet.Contract;
+using R3;
 using UnityEngine;
 using Zenject;
 
-namespace Aniki.Wallet {
-	[CreateAssetMenu(fileName = "WalletSave", menuName = "Scriptable Objects/Saves/Wallet")]
-	internal class WalletSave : ASave<WalletSave.Wallet, IWalletModel>, IInitializable, IDisposable {
-		[Serializable]
-		public struct Wallet {
-			public uint	balance;
-		}
+namespace LeaseExtension.Wallet
+{
+    [CreateAssetMenu(fileName = "WalletSave", menuName = "Scriptable Objects/Saves/Wallet")]
+    internal class WalletSave : ASave<Wallet>, IInitializable, IDisposable
+    {
+        private IWalletModel _wallet;
+        private IDisposable _disposable;
 
-		private IWalletModel	wallet;
-		private IDisposable		disposable;
+        public void Initialize()
+        {
+            Init();
+            _disposable = _wallet.BalanceChanged.Subscribe(b =>
+            {
+                SaveData.Balance = b;
+                Save();
+            });
+        }
 
-		public void	Initialize() {
-			Init();
-			disposable = wallet.BalanceChanged.Subscribe(b => {
-				data.balance = b;
-				Save();
-			});
-		}
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
 
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-
-		[Inject]
-		public void	Init(IWalletModel wallet) {
-			this.wallet = wallet;
-		}
-	}
+        [Inject]
+        public void Init(IWalletModel wallet)
+        {
+            _wallet = wallet;
+        }
+    }
 }

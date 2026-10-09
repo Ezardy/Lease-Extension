@@ -1,50 +1,71 @@
+using System;
 using System.IO;
 using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using LeaseExtension.WebPlugin.SyncFS;
+#endif
 
-namespace Aniki.Save {
-	public abstract class ASave<TData, TModel> : ScriptableObject, ISave where TData : struct {
-		
-		#if UNITY_WEBGL && !UNITY_EDITOR
-			private const string	persistentDataPath = "/idbfs/3dcd2e7bcb436cf4f1ac81d0c8ddf86a"; // MD5 hashed "Lease_Extension_1.0"
-		#else
-			private static string	persistentDataPath;
-		#endif
+namespace LeaseExtension.Save
+{
+    public abstract class ASave<TData> : ScriptableObject, ISave where TData : struct
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        private const string PERSISTENT_DATA_PATH =
+            "/idbfs/3dcd2e7bcb436cf4f1ac81d0c8ddf86a"; // MD5 hashed "Lease_Extension_1.0"
+#else
+        private static string _persistentDataPath;
+#endif
 
-		[SerializeField] private bool		doLoad = true;
-		[SerializeField] private string		filename;
-		[SerializeField] protected TData	data;
+        [SerializeField] protected TData SaveData;
+        [SerializeField] private bool _doLoad = true;
+        [SerializeField] private string _filename;
 
-		public string	Path => path;
-		public TData	Data => data;
+        private string _path;
+        public TData Data => SaveData;
+        private static string PersistentDataPath
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            get => PERSISTENT_DATA_PATH;
+#else
+            get => _persistentDataPath;
+#endif
+        }
 
-		private string	path;
+        private void OnEnable()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            _persistentDataPath = Application.persistentDataPath;
+#endif
+            _path = Path.Join(PersistentDataPath, _filename);
+        }
 
-		public void	Init() {
-			if (!Directory.Exists(persistentDataPath))
-				Directory.CreateDirectory(persistentDataPath);
-			if (!File.Exists(path))
-				Save();
-		}
+        protected void Init()
+        {
+            if (!Directory.Exists(PersistentDataPath))
+                Directory.CreateDirectory(PersistentDataPath);
+            if (!File.Exists(_path))
+                Save();
+        }
 
-		public void	Load() {
-			if (doLoad) {
-				try {
-					data = JsonUtility.FromJson<TData>(File.ReadAllText(path));
-				} catch (IOException) { }
-			}
-		}
-		public void	Save() {
-			File.WriteAllText(path, JsonUtility.ToJson(data));
-			#if UNITY_WEBGL && !UNITY_EDITOR
-			Plugin.SyncFS();
-			#endif
-		}
+        public void Load()
+        {
+            if (_doLoad && File.Exists(_path))
+                try
+                {
+                    SaveData = JsonUtility.FromJson<TData>(File.ReadAllText(_path));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
+        }
 
-		public void	OnEnable() {
-			#if !UNITY_WEBGL || UNITY_EDITOR
-			persistentDataPath = Application.persistentDataPath;
-			#endif
-			path = System.IO.Path.Join(persistentDataPath, filename);
-		}
-	}
+        public void Save()
+        {
+            File.WriteAllText(_path, JsonUtility.ToJson(SaveData));
+#if UNITY_WEBGL && !UNITY_EDITOR
+            Plugin.SyncFS();
+#endif
+        }
+    }
 }

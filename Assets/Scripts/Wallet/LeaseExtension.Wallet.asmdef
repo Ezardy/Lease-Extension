@@ -1,0 +1,23 @@
+{
+  "name": "LeaseExtension.Wallet",
+  "rootNamespace": "LeaseExtension",
+  "references": [
+    "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+    "GUID:08b38f39e2d9e594389b7a4cf4c2c338",
+    "GUID:f51ebe6a0ceec4240a699833d6309b23",
+    "GUID:e8bd2f4872af24d43842bf9b931b833e",
+    "GUID:d675251cc09940340b1a3c057ad037ca",
+    "GUID:5eb6977d055837a40843185997f022cc",
+    "GUID:8649d731b0525804cb93d94e81b4f81a",
+    "GUID:8bae442a0c387434db8da533aef67fcc"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

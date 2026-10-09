@@ -1,16 +1,23 @@
-using Aniki.State;
+using JetBrains.Annotations;
+using LeaseExtension.SceneManagment.States;
+using LeaseExtension.State;
 using Zenject;
 
-namespace Aniki.SceneManagment {
-	internal class SceneManagmentContext : AContext, ISceneContext, IInitializable {
-		private readonly WelcomeSceneState.Factory	welcomeFactory;
+namespace LeaseExtension.SceneManagment
+{
+    [UsedImplicitly]
+    internal class SceneManagmentContext : AContext, ISceneContext, IInitializable
+    {
+        private readonly WelcomeSceneState.Factory _welcomeFactory;
 
-		public SceneManagmentContext(WelcomeSceneState.Factory welcomeFactory) {
-			this.welcomeFactory = welcomeFactory;
-		}
+        public SceneManagmentContext(WelcomeSceneState.Factory welcomeFactory)
+        {
+            _welcomeFactory = welcomeFactory;
+        }
 
-		public void	Initialize() {
-			State = welcomeFactory.Create();
-		}
-	}
+        public void Initialize()
+        {
+            State = _welcomeFactory.Create();
+        }
+    }
 }

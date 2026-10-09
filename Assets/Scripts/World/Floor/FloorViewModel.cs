@@ -1,60 +1,86 @@
-using Aniki.Character;
+using System;
+using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
-using System;
 using UnityEngine;
 using Zenject;
 
-namespace Aniki.World {
-	internal class FloorViewModel : MonoBehaviour {
+namespace LeaseExtension.World.Floor
+{
+    internal class FloorViewModel : MonoBehaviour
+    {
+        private static readonly int _runHash = Animator.StringToHash("Run");
+        private static readonly int _wallHash = Animator.StringToHash("Wall");
+        private static readonly int _floorHash = Animator.StringToHash("Floor");
+        [SerializeField] private float _speed = 1;
+        private Observable<CharacterState> _subscriber;
+        private bool _over = false;
+        private IDisposable _runSubscription;
+        private Animator _animator;
 
-		private static readonly int	runHash = Animator.StringToHash("Run");
-		private static readonly int	wallHash = Animator.StringToHash("Wall");
-		private static readonly int	floorHash = Animator.StringToHash("Floor");
+        private void OnDestroy()
+        {
+            _runSubscription?.Dispose();
+        }
 
-		[SerializeField] private float	speed = 1;
+        [Inject]
+        public void Init(
+            IWorldModel worldModel,
+            IFloorView floorView,
+            Observable<CharacterState> subscriber,
+            Animator animator)
+        {
+            worldModel.SpeedChanged.Subscribe(s => floorView.Speed = s / (1 + worldModel.Perspective) * 2).AddTo(this);
+            worldModel.PerspectiveChanged.Subscribe(s => floorView.Perspective = s).AddTo(this);
+            Observable.EveryValueChanged(this, x => x._speed).Subscribe(s => worldModel.SpeedAmplifier = s).AddTo(this);
+            _subscriber = subscriber;
+            _animator = animator;
+            subscriber.Subscribe(s =>
+            {
+                switch (s)
+                {
+                    case CharacterState.Idle:
+                        Idle();
+                        break;
+                    case CharacterState.Fall:
+                        Wall();
+                        break;
+                    case CharacterState.Over:
+                        Floor();
+                        break;
+                }
+            }).AddTo(this);
+        }
 
-		private ISubscriber<CharacterState>	subscriber;
-		private bool						over = false;
-		private IDisposable					runSubscription;
-		private Animator					animator;
+        private void Idle()
+        {
+            _over = false;
+            _runSubscription = _subscriber.Subscribe(s =>
+            {
+                if (s == CharacterState.Punch)
+                {
+                    Run();
+                }
+            });
+        }
 
-		[Inject]
-		public void	Init(IWorldModel worldModel, IFloorView floorView,
-			ISubscriber<CharacterState> subscriber, Animator animator) {
-			worldModel.SpeedChanged.Subscribe(s => floorView.Speed = s / (1 + worldModel.Perspective) * 2).AddTo(this);
-			worldModel.PerspectiveChanged.Subscribe(s => floorView.Perspective = s).AddTo(this);
-			Observable.EveryValueChanged(this, x => x.speed).Subscribe(s => worldModel.SpeedAmplifier = s).AddTo(this);
+        private void Run()
+        {
+            _runSubscription.Dispose();
+            _animator.SetTrigger(_runHash);
+        }
 
-			this.subscriber = subscriber;
-			this.animator = animator;
-			subscriber.Subscribe(_ => Idle(), CharacterStateFilter.Idle).AddTo(this);
-			subscriber.Subscribe(_ => Wall(), CharacterStateFilter.Fall).AddTo(this);
-			subscriber.Subscribe(_ => Floor(), CharacterStateFilter.Over).AddTo(this);
-		}
+        private void Wall()
+        {
+            _over = true;
+            _animator.SetTrigger(_wallHash);
+        }
 
-		private void	Idle() {
-			over = false;
-			runSubscription = subscriber.Subscribe(_ => Run(), CharacterStateFilter.Punch);
-		}
-
-		private void	Run() {
-			runSubscription.Dispose();
-			animator.SetTrigger(runHash);
-		}
-
-		private void	Wall() {
-			over = true;
-			animator.SetTrigger(wallHash);
-		}
-
-		private void	Floor() {
-			if (!over)
-				animator.SetTrigger(floorHash);
-		}
-
-		private void	OnDestroy() {
-			runSubscription?.Dispose();
-		}
-	}
+        private void Floor()
+        {
+            if (!_over)
+                _animator.SetTrigger(_floorHash);
+        }
+    }
 }

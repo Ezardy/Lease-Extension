@@ -1,59 +1,63 @@
-using Aniki.UI;
+using System;
+using JetBrains.Annotations;
+using LeaseExtension.Common.Contract;
+using LeaseExtension.World.Contract;
 using MessagePipe;
 using R3;
-using System;
 using UnityEngine;
 using Zenject;
 
-namespace Aniki.World {
-	internal class FloorView : IFloorView, IInitializable, ITickable, IDisposable {
-		private readonly ReactiveProperty<float>	perspective = new(0.15f);
+namespace LeaseExtension.World.Floor
+{
+    [UsedImplicitly]
+    internal class FloorView : IFloorView, IInitializable, ITickable, IDisposable
+    {
+        private readonly ReactiveProperty<float> _perspective = new(0.15f);
+        private static readonly int _offsetId = Shader.PropertyToID("_Offset");
+        private static readonly int _perspectiveScaleId = Shader.PropertyToID("_Perspective");
+        private float _offset = 0;
+        private readonly SpriteRenderer _spriteRenderer;
+        private readonly IScreenSizeObserver _screenSizeObserver;
+        private IDisposable _disposable;
 
-		private static readonly int	offsetId = Shader.PropertyToID("_Offset");
-		private static readonly int	perspectiveScaleId = Shader.PropertyToID("_Perspective");
+        public float Speed { get; set; }
+        public float Perspective
+        {
+            get => _perspective.Value;
+            set => _perspective.Value = value;
+        }
 
-		private float	offset = 0;
+        public FloorView(SpriteRenderer spriteRenderer, IScreenSizeObserver screenSizeObserver)
+        {
+            _spriteRenderer = spriteRenderer;
+            _screenSizeObserver = screenSizeObserver;
+        }
 
-		public float	Speed { get; set; }
+        public void Tick()
+        {
+            _offset += Time.deltaTime * Speed;
+            _spriteRenderer.material.SetFloat(_offsetId, _offset);
+        }
 
-		private readonly SpriteRenderer			spriteRenderer;
-		private readonly IScreenSizeObserver	screenSizeObserver;
+        public void Initialize()
+        {
+            IDisposable d1 = _screenSizeObserver.SizeChanged.Subscribe(Rescale);
+            IDisposable d2 = _perspective.Subscribe(s => _spriteRenderer.material.SetFloat(_perspectiveScaleId, s));
+            _disposable = Disposable.Combine(d1, d2);
+        }
 
-		private IDisposable	disposable;
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
 
-		public float	Perspective {
-			get => perspective.Value;
-			set => perspective.Value = value;
-		}
-
-		public void	Tick() {
-			offset += Time.deltaTime * Speed;
-			spriteRenderer.material.SetFloat(offsetId, offset);
-		}
-
-		public FloorView(SpriteRenderer spriteRenderer, IScreenSizeObserver screenSizeObserver) {
-			this.spriteRenderer = spriteRenderer;
-			this.screenSizeObserver = screenSizeObserver;
-		}
-
-		public void	Initialize() {
-			IDisposable	d1 = screenSizeObserver.SizeChanged.Subscribe(Rescale);
-			IDisposable	d2 = perspective.Subscribe(s => spriteRenderer.material.SetFloat(perspectiveScaleId, s));
-
-			disposable = Disposable.Combine(d1, d2);
-		}
-
-		private void	Rescale(Vector2Int size) {
-			float	worldWidth = Camera.main.orthographicSize * 2 * size.x / size.y;
-			float	spriteWidth = spriteRenderer.bounds.size.x;
-			Vector3	scale = spriteRenderer.transform.localScale;
-
-			scale.x *= worldWidth / spriteWidth;
-			spriteRenderer.transform.localScale = scale;
-		}
-
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-	}
+        private void Rescale(Vector2Int size)
+        {
+            float worldWidth = Camera.main.orthographicSize * 2 * size.x / size.y;
+            float spriteWidth = _spriteRenderer.bounds.size.x;
+            Vector3 scale = _spriteRenderer.transform.localScale;
+            scale.x *= worldWidth / spriteWidth;
+            _spriteRenderer.transform.localScale = scale;
+        }
+    }
 }
