@@ -1,7 +1,10 @@
+using LeaseExtension.Audio.Background;
+using LeaseExtension.Audio.Background.States;
 using LeaseExtension.Audio.Contract;
 using LeaseExtension.Audio.Player;
 using LeaseExtension.Audio.Pool;
 using LeaseExtension.Gameplay.Contract.Message;
+using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.World.Contract.Message;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -23,6 +26,16 @@ namespace LeaseExtension.Audio.Installer
         {
             InstallCharacterAudio();
             InstallUIAudio();
+            InstallStateAudio();
+        }
+
+        private void InstallStateAudio()
+        {
+            Container.BindInterfacesTo<CrossSceneAudioStateTransition<IdleAudioState, IdleAudioState.Factory>>()
+                .AsSingle().WithArguments(FocusedScene.Main);
+            Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();
         }
 
         private void InstallUIAudio()

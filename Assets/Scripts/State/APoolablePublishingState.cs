@@ -23,7 +23,6 @@ namespace LeaseExtension.State
 
         public override void Start()
         {
-            Debug.Log(_state);
             _statePublisher.Value = _state;
         }
 

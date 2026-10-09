@@ -28,8 +28,6 @@ namespace LeaseExtension.Audio.Background.States
             {
                 if (s == CharacterState.Punch)
                 {
-                    //_disposable.Dispose();
-                    //_disposable = null;
                     Context.State = _runFactory.Create();
                 }
             });

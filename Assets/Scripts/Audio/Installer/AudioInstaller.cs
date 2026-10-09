@@ -23,10 +23,6 @@ namespace LeaseExtension.Audio.Installer
 
         private void InstallBackgroundAudio()
         {
-            Container.BindFactory<WelcomeAudioState, WelcomeAudioState.Factory>();
-            Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
-            Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
-            Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();
             Container.Bind<Animator>().FromComponentInNewPrefab(_backgroundPrefab.gameObject).AsSingle();
             Container.BindInterfacesTo<BackgroundAudioContext>().AsSingle();
         }
