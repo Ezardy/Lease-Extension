@@ -14,7 +14,6 @@ namespace LeaseExtension.Record
             Container.BindInterfacesTo<RecordModel>().AsSingle().WithArguments(_recordSave.Data.Value);
             Container.QueueForInject(_recordSave);
             Container.BindInterfacesTo<RecordSave>().FromInstance(_recordSave);
-            Container.BindInterfacesTo<RecordIncrementer>().AsSingle();
         }
     }
 }

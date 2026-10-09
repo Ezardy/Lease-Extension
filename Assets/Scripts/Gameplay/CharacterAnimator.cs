@@ -1,3 +1,4 @@
+using System;
 using LeaseExtension.Gameplay.Contract.Message;
 using MessagePipe;
 using R3;
@@ -14,13 +15,29 @@ namespace LeaseExtension.Gameplay
         private static readonly int _punchHash = Animator.StringToHash("Punch");
 
         [Inject]
-        public void Init(ISubscriber<CharacterState> subscriber)
+        public void Init(ReadOnlyReactiveProperty<CharacterState> subscriber)
         {
-            subscriber.AsObservable(CharacterStateFilter.Idle).ToObservable().Skip(1).Subscribe((_) => Idle()).AddTo(this);
-            subscriber.Subscribe((_) => Punch(), CharacterStateFilter.Punch).AddTo(this);
-            subscriber.Subscribe((_) => Wait(), CharacterStateFilter.Wait).AddTo(this);
-            subscriber.Subscribe((_) => Over(), CharacterStateFilter.Over).AddTo(this);
-            subscriber.Subscribe((_) => Fall(), CharacterStateFilter.Fall).AddTo(this);
+            subscriber.Subscribe(s =>
+            {
+                switch (s)
+                {
+                    case CharacterState.Idle:
+                        Idle();
+                        break;
+                    case CharacterState.Wait:
+                        Wait();
+                        break;
+                    case CharacterState.Punch:
+                        Punch();
+                        break;
+                    case CharacterState.Fall:
+                        Fall();
+                        break;
+                    default:
+                        Over();
+                        break;
+                }
+            }).AddTo(this);
         }
 
         private void Idle()

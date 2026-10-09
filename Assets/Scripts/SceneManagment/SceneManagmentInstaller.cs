@@ -1,6 +1,7 @@
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.SceneManagment.States;
 using LeaseExtension.State;
+using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -22,11 +23,13 @@ namespace LeaseExtension.SceneManagment
 
         private void InstallSceneStates()
         {
+            Container.Bind<ReactiveProperty<FocusedScene>>().AsSingle();
+            Container.Bind<ReadOnlyReactiveProperty<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindInstance(_mainScene).WithId(FocusedScene.Main);
-            Container.BindFactory<FocusedScene, StatePublisher<FocusedScene>, StatePublisher<FocusedScene>.Factory>();
-            Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>();
-            Container.BindFactory<AsyncOperationHandle<SceneInstance>, MainSceneState, MainSceneState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<AsyncOperationHandle<SceneInstance>, MainSceneState, MainSceneState.Factory>()
+                .FromPoolableMemoryPool();
             Container.BindInterfacesTo<SceneManagmentContext>().AsSingle();
         }
     }

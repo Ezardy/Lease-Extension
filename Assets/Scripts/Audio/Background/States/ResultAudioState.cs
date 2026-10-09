@@ -1,20 +1,20 @@
 using System;
 using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
-using MessagePipe;
+using R3;
 
 namespace LeaseExtension.Audio.Background.States
 {
     [UsedImplicitly]
     internal class ResultAudioState : ABackgroundAudioState<ResultAudioState>
     {
-        private readonly ISubscriber<CharacterState> _characterStateSubscriber;
+        private readonly ReadOnlyReactiveProperty<CharacterState> _characterStateSubscriber;
         private readonly IdleAudioState.Factory _idleFactory;
         private IDisposable _disposable;
 
         public ResultAudioState(
             IBackgroundAudioContext context,
-            ISubscriber<CharacterState> characterStateSubscriber,
+            ReadOnlyReactiveProperty<CharacterState> characterStateSubscriber,
             IdleAudioState.Factory idleFactory) : base(context, "Result")
         {
             _characterStateSubscriber = characterStateSubscriber;
@@ -24,9 +24,14 @@ namespace LeaseExtension.Audio.Background.States
         public override void Start()
         {
             base.Start();
-            _disposable = _characterStateSubscriber.Subscribe(
-                _ => Context.State = _idleFactory.Create(),
-                CharacterStateFilter.Idle);
+            _disposable = _characterStateSubscriber.Subscribe(s =>
+                {
+                    if (s == CharacterState.Idle)
+                    {
+                        Context.State = _idleFactory.Create();
+                    }
+                }
+            );
         }
 
         public override void Dispose()

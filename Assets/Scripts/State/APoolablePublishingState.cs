@@ -1,23 +1,30 @@
 using System;
 using JetBrains.Annotations;
 using LeaseExtension.State.Contract;
+using R3;
+using UnityEngine;
 using Zenject;
 
 namespace LeaseExtension.State
 {
-    public abstract class APoolablePublishingState<C, S> : AState<C> where C : IContext where S : Enum
+    public abstract class APoolablePublishingState<TContext, TState> : AState<TContext>
+        where TContext : IContext where TState : Enum
     {
-        private readonly StatePublisher<S> _statePublisher;
+        private readonly ReactiveProperty<TState> _statePublisher;
+        private readonly TState _state;
         private IMemoryPool _pool;
 
-        protected APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context)
+        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+            base(context)
         {
+            _state = state;
             _statePublisher = statePublisher;
         }
 
         public override void Start()
         {
-            _statePublisher.Publish();
+            Debug.Log(_state);
+            _statePublisher.Value = _state;
         }
 
         public override void Dispose()
@@ -36,9 +43,13 @@ namespace LeaseExtension.State
         }
     }
 
-    public abstract class APoolablePublishingState<T, C, S> : APoolablePublishingState<C, S>, IPoolable<IMemoryPool> where T : APoolablePublishingState<T, C, S> where C : IContext where S : Enum
+    public abstract class APoolablePublishingState<T, TContext, TState> : APoolablePublishingState<TContext, TState>,
+        IPoolable<IMemoryPool> where T : APoolablePublishingState<T, TContext, TState>
+        where TContext : IContext
+        where TState : Enum
     {
-        public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)
+        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+            base(context, statePublisher, state)
         {
         }
 
@@ -53,19 +64,24 @@ namespace LeaseExtension.State
         }
     }
 
-    public abstract class APoolablePublishingState<P, T, C, S> : APoolablePublishingState<C, S>, IPoolable<P, IMemoryPool> where T : APoolablePublishingState<P, T, C, S> where C : IContext where S : Enum
+    public abstract class APoolablePublishingState<TP, T, TContext, TState> :
+        APoolablePublishingState<TContext, TState>,
+        IPoolable<TP, IMemoryPool> where T : APoolablePublishingState<TP, T, TContext, TState>
+        where TContext : IContext
+        where TState : Enum
     {
-        public APoolablePublishingState(C context, StatePublisher<S> statePublisher) : base(context, statePublisher)
+        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+            base(context, statePublisher, state)
         {
         }
 
-        public virtual void OnSpawned(P param, IMemoryPool pool)
+        public virtual void OnSpawned(TP param, IMemoryPool pool)
         {
             SetPool(pool);
         }
 
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<P, T>
+        public class Factory : PlaceholderFactory<TP, T>
         {
         }
     }

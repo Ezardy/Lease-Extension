@@ -5,6 +5,7 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Input.Contract;
 using LeaseExtension.State;
 using MessagePipe;
+using R3;
 
 namespace LeaseExtension.Gameplay.States
 {
@@ -19,11 +20,9 @@ namespace LeaseExtension.Gameplay.States
         public IdleState(
             ICharacterContext context,
             PunchState.Factory punchFactory,
-            StatePublisher<CharacterState>.Factory publisherFactory,
+            ReactiveProperty<CharacterState> publisher,
             ISubscriber<PunchRequested> punchInput,
-            ICharacterModel characterModel) : base(
-            context,
-            publisherFactory.Create(CharacterState.Idle))
+            ICharacterModel characterModel) : base(context, publisher, CharacterState.Idle)
         {
             _characterModel = characterModel;
             _punchFactory = punchFactory;

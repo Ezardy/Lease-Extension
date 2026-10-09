@@ -13,9 +13,9 @@ namespace LeaseExtension.Audio.Player
 
         public EventAudioPlayer(
             IOneShotAudioPlayer player,
+            AudioPlayerParameters parameters,
             ISubscriber<T> subscriber,
-            [InjectOptional] MessageHandlerFilter<T> filter,
-            AudioPlayerParameters parameters)
+            [InjectOptional] MessageHandlerFilter<T> filter)
         {
             if (filter == null)
                 _disposable = subscriber.Subscribe(_ => player.Play(parameters));

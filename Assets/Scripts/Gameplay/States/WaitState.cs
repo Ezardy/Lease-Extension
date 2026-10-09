@@ -22,14 +22,12 @@ namespace LeaseExtension.Gameplay.States
 
         public WaitState(
             ICharacterContext context,
-            StatePublisher<CharacterState>.Factory publisherFactory,
+            ReactiveProperty<CharacterState> publisher,
             CollisionCheckStateBase stateBase,
             PunchState.Factory punchFactory,
             ISubscriber<PunchRequested> punchInput,
             INoPunchZone noPunchZone,
-            ICharacterModel characterModel) : base(
-            context,
-            publisherFactory.Create(CharacterState.Wait))
+            ICharacterModel characterModel) : base(context, publisher, CharacterState.Wait)
         {
             _stateBase = stateBase;
             _punchInput = punchInput;

@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.World.Contract;
-using MessagePipe;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -21,7 +20,7 @@ namespace LeaseExtension.World.Track
         private readonly HashSet<float> _newDistances;
         private readonly List<ITrack> _tracks;
         private readonly IScreenSizeObserver _screenSizeObserver;
-        private readonly ISubscriber<CharacterState> _stateSubscriber;
+        private readonly ReadOnlyReactiveProperty<CharacterState> _stateSubscriber;
         private IDisposable _disposable;
         private float _distance = 0;
         private float _lastX;
@@ -36,7 +35,7 @@ namespace LeaseExtension.World.Track
             TrackFactory trackFactory,
             IConstructionBlueprintDatabase database,
             IScreenSizeObserver screenSizeObserver,
-            ISubscriber<CharacterState> stateSubscriber)
+            ReadOnlyReactiveProperty<CharacterState> stateSubscriber)
         {
             _worldModel = worldModel;
             _database = database;
@@ -73,7 +72,13 @@ namespace LeaseExtension.World.Track
         {
             _lastX = WorldX(_screenSizeObserver.Size);
             IDisposable d1 = _screenSizeObserver.SizeChanged.Subscribe(Resize);
-            IDisposable d2 = _stateSubscriber.Subscribe(Reset, CharacterStateFilter.Idle);
+            IDisposable d2 = _stateSubscriber.Subscribe(s =>
+            {
+                if (s == CharacterState.Idle)
+                {
+                    Reset();
+                }
+            });
             IDisposable d3 = _worldModel.SpeedChanged.Subscribe(Speed);
             _disposable = Disposable.Combine(d1, d2, d3);
         }
@@ -83,7 +88,7 @@ namespace LeaseExtension.World.Track
             _disposable.Dispose();
         }
 
-        private void Reset(CharacterState _)
+        private void Reset()
         {
             foreach (ITrack track in _tracks)
                 track.WipeOut();

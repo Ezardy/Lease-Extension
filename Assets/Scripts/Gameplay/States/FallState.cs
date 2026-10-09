@@ -19,12 +19,10 @@ namespace LeaseExtension.Gameplay.States
 
         public FallState(
             ICharacterContext context,
-            StatePublisher<CharacterState>.Factory publisherFactory,
+            ReactiveProperty<CharacterState> publisher,
             Rigidbody2D rigidbody,
             ISubscriber<FloorCollided> subscriber,
-            OverState.Factory overStateFactory) : base(
-            context,
-            publisherFactory.Create(CharacterState.Fall))
+            OverState.Factory overStateFactory) : base(context, publisher, CharacterState.Fall)
         {
             _rigidbody = rigidbody;
             _subscriber = subscriber;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.World.Contract;
 using LeaseExtension.World.Track.Part.Concrete;
-using MessagePipe;
+using R3;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -21,11 +21,20 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         public float InterfereWidth => _width;
         public float Width => 0;
         public float Margin => 0;
-
-        private void OnDisable()
+        
+        [Inject]
+        public void Init(ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber)
         {
-            _disposable?.Dispose();
-            _disposable = null;
+            _disposable = sceneSubscriber.Subscribe(s =>
+            {
+                if (s == FocusedScene.Main && _pool == null)
+                {
+                    _pool = new ObjectPool<VirtualConstructionPart>(
+                        Create,
+                        actionOnRelease: Release,
+                        defaultCapacity: _initialPool);
+                }
+            });
         }
 
         public IConstructionPart Construct(Vector2 position, float scale, int order)
@@ -33,15 +42,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             VirtualConstructionPart part = _pool.Get();
             part.Move(position.x);
             return part;
-        }
-
-        [Inject]
-        public void Init(ISubscriber<FocusedScene> sceneSubscriber)
-        {
-            _disposable = sceneSubscriber.Subscribe(_ => _pool ??= new ObjectPool<VirtualConstructionPart>(
-                Create,
-                actionOnRelease: Release,
-                defaultCapacity: _initialPool), FocusedSceneFilter.Main);
         }
 
         public IConstructionBlank MakeBlank(float height, float size)
@@ -54,9 +54,15 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             return new(this);
         }
 
-        private void Release(VirtualConstructionPart part)
+        private static void Release(VirtualConstructionPart part)
         {
             part.Move(-part.X);
+        }
+        
+        private void OnDisable()
+        {
+            _disposable?.Dispose();
+            _disposable = null;
         }
     }
 }

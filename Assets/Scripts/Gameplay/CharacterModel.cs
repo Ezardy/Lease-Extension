@@ -20,13 +20,7 @@ namespace LeaseExtension.Gameplay
         public float PunchHeight => _punchHeight.Value;
         public float InitialPunchHeight => _initialPunchHeight.Value;
         public float PunchPeriod => _punchPeriod.Value;
-
-        [CreateProperty]
-        public CharacterState State
-        {
-            get => _state.Value;
-            set => _state.Value = value;
-        }
+        
         public Observable<float> PunchHeightChanged => _punchHeight;
         public Observable<float> InitialPunchHeightChanged => _initialPunchHeight;
         public Observable<float> PunchPeriodChanged => _punchPeriod;

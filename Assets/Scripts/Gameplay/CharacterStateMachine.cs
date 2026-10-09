@@ -14,7 +14,6 @@ namespace LeaseExtension.Gameplay
     internal class CharacterStateMachine : AContext, ICharacterContext, IInitializable, IFixedTickable
     {
         private readonly IdleState.Factory _idleFactory;
-        private readonly IDisposable _disposable;
 
         public CharacterStateMachine(
             ICharacterModel characterModel,
@@ -22,7 +21,6 @@ namespace LeaseExtension.Gameplay
             ISubscriber<CharacterState> stateSubscriber)
         {
             _idleFactory = idleFactory;
-            _disposable = stateSubscriber.Subscribe(s => characterModel.State = s);
         }
 
         public void Initialize()
@@ -33,12 +31,6 @@ namespace LeaseExtension.Gameplay
         public void FixedTick()
         {
             State.Update();
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            _disposable.Dispose();
         }
     }
 }

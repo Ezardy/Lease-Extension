@@ -628,6 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ccc964a1b2471418b43510074c3295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterMonoInstaller
+  _characterModel:
+    _target: {fileID: 11400000, guid: 762f93b221b2cb64bae4c0335c2564f7, type: 2}
   _forInject:
   - {fileID: 370017667}
   _characterRigidbody: {fileID: 370017670}
@@ -1314,6 +1316,7 @@ GameObject:
   - component: {fileID: 1290385282}
   - component: {fileID: 1290385284}
   - component: {fileID: 1290385285}
+  - component: {fileID: 1290385286}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1339,6 +1342,7 @@ MonoBehaviour:
   - {fileID: 370017671}
   - {fileID: 6003574216855412968}
   - {fileID: 1290385285}
+  - {fileID: 1290385286}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -1432,6 +1436,18 @@ MonoBehaviour:
     _generator:
       _target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}
   _swingPlayer: {fileID: 1610371250}
+--- !u!114 &1290385286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290385281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427790f3133719a4f9771b35cc0e8d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Record::RecordMonoInstaller
 --- !u!1 &1592930375
 GameObject:
   m_ObjectHideFlags: 0

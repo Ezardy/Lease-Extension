@@ -5,6 +5,7 @@ using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
 using LeaseExtension.UI.Contract;
 using LeaseExtension.Wallet.Contract;
+using R3;
 using Unity.Properties;
 using UnityEngine.UIElements;
 
@@ -13,19 +14,20 @@ namespace LeaseExtension.UI.Game.Main
     [UsedImplicitly]
     internal class MainViewModel : IMainViewModel
     {
-        private readonly ICharacterModel _characterModel;
+        private readonly ReadOnlyReactiveProperty<CharacterState> _characterState;
         private readonly IRecordModel _recordModel;
 
         [CreateProperty]
-        public StyleEnum<DisplayStyle> MainDisplayStyle => _characterModel.State == CharacterState.Idle ? DisplayStyle.Flex : DisplayStyle.None;
+        public StyleEnum<DisplayStyle> MainDisplayStyle => _characterState.CurrentValue == CharacterState.Idle
+            ? DisplayStyle.Flex
+            : DisplayStyle.None;
 
-        [CreateProperty]
-        public uint Record => _recordModel.Record;
+        [CreateProperty] public uint Record => _recordModel.Record;
 
         public MainViewModel(
             IMainView view,
             IWalletModel walletModel,
-            ICharacterModel characterModel,
+            ReadOnlyReactiveProperty<CharacterState> characterState,
             IRecordModel recordModel)
         {
             UniTask.WaitWhile(() => view.Root == null).ContinueWith(() =>
@@ -33,7 +35,7 @@ namespace LeaseExtension.UI.Game.Main
                 view.Root.dataSource = this;
                 view.EarnedGroup.dataSource = walletModel;
             }).Forget();
-            _characterModel = characterModel;
+            _characterState = characterState;
             _recordModel = recordModel;
         }
     }

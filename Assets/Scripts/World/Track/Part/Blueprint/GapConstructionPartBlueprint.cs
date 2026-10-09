@@ -6,6 +6,7 @@ using LeaseExtension.World.Contract;
 using LeaseExtension.World.Track.Part.Blank;
 using LeaseExtension.World.Track.Part.Concrete;
 using MessagePipe;
+using R3;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -32,6 +33,33 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         public float Margin { get; private set; }
         public float GapSize => _gapSize;
         public float InterfereWidth { get; private set; }
+        
+        [Inject]
+        public void Construct(ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber)
+        {
+            _disposable = sceneSubscriber.Subscribe(s =>
+            {
+                if (s == FocusedScene.Main && _blankPool == null)
+                {
+                    _blankPool = new ObjectPool<GapConstructionBlank>(
+                        () => new(this, _blankPool, _partPool),
+                        actionOnRelease: b => b.Depopulate());
+                    _partPool = new ObjectPool<GapConstructionPart>(
+                        () => new(this, _partPool),
+                        actionOnRelease: p => p.Depopulate());
+                }
+            });
+        }
+        
+        public IConstructionBlank MakeBlank(float height, float gapPos)
+        {
+            float gapStart = gapPos - _gapSize / 2 + height;
+            GapConstructionBlank blank = _blankPool.Get();
+            blank.Populate(_bottomPart.I.MakeBlank(height, gapStart), _gapPart.I.MakeBlank(gapStart, _gapSize), _topPart.I.MakeBlank(
+                gapStart + _gapSize,
+                1 - gapStart - _gapSize));
+            return blank;
+        }
 
         private void OnEnable()
         {
@@ -56,33 +84,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         {
             _disposable?.Dispose();
             _disposable = null;
-        }
-
-        public IConstructionBlank MakeBlank(float height, float gapPos)
-        {
-            float gapStart = gapPos - _gapSize / 2 + height;
-            GapConstructionBlank blank = _blankPool.Get();
-            blank.Populate(_bottomPart.I.MakeBlank(height, gapStart), _gapPart.I.MakeBlank(gapStart, _gapSize), _topPart.I.MakeBlank(
-                gapStart + _gapSize,
-                1 - gapStart - _gapSize));
-            return blank;
-        }
-
-        [Inject]
-        public void Construct(ISubscriber<FocusedScene> sceneSubscriber)
-        {
-            _disposable = sceneSubscriber.Subscribe(_ =>
-            {
-                if (_blankPool == null)
-                {
-                    _blankPool = new ObjectPool<GapConstructionBlank>(
-                        () => new(this, _blankPool, _partPool),
-                        actionOnRelease: b => b.Depopulate());
-                    _partPool = new ObjectPool<GapConstructionPart>(
-                        () => new(this, _partPool),
-                        actionOnRelease: p => p.Depopulate());
-                }
-            }, FocusedSceneFilter.Main);
         }
     }
 }

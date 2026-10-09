@@ -16,14 +16,14 @@ namespace LeaseExtension.Record
 
         public RecordIncrementer(
             IRecordModel model,
-            ICharacterModel characterModel,
+            ReadOnlyReactiveProperty<CharacterState> characterState,
             ISubscriber<RestartRequested> resetSubscriber,
             ISubscriber<BarPassed> barPassedSubscriber)
         {
             IDisposable d2 = resetSubscriber.Subscribe(_ => model.SetRecord());
             IDisposable d1 = barPassedSubscriber.Subscribe(_ =>
             {
-                if (characterModel.State != CharacterState.Fall)
+                if (characterState.CurrentValue != CharacterState.Fall)
                     model.Increment();
             });
             _disposable = Disposable.Combine(d1, d2);

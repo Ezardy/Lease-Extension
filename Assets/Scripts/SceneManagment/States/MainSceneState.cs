@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
+using R3;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using Zenject;
@@ -14,9 +15,7 @@ namespace LeaseExtension.SceneManagment.States
 
         public MainSceneState(
             ISceneContext context,
-            StatePublisher<FocusedScene>.Factory publisherFactory) : base(
-            context,
-            publisherFactory.Create(FocusedScene.Main))
+            ReactiveProperty<FocusedScene> statePublisher) : base(context, statePublisher, FocusedScene.Main)
         {
         }
 

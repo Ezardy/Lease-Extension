@@ -6,6 +6,7 @@ using LeaseExtension.Input.Contract;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
+using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -16,11 +17,10 @@ using Zenject;
 namespace LeaseExtension.SceneManagment.States
 {
     [UsedImplicitly]
-    internal class WelcomeSceneState : AState<ISceneContext>
+    internal class WelcomeSceneState : APoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>
     {
         private readonly Scene _welcomeScene;
         private readonly AssetReference _mainScene;
-        private readonly StatePublisher<FocusedScene> _statePublisher;
         private readonly MainSceneState.Factory _mainFactory;
         private readonly CancellationTokenSource _cts = new();
         private readonly IDisposable _disposable;
@@ -30,14 +30,13 @@ namespace LeaseExtension.SceneManagment.States
         public WelcomeSceneState(
             ISceneContext context,
             Scene welcomeScene,
-            StatePublisher<FocusedScene>.Factory publisherFactory,
+            ReactiveProperty<FocusedScene> statePublisher,
             [Inject(Id = FocusedScene.Main)] AssetReference mainScene,
             ISubscriber<Tapped> tapSubscriber,
-            MainSceneState.Factory mainFactory) : base(context)
+            MainSceneState.Factory mainFactory) : base(context, statePublisher, FocusedScene.Welcome)
         {
             _welcomeScene = welcomeScene;
             _mainScene = mainScene;
-            _statePublisher = publisherFactory.Create(FocusedScene.Welcome);
             _mainFactory = mainFactory;
             _disposable = tapSubscriber.Subscribe(_ =>
             {
@@ -48,7 +47,7 @@ namespace LeaseExtension.SceneManagment.States
 
         public override void Start()
         {
-            _statePublisher.Publish();
+            base.Start();
             StartAsync().Forget();
         }
 
@@ -59,6 +58,7 @@ namespace LeaseExtension.SceneManagment.States
             _cts.Cancel();
             _disposable?.Dispose();
             SceneManager.UnloadSceneAsync(_welcomeScene);
+            base.Dispose();
         }
 
         private async UniTaskVoid StartAsync()
@@ -79,11 +79,6 @@ namespace LeaseExtension.SceneManagment.States
         {
             foreach (GameObject go in _handle.Result.Scene.GetRootGameObjects())
                 go.SetActive(active);
-        }
-
-        [UsedImplicitly]
-        public class Factory : PlaceholderFactory<WelcomeSceneState>
-        {
         }
     }
 }

@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
+using R3;
 
 namespace LeaseExtension.Gameplay.States
 {
@@ -16,10 +17,8 @@ namespace LeaseExtension.Gameplay.States
         public OverState(
             ICharacterContext context,
             ISubscriber<RestartRequested> resetSubscriber,
-            StatePublisher<CharacterState>.Factory publisherFactory,
-            IdleState.Factory idleFactory) : base(
-            context,
-            publisherFactory.Create(CharacterState.Over))
+            ReactiveProperty<CharacterState> publisher,
+            IdleState.Factory idleFactory) : base(context, publisher, CharacterState.Over)
         {
             _idleFactory = idleFactory;
             _resetSubscriber = resetSubscriber;

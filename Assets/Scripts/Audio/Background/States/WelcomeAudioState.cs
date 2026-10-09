@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using LeaseExtension.SceneManagment.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
+using R3;
 using Zenject;
 
 namespace LeaseExtension.Audio.Background.States
@@ -14,10 +15,16 @@ namespace LeaseExtension.Audio.Background.States
 
         public WelcomeAudioState(
             IBackgroundAudioContext context,
-            ISubscriber<FocusedScene> sceneSubscriber,
+            ReadOnlyReactiveProperty<FocusedScene> sceneSubscriber,
             IdleAudioState.Factory idleFactory) : base(context)
         {
-            _disposable = sceneSubscriber.Subscribe(_ => context.State = idleFactory.Create(), FocusedSceneFilter.Main);
+            _disposable = sceneSubscriber.Subscribe(s =>
+            {
+                if (s == FocusedScene.Main)
+                {
+                    context.State = idleFactory.Create();
+                }
+            });
         }
 
         public override void Dispose()

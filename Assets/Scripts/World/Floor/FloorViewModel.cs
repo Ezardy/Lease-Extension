@@ -14,7 +14,7 @@ namespace LeaseExtension.World.Floor
         private static readonly int _wallHash = Animator.StringToHash("Wall");
         private static readonly int _floorHash = Animator.StringToHash("Floor");
         [SerializeField] private float _speed = 1;
-        private ISubscriber<CharacterState> _subscriber;
+        private ReadOnlyReactiveProperty<CharacterState> _subscriber;
         private bool _over = false;
         private IDisposable _runSubscription;
         private Animator _animator;
@@ -28,7 +28,7 @@ namespace LeaseExtension.World.Floor
         public void Init(
             IWorldModel worldModel,
             IFloorView floorView,
-            ISubscriber<CharacterState> subscriber,
+            ReadOnlyReactiveProperty<CharacterState> subscriber,
             Animator animator)
         {
             worldModel.SpeedChanged.Subscribe(s => floorView.Speed = s / (1 + worldModel.Perspective) * 2).AddTo(this);
@@ -36,15 +36,33 @@ namespace LeaseExtension.World.Floor
             Observable.EveryValueChanged(this, x => x._speed).Subscribe(s => worldModel.SpeedAmplifier = s).AddTo(this);
             _subscriber = subscriber;
             _animator = animator;
-            subscriber.Subscribe(_ => Idle(), CharacterStateFilter.Idle).AddTo(this);
-            subscriber.Subscribe(_ => Wall(), CharacterStateFilter.Fall).AddTo(this);
-            subscriber.Subscribe(_ => Floor(), CharacterStateFilter.Over).AddTo(this);
+            subscriber.Subscribe(s =>
+            {
+                switch (s)
+                {
+                    case CharacterState.Idle:
+                        Idle();
+                        break;
+                    case CharacterState.Fall:
+                        Wall();
+                        break;
+                    case CharacterState.Over:
+                        Floor();
+                        break;
+                }
+            }).AddTo(this);
         }
 
         private void Idle()
         {
             _over = false;
-            _runSubscription = _subscriber.Subscribe(_ => Run(), CharacterStateFilter.Punch);
+            _runSubscription = _subscriber.Subscribe(s =>
+            {
+                if (s == CharacterState.Punch)
+                {
+                    Run();
+                }
+            });
         }
 
         private void Run()

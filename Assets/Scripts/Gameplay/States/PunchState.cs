@@ -3,6 +3,7 @@ using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.State;
 using LeaseExtension.World.Contract;
+using R3;
 using UnityEngine;
 using Zenject;
 
@@ -22,13 +23,11 @@ namespace LeaseExtension.Gameplay.States
         public PunchState(
             ICharacterContext context,
             CollisionCheckStateBase stateBase,
-            StatePublisher<CharacterState>.Factory publisherFactory,
+            ReactiveProperty<CharacterState> publisher,
             WaitState.Factory waitFactory,
             Rigidbody2D rigidBody,
             ICharacterModel characterModel,
-            IWorldModel worldModel) : base(
-            context,
-            publisherFactory.Create(CharacterState.Punch))
+            IWorldModel worldModel) : base(context, publisher, CharacterState.Punch)
         {
             _stateBase = stateBase;
             _rigidBody = rigidBody;

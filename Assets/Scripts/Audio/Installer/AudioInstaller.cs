@@ -18,10 +18,10 @@ namespace LeaseExtension.Audio.Installer
             Container.BindFactory<AudioSource, AudioSourceFactory>().FromComponentInNewPrefab(_poolPrefab);
             Container.BindInterfacesTo<AudioSourcePool>().AsSingle();
             Container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
-            InstallBackgrounAudio();
+            InstallBackgroundAudio();
         }
 
-        private void InstallBackgrounAudio()
+        private void InstallBackgroundAudio()
         {
             Container.BindFactory<WelcomeAudioState, WelcomeAudioState.Factory>();
             Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();

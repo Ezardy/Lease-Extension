@@ -8,7 +8,6 @@ namespace LeaseExtension.Gameplay.Contract
         public float PunchHeight { get; }
         public float InitialPunchHeight { get; }
         public float PunchPeriod { get; }
-        public CharacterState State { get; set; }
         public Observable<float> PunchHeightChanged { get; }
         public Observable<float> InitialPunchHeightChanged { get; }
         public Observable<float> PunchPeriodChanged { get; }
