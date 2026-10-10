@@ -12,12 +12,10 @@ namespace LeaseExtension.World.Track.Construction
         [SerializeField, Range(0, 1)]
         private float _endHeight = 1;
 
-        public override IReadOnlyCollection<IConstructionBlank> MakeBlanks()
+        public override void MakeBlanks(ICollection<IConstructionBlank> blanksOutput)
         {
-            Blanks.Clear();
             foreach (IConstructionPartBlueprint part in this)
-                Blanks.Add(part.MakeBlank(Random.Range(_startHeight, _endHeight), Height));
-            return Blanks;
+                blanksOutput.Add(part.MakeBlank(Random.Range(_startHeight, _endHeight), Height));
         }
     }
 }

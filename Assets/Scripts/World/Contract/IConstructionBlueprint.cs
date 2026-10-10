@@ -13,6 +13,6 @@ namespace LeaseExtension.World.Contract
         public float RangeEnd { get; }
         public bool IsRangeInversed { get; }
 
-        public IReadOnlyCollection<IConstructionBlank> MakeBlanks();
+        public void MakeBlanks(ICollection<IConstructionBlank> blanksOutput);
     }
 }

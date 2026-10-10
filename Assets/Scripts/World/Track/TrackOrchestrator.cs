@@ -19,6 +19,7 @@ namespace LeaseExtension.World.Track
         private readonly Dictionary<float, float> _oldToNewDistances;
         private readonly HashSet<float> _newDistances;
         private readonly List<ITrack> _tracks;
+        private readonly List<IConstructionBlank> _blanks;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private readonly Observable<CharacterState> _stateSubscriber;
         private IDisposable _disposable;
@@ -50,6 +51,7 @@ namespace LeaseExtension.World.Track
             _constructionQueue = new(constructionCount);
             _oldToNewDistances = new(constructionCount);
             _newDistances = new(constructionCount);
+            _blanks = new(trackCount);
             _tracks = new(trackCount);
             for (byte i = 0; i < trackCount; i += 1)
                 _tracks.Add(trackFactory.Create(
@@ -130,9 +132,11 @@ namespace LeaseExtension.World.Track
                     ;
                 if (placeable)
                 {
-                    using IEnumerator<IConstructionBlank> enumerator = construction.MakeBlanks().GetEnumerator();
-                    for (byte i = trackStartIndex; enumerator.MoveNext() && i < endIndex; i += 1)
-                        _tracks[i].Construct(enumerator.Current);
+                    byte j = 0;
+                    construction.MakeBlanks(_blanks);
+                    for (byte i = trackStartIndex; j < _blanks.Count && i < endIndex; i += 1, j += 1)
+                        _tracks[i].Construct(_blanks[j]);
+                    _blanks.Clear();
                     _oldToNewDistances.Add(distance,
                         AddRandomDistance(construction.MinMargin, construction.MaxMargin,
                             d => !_oldToNewDistances.ContainsKey(d) && _newDistances.Add(d)));

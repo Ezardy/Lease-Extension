@@ -13,7 +13,6 @@ namespace LeaseExtension.World.Track.Construction
         protected float Height = 1;
         [SerializeField]
         protected List<Ref<IConstructionPartBlueprint>> PartReferences;
-        protected List<IConstructionBlank> Blanks;
         [SerializeField]
         private bool _isRangeInversed = false;
         [SerializeField, Range(0, 1)]
@@ -39,23 +38,15 @@ namespace LeaseExtension.World.Track.Construction
         public bool IsRangeInversed => _isRangeInversed;
         public int Count => PartReferences.Count;
 
-        private void OnEnable()
-        {
-            if (PartReferences != null && PartReferences.Count > 0)
-                Blanks = new(PartReferences.Count);
-        }
-
         public IEnumerator<IConstructionPartBlueprint> GetEnumerator()
         {
             return new RefEnumerator<IConstructionPartBlueprint>(PartReferences);
         }
 
-        public virtual IReadOnlyCollection<IConstructionBlank> MakeBlanks()
+        public virtual void MakeBlanks(ICollection<IConstructionBlank> blanksOutput)
         {
-            Blanks.Clear();
             foreach (IConstructionPartBlueprint part in this)
-                Blanks.Add(part.MakeBlank(0, Height));
-            return Blanks;
+                blanksOutput.Add(part.MakeBlank(0, Height));
         }
 
         IEnumerator IEnumerable.GetEnumerator()
