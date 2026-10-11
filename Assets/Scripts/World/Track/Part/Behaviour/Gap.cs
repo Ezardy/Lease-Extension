@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Behaviour
 {
-    internal class Gap : AConstructionPartBehaviour
+    internal class Gap : MonoBehaviour
     {
         private IPublisher<BarPassed> _publisher;
         private int _layer;

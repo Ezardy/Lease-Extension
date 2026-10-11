@@ -47,7 +47,7 @@ namespace LeaseExtension.World.Track
             float start = floorCenterY - floorDepth / 2 + trackDepth / 2;
             float scalerStep = trackCount == 1 ? 0 : (1 - worldModel.Perspective) / (trackCount - 1);
             float scalerScale = 1 / ((1 + worldModel.Perspective) / 2);
-            int constructionCount = database.Constructions.Count;
+            int constructionCount = database.ConstructionBlueprints.Count;
             _constructionQueue = new(constructionCount);
             _oldToNewDistances = new(constructionCount);
             _newDistances = new(constructionCount);
@@ -87,7 +87,7 @@ namespace LeaseExtension.World.Track
 
         public void Dispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
         }
 
         private void Reset()
@@ -177,7 +177,7 @@ namespace LeaseExtension.World.Track
 
         private void QueueConstructions()
         {
-            foreach (IConstructionBlueprint construction in _database.Constructions)
+            foreach (IConstructionBlueprint construction in _database.ConstructionBlueprints)
                 if (construction.Parts.Count <= _tracks.Count && construction.Parts.Count > 0)
                     AddRandomDistance(construction.MinDelay, construction.MaxDelay,
                         d => _constructionQueue.TryAdd(d, construction));

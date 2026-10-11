@@ -1,40 +1,41 @@
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
-using UnityEngine.Pool;
+using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
-    internal class GapConstructionPart : IConstructionPart
+    [UsedImplicitly]
+    internal class GapConstructionPart : IConstructionPart,
+        IPoolable<IConstructionPartBlueprint, IConstructionPart, IConstructionPart, IConstructionPart, IMemoryPool>
     {
-        private readonly IObjectPool<GapConstructionPart> _pool;
+        private IMemoryPool _pool;
         private IConstructionPart _bottomPart;
         private IConstructionPart _gapPart;
         private IConstructionPart _topPart;
 
-        public IConstructionPartBlueprint Blueprint { get; }
+        public IConstructionPartBlueprint Blueprint { get; private set; }
         public float X => _bottomPart.X;
 
-        public GapConstructionPart(IConstructionPartBlueprint blueprint, IObjectPool<GapConstructionPart> pool)
+        public void OnSpawned(IConstructionPartBlueprint blueprint, IConstructionPart bottomPart,
+            IConstructionPart gapPart, IConstructionPart topPart, IMemoryPool pool)
         {
             Blueprint = blueprint;
-            _pool = pool;
-        }
-
-        public void Populate(
-            IConstructionBlank blank,
-            IConstructionPart bottomPart,
-            IConstructionPart gapPart,
-            IConstructionPart topPart)
-        {
             _bottomPart = bottomPart;
             _gapPart = gapPart;
             _topPart = topPart;
+            _pool = pool;
         }
 
-        public void Depopulate()
+        public void OnDespawned()
         {
+            _bottomPart.WipeOut();
+            _gapPart.WipeOut();
+            _topPart.WipeOut();
+            Blueprint = null;
             _bottomPart = null;
             _gapPart = null;
             _topPart = null;
+            _pool = null;
         }
 
         public void Move(float shift)
@@ -46,10 +47,12 @@ namespace LeaseExtension.World.Track.Part.Concrete
 
         public void WipeOut()
         {
-            _bottomPart.WipeOut();
-            _gapPart.WipeOut();
-            _topPart.WipeOut();
-            _pool.Release(this);
+            _pool.Despawn(this);
+        }
+
+        [UsedImplicitly]
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, IConstructionPart, IConstructionPart, IConstructionPart, GapConstructionPart>
+        {
         }
     }
 }

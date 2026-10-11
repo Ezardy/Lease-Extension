@@ -1,6 +1,5 @@
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
@@ -8,16 +7,16 @@ namespace LeaseExtension.World.Track.Part.Concrete
     {
         private readonly ISize _sizer;
         private readonly IOrder _orderer;
+        private readonly Vector2 _initialSize;
 
         public SizedConstructionPart(
-            IConstructionPartBlueprint blueprint,
             Transform transform,
             ISize sizer,
-            IObjectPool<ConstructionPart> pool,
-            IOrder orderer) : base(blueprint, transform, pool)
+            IOrder orderer) : base(transform)
         {
             _sizer = sizer;
             _orderer = orderer;
+            _initialSize = sizer.Size;
         }
 
         public override void Place(Vector3 position, float scale, float s, int order)
@@ -25,8 +24,15 @@ namespace LeaseExtension.World.Track.Part.Concrete
             base.Place(position, scale, s, order);
             if (s != 0)
                 _sizer.Size = new(_sizer.Size.x, s / Transform.localScale.y);
-            Transform.position += position - _sizer.Min + PartBlueprint.Margin * Vector3.right;
+            Transform.position += position - _sizer.Min + Blueprint.Margin * Vector3.right;
             _orderer.Order = order;
+        }
+
+        public override void OnDespawned()
+        {
+            _sizer.Size = _initialSize;
+            _orderer.Order = 0;
+            base.OnDespawned();
         }
     }
 }

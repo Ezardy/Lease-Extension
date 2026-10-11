@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Behaviour
 {
-    internal class Obstacle : AConstructionPartBehaviour
+    internal class Obstacle : MonoBehaviour
     {
         private IPublisher<ObstacleCollided> _publisher;
         private int _layer;

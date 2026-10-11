@@ -1,30 +1,25 @@
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using UnityEngine;
-using UnityEngine.Pool;
+using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
-    internal class ConstructionPart : IConstructionPart
+    internal class ConstructionPart : IConstructionPart, IPoolable<IConstructionPartBlueprint, IMemoryPool>
     {
-        protected readonly IConstructionPartBlueprint PartBlueprint;
-        protected readonly IObjectPool<ConstructionPart> Pool;
         protected readonly Transform PoolTransform;
         protected readonly Transform Transform;
         protected readonly Vector3 InitScale;
+        private IMemoryPool _pool;
 
-        public IConstructionPartBlueprint Blueprint => PartBlueprint;
+        public IConstructionPartBlueprint Blueprint { get; private set; }
         public float X => Transform.position.x;
 
-        public ConstructionPart(
-            IConstructionPartBlueprint blueprint,
-            Transform transform,
-            IObjectPool<ConstructionPart> pool)
+        public ConstructionPart(Transform transform)
         {
-            PartBlueprint = blueprint;
-            Pool = pool;
             Transform = transform;
             PoolTransform = transform.parent;
-            InitScale = transform.transform.localScale;
+            InitScale = transform.localScale;
         }
 
         public virtual void Place(Vector3 position, float scale, float s, int order)
@@ -37,10 +32,22 @@ namespace LeaseExtension.World.Track.Part.Concrete
 
         public void WipeOut()
         {
+            _pool.Despawn(this);
+        }
+
+        public virtual void OnDespawned()
+        {
             Transform.parent = PoolTransform;
             Transform.gameObject.SetActive(false);
             Transform.localScale = InitScale;
-            Pool.Release(this);
+            Blueprint = null;
+            _pool = null;
+        }
+
+        public void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
+        {
+            Blueprint = blueprint;
+            _pool = pool;
         }
 
         public void Dispose()
@@ -51,6 +58,11 @@ namespace LeaseExtension.World.Track.Part.Concrete
         public void Move(float shift)
         {
             Transform.Translate(shift, 0, 0);
+        }
+
+        [UsedImplicitly]
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, ConstructionPart>
+        {
         }
     }
 }

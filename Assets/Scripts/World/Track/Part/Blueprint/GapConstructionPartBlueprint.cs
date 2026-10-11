@@ -1,88 +1,52 @@
-using System;
 using System.Collections.Generic;
-using LeaseExtension.Common.Utilities;
-using LeaseExtension.SceneManagment.Contract.Message;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using LeaseExtension.World.Track.Part.Blank;
-using LeaseExtension.World.Track.Part.Concrete;
-using R3;
 using UnityEngine;
-using UnityEngine.Pool;
-using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
 {
-    [CreateAssetMenu(fileName = "GapConstructionPartBlueprint", menuName = "Scriptable Objects/Blueprints/Gap Construction Part Blueprint")]
-    internal class GapConstructionPartBlueprint : ScriptableObject, IGapConstructionPartBlueprint
+    [UsedImplicitly]
+    internal class GapConstructionPartBlueprint : IGapConstructionPartBlueprint
     {
-        [SerializeField, Range(0, 1)]
-        private float _gapSize;
-        [SerializeField]
-        private Ref<IConstructionPartBlueprint> _bottomPart;
-        [SerializeField]
-        private Ref<IConstructionPartBlueprint> _gapPart;
-        [SerializeField]
-        private Ref<IConstructionPartBlueprint> _topPart;
-        private IObjectPool<GapConstructionPart> _partPool;
-        private IObjectPool<GapConstructionBlank> _blankPool;
-        private IDisposable _disposable;
+        private readonly IConstructionPartBlueprint _bottomPart;
+        private readonly IConstructionPartBlueprint _gapPart;
+        private readonly IConstructionPartBlueprint _topPart;
+        private readonly GapConstructionBlank.Factory _blankFactory;
 
-        public IReadOnlyCollection<IConstructionPartBlueprint> SubPartBlueprints { get; private set; }
-        public float Width { get; private set; }
-        public float Margin { get; private set; }
-        public float GapSize => _gapSize;
-        public float InterfereWidth { get; private set; }
-        
-        [Inject]
-        public void Construct(Observable<FocusedScene> sceneSubscriber)
+        public IReadOnlyCollection<IConstructionPartBlueprint> SubPartBlueprints { get; }
+        public float Width { get; } // TODO: use setting's value
+        public float InterfereWidth { get; }
+        public float Margin { get; }
+        public float GapSize { get; }
+
+        public GapConstructionPartBlueprint(GapConstructionPartBlueprintSettings settings,
+            IConstructionPartBlueprint bottomPart, IConstructionPartBlueprint gapPart,
+            IConstructionPartBlueprint topPart, GapConstructionBlank.Factory blankFactory)
         {
-            _disposable = sceneSubscriber.Subscribe(s =>
-            {
-                if (s == FocusedScene.Main && _blankPool == null)
-                {
-                    _blankPool = new ObjectPool<GapConstructionBlank>(
-                        () => new(this, _blankPool, _partPool),
-                        actionOnRelease: b => b.Depopulate());
-                    _partPool = new ObjectPool<GapConstructionPart>(
-                        () => new(this, _partPool),
-                        actionOnRelease: p => p.Depopulate());
-                }
-            });
-        }
-        
-        public IConstructionBlank MakeBlank(float height, float gapPos)
-        {
-            float gapStart = gapPos - _gapSize / 2 + height;
-            GapConstructionBlank blank = _blankPool.Get();
-            blank.Populate(_bottomPart.I.MakeBlank(height, gapStart), _gapPart.I.MakeBlank(gapStart, _gapSize), _topPart.I.MakeBlank(
-                gapStart + _gapSize,
-                1 - gapStart - _gapSize));
-            return blank;
+            _bottomPart = bottomPart;
+            _gapPart = gapPart;
+            _topPart = topPart;
+            _blankFactory = blankFactory;
+            GapSize = settings.GapSize;
+            SubPartBlueprints = new[] { bottomPart, gapPart, topPart };
+            Width = Mathf.Max(bottomPart.Width, gapPart.Width, topPart.Width);
+            InterfereWidth = Mathf.Max(bottomPart.InterfereWidth, gapPart.InterfereWidth, topPart.InterfereWidth);
+            Margin = Mathf.Max(bottomPart.Margin, gapPart.Margin, topPart.Margin);
         }
 
-        private void OnEnable()
+        public IConstructionBlank MakeBlank(float height, float size)
         {
-            if (_bottomPart && _gapPart && _topPart)
-            {
-                Width = Mathf.Max(_bottomPart.I.Width, _gapPart.I.Width, _topPart.I.Width);
-                Margin = Mathf.Max(_bottomPart.I.Margin, _gapPart.I.Margin, _topPart.I.Margin);
-                InterfereWidth = Mathf.Max(
-                    _bottomPart.I.InterfereWidth,
-                    _gapPart.I.InterfereWidth,
-                    _topPart.I.InterfereWidth);
-                SubPartBlueprints = new[]
-                {
-                    _bottomPart.I,
-                    _gapPart.I,
-                    _topPart.I
-                };
-            }
+            return MakeBlank(height, size, 0.5f);
         }
 
-        private void OnDisable()
+        public IConstructionBlank MakeBlank(float height, float size, float gapPosition)
         {
-            _disposable?.Dispose();
-            _disposable = null;
+            float gapHeight = size * GapSize;
+            float gapStart = height + size * (Mathf.Clamp(gapPosition, GapSize / 2, 1 - GapSize / 2) - GapSize / 2);
+            float gapEnd = gapStart + gapHeight;
+            return _blankFactory.Create(this, _bottomPart.MakeBlank(height, gapStart - height),
+                _gapPart.MakeBlank(gapStart, gapHeight), _topPart.MakeBlank(gapEnd, height + size - gapEnd));
         }
     }
 }

@@ -1,27 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using LeaseExtension.Common.Utilities;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
-using UnityEngine;
 
 namespace LeaseExtension.World.Track.Construction
 {
-    [CreateAssetMenu(fileName = "ConstructionDatabase", menuName = "Scriptable Objects/Construction Database")]
-    internal class ConstructionBlueprintDatabase : ScriptableObject, IConstructionBlueprintDatabase, IReadOnlyCollection<IConstructionBlueprint>
+    [UsedImplicitly]
+    internal class ConstructionBlueprintDatabase : IConstructionBlueprintDatabase
     {
-        [SerializeField] private List<Ref<IConstructionBlueprint>> _constructions;
+        public IReadOnlyCollection<IConstructionBlueprint> ConstructionBlueprints { get; }
 
-        public int Count => _constructions.Count;
-        public IReadOnlyCollection<IConstructionBlueprint> Constructions => this;
-
-        public IEnumerator<IConstructionBlueprint> GetEnumerator()
+        public ConstructionBlueprintDatabase(ConstructionBlueprintDatabaseSettings settings, ConstructionBlueprint.Factory factory)
         {
-            return new RefEnumerator<IConstructionBlueprint>(_constructions);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+            List<IConstructionBlueprint> constructions = new();
+            foreach (ConstructionBlueprintSettings setting in settings.Constructions)
+            {
+                constructions.Add(factory.Create(setting));
+            }
+            ConstructionBlueprints = constructions.AsReadOnly();
         }
     }
 }

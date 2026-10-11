@@ -4,6 +4,6 @@ namespace LeaseExtension.World.Contract
 {
     public interface IConstructionBlueprintDatabase
     {
-        public IReadOnlyCollection<IConstructionBlueprint> Constructions { get; }
+        public IReadOnlyCollection<IConstructionBlueprint> ConstructionBlueprints { get; }
     }
 }

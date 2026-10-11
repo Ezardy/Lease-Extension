@@ -1,57 +1,44 @@
-using System.Collections;
 using System.Collections.Generic;
-using LeaseExtension.Common.Utilities;
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
-using UnityEngine;
+using LeaseExtension.World.Track.Part.Blueprint;
+using Zenject;
 
 namespace LeaseExtension.World.Track.Construction
 {
-    [CreateAssetMenu(fileName = "ConstructionBlueprint", menuName = "Scriptable Objects/Blueprints/Construction Blueprint")]
-    internal class ConstructionBlueprint : ScriptableObject, IConstructionBlueprint, IReadOnlyCollection<IConstructionPartBlueprint>
+    [UsedImplicitly]
+    internal class ConstructionBlueprint : IConstructionBlueprint
     {
-        [SerializeField, Tooltip("0 - use implicit height, 1 - stretch to the ceil"), Range(0, 1)]
-        protected float Height = 1;
-        [SerializeField]
-        protected List<Ref<IConstructionPartBlueprint>> PartReferences;
-        [SerializeField]
-        private bool _isRangeInversed = false;
-        [SerializeField, Range(0, 1)]
-        private float _rangeStart = 0;
-        [SerializeField, Range(0, 1)]
-        private float _rangeEnd = 1;
-        [SerializeField]
-        private float _minDelay = 5;
-        [SerializeField]
-        private float _maxDelay = 20;
-        [SerializeField]
-        private float _minMargin = 30;
-        [SerializeField]
-        private float _maxMargin = 50;
+        private readonly ConstructionBlueprintSettings _settings;
 
-        public IReadOnlyCollection<IConstructionPartBlueprint> Parts => this;
-        public float MinDelay => _minDelay;
-        public float MaxDelay => _maxDelay;
-        public float MinMargin => _minMargin;
-        public float MaxMargin => _maxMargin;
-        public float RangeStart => _rangeStart;
-        public float RangeEnd => _rangeEnd;
-        public bool IsRangeInversed => _isRangeInversed;
-        public int Count => PartReferences.Count;
+        public IReadOnlyCollection<IConstructionPartBlueprint> Parts { get; }
+        public float MinDelay => _settings.MinDelay;
+        public float MaxDelay => _settings.MaxDelay;
+        public float MinMargin => _settings.MinMargin;
+        public float MaxMargin => _settings.MaxMargin;
+        public float RangeStart => _settings.RangeStart;
+        public float RangeEnd => _settings.RangeEnd;
+        public bool IsRangeInversed => _settings.IsRangeInversed;
 
-        public IEnumerator<IConstructionPartBlueprint> GetEnumerator()
+        public ConstructionBlueprint(ConstructionBlueprintSettings settings, ConstructionPartBlueprintFactory.Factory partBlueprintFactory)
         {
-            return new RefEnumerator<IConstructionPartBlueprint>(PartReferences);
+            _settings = settings;
+            List<IConstructionPartBlueprint> parts = new();
+            foreach (IConstructionPartBlueprintSettings part in settings.PartSettings)
+            {
+                parts.Add(partBlueprintFactory.Create(part));
+            }
+            Parts = parts.AsReadOnly();
         }
 
-        public virtual void MakeBlanks(ICollection<IConstructionBlank> blanksOutput)
+        public void MakeBlanks(ICollection<IConstructionBlank> blanksOutput)
         {
-            foreach (IConstructionPartBlueprint part in this)
-                blanksOutput.Add(part.MakeBlank(0, Height));
+            _settings.MakeBlanks(Parts, blanksOutput);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        [UsedImplicitly]
+        public class Factory : PlaceholderFactory<ConstructionBlueprintSettings, ConstructionBlueprint>
         {
-            return GetEnumerator();
         }
     }
 }

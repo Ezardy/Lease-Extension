@@ -1,15 +1,28 @@
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
+using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
-    internal class VirtualConstructionPart : IConstructionPart
+    [UsedImplicitly]
+    internal class VirtualConstructionPart : IConstructionPart, IPoolable<IConstructionPartBlueprint, IMemoryPool>
     {
-        public IConstructionPartBlueprint Blueprint { get; }
+        private IMemoryPool _pool;
+
+        public IConstructionPartBlueprint Blueprint { get; private set; }
         public float X { get; private set; } = 0;
 
-        public VirtualConstructionPart(IConstructionPartBlueprint blueprint)
+        public void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
         {
             Blueprint = blueprint;
+            _pool = pool;
+        }
+
+        public void OnDespawned()
+        {
+            Blueprint = null;
+            X = 0;
+            _pool = null;
         }
 
         public void Move(float shift)
@@ -18,6 +31,12 @@ namespace LeaseExtension.World.Track.Part.Concrete
         }
 
         public void WipeOut()
+        {
+            _pool.Despawn(this);
+        }
+
+        [UsedImplicitly]
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, VirtualConstructionPart>
         {
         }
     }

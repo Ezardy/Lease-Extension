@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Behaviour
 {
-    internal class Tooth : AConstructionPartBehaviour
+    internal class Tooth : MonoBehaviour
     {
         private IPublisher<ToothPicked> _publisher;
         private int _layer;
