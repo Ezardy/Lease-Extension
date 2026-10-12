@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using LeaseExtension.Common.Utilities;
+using LeaseExtension.World.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track.Part.Blueprint

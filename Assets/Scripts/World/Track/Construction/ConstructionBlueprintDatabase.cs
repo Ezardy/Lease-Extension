@@ -12,7 +12,7 @@ namespace LeaseExtension.World.Track.Construction
         public ConstructionBlueprintDatabase(ConstructionBlueprintDatabaseSettings settings, ConstructionBlueprint.Factory factory)
         {
             List<IConstructionBlueprint> constructions = new();
-            foreach (ConstructionBlueprintSettings setting in settings.Constructions)
+            foreach (ConstructionBlueprintSettings setting in settings.ConstructionSettings)
             {
                 constructions.Add(factory.Create(setting));
             }

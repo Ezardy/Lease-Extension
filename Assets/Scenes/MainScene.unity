@@ -1397,8 +1397,7 @@ MonoBehaviour:
   _reservedOrderCount: 5
   _worldModel:
     _target: {fileID: 11400000, guid: 6024f10655c6a9b4f8597f38672304f3, type: 2}
-  _constructionDatabase:
-    _target: {fileID: 11400000, guid: 349f70f89c36a5c468d0eef906062aeb, type: 2}
+  _constructionDatabase: {fileID: 11400000, guid: 349f70f89c36a5c468d0eef906062aeb, type: 2}
 --- !u!114 &1290385285
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             Container = container;
         }
 
-        public virtual void InstallPools(TSettings settings)
+        protected virtual void InstallPools(TSettings settings)
         {
         }
 

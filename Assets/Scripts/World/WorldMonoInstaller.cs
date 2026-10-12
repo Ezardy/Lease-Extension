@@ -23,7 +23,7 @@ namespace LeaseExtension.World
         [SerializeField] private byte _maxConstructionCount = 100;
         [SerializeField] private byte _reservedOrderCount = 5;
         [SerializeField, Space] private Ref<IWorldModel> _worldModel;
-        [SerializeField] private Ref<ConstructionBlueprintDatabaseSettings> _constructionDatabase;
+        [SerializeField] private ConstructionBlueprintDatabaseSettings _constructionDatabase;
 
         public override void InstallBindings()
         {
@@ -94,9 +94,9 @@ namespace LeaseExtension.World
                 .BindFactory<ConstructionBlueprintSettings, ConstructionBlueprint,
                     ConstructionBlueprint.Factory>();
             Container.Bind<IConstructionBlueprintDatabase>().To<ConstructionBlueprintDatabase>()
-                .AsSingle().WithArguments(_constructionDatabase.I);
+                .AsSingle().WithArguments(_constructionDatabase);
 
-            foreach (ConstructionBlueprintSettings construction in _constructionDatabase.I.Constructions)
+            foreach (ConstructionBlueprintSettings construction in _constructionDatabase.ConstructionSettings)
             {
                 foreach (IConstructionPartBlueprintSettings part in construction.PartSettings)
                 {

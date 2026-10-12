@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using LeaseExtension.Common.Utilities;
 using UnityEngine;
 
 namespace LeaseExtension.World.Track.Construction
@@ -7,8 +6,8 @@ namespace LeaseExtension.World.Track.Construction
     [CreateAssetMenu(fileName = "ConstructionDatabase", menuName = "Scriptable Objects/Construction Database")]
     internal class ConstructionBlueprintDatabaseSettings : ScriptableObject
     {
-        [SerializeField] private List<ConstructionBlueprintSettings> _constructions;
+        [SerializeField] private List<ConstructionBlueprintSettings> _constructionSettings;
 
-        public IEnumerable<ConstructionBlueprintSettings> Constructions => _constructions;
+        public IEnumerable<ConstructionBlueprintSettings> ConstructionSettings => _constructionSettings;
     }
 }

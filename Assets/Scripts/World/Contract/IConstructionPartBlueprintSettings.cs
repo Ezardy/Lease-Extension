@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace LeaseExtension.World.Track.Part.Blueprint
+namespace LeaseExtension.World.Contract
 {
-    internal interface IConstructionPartBlueprintSettings
+    public interface IConstructionPartBlueprintSettings
     {
         public IReadOnlyCollection<IConstructionPartBlueprintSettings> SubPartSettings { get; }
     }

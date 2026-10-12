@@ -14,7 +14,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         {
         }
 
-        public override void InstallPools(ConstructionPartBlueprintSettings settings)
+        protected override void InstallPools(ConstructionPartBlueprintSettings settings)
         {
             Container.BindFactory<IConstructionPartBlueprint, ConstructionPart, ConstructionPart.Factory>()
                 .WithId(settings).FromPoolableMemoryPool(pool => pool.WithInitialSize(settings.InitialPool)
