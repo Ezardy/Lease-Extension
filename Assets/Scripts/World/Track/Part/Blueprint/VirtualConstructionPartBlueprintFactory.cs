@@ -24,7 +24,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             IReadOnlyList<IConstructionPartBlueprint> subParts)
         {
             return Container.Instantiate<VirtualConstructionPartBlueprint>(
-                new object[] { settings, Container.ResolveId<VirtualConstructionPart.Factory>(settings), subParts });
+                new object[] { settings, Container.ResolveId<VirtualConstructionPart.Factory>(settings) });
         }
     }
 }

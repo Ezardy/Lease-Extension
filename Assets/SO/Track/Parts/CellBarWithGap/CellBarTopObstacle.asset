@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cd76ce98964b745b9fd0bb71da6e74, type: 3}
   m_Name: CellBarTopObstacle
   m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.ConstructionPartBlueprintSettings
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1934687313046700753, guid: cb5f421797a4df04aaed9626fb508dc7, type: 3}
   _initialPool: 5
   _margin: 0
   _width: 0

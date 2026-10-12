@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cd76ce98964b745b9fd0bb71da6e74, type: 3}
   m_Name: PassableGap
   m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.ConstructionPartBlueprintSettings
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 966009156463661739, guid: 5ac83eaa1e276ea4ab8f43d38ef9c789, type: 3}
   _initialPool: 5
   _margin: 0
   _width: 0
@@ -20,5 +20,5 @@ MonoBehaviour:
   _interfereWidth: 0
   _autoInterfereWidth: 1
   _sameWidth: 1
-  _useSpriteRenderer: 1
+  _useSpriteRenderer: 0
   _zOrdering: 0
