@@ -9,22 +9,20 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     [UsedImplicitly]
     internal class VirtualConstructionPartBlueprint : IConstructionPartBlueprint
     {
+        private readonly VirtualConstructionPartBlueprintSettings _settings;
         private readonly VirtualConstructionPart.Factory _partFactory;
         private readonly VirtualConstructionBlank.Factory _blankFactory;
 
-        public IReadOnlyCollection<IConstructionPartBlueprint> SubPartBlueprints { get; }
         public float Width => 0;
-        public float InterfereWidth { get; } // TODO: use setting's value
+        public float InterfereWidth => _settings.InterfereWidth;
         public float Margin => 0;
 
         public VirtualConstructionPartBlueprint(VirtualConstructionPartBlueprintSettings settings,
-            VirtualConstructionPart.Factory partFactory, IReadOnlyList<IConstructionPartBlueprint> subParts,
-            VirtualConstructionBlank.Factory blankFactory)
+            VirtualConstructionPart.Factory partFactory, VirtualConstructionBlank.Factory blankFactory)
         {
-            InterfereWidth = settings.InterfereWidth;
+            _settings = settings;
             _partFactory = partFactory;
             _blankFactory = blankFactory;
-            SubPartBlueprints = subParts;
         }
 
         public IConstructionBlank MakeBlank(float height, float size)

@@ -11,22 +11,18 @@ namespace LeaseExtension.World.Track.Part.Blueprint
     {
         private readonly ConstructionPart.Factory _partFactory;
         private readonly ConstructionBlank.Factory _blankFactory;
+        private readonly ConstructionPartBlueprintSettings _settings;
 
-        public IReadOnlyCollection<IConstructionPartBlueprint> SubPartBlueprints { get; }
-        public float Width { get; } // TODO: do not store all setting's properties in the instance. Just reference them
-        public float InterfereWidth { get; }
-        public float Margin { get; }
+        public float Width => _settings.Width;
+        public float InterfereWidth => _settings.InterfereWidth;
+        public float Margin => _settings.Margin;
 
         public ConstructionPartBlueprint(ConstructionPartBlueprintSettings settings,
-            ConstructionPart.Factory partFactory, IReadOnlyList<IConstructionPartBlueprint> subParts,
-            ConstructionBlank.Factory blankFactory)
+            ConstructionPart.Factory partFactory, ConstructionBlank.Factory blankFactory)
         {
-            Width = settings.Width;
-            InterfereWidth = settings.InterfereWidth;
-            Margin = settings.Margin;
+            _settings = settings;
             _partFactory = partFactory;
             _blankFactory = blankFactory;
-            SubPartBlueprints = subParts;
         }
 
         public IConstructionBlank MakeBlank(float height, float size)
