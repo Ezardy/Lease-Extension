@@ -1,4 +1,3 @@
-
 namespace LeaseExtension.Audio.Contract
 {
     public interface IOneShotAudioPlayer

@@ -26,7 +26,9 @@ namespace LeaseExtension.Gameplay
         private void QueueForInject()
         {
             foreach (MonoBehaviour c in _forInject)
+            {
                 Container.QueueForInject(c);
+            }
         }
 
         private void InstallStates()

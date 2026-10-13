@@ -66,7 +66,9 @@ namespace LeaseExtension.Input
                     new(EventSystem.current) { position = pointer.position.ReadValue() },
                     hits);
                 if (hits.Count == 0)
+                {
                     _punchPublisher.Publish(new());
+                }
             }
             else
             {

@@ -29,7 +29,10 @@ namespace LeaseExtension.Record
         public void SetRecord()
         {
             if (Record < BarsPassed)
+            {
                 _record.Value = BarsPassed;
+            }
+
             _barsPassed.Value = 0;
         }
     }

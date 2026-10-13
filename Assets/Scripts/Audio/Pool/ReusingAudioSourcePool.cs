@@ -24,7 +24,10 @@ namespace LeaseExtension.Audio.Pool
         public void Clear()
         {
             foreach (AudioSource i in _inUse)
+            {
                 _pool.Release(i);
+            }
+
             _inUse.Clear();
         }
 

@@ -14,7 +14,9 @@ namespace LeaseExtension.World.Floor
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.layer == _playerLayerId)
+            {
                 _publisher.Publish(new());
+            }
         }
 
         [Inject]

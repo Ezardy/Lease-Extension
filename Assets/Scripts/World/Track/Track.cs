@@ -14,12 +14,13 @@ namespace LeaseExtension.World.Track
         private readonly byte _maxConstructions;
         private readonly Queue<IConstructionPart> _parts = new();
         private float _speed;
-        private float _lastPartOffset = 0;
+        private float _lastPartOffset;
         private int _lastPartOrder;
 
         public float StartX { get; set; }
         public float EndX { get; set; }
         public bool IsFree => _lastPartOffset <= 0 && _parts.Count <= _maxConstructions;
+
         public float Speed
         {
             get => _speed;
@@ -39,7 +40,10 @@ namespace LeaseExtension.World.Track
         {
             float shift = -_speed * Time.deltaTime;
             foreach (IConstructionPart part in _parts)
+            {
                 part.Move(shift);
+            }
+
             _lastPartOffset += shift;
             WipeOutPart();
         }
@@ -56,15 +60,22 @@ namespace LeaseExtension.World.Track
         public void WipeOut()
         {
             foreach (IConstructionPart part in _parts)
+            {
                 part.WipeOut();
+            }
+
             _parts.Clear();
             _lastPartOffset = 0;
         }
 
         private void WipeOutPart()
         {
-            for (; _parts.TryPeek(out IConstructionPart part) && part.X + part.Blueprint.Width * _scaler < EndX; _parts.Dequeue(), part.WipeOut())
+            for (;
+                 _parts.TryPeek(out IConstructionPart part) && part.X + part.Blueprint.Width * _scaler < EndX;
+                 _parts.Dequeue(), part.WipeOut())
+            {
                 ;
+            }
         }
     }
 }

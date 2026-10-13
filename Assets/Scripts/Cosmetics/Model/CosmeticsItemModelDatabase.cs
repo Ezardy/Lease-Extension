@@ -14,7 +14,9 @@ namespace LeaseExtension.Cosmetics.Model
         private void OnEnable()
         {
             if (_variants != null)
+            {
                 _variantsDict = _variants.ToDictionary(p => p.Id);
+            }
         }
 
         public ICosmeticsItemModel GetCosmeticsItemModel(string id)

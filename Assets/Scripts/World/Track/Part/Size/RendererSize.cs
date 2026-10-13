@@ -12,6 +12,7 @@ namespace LeaseExtension.World.Track.Part.Size
             get => _renderer.size;
             set => _renderer.size = value;
         }
+
         public Vector3 Min => _renderer.bounds.min;
 
         public RendererSize(SpriteRenderer renderer)

@@ -2,7 +2,6 @@ using System;
 using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.World.Contract;
-using MessagePipe;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -15,12 +14,13 @@ namespace LeaseExtension.World.Floor
         private readonly ReactiveProperty<float> _perspective = new(0.15f);
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");
         private static readonly int _perspectiveScaleId = Shader.PropertyToID("_Perspective");
-        private float _offset = 0;
+        private float _offset;
         private readonly SpriteRenderer _spriteRenderer;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private IDisposable _disposable;
 
         public float Speed { get; set; }
+
         public float Perspective
         {
             get => _perspective.Value;

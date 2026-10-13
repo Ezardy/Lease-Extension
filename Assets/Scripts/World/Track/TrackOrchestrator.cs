@@ -23,7 +23,7 @@ namespace LeaseExtension.World.Track
         private readonly IScreenSizeObserver _screenSizeObserver;
         private readonly Observable<CharacterState> _stateSubscriber;
         private IDisposable _disposable;
-        private float _distance = 0;
+        private float _distance;
         private float _lastX;
 
         public TrackOrchestrator(
@@ -54,11 +54,13 @@ namespace LeaseExtension.World.Track
             _blanks = new(trackCount);
             _tracks = new(trackCount);
             for (byte i = 0; i < trackCount; i += 1)
+            {
                 _tracks.Add(trackFactory.Create(
                     start + trackDepth * i,
                     (1 - scalerStep * i) * scalerScale,
                     maxConstructions,
                     (maxConstructions + reservedOrders) * (trackCount - i - 1)));
+            }
         }
 
         public void Tick()
@@ -93,7 +95,10 @@ namespace LeaseExtension.World.Track
         private void Reset()
         {
             foreach (ITrack track in _tracks)
+            {
                 track.WipeOut();
+            }
+
             _constructionQueue.Clear();
             _oldToNewDistances.Clear();
             _distance = 0;
@@ -106,8 +111,9 @@ namespace LeaseExtension.World.Track
             IList<IConstructionBlueprint> constructions = _constructionQueue.Values;
             for (int i = 0; i < distances.Count && distances[i] <= _distance; i += 1)
             {
-                    PlaceConstruction(distances[i], constructions[i]);
+                PlaceConstruction(distances[i], constructions[i]);
             }
+
             foreach (KeyValuePair<float, float> oldNew in _oldToNewDistances)
             {
                 _constructionQueue.Add(oldNew.Value, _constructionQueue[oldNew.Key]);
@@ -129,13 +135,19 @@ namespace LeaseExtension.World.Track
                 for (byte trackIndex = trackStartIndex;
                      trackIndex < endIndex && placeable;
                      placeable = _tracks[trackIndex].IsFree, trackIndex += 1)
+                {
                     ;
+                }
+
                 if (placeable)
                 {
                     byte j = 0;
                     construction.MakeBlanks(_blanks);
                     for (byte i = trackStartIndex; j < _blanks.Count && i < endIndex; i += 1, j += 1)
+                    {
                         _tracks[i].Construct(_blanks[j]);
+                    }
+
                     _blanks.Clear();
                     _oldToNewDistances.Add(distance,
                         AddRandomDistance(construction.MinMargin, construction.MaxMargin,
@@ -152,7 +164,9 @@ namespace LeaseExtension.World.Track
                 float excludedRange = construction.RangeEnd - construction.RangeStart;
                 pos = UnityEngine.Random.Range(0, 1f - excludedRange);
                 if (pos > construction.RangeStart)
+                {
                     pos += excludedRange;
+                }
             }
             else
             {
@@ -165,24 +179,33 @@ namespace LeaseExtension.World.Track
         private void Move()
         {
             foreach (ITrack track in _tracks)
+            {
                 track.Move();
+            }
+
             _distance += _worldModel.Speed * Time.deltaTime;
         }
 
         private void Speed(float speed)
         {
             foreach (ITrack track in _tracks)
+            {
                 track.Speed = speed;
+            }
         }
 
         private void QueueConstructions()
         {
             foreach (IConstructionBlueprint construction in _database.ConstructionBlueprints)
+            {
                 if (construction.Parts.Count <= _tracks.Count && construction.Parts.Count > 0)
+                {
                     AddRandomDistance(construction.MinDelay, construction.MaxDelay,
                         d => _constructionQueue.TryAdd(d, construction));
+                }
+            }
         }
-        
+
         private float AddRandomDistance(float min, float max, Func<float, bool> predicate)
         {
             float newDistance = _distance + UnityEngine.Random.Range(min, max);

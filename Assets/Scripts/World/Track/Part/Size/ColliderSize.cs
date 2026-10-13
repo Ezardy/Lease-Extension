@@ -12,6 +12,7 @@ namespace LeaseExtension.World.Track.Part.Size
             get => _collider.size;
             set => _collider.size = value;
         }
+
         public Vector3 Min => _collider.bounds.min;
 
         public ColliderSize(BoxCollider2D collider)

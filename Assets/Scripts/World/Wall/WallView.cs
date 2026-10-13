@@ -15,7 +15,7 @@ namespace LeaseExtension.World.Wall
         private readonly SpriteRenderer _renderer;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private IDisposable _disposable;
-        private float _offset = 0;
+        private float _offset;
 
         public float Speed { get; set; }
 

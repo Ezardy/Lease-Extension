@@ -18,9 +18,13 @@ namespace LeaseExtension.Audio.Player
             [InjectOptional] MessageHandlerFilter<T> filter)
         {
             if (filter == null)
+            {
                 _disposable = subscriber.Subscribe(_ => player.Play(parameters));
+            }
             else
+            {
                 _disposable = subscriber.Subscribe(_ => player.Play(parameters), filter);
+            }
         }
 
         public void Dispose()

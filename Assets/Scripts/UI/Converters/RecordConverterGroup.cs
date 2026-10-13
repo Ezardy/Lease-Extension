@@ -1,9 +1,8 @@
 using System.Text;
+using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Converters
 {
@@ -38,7 +37,10 @@ namespace LeaseExtension.UI.Converters
             if (months > 0)
             {
                 if (years > 0)
+                {
                     sb.Append(' ');
+                }
+
                 sb.Append(months);
                 sb.Append(" m");
             }
@@ -46,7 +48,10 @@ namespace LeaseExtension.UI.Converters
             if (days > 0 || (months == 0 && years == 0))
             {
                 if (months > 0 || years > 0)
+                {
                     sb.Append(' ');
+                }
+
                 sb.Append(days);
                 sb.Append(" d");
             }

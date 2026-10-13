@@ -15,16 +15,22 @@ namespace LeaseExtension.World.Track.Construction
             foreach (IConstructionPartBlueprint part in parts)
             {
                 if (part is IGapConstructionPartBlueprint gap)
+                {
                     size = Mathf.Max(size, gap.GapSize);
+                }
             }
 
             float gapPos = Random.Range(size / 2, 1 - size / 2);
             foreach (IConstructionPartBlueprint part in parts)
             {
                 if (part is IGapConstructionPartBlueprint gap)
+                {
                     blanksOutput.Add(gap.MakeBlank(0, 1, gapPos));
+                }
                 else
+                {
                     blanksOutput.Add(part.MakeBlank(0, 1));
+                }
             }
         }
     }

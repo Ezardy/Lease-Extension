@@ -14,7 +14,9 @@ namespace LeaseExtension.World.Track.Part.Behaviour
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (collider.gameObject.layer == _layer)
+            {
                 _publisher.Publish(new());
+            }
         }
 
         [Inject]

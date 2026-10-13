@@ -51,7 +51,8 @@ namespace LeaseExtension.World.Track.Part.Concrete
         }
 
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, IConstructionPart, IConstructionPart, IConstructionPart, GapConstructionPart>
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, IConstructionPart, IConstructionPart,
+            IConstructionPart, GapConstructionPart>
         {
         }
     }

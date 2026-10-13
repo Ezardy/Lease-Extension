@@ -41,14 +41,17 @@ namespace LeaseExtension.Gameplay.States
             _stateBase.Start();
             base.Start();
             _rigidBody.AddForce((Mathf.Sqrt(
--2 * _worldModel.Gravity * _height) - _rigidBody.linearVelocityY) * _rigidBody.mass * Vector2.up, ForceMode2D.Impulse);
+                    -2 * _worldModel.Gravity * _height) - _rigidBody.linearVelocityY) * _rigidBody.mass * Vector2.up,
+                ForceMode2D.Impulse);
             _timestamp = Time.fixedTime + _characterModel.PunchPeriod;
         }
 
         public override void Update()
         {
             if (_timestamp < Time.fixedTime)
+            {
                 Context.State = _waitFactory.Create();
+            }
         }
 
         public override void Dispose()

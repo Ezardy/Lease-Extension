@@ -12,8 +12,8 @@ namespace LeaseExtension.World.Wall
 
         public WallViewModel(IWallView view, IWorldModel model)
         {
-            _disposable = model.SpeedChanged.Subscribe(
-s => view.Speed = s * model.Perspective * 2 / (1 + model.Perspective));
+            _disposable =
+                model.SpeedChanged.Subscribe(s => view.Speed = s * model.Perspective * 2 / (1 + model.Perspective));
         }
 
         public void Dispose()

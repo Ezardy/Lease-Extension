@@ -23,7 +23,9 @@ namespace LeaseExtension.Record
             IDisposable d1 = barPassedSubscriber.Subscribe(_ =>
             {
                 if (characterState.CurrentValue != CharacterState.Fall)
+                {
                     model.Increment();
+                }
             });
             _disposable = Disposable.Combine(d1, d2);
         }

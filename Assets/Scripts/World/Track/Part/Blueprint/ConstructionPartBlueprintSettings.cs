@@ -8,16 +8,26 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         menuName = "Scriptable Objects/Blueprints/Construction Part Blueprint")]
     internal class ConstructionPartBlueprintSettings : ScriptableObject, IConstructionPartBlueprintSettings
     {
-        [SerializeField] protected GameObject Prefab;
-        [SerializeField] private byte _initialPool = 5;
-        [SerializeField, Space] private float _margin = 0;
-        [SerializeField] private float _width = 0;
-        [SerializeField] private bool _autoWidth = true;
-        [SerializeField, Space] private float _interfereWidth = 0;
-        [SerializeField] private bool _autoInterfereWidth = true;
-        [SerializeField] private bool _sameWidth = true;
-        [SerializeField, Space] private bool _useSpriteRenderer = true;
-        [SerializeField] private bool _zOrdering = false;
+        [SerializeField]
+        protected GameObject Prefab;
+        [SerializeField]
+        private byte _initialPool = 5;
+        [SerializeField, Space]
+        private float _margin;
+        [SerializeField]
+        private float _width;
+        [SerializeField]
+        private bool _autoWidth = true;
+        [SerializeField, Space]
+        private float _interfereWidth;
+        [SerializeField]
+        private bool _autoInterfereWidth = true;
+        [SerializeField]
+        private bool _sameWidth = true;
+        [SerializeField, Space]
+        private bool _useSpriteRenderer = true;
+        [SerializeField]
+        private bool _zOrdering;
 
         public GameObject PartPrefab => Prefab;
         public byte InitialPool => _initialPool;

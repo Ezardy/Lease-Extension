@@ -23,20 +23,32 @@ namespace LeaseExtension.Cosmetics.Model
         {
             UniTask awaitable;
             if (_back.IsValid() && _front.IsValid())
+            {
                 awaitable = UniTask.WhenAll(_back.ToUniTask(), _front.ToUniTask());
+            }
             else if (_back.IsValid())
+            {
                 awaitable = _back.ToUniTask();
+            }
             else
+            {
                 awaitable = _front.ToUniTask();
+            }
+
             return awaitable;
         }
 
         public void Release()
         {
             if (_back.IsValid())
+            {
                 _back.Release();
+            }
+
             if (_front.IsValid())
+            {
                 _front.Release();
+            }
         }
     }
 }

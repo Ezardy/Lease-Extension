@@ -12,14 +12,14 @@ namespace LeaseExtension.Audio.Pool
         private readonly AudioSourceFactory _factory;
         private readonly IObjectPool<AudioSource> _pool;
         private Transform _poolTransform;
-        private bool _isQuiting = false;
+        private bool _isQuiting;
 
         public int CountInactive => _pool.CountInactive;
 
         public AudioSourcePool(AudioSourceFactory factory)
         {
             _factory = factory;
-            _pool = new ObjectPool<AudioSource>(Create, OnGet, OnRelease, OnDestroy, true);
+            _pool = new ObjectPool<AudioSource>(Create, OnGet, OnRelease, OnDestroy);
         }
 
         public void Initialize()
@@ -75,7 +75,10 @@ namespace LeaseExtension.Audio.Pool
         {
             instance.generator = null;
             if (!_isQuiting)
+            {
                 instance.transform.parent = _poolTransform;
+            }
+
             instance.gameObject.SetActive(false);
         }
     }

@@ -10,7 +10,7 @@ namespace LeaseExtension.World.Track.Part.Concrete
         private IMemoryPool _pool;
 
         public IConstructionPartBlueprint Blueprint { get; private set; }
-        public float X { get; private set; } = 0;
+        public float X { get; private set; }
 
         public void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
         {

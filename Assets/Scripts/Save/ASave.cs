@@ -22,6 +22,7 @@ namespace LeaseExtension.Save
 
         private string _path;
         public TData Data => SaveData;
+
         private static string PersistentDataPath
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -42,14 +43,20 @@ namespace LeaseExtension.Save
         protected void Init()
         {
             if (!Directory.Exists(PersistentDataPath))
+            {
                 Directory.CreateDirectory(PersistentDataPath);
+            }
+
             if (!File.Exists(_path))
+            {
                 Save();
+            }
         }
 
         public void Load()
         {
             if (_doLoad && File.Exists(_path))
+            {
                 try
                 {
                     SaveData = JsonUtility.FromJson<TData>(File.ReadAllText(_path));
@@ -58,6 +65,7 @@ namespace LeaseExtension.Save
                 {
                     Debug.LogException(e);
                 }
+            }
         }
 
         public void Save()

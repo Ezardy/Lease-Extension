@@ -6,7 +6,8 @@ using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
 {
-    internal class ConstructionPartBlueprintFactory : IFactory<IConstructionPartBlueprintSettings, IConstructionPartBlueprint>
+    internal class
+        ConstructionPartBlueprintFactory : IFactory<IConstructionPartBlueprintSettings, IConstructionPartBlueprint>
     {
         private readonly Dictionary<Type, IConstructionPartBlueprintFactory> _factories = new();
         private readonly Dictionary<IConstructionPartBlueprintSettings, IConstructionPartBlueprint> _blueprints = new();
@@ -27,6 +28,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             {
                 throw new ArgumentNullException(nameof(settings));
             }
+
             if (_installed.Add(settings))
             {
                 GetFactory(settings).InstallPools(settings);
@@ -43,12 +45,14 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             {
                 throw new ArgumentNullException(nameof(settings));
             }
+
             if (!_blueprints.TryGetValue(settings, out IConstructionPartBlueprint blueprint))
             {
                 if (!_creating.Add(settings))
                 {
                     throw new InvalidOperationException("Construction part settings contain a cyclic reference.");
                 }
+
                 try
                 {
                     List<IConstructionPartBlueprint> subParts = new();
@@ -56,6 +60,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
                     {
                         subParts.Add(Create(subPartSettings));
                     }
+
                     blueprint = GetFactory(settings).Create(settings, subParts.AsReadOnly());
                     _blueprints.Add(settings, blueprint);
                 }
@@ -64,6 +69,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
                     _creating.Remove(settings);
                 }
             }
+
             return blueprint;
         }
 
@@ -75,10 +81,13 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             {
                 settingsType = settingsType.BaseType;
             }
+
             if (factory == null)
             {
-                throw new InvalidOperationException($"No construction part blueprint factory is registered for {settings.GetType().Name}.");
+                throw new InvalidOperationException(
+                    $"No construction part blueprint factory is registered for {settings.GetType().Name}.");
             }
+
             return factory;
         }
 

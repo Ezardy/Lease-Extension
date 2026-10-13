@@ -9,13 +9,15 @@ namespace LeaseExtension.World.Track.Construction
     {
         public IReadOnlyCollection<IConstructionBlueprint> ConstructionBlueprints { get; }
 
-        public ConstructionBlueprintDatabase(ConstructionBlueprintDatabaseSettings settings, ConstructionBlueprint.Factory factory)
+        public ConstructionBlueprintDatabase(ConstructionBlueprintDatabaseSettings settings,
+            ConstructionBlueprint.Factory factory)
         {
             List<IConstructionBlueprint> constructions = new();
             foreach (ConstructionBlueprintSettings setting in settings.ConstructionSettings)
             {
                 constructions.Add(factory.Create(setting));
             }
+
             ConstructionBlueprints = constructions.AsReadOnly();
         }
     }

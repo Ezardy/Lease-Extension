@@ -52,7 +52,9 @@ namespace LeaseExtension.UI.Game.Over
         public void Dispose()
         {
             if (_view.Root != null)
+            {
                 _view.AcceptButton.clicked -= OnClick;
+            }
         }
 
         private void Initialize()

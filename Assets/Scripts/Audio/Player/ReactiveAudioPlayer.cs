@@ -11,7 +11,8 @@ namespace LeaseExtension.Audio.Player
     {
         private readonly IDisposable _disposable;
 
-        public ReactiveAudioPlayer(IOneShotAudioPlayer player, AudioPlayerParameters parameters, ReadOnlyReactiveProperty<T> subscriber, T filter)
+        public ReactiveAudioPlayer(IOneShotAudioPlayer player, AudioPlayerParameters parameters,
+            ReadOnlyReactiveProperty<T> subscriber, T filter)
         {
             _disposable = subscriber.Subscribe(v =>
             {

@@ -9,7 +9,7 @@ namespace LeaseExtension.Common.Utilities
 
         public T I => _target as T;
 
-        public static implicit operator bool (Ref<T> ir)
+        public static implicit operator bool(Ref<T> ir)
         {
             return ir._target != null;
         }
@@ -22,11 +22,13 @@ namespace LeaseExtension.Common.Utilities
                 {
                     _target = null;
                     foreach (Component c in go.GetComponents<Component>())
+                    {
                         if (c is T)
                         {
                             _target = c;
                             break;
                         }
+                    }
                 }
                 else
                 {

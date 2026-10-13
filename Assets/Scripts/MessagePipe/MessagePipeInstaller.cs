@@ -24,7 +24,8 @@ namespace LeaseExtension.MessagePipe
             Container.BindMessageBroker<FocusedScene>(options);
             InstallInput(options);
             InstallCollisions(options);
-            Container.BindFactory<MessagePipeDiagnostics, MessagePipeDiagnostics.Factory>().FromFactory<MessagePipeDiagnosticsFactory>();
+            Container.BindFactory<MessagePipeDiagnostics, MessagePipeDiagnostics.Factory>()
+                .FromFactory<MessagePipeDiagnosticsFactory>();
             Container.BindInterfacesTo<MessagePipeDiagnosticsBootstrap>().AsSingle();
         }
 

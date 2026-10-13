@@ -9,7 +9,7 @@ using Zenject;
 namespace LeaseExtension.Cosmetics.Installer
 {
     [CreateAssetMenu(fileName = "CosmeticsInstaller", menuName = "Installers/Cosmetics Installer")]
-    internal partial class CosmeticsInstaller : ScriptableObjectInstaller<CosmeticsInstaller>
+    internal class CosmeticsInstaller : ScriptableObjectInstaller<CosmeticsInstaller>
     {
         [SerializeField] private CosmeticsElementModelDependencies _babHairstyleModelDependencies;
         [SerializeField] private CosmeticsElementModelDependencies _pupHairstyleModelDependencies;
@@ -34,6 +34,7 @@ namespace LeaseExtension.Cosmetics.Installer
                 dependencies.CosmeticsSave.Load();
                 dependencies.CosmeticsCollectionSave.Load();
             }
+
             container.Bind<ICosmeticsElementModel>().To<CosmeticsElementModel>().AsSingle().WithArguments(
                 dependencies.CosmeticsSave.Data.Id,
                 dependencies.CosmeticsCollectionSave.Data.IdCollection);

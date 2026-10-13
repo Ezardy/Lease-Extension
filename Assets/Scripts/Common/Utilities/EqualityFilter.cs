@@ -15,7 +15,9 @@ namespace LeaseExtension.Common.Utilities
         public override void Handle(T message, Action<T> next)
         {
             if (_sample.Equals(message))
+            {
                 next(message);
+            }
         }
     }
 }

@@ -32,8 +32,8 @@ namespace LeaseExtension.Gameplay.States
 
         public override void Start()
         {
-            _wallSubscription = _wallSubscriber.Subscribe((_) => Context.State = _fallFactory.Create());
-            _floorSubscription = _floorSubscriber.Subscribe((_) => Context.State = _overFactory.Create());
+            _wallSubscription = _wallSubscriber.Subscribe(_ => Context.State = _fallFactory.Create());
+            _floorSubscription = _floorSubscriber.Subscribe(_ => Context.State = _overFactory.Create());
         }
 
         public override void Dispose()

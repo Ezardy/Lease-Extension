@@ -47,7 +47,9 @@ namespace LeaseExtension.Cosmetics.ViewModel
             ICosmeticsSpriteHandles handles = _handles;
             await handles.LoadTask();
             if (!_isDisposed && ReferenceEquals(handles, _handles))
+            {
                 _cosmeticsView.Set(handles.Back, handles.Front);
+            }
         }
     }
 }

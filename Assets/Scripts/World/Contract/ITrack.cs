@@ -1,4 +1,3 @@
-
 namespace LeaseExtension.World.Contract
 {
     public interface ITrack

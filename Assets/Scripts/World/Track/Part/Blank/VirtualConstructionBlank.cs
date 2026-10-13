@@ -22,7 +22,8 @@ namespace LeaseExtension.World.Track.Part.Blank
             return part;
         }
 
-        public void OnSpawned(IConstructionPartBlueprint blueprint, VirtualConstructionPart.Factory partFactory, IMemoryPool pool)
+        public void OnSpawned(IConstructionPartBlueprint blueprint, VirtualConstructionPart.Factory partFactory,
+            IMemoryPool pool)
         {
             _blueprint = blueprint;
             _partFactory = partFactory;
@@ -37,7 +38,8 @@ namespace LeaseExtension.World.Track.Part.Blank
         }
 
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, VirtualConstructionPart.Factory, VirtualConstructionBlank>
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, VirtualConstructionPart.Factory,
+            VirtualConstructionBlank>
         {
         }
     }

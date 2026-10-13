@@ -19,9 +19,14 @@ namespace LeaseExtension.Cosmetics.View
         public void Set(Sprite back, Sprite front)
         {
             if (_backRenderer)
+            {
                 _backRenderer.sprite = back;
+            }
+
             if (_frontRenderer)
+            {
                 _frontRenderer.sprite = front;
+            }
         }
     }
 }

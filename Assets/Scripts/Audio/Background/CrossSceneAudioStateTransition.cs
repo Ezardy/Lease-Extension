@@ -8,11 +8,13 @@ using Zenject;
 namespace LeaseExtension.Audio.Background
 {
     [UsedImplicitly]
-    internal class CrossSceneAudioStateTransition<TState, TFactory> : IDisposable where TState : IState where TFactory : IFactory<TState>
+    internal class CrossSceneAudioStateTransition<TState, TFactory> : IDisposable
+        where TState : IState where TFactory : IFactory<TState>
     {
         private readonly IDisposable _disposable;
 
-        public CrossSceneAudioStateTransition(FocusedScene scene, Observable<FocusedScene> subscriber, IBackgroundAudioContext context, TFactory stateFactory)
+        public CrossSceneAudioStateTransition(FocusedScene scene, Observable<FocusedScene> subscriber,
+            IBackgroundAudioContext context, TFactory stateFactory)
         {
             _disposable = subscriber.Subscribe(s =>
             {

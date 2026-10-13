@@ -16,6 +16,7 @@ namespace LeaseExtension.Wallet
 
         [CreateProperty]
         public uint Earned => _earned.CurrentValue;
+
         public Observable<uint> BalanceChanged => _balance;
         public Observable<uint> EarnedChanged => _earned;
 
@@ -40,7 +41,10 @@ namespace LeaseExtension.Wallet
         {
             bool toWithdraw = amount <= Balance;
             if (toWithdraw)
+            {
                 _balance.Value -= amount;
+            }
+
             return toWithdraw;
         }
     }

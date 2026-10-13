@@ -14,17 +14,18 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         {
         }
 
-        protected override void InstallPools(VirtualConstructionPartBlueprintSettings settings)
-        {
-            Container.BindFactory<IConstructionPartBlueprint, VirtualConstructionPart, VirtualConstructionPart.Factory>()
-                .WithId(settings).FromPoolableMemoryPool(pool => pool.WithInitialSize(settings.InitialPool));
-        }
-
         public override VirtualConstructionPartBlueprint Create(VirtualConstructionPartBlueprintSettings settings,
             IReadOnlyList<IConstructionPartBlueprint> subParts)
         {
             return Container.Instantiate<VirtualConstructionPartBlueprint>(
                 new object[] { settings, Container.ResolveId<VirtualConstructionPart.Factory>(settings) });
+        }
+
+        protected override void InstallPools(VirtualConstructionPartBlueprintSettings settings)
+        {
+            Container
+                .BindFactory<IConstructionPartBlueprint, VirtualConstructionPart, VirtualConstructionPart.Factory>()
+                .WithId(settings).FromPoolableMemoryPool(pool => pool.WithInitialSize(settings.InitialPool));
         }
     }
 }

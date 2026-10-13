@@ -54,7 +54,9 @@ namespace LeaseExtension.Gameplay.States
         private void Punch(PunchRequested _)
         {
             if (!_noPunchZone.InZone)
+            {
                 Context.State = _punchFactory.Create(_characterModel.PunchHeight);
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.World.Contract;
-using MessagePipe;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -15,7 +14,7 @@ namespace LeaseExtension.World.Floor
         private static readonly int _floorHash = Animator.StringToHash("Floor");
         [SerializeField] private float _speed = 1;
         private Observable<CharacterState> _subscriber;
-        private bool _over = false;
+        private bool _over;
         private IDisposable _runSubscription;
         private Animator _animator;
 
@@ -80,7 +79,9 @@ namespace LeaseExtension.World.Floor
         private void Floor()
         {
             if (!_over)
+            {
                 _animator.SetTrigger(_floorHash);
+            }
         }
     }
 }

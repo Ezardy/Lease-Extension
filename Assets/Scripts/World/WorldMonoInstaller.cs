@@ -38,6 +38,7 @@ namespace LeaseExtension.World
                 .To<LeaseExtension.World.Track.Track>();
             InstallPartBlueprints();
         }
+
         private void InstallTracks()
         {
             float depth = _floorSpriteRenderer.bounds.size.y;
@@ -75,6 +76,7 @@ namespace LeaseExtension.World
             {
                 Container.QueueForInject(factory);
             }
+
             ConstructionPartBlueprintFactory blueprintFactory = new(factories);
             Container.BindInstance(blueprintFactory);
             Container
@@ -89,7 +91,8 @@ namespace LeaseExtension.World
             Container.BindFactory<IConstructionPartBlueprint, VirtualConstructionPart.Factory,
                 VirtualConstructionBlank, VirtualConstructionBlank.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<IConstructionPartBlueprintSettings, IConstructionPartBlueprint,
-                ConstructionPartBlueprintFactory.Factory>().FromIFactory(factory => factory.FromInstance(blueprintFactory));
+                    ConstructionPartBlueprintFactory.Factory>()
+                .FromIFactory(factory => factory.FromInstance(blueprintFactory));
             Container
                 .BindFactory<ConstructionBlueprintSettings, ConstructionBlueprint,
                     ConstructionBlueprint.Factory>();
@@ -104,6 +107,5 @@ namespace LeaseExtension.World
                 }
             }
         }
-
     }
 }

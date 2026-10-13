@@ -41,7 +41,9 @@ namespace LeaseExtension.UI.Welcome
         {
             _disposable.Dispose();
             if (_spriteHandle.IsValid())
+            {
                 _spriteHandle.Release();
+            }
         }
 
         private void SetSprite(Vector2Int size)
@@ -61,7 +63,10 @@ namespace LeaseExtension.UI.Welcome
             if (handle.IsValid())
             {
                 if (_spriteHandle.IsValid())
+                {
                     _spriteHandle.Release();
+                }
+
                 _spriteHandle = handle;
                 handle.Completed += OnSpriteLoaded;
             }

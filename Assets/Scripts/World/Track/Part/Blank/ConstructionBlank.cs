@@ -45,7 +45,8 @@ namespace LeaseExtension.World.Track.Part.Blank
         }
 
         [UsedImplicitly]
-        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, ConstructionPart.Factory, float, float, ConstructionBlank>
+        public class Factory : PlaceholderFactory<IConstructionPartBlueprint, ConstructionPart.Factory, float, float,
+            ConstructionBlank>
         {
         }
     }

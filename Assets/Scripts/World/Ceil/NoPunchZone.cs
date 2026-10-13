@@ -4,7 +4,7 @@ namespace LeaseExtension.World.Ceil
 {
     internal class NoPunchZone : MonoBehaviour
     {
-        private static int _zoneCount = 0;
+        private static int _zoneCount;
 
         public static bool InZone => _zoneCount > 0;
 

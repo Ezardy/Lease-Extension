@@ -20,7 +20,8 @@ namespace LeaseExtension.World.Track.Construction
         public float RangeEnd => _settings.RangeEnd;
         public bool IsRangeInversed => _settings.IsRangeInversed;
 
-        public ConstructionBlueprint(ConstructionBlueprintSettings settings, ConstructionPartBlueprintFactory.Factory partBlueprintFactory)
+        public ConstructionBlueprint(ConstructionBlueprintSettings settings,
+            ConstructionPartBlueprintFactory.Factory partBlueprintFactory)
         {
             _settings = settings;
             List<IConstructionPartBlueprint> parts = new();
@@ -28,6 +29,7 @@ namespace LeaseExtension.World.Track.Construction
             {
                 parts.Add(partBlueprintFactory.Create(part));
             }
+
             Parts = parts.AsReadOnly();
         }
 

@@ -18,7 +18,9 @@ namespace LeaseExtension.Cosmetics.Model
             set
             {
                 if (_idCollection.Contains(value))
+                {
                     _id.Value = value;
+                }
             }
         }
 

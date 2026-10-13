@@ -23,7 +23,10 @@ namespace LeaseExtension.World.Track.Part.Concrete
         {
             base.Place(position, scale, s, order);
             if (s != 0)
+            {
                 _sizer.Size = new(_sizer.Size.x, s / Transform.localScale.y);
+            }
+
             Transform.position += position - _sizer.Min + Blueprint.Margin * Vector3.right;
             _orderer.Order = order;
         }

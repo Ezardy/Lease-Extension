@@ -24,7 +24,7 @@ namespace LeaseExtension.SceneManagment.States
         private readonly MainSceneState.Factory _mainFactory;
         private readonly CancellationTokenSource _cts = new();
         private readonly IDisposable _disposable;
-        private bool _ready = false;
+        private bool _ready;
         private AsyncOperationHandle<SceneInstance> _handle;
 
         public WelcomeSceneState(
@@ -54,7 +54,10 @@ namespace LeaseExtension.SceneManagment.States
         public override void Dispose()
         {
             if (_handle.IsValid())
+            {
                 _handle.Release();
+            }
+
             _cts.Cancel();
             _disposable?.Dispose();
             SceneManager.UnloadSceneAsync(_welcomeScene);
@@ -78,7 +81,9 @@ namespace LeaseExtension.SceneManagment.States
         private void SetSceneGameObjectsActive(bool active)
         {
             foreach (GameObject go in _handle.Result.Scene.GetRootGameObjects())
+            {
                 go.SetActive(active);
+            }
         }
     }
 }

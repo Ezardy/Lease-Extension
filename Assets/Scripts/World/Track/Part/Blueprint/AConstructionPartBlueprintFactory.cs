@@ -20,10 +20,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             Container = container;
         }
 
-        protected virtual void InstallPools(TSettings settings)
-        {
-        }
-
         public abstract TBlueprint Create(TSettings settings, IReadOnlyList<IConstructionPartBlueprint> subParts);
 
         public void InstallPools(IConstructionPartBlueprintSettings settings)
@@ -35,6 +31,10 @@ namespace LeaseExtension.World.Track.Part.Blueprint
             IReadOnlyList<IConstructionPartBlueprint> subParts)
         {
             return Create((TSettings)settings, subParts);
+        }
+
+        protected virtual void InstallPools(TSettings settings)
+        {
         }
     }
 }
