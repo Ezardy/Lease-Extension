@@ -19,7 +19,7 @@ namespace LeaseExtension.Common.Utilities
         {
             _size = new(new(Screen.width, Screen.height));
             _disposable = Observable.EveryValueChanged(this, _ => new Vector2Int(Screen.width, Screen.height))
-                .Subscribe(s =>  _size.Value = s );
+                .Subscribe(s => _size.Value = s);
         }
 
         public void Dispose()

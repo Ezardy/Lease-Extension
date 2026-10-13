@@ -11,8 +11,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         AConstructionPartBlueprintFactory<ConstructionPartBlueprintSettings, ConstructionPartBlueprint>
     {
         public PrefabConstructionPartBlueprintFactory(DiContainer container) : base(container)
-        {
-        }
+        {}
 
         public override ConstructionPartBlueprint Create(ConstructionPartBlueprintSettings settings,
             IReadOnlyList<IConstructionPartBlueprint> subParts)

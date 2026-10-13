@@ -10,8 +10,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         AConstructionPartBlueprintFactory<GapConstructionPartBlueprintSettings, GapConstructionPartBlueprint>
     {
         public GapConstructionPartBlueprintFactory(DiContainer container) : base(container)
-        {
-        }
+        {}
 
         public override GapConstructionPartBlueprint Create(GapConstructionPartBlueprintSettings settings,
             IReadOnlyList<IConstructionPartBlueprint> subParts)

@@ -40,7 +40,6 @@ namespace LeaseExtension.World.Track.Construction
 
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<ConstructionBlueprintSettings, ConstructionBlueprint>
-        {
-        }
+        {}
     }
 }

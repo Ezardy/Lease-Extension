@@ -93,7 +93,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
 
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<IConstructionPartBlueprintSettings, IConstructionPartBlueprint>
-        {
-        }
+        {}
     }
 }

@@ -43,7 +43,6 @@ namespace LeaseExtension.Common.Utilities
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-        }
+        {}
     }
 }

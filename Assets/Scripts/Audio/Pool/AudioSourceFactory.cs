@@ -6,6 +6,5 @@ namespace LeaseExtension.Audio.Pool
 {
     [UsedImplicitly]
     internal class AudioSourceFactory : PlaceholderFactory<AudioSource>
-    {
-    }
+    {}
 }

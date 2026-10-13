@@ -48,8 +48,7 @@ namespace LeaseExtension.State
     {
         protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context, statePublisher, state)
-        {
-        }
+        {}
 
         public void OnSpawned(IMemoryPool pool)
         {
@@ -58,8 +57,7 @@ namespace LeaseExtension.State
 
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<T>
-        {
-        }
+        {}
     }
 
     public abstract class APoolablePublishingState<TP, T, TContext, TState> :
@@ -70,8 +68,7 @@ namespace LeaseExtension.State
     {
         protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context, statePublisher, state)
-        {
-        }
+        {}
 
         public virtual void OnSpawned(TP param, IMemoryPool pool)
         {
@@ -80,7 +77,6 @@ namespace LeaseExtension.State
 
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<TP, T>
-        {
-        }
+        {}
     }
 }

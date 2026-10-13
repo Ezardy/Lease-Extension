@@ -34,7 +34,6 @@ namespace LeaseExtension.World.Track.Part.Blueprint
         }
 
         protected virtual void InstallPools(TSettings settings)
-        {
-        }
+        {}
     }
 }

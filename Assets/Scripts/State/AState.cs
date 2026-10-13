@@ -12,15 +12,12 @@ namespace LeaseExtension.State
         }
 
         public virtual void Start()
-        {
-        }
+        {}
 
         public virtual void Update()
-        {
-        }
+        {}
 
         public virtual void Dispose()
-        {
-        }
+        {}
     }
 }

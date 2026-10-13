@@ -40,7 +40,6 @@ namespace LeaseExtension.World.Track.Part.Blank
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<IConstructionPartBlueprint, VirtualConstructionPart.Factory,
             VirtualConstructionBlank>
-        {
-        }
+        {}
     }
 }

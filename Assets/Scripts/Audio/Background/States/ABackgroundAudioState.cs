@@ -38,7 +38,6 @@ namespace LeaseExtension.Audio.Background.States
 
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<T>
-        {
-        }
+        {}
     }
 }

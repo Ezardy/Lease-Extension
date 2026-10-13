@@ -11,8 +11,7 @@ namespace LeaseExtension.UI.Game.Main
         public VisualElement EarnedGroup { get; private set; }
 
         public MainView(PanelRenderer panelRenderer) : base(panelRenderer, "main")
-        {
-        }
+        {}
 
         protected override void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
         {

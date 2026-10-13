@@ -17,8 +17,7 @@ namespace LeaseExtension.SceneManagment.States
         public MainSceneState(
             ISceneContext context,
             ReactiveProperty<FocusedScene> statePublisher) : base(context, statePublisher, FocusedScene.Main)
-        {
-        }
+        {}
 
         public override void OnSpawned(AsyncOperationHandle<SceneInstance> sceneHandle, IMemoryPool pool)
         {

@@ -20,8 +20,7 @@ namespace LeaseExtension.Audio.Contract
         public AudioPlayerParameters(
             IAudioGenerator generator,
             float volume = 1) : this(generator, volume, Vector2.zero)
-        {
-        }
+        {}
 
         public void ApplyTo(AudioSource source)
         {

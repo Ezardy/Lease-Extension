@@ -11,8 +11,7 @@ namespace LeaseExtension.UI.Game.Race
         private VisualElement _effects;
 
         public RaceView(PanelRenderer panelRenderer) : base(panelRenderer, "race")
-        {
-        }
+        {}
 
         public void AddEffect(string id, float duration, Texture texture)
         {

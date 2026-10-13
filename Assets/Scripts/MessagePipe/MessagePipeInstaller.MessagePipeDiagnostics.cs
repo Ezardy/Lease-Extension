@@ -9,8 +9,7 @@ namespace LeaseExtension.MessagePipe
         {
             [UsedImplicitly]
             public class Factory : PlaceholderFactory<MessagePipeDiagnostics>
-            {
-            }
+            {}
         }
     }
 }
