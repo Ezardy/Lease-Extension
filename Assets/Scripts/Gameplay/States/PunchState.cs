@@ -10,7 +10,7 @@ using Zenject;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class PunchState : APoolablePublishingState<float, PunchState, ICharacterContext, CharacterState>
+    internal class PunchState : PoolablePublishingState<float, PunchState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;
         private readonly Rigidbody2D _rigidBody;

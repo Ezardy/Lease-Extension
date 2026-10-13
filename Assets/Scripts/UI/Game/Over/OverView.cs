@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace LeaseExtension.UI.Game.Over
 {
     [UsedImplicitly]
-    internal class OverView : AView, IOverView
+    internal class OverView : View, IOverView
     {
         public Button AcceptButton { get; private set; }
 

@@ -7,7 +7,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
 {
     [UsedImplicitly]
     internal class GapConstructionPartBlueprintFactory :
-        AConstructionPartBlueprintFactory<GapConstructionPartBlueprintSettings, GapConstructionPartBlueprint>
+        ConstructionPartBlueprintFactoryBase<GapConstructionPartBlueprintSettings, GapConstructionPartBlueprint>
     {
         public GapConstructionPartBlueprintFactory(DiContainer container) : base(container)
         {}

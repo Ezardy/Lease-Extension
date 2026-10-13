@@ -7,7 +7,7 @@ using LeaseExtension.WebPlugin.SyncFS;
 
 namespace LeaseExtension.Save
 {
-    public abstract class ASave<TData> : ScriptableObject, ISave where TData : struct
+    public abstract class SaveBase<TData> : ScriptableObject, ISave where TData : struct
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         private const string PERSISTENT_DATA_PATH =

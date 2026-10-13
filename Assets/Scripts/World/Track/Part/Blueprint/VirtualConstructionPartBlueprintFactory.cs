@@ -8,7 +8,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
 {
     [UsedImplicitly]
     internal class VirtualConstructionPartBlueprintFactory :
-        AConstructionPartBlueprintFactory<VirtualConstructionPartBlueprintSettings, VirtualConstructionPartBlueprint>
+        ConstructionPartBlueprintFactoryBase<VirtualConstructionPartBlueprintSettings, VirtualConstructionPartBlueprint>
     {
         public VirtualConstructionPartBlueprintFactory(DiContainer container) : base(container)
         {}

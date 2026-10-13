@@ -8,7 +8,7 @@ using MessagePipe;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class CollisionCheckStateBase : AState<IContext>
+    internal class CollisionCheckStateBase : State<IContext>
     {
         private readonly ISubscriber<ObstacleCollided> _wallSubscriber;
         private readonly ISubscriber<FloorCollided> _floorSubscriber;

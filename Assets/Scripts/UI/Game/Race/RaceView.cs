@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 namespace LeaseExtension.UI.Game.Race
 {
     [UsedImplicitly]
-    internal class RaceView : AView, IRaceView
+    internal class RaceView : View, IRaceView
     {
         private VisualElement _effects;
 

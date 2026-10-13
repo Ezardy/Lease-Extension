@@ -11,7 +11,7 @@ using R3;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class WaitState : APoolablePublishingState<WaitState, ICharacterContext, CharacterState>
+    internal class WaitState : PoolablePublishingState<WaitState, ICharacterContext, CharacterState>
     {
         private readonly CollisionCheckStateBase _stateBase;
         private readonly PunchState.Factory _punchFactory;

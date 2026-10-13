@@ -5,13 +5,13 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Background.States
 {
-    internal abstract class ABackgroundAudioState<T> : AState<IBackgroundAudioContext>, IPoolable<IMemoryPool>
-        where T : ABackgroundAudioState<T>
+    internal abstract class BackgroundAudioState<T> : State<IBackgroundAudioContext>, IPoolable<IMemoryPool>
+        where T : BackgroundAudioState<T>
     {
         protected readonly int TriggerHash;
         private IMemoryPool _pool;
 
-        protected ABackgroundAudioState(IBackgroundAudioContext context, string animatorStateName) : base(context)
+        protected BackgroundAudioState(IBackgroundAudioContext context, string animatorStateName) : base(context)
         {
             TriggerHash = Animator.StringToHash(animatorStateName);
         }

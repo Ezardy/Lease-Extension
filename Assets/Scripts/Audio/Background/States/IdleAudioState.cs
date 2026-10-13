@@ -6,7 +6,7 @@ using R3;
 namespace LeaseExtension.Audio.Background.States
 {
     [UsedImplicitly]
-    internal class IdleAudioState : ABackgroundAudioState<IdleAudioState>
+    internal class IdleAudioState : BackgroundAudioState<IdleAudioState>
     {
         private readonly Observable<CharacterState> _characterStateSubscriber;
         private readonly RunAudioState.Factory _runFactory;

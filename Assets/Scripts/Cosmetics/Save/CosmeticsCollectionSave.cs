@@ -8,7 +8,7 @@ using Zenject;
 namespace LeaseExtension.Cosmetics.Save
 {
     [CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
-    internal class CosmeticsCollectionSave : ASave<CosmeticsCollection>, IInitializable, IDisposable
+    internal class CosmeticsCollectionSave : SaveBase<CosmeticsCollection>, IInitializable, IDisposable
     {
         private ICosmeticsElementModel _cosmetics;
         private IDisposable _disposable;

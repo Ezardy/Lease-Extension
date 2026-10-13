@@ -3,13 +3,13 @@ using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI
 {
-    internal abstract class AView : IView
+    internal abstract class View : IView
     {
         protected readonly string RootName;
 
         public VisualElement Root { get; private set; }
 
-        protected AView(PanelRenderer panelRenderer, string rootName)
+        protected View(PanelRenderer panelRenderer, string rootName)
         {
             RootName = rootName;
             panelRenderer.RegisterUIReloadCallback(OnGUIReload);

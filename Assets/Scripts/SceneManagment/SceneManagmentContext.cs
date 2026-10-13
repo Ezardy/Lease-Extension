@@ -1,12 +1,12 @@
 using JetBrains.Annotations;
 using LeaseExtension.SceneManagment.States;
-using LeaseExtension.State;
 using Zenject;
+using Context = LeaseExtension.State.Context;
 
 namespace LeaseExtension.SceneManagment
 {
     [UsedImplicitly]
-    internal class SceneManagmentContext : AContext, ISceneContext, IInitializable
+    internal class SceneManagmentContext : Context, ISceneContext, IInitializable
     {
         private readonly WelcomeSceneState.Factory _welcomeFactory;
 

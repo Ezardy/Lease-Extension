@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Blueprint
 {
-    internal abstract class AConstructionPartBlueprintFactory<TSettings, TBlueprint> :
+    internal abstract class ConstructionPartBlueprintFactoryBase<TSettings, TBlueprint> :
         IConstructionPartBlueprintFactory, IFactory<TSettings, IReadOnlyList<IConstructionPartBlueprint>, TBlueprint>
         where TSettings : ScriptableObject, IConstructionPartBlueprintSettings
         where TBlueprint : IConstructionPartBlueprint
@@ -15,7 +15,7 @@ namespace LeaseExtension.World.Track.Part.Blueprint
 
         public Type SettingsType => typeof(TSettings);
 
-        protected AConstructionPartBlueprintFactory(DiContainer container)
+        protected ConstructionPartBlueprintFactoryBase(DiContainer container)
         {
             Container = container;
         }

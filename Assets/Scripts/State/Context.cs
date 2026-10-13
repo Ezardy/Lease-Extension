@@ -2,7 +2,7 @@ using LeaseExtension.State.Contract;
 
 namespace LeaseExtension.State
 {
-    public abstract class AContext : IContext
+    public abstract class Context : IContext
     {
         private IState _state;
 

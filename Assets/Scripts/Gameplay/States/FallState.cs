@@ -10,7 +10,7 @@ using UnityEngine;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class FallState : APoolablePublishingState<FallState, ICharacterContext, CharacterState>
+    internal class FallState : PoolablePublishingState<FallState, ICharacterContext, CharacterState>
     {
         private readonly ISubscriber<FloorCollided> _subscriber;
         private readonly OverState.Factory _overStateFactory;

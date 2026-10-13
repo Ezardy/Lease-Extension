@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LeaseExtension.Audio.Background
 {
     [UsedImplicitly]
-    internal class BackgroundAudioContext : AContext, IBackgroundAudioContext
+    internal class BackgroundAudioContext : Context, IBackgroundAudioContext
     {
         public Animator Animator { get; }
 

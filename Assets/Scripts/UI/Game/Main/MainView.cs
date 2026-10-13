@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace LeaseExtension.UI.Game.Main
 {
     [UsedImplicitly]
-    internal class MainView : AView, IMainView
+    internal class MainView : View, IMainView
     {
         public Button StoreButton { get; private set; }
         public VisualElement EarnedGroup { get; private set; }

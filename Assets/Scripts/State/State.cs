@@ -2,11 +2,11 @@ using LeaseExtension.State.Contract;
 
 namespace LeaseExtension.State
 {
-    public abstract class AState<T> : IState where T : IContext
+    public abstract class State<T> : IState where T : IContext
     {
         protected readonly T Context;
 
-        public AState(T context)
+        public State(T context)
         {
             Context = context;
         }

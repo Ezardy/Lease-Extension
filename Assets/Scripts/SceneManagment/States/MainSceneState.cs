@@ -9,7 +9,7 @@ using Zenject;
 namespace LeaseExtension.SceneManagment.States
 {
     [UsedImplicitly]
-    internal class MainSceneState : APoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState,
+    internal class MainSceneState : PoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState,
         ISceneContext, FocusedScene>
     {
         private AsyncOperationHandle<SceneInstance> _sceneHandle;

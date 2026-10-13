@@ -6,14 +6,14 @@ using Zenject;
 
 namespace LeaseExtension.State
 {
-    public abstract class APoolablePublishingState<TContext, TState> : AState<TContext>
+    public abstract class PoolablePublishingState<TContext, TState> : State<TContext>
         where TContext : IContext where TState : Enum
     {
         private readonly ReactiveProperty<TState> _statePublisher;
         private readonly TState _state;
         private IMemoryPool _pool;
 
-        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+        protected PoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context)
         {
             _state = state;
@@ -41,12 +41,12 @@ namespace LeaseExtension.State
         }
     }
 
-    public abstract class APoolablePublishingState<T, TContext, TState> : APoolablePublishingState<TContext, TState>,
-        IPoolable<IMemoryPool> where T : APoolablePublishingState<T, TContext, TState>
+    public abstract class PoolablePublishingState<T, TContext, TState> : PoolablePublishingState<TContext, TState>,
+        IPoolable<IMemoryPool> where T : PoolablePublishingState<T, TContext, TState>
         where TContext : IContext
         where TState : Enum
     {
-        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+        protected PoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context, statePublisher, state)
         {}
 
@@ -60,13 +60,13 @@ namespace LeaseExtension.State
         {}
     }
 
-    public abstract class APoolablePublishingState<TP, T, TContext, TState> :
-        APoolablePublishingState<TContext, TState>,
-        IPoolable<TP, IMemoryPool> where T : APoolablePublishingState<TP, T, TContext, TState>
+    public abstract class PoolablePublishingState<TP, T, TContext, TState> :
+        PoolablePublishingState<TContext, TState>,
+        IPoolable<TP, IMemoryPool> where T : PoolablePublishingState<TP, T, TContext, TState>
         where TContext : IContext
         where TState : Enum
     {
-        protected APoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+        protected PoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context, statePublisher, state)
         {}
 

@@ -2,14 +2,14 @@ using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Gameplay.States;
-using LeaseExtension.State;
 using MessagePipe;
 using Zenject;
+using Context = LeaseExtension.State.Context;
 
 namespace LeaseExtension.Gameplay
 {
     [UsedImplicitly]
-    internal class CharacterStateMachine : AContext, ICharacterContext, IInitializable, IFixedTickable
+    internal class CharacterStateMachine : Context, ICharacterContext, IInitializable, IFixedTickable
     {
         private readonly IdleState.Factory _idleFactory;
 

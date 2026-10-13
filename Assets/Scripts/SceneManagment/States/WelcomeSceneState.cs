@@ -17,7 +17,7 @@ using Zenject;
 namespace LeaseExtension.SceneManagment.States
 {
     [UsedImplicitly]
-    internal class WelcomeSceneState : APoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>
+    internal class WelcomeSceneState : PoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>
     {
         private readonly Scene _welcomeScene;
         private readonly AssetReference _mainScene;
