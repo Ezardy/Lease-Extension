@@ -1,43 +1,47 @@
-using R3;
 using System;
+using LeaseExtension.World.Contract;
+using R3;
 using UnityEngine;
 using Zenject;
 
-namespace Aniki.World {
-	[CreateAssetMenu(fileName = "WorldModel", menuName = "Scriptable Objects/World Model")]
-	internal class WorldModel : ScriptableObject, IWorldModel, IInitializable, IDisposable {
-		[SerializeField] private SerializableReactiveProperty<float>	speed;
-		[SerializeField] private SerializableReactiveProperty<float>	perspective;
-		[SerializeField] private SerializableReactiveProperty<float>	gravity;
+namespace LeaseExtension.World
+{
+    [CreateAssetMenu(fileName = "WorldModel", menuName = "Scriptable Objects/World Model")]
+    internal class WorldModel : ScriptableObject, IWorldModel, IInitializable, IDisposable
+    {
+        [SerializeField] private SerializableReactiveProperty<float> _speed;
+        [SerializeField] private SerializableReactiveProperty<float> _perspective;
+        [SerializeField] private SerializableReactiveProperty<float> _gravity;
+        private readonly ReactiveProperty<float> _actualSpeed = new(1);
+        private float _amplifier = 1;
+        private IDisposable _disposable;
 
-		private readonly ReactiveProperty<float>	actualSpeed = new(1);
+        public float Speed => _actualSpeed.CurrentValue;
+        public float Perspective => _perspective.CurrentValue;
+        public float Gravity => _gravity.CurrentValue;
 
-		private float	amplifier = 1;
+        public float SpeedAmplifier
+        {
+            get => _amplifier;
+            set
+            {
+                _amplifier = value;
+                _actualSpeed.Value = _speed.CurrentValue * value;
+            }
+        }
 
-		private IDisposable	disposable;
+        public Observable<float> SpeedChanged => _actualSpeed;
+        public Observable<float> PerspectiveChanged => _perspective;
+        public Observable<float> GravityChanged => _gravity;
 
-		public float	Speed => actualSpeed.CurrentValue;
-		public float	Perspective => perspective.CurrentValue;
-		public float	Gravity => gravity.CurrentValue;
+        public void Initialize()
+        {
+            _disposable = _speed.Subscribe(s => _actualSpeed.Value = s * _amplifier);
+        }
 
-		public float	SpeedAmplifier {
-			get => amplifier;
-			set {
-				amplifier = value;
-				actualSpeed.Value = speed.CurrentValue * value;
-			}
-		}
-
-		public Observable<float>	SpeedChanged => actualSpeed;
-		public Observable<float>	PerspectiveChanged => perspective;
-		public Observable<float>	GravityChanged => gravity;
-
-		public void	Initialize() {
-			disposable = speed.Subscribe(s => actualSpeed.Value = s * amplifier);
-		}
-
-		public void	Dispose() {
-			disposable.Dispose();
-		}
-	}
+        public void Dispose()
+        {
+            _disposable.Dispose();
+        }
+    }
 }

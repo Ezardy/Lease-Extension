@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107936550917886619, guid: cbd8804cb6829054881a5adc17e7c2b9, type: 3}
       propertyPath: m_Name
-      value: top bar obstacle Variant
+      value: top bar obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 7548167483008959970, guid: cbd8804cb6829054881a5adc17e7c2b9, type: 3}
       propertyPath: m_FlipY

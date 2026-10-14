@@ -11,10 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 559b3187cc84ea441b3ddeedb2ac2968, type: 3}
   m_Name: LayerNames
-  m_EditorClassIdentifier: Common::Aniki.Common.LayerNames
-  defaultLayerName: Default
-  transparentFXLayerName: TransparentFX
-  ignoreRaycastLayerName: Ignore Raycast
-  waterLayerName: Water
-  uILayerName: UI
-  playerLayerName: Player
+  m_EditorClassIdentifier: LeaseExtension.Common::LeaseExtension.Common.Layer.LayerNames
+  _defaultLayerName: Default
+  _transparentFXLayerName: TransparentFX
+  _ignoreRaycastLayerName: Ignore Raycast
+  _waterLayerName: Water
+  _uILayerName: UI
+  _playerLayerName: Player

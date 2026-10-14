@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df4f161d6d4cea14ead07a1e323605fb, type: 3}
   m_Name: RecordSave
-  m_EditorClassIdentifier: Save::Aniki.Save.RecordSave
-  doLoad: 1
-  filename: record.json
-  data:
-    record: 0
+  m_EditorClassIdentifier: LeaseExtension.Record::LeaseExtension.Record.RecordSave
+  SaveData:
+    Value: 0
+  _doLoad: 1
+  _filename: record.json

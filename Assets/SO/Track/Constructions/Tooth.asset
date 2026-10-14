@@ -11,16 +11,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6f733a15e5598248993e939ff6f6289, type: 3}
   m_Name: Tooth
-  m_EditorClassIdentifier: World::Aniki.World.CollectableConstructionBlueprint
-  isRangeInversed: 0
-  height: 0
-  rangeStart: 0.5
-  rangeEnd: 0.5
-  minDelay: 5
-  maxDelay: 20
-  minMargin: 30
-  maxMargin: 50
-  parts:
-  - target: {fileID: 11400000, guid: f5c91b68edcc7a84cac6b6a2a6807b18, type: 2}
-  startHeight: 0.1
-  endHeight: 0.9
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Construction.SoaringConstructionBlueprint
+  Height: 0
+  PartReferences:
+  - _target: {fileID: 11400000, guid: f5c91b68edcc7a84cac6b6a2a6807b18, type: 2}
+  _isRangeInversed: 0
+  _rangeStart: 0.5
+  _rangeEnd: 0.5
+  _minDelay: 5
+  _maxDelay: 20
+  _minMargin: 30
+  _maxMargin: 50
+  _startHeight: 0.1
+  _endHeight: 0.9

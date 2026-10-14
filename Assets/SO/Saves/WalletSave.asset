@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3c37c7543631134b9149a559d7c0e1d, type: 3}
   m_Name: WalletSave
-  m_EditorClassIdentifier: Save::Aniki.Save.WalletSave
-  doLoad: 1
-  filename: wallet.json
-  data:
-    balance: 0
+  m_EditorClassIdentifier: LeaseExtension.Wallet::LeaseExtension.Wallet.WalletSave
+  SaveData:
+    Balance: 0
+  _doLoad: 1
+  _filename: wallet.json

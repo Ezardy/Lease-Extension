@@ -11,14 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60cd76ce98964b745b9fd0bb71da6e74, type: 3}
   m_Name: Window
-  m_EditorClassIdentifier: World::Aniki.World.ConstructionPartBlueprint
-  initialPool: 1
-  margin: 0
-  width: 20
-  autoWidth: 0
-  interfereWidth: 0
-  autoInterfereWidth: 0
-  sameWidth: 0
-  useSpriteRenderer: 0
-  zOrdering: 0
-  prefab: {fileID: 506676389304159407, guid: 3acd049716e2a38429f43b40be5da9b3, type: 3}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Part.Blueprint.ConstructionPartBlueprint
+  Prefab: {fileID: 506676389304159407, guid: 3acd049716e2a38429f43b40be5da9b3, type: 3}
+  _initialPool: 1
+  _margin: 0
+  _width: 20
+  _autoWidth: 0
+  _interfereWidth: 0
+  _autoInterfereWidth: 0
+  _sameWidth: 0
+  _useSpriteRenderer: 0
+  _zOrdering: 0
