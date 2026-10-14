@@ -3,7 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using LeaseExtension.Input.Contract;
-using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
 using R3;
@@ -14,7 +14,7 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace LeaseExtension.SceneManagment.States
+namespace LeaseExtension.SceneManagement.States
 {
     [UsedImplicitly]
     internal class WelcomeSceneState : PoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>

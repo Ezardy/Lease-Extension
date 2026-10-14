@@ -1,6 +1,6 @@
 using LeaseExtension.State.Contract;
 
-namespace LeaseExtension.SceneManagment
+namespace LeaseExtension.SceneManagement
 {
     internal interface ISceneContext : IContext
     {}

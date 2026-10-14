@@ -1,6 +1,6 @@
 using System;
 using JetBrains.Annotations;
-using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State.Contract;
 using R3;
 using Zenject;

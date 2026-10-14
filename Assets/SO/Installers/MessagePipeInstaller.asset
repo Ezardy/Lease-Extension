@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8de738670846454f9a69934fc78a8d0, type: 3}
   m_Name: MessagePipeInstaller
   m_EditorClassIdentifier: LeaseExtension.MessagePipe::LeaseExtension.MessagePipe.MessagePipeInstaller
+  _messageInstallers:
+  - {fileID: 11400000, guid: 12a1847f3d838ab4db2d1e4d0b620670, type: 2}
+  - {fileID: 11400000, guid: 66da096c2dbcbe4428c75e9b3fe46ded, type: 2}
+  - {fileID: 11400000, guid: c6a7af43e5aed9c4d999f661b6bfd55f, type: 2}
+  - {fileID: 11400000, guid: b9ddd6b6652296442a40a2b5c9fe1dad, type: 2}

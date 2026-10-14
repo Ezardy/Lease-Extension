@@ -1,5 +1,5 @@
-using LeaseExtension.SceneManagment.Contract.Message;
-using LeaseExtension.SceneManagment.States;
+using LeaseExtension.SceneManagement.Contract.Message;
+using LeaseExtension.SceneManagement.States;
 using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -8,10 +8,10 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace LeaseExtension.SceneManagment
+namespace LeaseExtension.SceneManagement.Installer
 {
-    [CreateAssetMenu(fileName = "SceneManagmentInstaller", menuName = "Installers/Scene Managment Installer")]
-    internal class SceneManagmentInstaller : ScriptableObjectInstaller<SceneManagmentInstaller>
+    [CreateAssetMenu(fileName = "SceneManagementInstaller", menuName = "Installers/Scene Management Installer")]
+    internal class SceneManagementInstaller : ScriptableObjectInstaller<SceneManagementInstaller>
     {
         [SerializeField] private AssetReference _mainScene;
 
@@ -29,7 +29,7 @@ namespace LeaseExtension.SceneManagment
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<AsyncOperationHandle<SceneInstance>, MainSceneState, MainSceneState.Factory>()
                 .FromPoolableMemoryPool();
-            Container.BindInterfacesTo<SceneManagmentContext>().AsSingle();
+            Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }
     }
 }

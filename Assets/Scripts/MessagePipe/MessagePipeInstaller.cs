@@ -1,7 +1,4 @@
-using LeaseExtension.Gameplay.Contract.Message;
-using LeaseExtension.Input.Contract;
-using LeaseExtension.SceneManagment.Contract.Message;
-using LeaseExtension.World.Contract.Message;
+using JetBrains.Annotations;
 using MessagePipe;
 using UnityEngine;
 using Zenject;
@@ -9,38 +6,36 @@ using Zenject;
 namespace LeaseExtension.MessagePipe
 {
     [CreateAssetMenu(fileName = "MessagePipeInstaller", menuName = "Installers/Message Pipe Installer")]
-    internal partial class MessagePipeInstaller : ScriptableObjectInstaller<MessagePipeInstaller>
+    internal class MessagePipeInstaller : ScriptableObjectInstaller<MessagePipeInstaller>
     {
+        [SerializeField] private MessagePipeInstallerBase[] _messageInstallers = new MessagePipeInstallerBase[0];
+
         public override void InstallBindings()
         {
-            InstallMessagePipe();
-        }
-
-        private void InstallMessagePipe()
-        {
             MessagePipeOptions options = Container.BindMessagePipe();
-            Container.BindMessageBroker<CharacterState>(options);
-            Container.BindMessageBroker<RestartRequested>(options);
-            Container.BindMessageBroker<FocusedScene>(options);
-            InstallInput(options);
-            InstallCollisions(options);
-            Container.BindFactory<MessagePipeDiagnostics, MessagePipeDiagnostics.Factory>()
-                .FromFactory<MessagePipeDiagnosticsFactory>();
+            foreach (MessagePipeInstallerBase installer in _messageInstallers)
+            {
+                Container.Inject(installer, new object[] { options });
+                installer.InstallBindings();
+            }
+
             Container.BindInterfacesTo<MessagePipeDiagnosticsBootstrap>().AsSingle();
         }
 
-        private void InstallCollisions(MessagePipeOptions options)
+        [UsedImplicitly]
+        private class MessagePipeDiagnosticsBootstrap : IInitializable
         {
-            Container.BindMessageBroker<ObstacleCollided>(options);
-            Container.BindMessageBroker<FloorCollided>(options);
-            Container.BindMessageBroker<ToothPicked>(options);
-            Container.BindMessageBroker<BarPassed>(options);
-        }
+            private readonly DiContainer _container;
 
-        private void InstallInput(MessagePipeOptions options)
-        {
-            Container.BindMessageBroker<PunchRequested>(options);
-            Container.BindMessageBroker<Tapped>(options);
+            public MessagePipeDiagnosticsBootstrap(DiContainer container)
+            {
+                _container = container;
+            }
+
+            public void Initialize()
+            {
+                GlobalMessagePipe.SetProvider(_container.AsServiceProvider());
+            }
         }
     }
 }

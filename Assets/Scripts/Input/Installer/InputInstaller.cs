@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Input
+namespace LeaseExtension.Input.Installer
 {
     [CreateAssetMenu(fileName = "InputInstaller", menuName = "Installers/Input Installer")]
     internal class InputInstaller : ScriptableObjectInstaller<InputInstaller>

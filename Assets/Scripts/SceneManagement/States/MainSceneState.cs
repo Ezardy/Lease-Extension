@@ -1,12 +1,12 @@
 using JetBrains.Annotations;
-using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State;
 using R3;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using Zenject;
 
-namespace LeaseExtension.SceneManagment.States
+namespace LeaseExtension.SceneManagement.States
 {
     [UsedImplicitly]
     internal class MainSceneState : PoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState,

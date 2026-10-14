@@ -1,4 +1,4 @@
-namespace LeaseExtension.SceneManagment.Contract.Message
+namespace LeaseExtension.SceneManagement.Contract.Message
 {
     public enum FocusedScene : byte
     {

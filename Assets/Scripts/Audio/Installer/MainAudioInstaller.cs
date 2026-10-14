@@ -4,7 +4,7 @@ using LeaseExtension.Audio.Contract;
 using LeaseExtension.Audio.Player;
 using LeaseExtension.Audio.Pool;
 using LeaseExtension.Gameplay.Contract.Message;
-using LeaseExtension.SceneManagment.Contract.Message;
+using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.World.Contract.Message;
 using UnityEngine;
 using UnityEngine.Pool;

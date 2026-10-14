@@ -7,7 +7,7 @@ using R3;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Gameplay
+namespace LeaseExtension.Gameplay.Installer
 {
     internal class GameplayMonoInstaller : MonoInstaller
     {
