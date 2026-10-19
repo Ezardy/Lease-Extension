@@ -11,14 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e076ed1c2751d0b49b06b2f3e3ea0c61, type: 3}
   m_Name: Window
-  m_EditorClassIdentifier: World::Aniki.World.ConstructionBlueprint
-  isRangeInversed: 0
-  height: 0
-  rangeStart: 1
-  rangeEnd: 1
-  minDelay: 0.01
-  maxDelay: 1
-  minMargin: 30
-  maxMargin: 50
-  parts:
-  - target: {fileID: 11400000, guid: 872ea22edde38194cb8f5780caaa9f5b, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Construction.ConstructionBlueprint
+  Height: 0
+  PartReferences:
+  - _target: {fileID: 11400000, guid: 872ea22edde38194cb8f5780caaa9f5b, type: 2}
+  _isRangeInversed: 0
+  _rangeStart: 1
+  _rangeEnd: 1
+  _minDelay: 0.01
+  _maxDelay: 1
+  _minMargin: 30
+  _maxMargin: 50

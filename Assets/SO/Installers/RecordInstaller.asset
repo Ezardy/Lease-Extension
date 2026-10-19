@@ -11,6 +11,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce2fbae3656aabd488cf8e9fafa2581a, type: 3}
   m_Name: RecordInstaller
-  m_EditorClassIdentifier: Record::Aniki.Record.RecordInstaller
-  useDefaults: 0
-  recordSave: {fileID: 11400000, guid: 9b30e5c7bcff04342b0ce90531402132, type: 2}
+  m_EditorClassIdentifier: LeaseExtension.Record::LeaseExtension.Record.RecordInstaller
+  _recordSave: {fileID: 11400000, guid: 9b30e5c7bcff04342b0ce90531402132, type: 2}

@@ -1,74 +1,111 @@
-using Aniki.Common;
-using Aniki.World;
-using System.Collections.Generic;
+using LeaseExtension.Common.Utilities;
+using LeaseExtension.World.Ceil;
+using LeaseExtension.World.Contract;
+using LeaseExtension.World.Floor;
+using LeaseExtension.World.Track;
+using LeaseExtension.World.Track.Construction;
+using LeaseExtension.World.Track.Part.Blank;
+using LeaseExtension.World.Track.Part.Blueprint;
+using LeaseExtension.World.Track.Part.Concrete;
+using LeaseExtension.World.Wall;
 using UnityEngine;
 using Zenject;
 
-internal class WorldMonoInstaller : MonoInstaller {
-	[SerializeField] private SpriteRenderer	floorSpriteRenderer;
-	[SerializeField] private Animator		floorAnimator;
-	[SerializeField] private MonoBehaviour	floorViewModel;
-	[SerializeField] private SpriteRenderer	wallSpriteRenderer;
+namespace LeaseExtension.World
+{
+    internal class WorldMonoInstaller : MonoInstaller
+    {
+        [SerializeField] private SpriteRenderer _floorSpriteRenderer;
+        [SerializeField] private Animator _floorAnimator;
+        [SerializeField] private MonoBehaviour _floorViewModel;
+        [SerializeField] private SpriteRenderer _wallSpriteRenderer;
+        [SerializeField, Space] private byte _trackCount = 11;
+        [SerializeField] private byte _maxConstructionCount = 100;
+        [SerializeField] private byte _reservedOrderCount = 5;
+        [SerializeField, Space] private Ref<IWorldModel> _worldModel;
+        [SerializeField] private ConstructionBlueprintDatabaseSettings _constructionDatabase;
 
-	[Space]
+        public override void InstallBindings()
+        {
+            InstallWall();
+            InstallFloor();
+            InstallTracks();
+            Container.BindInstance(_worldModel.I);
+            Container.QueueForInject(_worldModel.I);
+            Container.Bind<INoPunchZone>().To<NoPunchZoneManager>().AsSingle();
+            Container.BindInterfacesTo<WorldViewModel>().AsSingle();
+            Container.BindFactory<float, float, byte, int, ITrack, TrackFactory>()
+                .To<LeaseExtension.World.Track.Track>();
+            InstallPartBlueprints();
+        }
 
-	[SerializeField] private byte	trackCount = 11;
-	[SerializeField] private byte	maxConstructionCount = 100;
-	[SerializeField] private byte	reservedOrderCount = 5;
+        private void InstallTracks()
+        {
+            float depth = _floorSpriteRenderer.bounds.size.y;
+            float centerY = _floorSpriteRenderer.transform.position.y;
+            Container.BindInterfacesTo<TrackOrchestrator>().AsSingle().WithArguments(
+                _trackCount,
+                depth,
+                centerY,
+                _maxConstructionCount,
+                _reservedOrderCount);
+        }
 
-	[Space]
+        private void InstallWall()
+        {
+            Container.BindInterfacesTo<WallView>().AsSingle().WithArguments(_wallSpriteRenderer);
+            Container.BindInterfacesTo<WallViewModel>().AsSingle();
+        }
 
-	[SerializeField] private IRef<IWorldModel>						worldModel;
-	[SerializeField] private IRef<IConstructionBlueprintDatabase>	constructionDatabase;
+        private void InstallFloor()
+        {
+            Container.BindInstance(_floorAnimator).WhenInjectedInto<FloorViewModel>();
+            Container.BindInterfacesTo<FloorView>().AsSingle().WithArguments(_floorSpriteRenderer);
+            Container.QueueForInject(_floorViewModel);
+        }
 
-	public override void	InstallBindings() {
-		InstallWall();
-		InstallFloor();
-		InstallTracks();
+        private void InstallPartBlueprints()
+        {
+            IConstructionPartBlueprintFactory[] factories =
+            {
+                new PrefabConstructionPartBlueprintFactory(Container),
+                new GapConstructionPartBlueprintFactory(Container),
+                new VirtualConstructionPartBlueprintFactory(Container)
+            };
+            foreach (IConstructionPartBlueprintFactory factory in factories)
+            {
+                Container.QueueForInject(factory);
+            }
 
-		Container.BindInstance(worldModel.I);
-		Container.QueueForInject(worldModel.I);
-		Container.BindInstance(constructionDatabase.I);
-		Container.Bind<INoPunchZone>().To<NoPunchZoneManager>().AsSingle();
-		Container.BindInterfacesTo<WorldViewModel>().AsSingle();
-		Container.BindFactory<float, float, byte, int, ITrack, ITrackFactory>().To<Track>();
-		Container.BindFactory<Object, AConstructionPartBehaviour, AConstructionPartBehaviour.Factory>().FromFactory<PrefabFactory<AConstructionPartBehaviour>>();
+            ConstructionPartBlueprintFactory blueprintFactory = new(factories);
+            Container.BindInstance(blueprintFactory);
+            Container
+                .BindFactory<IConstructionPartBlueprint, ConstructionPart.Factory, float, float, ConstructionBlank,
+                    ConstructionBlank.Factory>()
+                .FromPoolableMemoryPool();
+            Container.BindFactory<IConstructionPartBlueprint, IConstructionPart, IConstructionPart, IConstructionPart,
+                GapConstructionPart, GapConstructionPart.Factory>().FromPoolableMemoryPool();
+            Container
+                .BindFactory<IConstructionPartBlueprint, IConstructionBlank, IConstructionBlank, IConstructionBlank,
+                    GapConstructionBlank, GapConstructionBlank.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<IConstructionPartBlueprint, VirtualConstructionPart.Factory,
+                VirtualConstructionBlank, VirtualConstructionBlank.Factory>().FromPoolableMemoryPool();
+            Container.BindFactory<IConstructionPartBlueprintSettings, IConstructionPartBlueprint,
+                    ConstructionPartBlueprintFactory.Factory>()
+                .FromIFactory(factory => factory.FromInstance(blueprintFactory));
+            Container
+                .BindFactory<ConstructionBlueprintSettings, ConstructionBlueprint,
+                    ConstructionBlueprint.Factory>();
+            Container.Bind<IConstructionBlueprintDatabase>().To<ConstructionBlueprintDatabase>()
+                .AsSingle().WithArguments(_constructionDatabase);
 
-		InstallPartBlueprints();
-	}
-
-	private void	InstallTracks() {
-		float	depth = floorSpriteRenderer.bounds.size.y;
-		float	centerY = floorSpriteRenderer.transform.position.y;
-
-
-		Container.BindInterfacesTo<TrackOrchectrator>().AsSingle()
-			.WithArguments(trackCount, depth, centerY, maxConstructionCount,
-				reservedOrderCount);
-	}
-
-	private void	InstallWall() {
-		Container.BindInterfacesTo<WallView>().AsSingle().WithArguments(wallSpriteRenderer);
-		Container.BindInterfacesTo<WallViewModel>().AsSingle();
-	}
-
-	private void	InstallFloor() {
-		Container.BindInstance(floorAnimator).WhenInjectedInto<FloorViewModel>();
-		Container.BindInterfacesTo<FloorView>().AsSingle().WithArguments(floorSpriteRenderer);
-		Container.QueueForInject(floorViewModel);
-	}
-
-	private void	InstallPartBlueprints() {
-		HashSet<object>	uniqueParts = new();
-
-		foreach (IConstructionBlueprint construction in constructionDatabase.I.Constructions) {
-			foreach (IConstructionPartBlueprint part in construction.Parts) {
-				uniqueParts.Add(part);
-				foreach (IConstructionPartBlueprint subPart in part.SubPartBlueprints)
-					uniqueParts.Add(subPart);
-			}
-		}
-		foreach (object part in uniqueParts)
-			Container.QueueForInject(part);
-	}
+            foreach (ConstructionBlueprintSettings construction in _constructionDatabase.ConstructionSettings)
+            {
+                foreach (IConstructionPartBlueprintSettings part in construction.PartSettings)
+                {
+                    blueprintFactory.InstallPools(part);
+                }
+            }
+        }
+    }
 }

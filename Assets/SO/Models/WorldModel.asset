@@ -11,10 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 035f49ed40ccbb644bf87f977382dbfc, type: 3}
   m_Name: WorldModel
-  m_EditorClassIdentifier: World::Aniki.World.WorldModel
-  speed:
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.WorldModel
+  _speed:
     value: 8
-  perspective:
+  _perspective:
     value: 0.5
-  gravity:
+  _gravity:
     value: -20

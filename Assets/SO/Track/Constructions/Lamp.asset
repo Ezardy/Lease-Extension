@@ -11,16 +11,16 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6f733a15e5598248993e939ff6f6289, type: 3}
   m_Name: Lamp
-  m_EditorClassIdentifier: World::Aniki.World.SoaringConstructionBlueprint
-  isRangeInversed: 0
-  height: 1
-  rangeStart: 0
-  rangeEnd: 0.3
-  minDelay: 5
-  maxDelay: 15
-  minMargin: 50
-  maxMargin: 100
-  parts:
-  - target: {fileID: 11400000, guid: 9d8a06535d58ead4dbe625ad62cbc90a, type: 2}
-  startHeight: 0.65
-  endHeight: 0.8
+  m_EditorClassIdentifier: LeaseExtension.World::LeaseExtension.World.Track.Construction.SoaringConstructionBlueprint
+  Height: 1
+  PartReferences:
+  - _target: {fileID: 11400000, guid: 9d8a06535d58ead4dbe625ad62cbc90a, type: 2}
+  _isRangeInversed: 0
+  _rangeStart: 0
+  _rangeEnd: 0.3
+  _minDelay: 5
+  _maxDelay: 15
+  _minMargin: 50
+  _maxMargin: 100
+  _startHeight: 0.65
+  _endHeight: 0.8

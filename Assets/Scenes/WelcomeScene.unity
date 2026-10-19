@@ -255,20 +255,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a897f67195196a84894c5ecc403a227a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UI::WelcomeMonoInstaller
-  panelRenderer: {fileID: 2100344651}
-  horizontalWelcome:
+  m_EditorClassIdentifier: LeaseExtension.UI::LeaseExtension.UI.Welcome.WelcomeMonoInstaller
+  _panelRenderer: {fileID: 2100344651}
+  _horizontalWelcome:
     m_AssetGUID: b7e6be15a83e6964ca036caa00f3ddad
     m_SubObjectName: gran horizontal_0
-    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
-  verticalWelcome:
+  _verticalWelcome:
     m_AssetGUID: 2f798b7fec76d5c429a58182d0bb5ef6
     m_SubObjectName: gran vertical_0
-    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_SubObjectGUID: 
     m_EditorAssetChanged: 1
 --- !u!1660057539 &9223372036854775807
