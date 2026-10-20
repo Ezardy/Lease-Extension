@@ -21,7 +21,7 @@ namespace LeaseExtension.World.Track
         private readonly List<ITrack> _tracks;
         private readonly List<IConstructionBlank> _blanks;
         private readonly IScreenSizeObserver _screenSizeObserver;
-        private readonly Observable<CharacterState> _stateSubscriber;
+        private readonly Observable<GameplayState> _stateSubscriber;
         private IDisposable _disposable;
         private float _distance;
         private float _lastX;
@@ -36,7 +36,7 @@ namespace LeaseExtension.World.Track
             TrackFactory trackFactory,
             IConstructionBlueprintDatabase database,
             IScreenSizeObserver screenSizeObserver,
-            Observable<CharacterState> stateSubscriber)
+            Observable<GameplayState> stateSubscriber)
         {
             _worldModel = worldModel;
             _database = database;
@@ -78,7 +78,7 @@ namespace LeaseExtension.World.Track
             IDisposable d1 = _screenSizeObserver.SizeChanged.Subscribe(Resize);
             IDisposable d2 = _stateSubscriber.Subscribe(s =>
             {
-                if (s == CharacterState.Idle)
+                if (s == GameplayState.Idle)
                 {
                     Reset();
                 }

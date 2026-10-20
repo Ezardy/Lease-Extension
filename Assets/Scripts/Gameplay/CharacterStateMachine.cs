@@ -16,7 +16,7 @@ namespace LeaseExtension.Gameplay
         public CharacterStateMachine(
             ICharacterModel characterModel,
             IdleState.Factory idleFactory,
-            ISubscriber<CharacterState> stateSubscriber)
+            ISubscriber<GameplayState> stateSubscriber)
         {
             _idleFactory = idleFactory;
         }

@@ -11,31 +11,12 @@ namespace LeaseExtension.Gameplay
         [SerializeField] private Animator _pupAnimator;
         private static readonly int _overHash = Animator.StringToHash("Over");
         private static readonly int _punchHash = Animator.StringToHash("Punch");
+        private Observable<GameplayState> _subscriber;
 
         [Inject]
-        public void Init(Observable<CharacterState> subscriber)
+        public void Init(Observable<GameplayState> subscriber)
         {
-            subscriber.Subscribe(s =>
-            {
-                switch (s)
-                {
-                    case CharacterState.Idle:
-                        Idle();
-                        break;
-                    case CharacterState.Wait:
-                        Wait();
-                        break;
-                    case CharacterState.Punch:
-                        Punch();
-                        break;
-                    case CharacterState.Fall:
-                        Fall();
-                        break;
-                    default:
-                        Over();
-                        break;
-                }
-            }).AddTo(this);
+            _subscriber = subscriber;
         }
 
         private void Idle()
@@ -70,6 +51,31 @@ namespace LeaseExtension.Gameplay
             _pupAnimator.SetBool(_punchHash, false);
             _babAnimator.SetBool(_punchHash, false);
             _babAnimator.SetBool(_overHash, true);
+        }
+
+        private void Start()
+        {
+            _subscriber.Subscribe(s =>
+            {
+                switch (s)
+                {
+                    case GameplayState.Idle:
+                        Idle();
+                        break;
+                    case GameplayState.Wait:
+                        Wait();
+                        break;
+                    case GameplayState.Punch:
+                        Punch();
+                        break;
+                    case GameplayState.Fall:
+                        Fall();
+                        break;
+                    default:
+                        Over();
+                        break;
+                }
+            }).AddTo(this);
         }
     }
 }

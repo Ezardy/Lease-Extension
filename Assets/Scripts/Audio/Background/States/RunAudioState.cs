@@ -8,13 +8,13 @@ namespace LeaseExtension.Audio.Background.States
     [UsedImplicitly]
     internal class RunAudioState : BackgroundAudioState<RunAudioState>
     {
-        private readonly Observable<CharacterState> _characterStateSubscriber;
+        private readonly Observable<GameplayState> _characterStateSubscriber;
         private readonly ResultAudioState.Factory _resultFactory;
         private IDisposable _disposable;
 
         public RunAudioState(
             IBackgroundAudioContext context,
-            Observable<CharacterState> characterStateSubscriber,
+            Observable<GameplayState> characterStateSubscriber,
             ResultAudioState.Factory resultFactory) : base(context, "Run")
         {
             _characterStateSubscriber = characterStateSubscriber;
@@ -26,7 +26,7 @@ namespace LeaseExtension.Audio.Background.States
             base.Start();
             _disposable = _characterStateSubscriber.Subscribe(s =>
             {
-                if (s == CharacterState.Over)
+                if (s == GameplayState.Over)
                 {
                     Context.State = _resultFactory.Create();
                 }

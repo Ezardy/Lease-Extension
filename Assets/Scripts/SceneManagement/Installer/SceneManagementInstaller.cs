@@ -9,15 +9,13 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace LeaseExtension.SceneManagement.Installer
 {
     [CreateAssetMenu(fileName = "SceneManagementInstaller", menuName = "Installers/Scene Management Installer")]
     internal class SceneManagementInstaller : ScriptableObjectInstaller<SceneManagementInstaller>
     {
-        [SerializeField] private SceneParameters test;
-        [SerializeField] private Dictionary<FocusedScene, SceneParameters> _sceneParameters = new();
+        [SerializeField] private List<SceneParameters> _sceneParameters;
 
         public override void InstallBindings()
         {
@@ -27,10 +25,14 @@ namespace LeaseExtension.SceneManagement.Installer
         
         private void InstallSceneParameters()
         {
-            foreach (KeyValuePair<FocusedScene, SceneParameters> sceneParameters in _sceneParameters)
+            Dictionary<FocusedScene, SceneParameters> uniqueParameters = new(_sceneParameters.Count);
+            foreach (SceneParameters parameters in _sceneParameters)
+            {
+                uniqueParameters.Add(parameters.Scene, parameters);
+            }
+            foreach (KeyValuePair<FocusedScene, SceneParameters> sceneParameters in uniqueParameters)
             {
                 Container.BindInstance(sceneParameters.Value.SceneReference).WithId(sceneParameters.Key);
-                Container.BindInstance(sceneParameters.Value.Prefabs).WithId(sceneParameters.Key);
             }
         }
 
@@ -48,8 +50,8 @@ namespace LeaseExtension.SceneManagement.Installer
         [Serializable]
         private class SceneParameters
         {
-            [SerializeField] public AssetReference SceneReference;
-            public List<Object> Prefabs;
+            public FocusedScene Scene;
+            public AssetReference SceneReference;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace LeaseExtension.Gameplay
         private SerializableReactiveProperty<float> _initialPunchHeight;
         [SerializeField, DontCreateProperty]
         private SerializableReactiveProperty<float> _punchPeriod;
-        private readonly SerializableReactiveProperty<CharacterState> _state = new(CharacterState.Idle);
+        private readonly SerializableReactiveProperty<GameplayState> _state = new(GameplayState.Idle);
 
         public float PunchHeight => _punchHeight.Value;
         public float InitialPunchHeight => _initialPunchHeight.Value;
@@ -24,6 +24,6 @@ namespace LeaseExtension.Gameplay
         public Observable<float> PunchHeightChanged => _punchHeight;
         public Observable<float> InitialPunchHeightChanged => _initialPunchHeight;
         public Observable<float> PunchPeriodChanged => _punchPeriod;
-        public Observable<CharacterState> StateChanged => _state;
+        public Observable<GameplayState> StateChanged => _state;
     }
 }

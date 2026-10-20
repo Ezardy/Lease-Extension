@@ -10,7 +10,7 @@ namespace LeaseExtension.Gameplay.Installer
     {
         public override void InstallBindings()
         {
-            Container.BindMessageBroker<CharacterState>(Options);
+            Container.BindMessageBroker<GameplayState>(Options);
             Container.BindMessageBroker<RestartRequested>(Options);
         }
     }

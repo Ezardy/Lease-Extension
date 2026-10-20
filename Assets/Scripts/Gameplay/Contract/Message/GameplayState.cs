@@ -1,6 +1,6 @@
 namespace LeaseExtension.Gameplay.Contract.Message
 {
-    public enum CharacterState : byte
+    public enum GameplayState : byte
     {
         Idle,
         Wait,

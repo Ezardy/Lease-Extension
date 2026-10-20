@@ -8,7 +8,7 @@ using R3;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class OverState : PoolablePublishingState<OverState, ICharacterContext, CharacterState>
+    internal class OverState : PoolablePublishingState<OverState, ICharacterContext, GameplayState>
     {
         private readonly ISubscriber<RestartRequested> _resetSubscriber;
         private readonly IdleState.Factory _idleFactory;
@@ -17,8 +17,8 @@ namespace LeaseExtension.Gameplay.States
         public OverState(
             ICharacterContext context,
             ISubscriber<RestartRequested> resetSubscriber,
-            ReactiveProperty<CharacterState> publisher,
-            IdleState.Factory idleFactory) : base(context, publisher, CharacterState.Over)
+            ReactiveProperty<GameplayState> publisher,
+            IdleState.Factory idleFactory) : base(context, publisher, GameplayState.Over)
         {
             _idleFactory = idleFactory;
             _resetSubscriber = resetSubscriber;

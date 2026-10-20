@@ -11,7 +11,7 @@ using R3;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class WaitState : PoolablePublishingState<WaitState, ICharacterContext, CharacterState>
+    internal class WaitState : PoolablePublishingState<WaitState, ICharacterContext, GameplayState>
     {
         private readonly CollisionCheckStateBase _stateBase;
         private readonly PunchState.Factory _punchFactory;
@@ -22,12 +22,12 @@ namespace LeaseExtension.Gameplay.States
 
         public WaitState(
             ICharacterContext context,
-            ReactiveProperty<CharacterState> publisher,
+            ReactiveProperty<GameplayState> publisher,
             CollisionCheckStateBase stateBase,
             PunchState.Factory punchFactory,
             ISubscriber<PunchRequested> punchInput,
             INoPunchZone noPunchZone,
-            ICharacterModel characterModel) : base(context, publisher, CharacterState.Wait)
+            ICharacterModel characterModel) : base(context, publisher, GameplayState.Wait)
         {
             _stateBase = stateBase;
             _punchInput = punchInput;

@@ -13,13 +13,13 @@ namespace LeaseExtension.UI.Game.Race
     [UsedImplicitly]
     internal class RaceViewModel : IRaceViewModel
     {
-        private readonly ReadOnlyReactiveProperty<CharacterState> _characterState;
+        private readonly ReadOnlyReactiveProperty<GameplayState> _characterState;
         private readonly IRecordModel _recordModel;
         private readonly IWalletModel _walletModel;
 
         [CreateProperty]
         public StyleEnum<DisplayStyle> GameDisplayStyle =>
-            _characterState.CurrentValue != CharacterState.Idle && _characterState.CurrentValue != CharacterState.Over
+            _characterState.CurrentValue != GameplayState.Idle && _characterState.CurrentValue != GameplayState.Over
                 ? DisplayStyle.Flex
                 : DisplayStyle.None;
 
@@ -29,7 +29,7 @@ namespace LeaseExtension.UI.Game.Race
 
         public RaceViewModel(
             IRaceView view,
-            ReadOnlyReactiveProperty<CharacterState> characterState,
+            ReadOnlyReactiveProperty<GameplayState> characterState,
             IRecordModel recordModel,
             IWalletModel walletModel)
         {

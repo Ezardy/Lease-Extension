@@ -10,7 +10,7 @@ using UnityEngine;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class FallState : PoolablePublishingState<FallState, ICharacterContext, CharacterState>
+    internal class FallState : PoolablePublishingState<FallState, ICharacterContext, GameplayState>
     {
         private readonly ISubscriber<FloorCollided> _subscriber;
         private readonly OverState.Factory _overStateFactory;
@@ -19,10 +19,10 @@ namespace LeaseExtension.Gameplay.States
 
         public FallState(
             ICharacterContext context,
-            ReactiveProperty<CharacterState> publisher,
+            ReactiveProperty<GameplayState> publisher,
             Rigidbody2D rigidbody,
             ISubscriber<FloorCollided> subscriber,
-            OverState.Factory overStateFactory) : base(context, publisher, CharacterState.Fall)
+            OverState.Factory overStateFactory) : base(context, publisher, GameplayState.Fall)
         {
             _rigidbody = rigidbody;
             _subscriber = subscriber;

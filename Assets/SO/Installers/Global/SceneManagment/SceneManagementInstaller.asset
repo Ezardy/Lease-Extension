@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 276c8339b9c231b47bf1abd62f860808, type: 3}
   m_Name: SceneManagementInstaller
   m_EditorClassIdentifier: LeaseExtension.SceneManagment::LeaseExtension.SceneManagment.SceneManagmentInstaller
-  _mainScene:
-    m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+  _sceneParameters:
+  - Scene: 1
+    SceneReference:
+      m_AssetGUID: 8c9cfa26abfee488c85f1582747f6a02
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    Prefabs:
+    - {fileID: 8372950798764470383, guid: 9fbd832b8c9243545a4410835210af8b, type: 3}

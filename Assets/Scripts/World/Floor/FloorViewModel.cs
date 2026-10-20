@@ -13,7 +13,7 @@ namespace LeaseExtension.World.Floor
         private static readonly int _wallHash = Animator.StringToHash("Wall");
         private static readonly int _floorHash = Animator.StringToHash("Floor");
         [SerializeField] private float _speed = 1;
-        private Observable<CharacterState> _subscriber;
+        private Observable<GameplayState> _subscriber;
         private bool _over;
         private IDisposable _runSubscription;
         private Animator _animator;
@@ -27,7 +27,7 @@ namespace LeaseExtension.World.Floor
         public void Init(
             IWorldModel worldModel,
             IFloorView floorView,
-            Observable<CharacterState> subscriber,
+            Observable<GameplayState> subscriber,
             Animator animator)
         {
             worldModel.SpeedChanged.Subscribe(s => floorView.Speed = s / (1 + worldModel.Perspective) * 2).AddTo(this);
@@ -39,13 +39,13 @@ namespace LeaseExtension.World.Floor
             {
                 switch (s)
                 {
-                    case CharacterState.Idle:
+                    case GameplayState.Idle:
                         Idle();
                         break;
-                    case CharacterState.Fall:
+                    case GameplayState.Fall:
                         Wall();
                         break;
-                    case CharacterState.Over:
+                    case GameplayState.Over:
                         Floor();
                         break;
                 }
@@ -57,7 +57,7 @@ namespace LeaseExtension.World.Floor
             _over = false;
             _runSubscription = _subscriber.Subscribe(s =>
             {
-                if (s == CharacterState.Punch)
+                if (s == GameplayState.Punch)
                 {
                     Run();
                 }

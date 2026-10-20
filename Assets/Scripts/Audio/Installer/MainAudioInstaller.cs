@@ -46,12 +46,12 @@ namespace LeaseExtension.Audio.Installer
 
         private void InstallCharacterAudio()
         {
-            Container.BindInterfacesTo<ReactiveAudioPlayer<CharacterState>>().FromSubContainerResolve()
+            Container.BindInterfacesTo<ReactiveAudioPlayer<GameplayState>>().FromSubContainerResolve()
                 .ByMethod(InstallCharacterPunchAudio).AsCached();
             Container.BindInterfacesTo<EventAudioPlayer<ObstacleCollided>>().AsSingle()
                 .WithArguments(_obstacle.ToParameters());
-            Container.BindInterfacesTo<ReactiveAudioPlayer<CharacterState>>().AsCached().WithArguments(
-                CharacterState.Over, _floor.ToParameters());
+            Container.BindInterfacesTo<ReactiveAudioPlayer<GameplayState>>().AsCached().WithArguments(
+                GameplayState.Over, _floor.ToParameters());
             Container.BindInterfacesTo<EventAudioPlayer<ToothPicked>>().AsSingle().WithArguments(_tooth.ToParameters());
             Container.Bind<AudioPlayerParameters>().FromSubContainerResolve().ByMethod(InstallCharacterSwingAudio)
                 .AsCached();
@@ -69,8 +69,8 @@ namespace LeaseExtension.Audio.Installer
         {
             container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(2);
             container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
-            container.Bind<ReactiveAudioPlayer<CharacterState>>().AsSingle().WithArguments(
-                _punch.ToParameters(), CharacterState.Punch);
+            container.Bind<ReactiveAudioPlayer<GameplayState>>().AsSingle().WithArguments(
+                _punch.ToParameters(), GameplayState.Punch);
         }
     }
 }

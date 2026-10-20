@@ -8,13 +8,13 @@ namespace LeaseExtension.Audio.Background.States
     [UsedImplicitly]
     internal class ResultAudioState : BackgroundAudioState<ResultAudioState>
     {
-        private readonly Observable<CharacterState> _characterStateSubscriber;
+        private readonly Observable<GameplayState> _characterStateSubscriber;
         private readonly IdleAudioState.Factory _idleFactory;
         private IDisposable _disposable;
 
         public ResultAudioState(
             IBackgroundAudioContext context,
-            Observable<CharacterState> characterStateSubscriber,
+            Observable<GameplayState> characterStateSubscriber,
             IdleAudioState.Factory idleFactory) : base(context, "Result")
         {
             _characterStateSubscriber = characterStateSubscriber;
@@ -26,7 +26,7 @@ namespace LeaseExtension.Audio.Background.States
             base.Start();
             _disposable = _characterStateSubscriber.Subscribe(s =>
                 {
-                    if (s == CharacterState.Idle)
+                    if (s == GameplayState.Idle)
                     {
                         Context.State = _idleFactory.Create();
                     }

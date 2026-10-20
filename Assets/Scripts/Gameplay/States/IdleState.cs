@@ -10,7 +10,7 @@ using R3;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class IdleState : PoolablePublishingState<IdleState, ICharacterContext, CharacterState>
+    internal class IdleState : PoolablePublishingState<IdleState, ICharacterContext, GameplayState>
     {
         private readonly ICharacterModel _characterModel;
         private readonly PunchState.Factory _punchFactory;
@@ -20,9 +20,9 @@ namespace LeaseExtension.Gameplay.States
         public IdleState(
             ICharacterContext context,
             PunchState.Factory punchFactory,
-            ReactiveProperty<CharacterState> publisher,
+            ReactiveProperty<GameplayState> publisher,
             ISubscriber<PunchRequested> punchInput,
-            ICharacterModel characterModel) : base(context, publisher, CharacterState.Idle)
+            ICharacterModel characterModel) : base(context, publisher, GameplayState.Idle)
         {
             _characterModel = characterModel;
             _punchFactory = punchFactory;

@@ -13,11 +13,11 @@ namespace LeaseExtension.UI.Game.Main
     [UsedImplicitly]
     internal class MainViewModel : IMainViewModel
     {
-        private readonly ReadOnlyReactiveProperty<CharacterState> _characterState;
+        private readonly ReadOnlyReactiveProperty<GameplayState> _characterState;
         private readonly IRecordModel _recordModel;
 
         [CreateProperty]
-        public StyleEnum<DisplayStyle> MainDisplayStyle => _characterState.CurrentValue == CharacterState.Idle
+        public StyleEnum<DisplayStyle> MainDisplayStyle => _characterState.CurrentValue == GameplayState.Idle
             ? DisplayStyle.Flex
             : DisplayStyle.None;
 
@@ -26,7 +26,7 @@ namespace LeaseExtension.UI.Game.Main
         public MainViewModel(
             IMainView view,
             IWalletModel walletModel,
-            ReadOnlyReactiveProperty<CharacterState> characterState,
+            ReadOnlyReactiveProperty<GameplayState> characterState,
             IRecordModel recordModel)
         {
             UniTask.WaitWhile(() => view.Root == null).ContinueWith(() =>

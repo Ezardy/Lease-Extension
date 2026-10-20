@@ -15,14 +15,14 @@ namespace LeaseExtension.Record
 
         public RecordIncrementer(
             IRecordModel model,
-            ReadOnlyReactiveProperty<CharacterState> characterState,
+            ReadOnlyReactiveProperty<GameplayState> characterState,
             ISubscriber<RestartRequested> resetSubscriber,
             ISubscriber<BarPassed> barPassedSubscriber)
         {
             IDisposable d2 = resetSubscriber.Subscribe(_ => model.SetRecord());
             IDisposable d1 = barPassedSubscriber.Subscribe(_ =>
             {
-                if (characterState.CurrentValue != CharacterState.Fall)
+                if (characterState.CurrentValue != GameplayState.Fall)
                 {
                     model.Increment();
                 }

@@ -16,13 +16,13 @@ namespace LeaseExtension.UI.Game.Over
     internal class OverViewModel : IOverViewModel, IDisposable
     {
         private readonly IOverView _view;
-        private readonly ReadOnlyReactiveProperty<CharacterState> _characterState;
+        private readonly ReadOnlyReactiveProperty<GameplayState> _characterState;
         private readonly IRecordModel _recordModel;
         private readonly IWalletModel _walletModel;
         private readonly IPublisher<RestartRequested> _publisher;
 
         [CreateProperty]
-        public StyleEnum<DisplayStyle> OverDisplayStyle => _characterState.CurrentValue == CharacterState.Over
+        public StyleEnum<DisplayStyle> OverDisplayStyle => _characterState.CurrentValue == GameplayState.Over
             ? DisplayStyle.Flex
             : DisplayStyle.None;
 
@@ -36,7 +36,7 @@ namespace LeaseExtension.UI.Game.Over
 
         public OverViewModel(
             IOverView view,
-            ReadOnlyReactiveProperty<CharacterState> characterState,
+            ReadOnlyReactiveProperty<GameplayState> characterState,
             IRecordModel recordModel,
             IWalletModel walletModel,
             IPublisher<RestartRequested> publisher)

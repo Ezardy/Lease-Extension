@@ -10,7 +10,7 @@ using Zenject;
 namespace LeaseExtension.Gameplay.States
 {
     [UsedImplicitly]
-    internal class PunchState : PoolablePublishingState<float, PunchState, ICharacterContext, CharacterState>
+    internal class PunchState : PoolablePublishingState<float, PunchState, ICharacterContext, GameplayState>
     {
         private readonly CollisionCheckStateBase _stateBase;
         private readonly Rigidbody2D _rigidBody;
@@ -23,11 +23,11 @@ namespace LeaseExtension.Gameplay.States
         public PunchState(
             ICharacterContext context,
             CollisionCheckStateBase stateBase,
-            ReactiveProperty<CharacterState> publisher,
+            ReactiveProperty<GameplayState> publisher,
             WaitState.Factory waitFactory,
             Rigidbody2D rigidBody,
             ICharacterModel characterModel,
-            IWorldModel worldModel) : base(context, publisher, CharacterState.Punch)
+            IWorldModel worldModel) : base(context, publisher, GameplayState.Punch)
         {
             _stateBase = stateBase;
             _rigidBody = rigidBody;
