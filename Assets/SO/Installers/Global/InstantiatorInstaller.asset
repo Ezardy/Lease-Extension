@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc37ddf2632994443817f6c9d73cf715, type: 3}
-  m_Name: UIInstaller
-  m_EditorClassIdentifier: UI::UIInstaller
+  m_Script: {fileID: 11500000, guid: 1efa9f0ad5b14ba8b0f4cc82c7bb8411, type: 3}
+  m_Name: InstantiatorInstaller
+  m_EditorClassIdentifier: LeaseExtension.Common::LeaseExtension.Common.Installer.InstantiatorInstaller

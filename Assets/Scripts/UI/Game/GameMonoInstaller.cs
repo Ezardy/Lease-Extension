@@ -7,7 +7,7 @@ using Zenject;
 
 namespace LeaseExtension.UI.Game
 {
-    internal class UIMonoInstaller : MonoInstaller
+    internal class GameMonoInstaller : MonoInstaller
     {
         [SerializeField] private PanelRenderer _panelRenderer;
 

@@ -71,9 +71,9 @@ namespace LeaseExtension.SceneManagement.States
                 LoadSceneMode.Additive);
             _handle = sceneHandle;
             await _handle.WithCancellation(_cts.Token);
-            SetSceneGameObjectsActive(false);
+            //SetSceneGameObjectsActive(false);
             await UniTask.WaitUntil(() => _ready, cancellationToken: _cts.Token);
-            SetSceneGameObjectsActive(true);
+            //SetSceneGameObjectsActive(true);
             _handle = new();
             Context.State = _mainFactory.Create(sceneHandle);
         }

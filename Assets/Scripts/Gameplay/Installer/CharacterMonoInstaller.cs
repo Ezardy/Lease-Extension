@@ -9,7 +9,7 @@ using Zenject;
 
 namespace LeaseExtension.Gameplay.Installer
 {
-    internal class GameplayMonoInstaller : MonoInstaller
+    internal class CharacterMonoInstaller : MonoInstaller
     {
         [SerializeField] private Ref<ICharacterModel> _characterModel;
         [SerializeField] private List<MonoBehaviour> _forInject;
