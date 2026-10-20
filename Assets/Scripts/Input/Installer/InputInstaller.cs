@@ -1,16 +1,16 @@
+using System;
+using LeaseExtension.Input.Relay;
 using UnityEngine;
 using Zenject;
 
 namespace LeaseExtension.Input.Installer
 {
-    [CreateAssetMenu(fileName = "InputInstaller", menuName = "Installers/Input Installer")]
+    [CreateAssetMenu(fileName = "InputInstaller", menuName = "Installers/Input/Input")]
     internal class InputInstaller : ScriptableObjectInstaller<InputInstaller>
     {
-        [SerializeField] private InputSettings _inputSettings;
-
         public override void InstallBindings()
         {
-            Container.QueueForInject(_inputSettings);
+            Container.Bind(typeof(LeaseExtensionInput), typeof(IDisposable)).To<LeaseExtensionInput>().AsSingle();
         }
     }
 }

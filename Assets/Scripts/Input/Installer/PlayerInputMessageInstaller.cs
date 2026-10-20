@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace LeaseExtension.Input.Installer
 {
-    [CreateAssetMenu(fileName = "InputMessageInstaller", menuName = "Installers/Input Messages")]
-    internal class InputMessageInstaller : MessagePipeInstallerBase
+    [CreateAssetMenu(fileName = "PlayerInputMessageInstaller", menuName = "Installers/Input/Player Messages")]
+    internal class PlayerInputMessageInstaller : MessagePipeInstallerBase
     {
         public override void InstallBindings()
         {
             Container.BindMessageBroker<PunchRequested>(Options);
-            Container.BindMessageBroker<Tapped>(Options);
         }
     }
 }

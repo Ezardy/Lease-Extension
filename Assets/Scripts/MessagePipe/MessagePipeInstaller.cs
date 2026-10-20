@@ -8,7 +8,7 @@ namespace LeaseExtension.MessagePipe
     [CreateAssetMenu(fileName = "MessagePipeInstaller", menuName = "Installers/Message Pipe Installer")]
     internal class MessagePipeInstaller : ScriptableObjectInstaller<MessagePipeInstaller>
     {
-        [SerializeField] private MessagePipeInstallerBase[] _messageInstallers = new MessagePipeInstallerBase[0];
+        [SerializeField] private MessagePipeInstallerBase[] _messageInstallers;
 
         public override void InstallBindings()
         {

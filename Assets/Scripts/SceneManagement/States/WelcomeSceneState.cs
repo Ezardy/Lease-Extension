@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
-using LeaseExtension.Input.Contract;
 using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State;
 using MessagePipe;
@@ -19,6 +18,7 @@ namespace LeaseExtension.SceneManagement.States
     [UsedImplicitly]
     internal class WelcomeSceneState : PoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>
     {
+        private static readonly FocusedSceneFilter _filter = new(FocusedScene.Main);
         private readonly Scene _welcomeScene;
         private readonly AssetReference _mainScene;
         private readonly MainSceneState.Factory _mainFactory;
@@ -31,18 +31,18 @@ namespace LeaseExtension.SceneManagement.States
             ISceneContext context,
             Scene welcomeScene,
             ReactiveProperty<FocusedScene> statePublisher,
+            ISubscriber<FocusedScene> requestSubscriber,
             [Inject(Id = FocusedScene.Main)] AssetReference mainScene,
-            ISubscriber<Tapped> tapSubscriber,
             MainSceneState.Factory mainFactory) : base(context, statePublisher, FocusedScene.Welcome)
         {
             _welcomeScene = welcomeScene;
             _mainScene = mainScene;
             _mainFactory = mainFactory;
-            _disposable = tapSubscriber.Subscribe(_ =>
+            _disposable = requestSubscriber.Subscribe(_ =>
             {
                 _ready = true;
                 _disposable.Dispose();
-            });
+            }, _filter);
         }
 
         public override void Start()

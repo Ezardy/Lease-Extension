@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed2a8201b5a345a49beec76269d39b46, type: 3}
-  m_Name: InputMessageInstaller
-  m_EditorClassIdentifier: LeaseExtension.Input::LeaseExtension.Input.InputMessageInstaller
+  m_Script: {fileID: 11500000, guid: 9ac5d6da12b04299863319515f333263, type: 3}
+  m_Name: UIInputMessageInstaller
+  m_EditorClassIdentifier: LeaseExtension.Input::LeaseExtension.Input.Installer.UIInputMessageInstaller

@@ -1336,7 +1336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Zenject::Zenject.SceneContext
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 6d80c45accd90d94ebeca1762c8d151a, type: 2}
+  - {fileID: 11400000, guid: 99f7cfee77c08c944a559e1c641b3f66, type: 2}
+  - {fileID: 11400000, guid: a96d62193f58763409f5ef49a7e20be2, type: 2}
   _monoInstallers:
   - {fileID: 1290385284}
   - {fileID: 370017671}

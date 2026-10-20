@@ -1,9 +1,9 @@
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Wallet
+namespace LeaseExtension.Wallet.Installer
 {
-    [CreateAssetMenu(fileName = "WalletInstaller", menuName = "Installers/Wallet Installer")]
+    [CreateAssetMenu(fileName = "WalletInstaller", menuName = "Installers/Wallet/Wallet")]
     internal class WalletInstaller : ScriptableObjectInstaller<WalletInstaller>
     {
         [SerializeField] private WalletSave _walletSave;
@@ -14,7 +14,6 @@ namespace LeaseExtension.Wallet
             Container.BindInterfacesTo<WalletModel>().AsSingle().WithArguments(_walletSave.Data.Balance);
             Container.BindInterfacesTo<WalletSave>().FromInstance(_walletSave);
             Container.QueueForInject(_walletSave);
-            Container.BindInterfacesTo<WalletUpdater>().AsSingle();
         }
     }
 }

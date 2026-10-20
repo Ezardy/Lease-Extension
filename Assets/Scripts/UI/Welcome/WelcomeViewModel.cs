@@ -2,7 +2,10 @@ using System;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
+using LeaseExtension.Input.Contract;
+using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.UI.Contract;
+using MessagePipe;
 using R3;
 using Unity.Properties;
 using UnityEngine;
@@ -20,21 +23,24 @@ namespace LeaseExtension.UI.Welcome
         private bool _isVertical;
         private AsyncOperationHandle<Sprite> _spriteHandle;
 
-        [CreateProperty]
-        public Sprite Welcome { get; private set; }
+        [CreateProperty] public Sprite Welcome { get; private set; }
 
         public WelcomeViewModel(
             IWelcomeView view,
             AssetReferenceSprite horizontalWelcome,
             AssetReferenceSprite verticalWelcome,
-            IScreenSizeObserver screenSizeObserver)
+            IScreenSizeObserver screenSizeObserver,
+            ISubscriber<Submitted> submitSubscriber,
+            IPublisher<FocusedScene> sceneRequestPublisher)
         {
             Vector2Int screenSize = screenSizeObserver.Size;
             _horizontalWelcome = horizontalWelcome;
             _verticalWelcome = verticalWelcome;
             UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Root.dataSource = this).Forget();
             _isVertical = screenSize.x > screenSize.y;
-            _disposable = screenSizeObserver.SizeChanged.Subscribe(SetSprite);
+            IDisposable d1 = screenSizeObserver.SizeChanged.Subscribe(SetSprite);
+            IDisposable d2 = submitSubscriber.Subscribe(_ => sceneRequestPublisher.Publish(FocusedScene.Main));
+            _disposable = Disposable.Combine(d1, d2);
         }
 
         public void Dispose()
