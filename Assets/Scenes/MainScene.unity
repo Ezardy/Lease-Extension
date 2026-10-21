@@ -427,7 +427,6 @@ GameObject:
   - component: {fileID: 1290385283}
   - component: {fileID: 1290385282}
   - component: {fileID: 1290385284}
-  - component: {fileID: 1290385285}
   - component: {fileID: 1290385286}
   m_Layer: 0
   m_Name: SceneContext
@@ -457,7 +456,6 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1290385284}
   - {fileID: 6003574216855412968}
-  - {fileID: 1290385285}
   - {fileID: 1290385286}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
@@ -514,43 +512,6 @@ MonoBehaviour:
   _worldModel:
     _target: {fileID: 11400000, guid: 6024f10655c6a9b4f8597f38672304f3, type: 2}
   _constructionDatabase: {fileID: 11400000, guid: 349f70f89c36a5c468d0eef906062aeb, type: 2}
---- !u!114 &1290385285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290385281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8ad21f3270c0d4491426ae80f27b93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.MainAudioInstaller
-  _punch:
-    _volume: 0.45
-    _generator:
-      _target: {fileID: 6418180475301049370, guid: da6b862fa1c996243b2efc5e83aa8d7b, type: 2}
-  _obstacle:
-    _volume: 1
-    _generator:
-      _target: {fileID: 8300000, guid: a87d45ea18a37754cacb489d93fa3af1, type: 3}
-  _floor:
-    _volume: 1
-    _generator:
-      _target: {fileID: 8300000, guid: ea8a6e142b83f6d469bed8460d5dd2df, type: 3}
-  _tooth:
-    _volume: 1
-    _generator:
-      _target: {fileID: 8300000, guid: f9b59ca61ffd6a347b81dd8a76a0153f, type: 3}
-  _sign:
-    _volume: 1
-    _generator:
-      _target: {fileID: 8300000, guid: b683439ed05a834408e6b1b5660ae378, type: 3}
-  _weightSwing:
-    _volume: 0.3
-    _generator:
-      _target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}
-  _swingPlayer: {fileID: 0}
 --- !u!114 &1290385286
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 9090359399068851545}
   - component: {fileID: 8203114978673424502}
   - component: {fileID: 3282150673867810968}
+  - component: {fileID: 5379772873956348482}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1220,6 +1221,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 8203114978673424502}
+  - {fileID: 5379772873956348482}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
   _autoRun: 1
@@ -1238,8 +1240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterMonoInstaller
   _characterModel:
     _target: {fileID: 11400000, guid: 762f93b221b2cb64bae4c0335c2564f7, type: 2}
-  _forInject:
-  - {fileID: 3282150673867810968}
   _characterRigidbody: {fileID: 8113464824561396145}
 --- !u!114 &3282150673867810968
 MonoBehaviour:
@@ -1255,3 +1255,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Gameplay::LeaseExtension.Gameplay.CharacterAnimator
   _babAnimator: {fileID: 6153523801676788869}
   _pupAnimator: {fileID: 2643691138884917819}
+--- !u!114 &5379772873956348482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372950798764470383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8ad21f3270c0d4491426ae80f27b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LeaseExtension.Audio::LeaseExtension.Audio.MainAudioInstaller
+  _punch:
+    _volume: 0.45
+    _generator:
+      _target: {fileID: 6418180475301049370, guid: da6b862fa1c996243b2efc5e83aa8d7b, type: 2}
+  _obstacle:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: a87d45ea18a37754cacb489d93fa3af1, type: 3}
+  _floor:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: ea8a6e142b83f6d469bed8460d5dd2df, type: 3}
+  _tooth:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: f9b59ca61ffd6a347b81dd8a76a0153f, type: 3}
+  _sign:
+    _volume: 1
+    _generator:
+      _target: {fileID: 8300000, guid: b683439ed05a834408e6b1b5660ae378, type: 3}
+  _weightSwing:
+    _volume: 0.3
+    _generator:
+      _target: {fileID: 8300000, guid: de0e627e53fb1974880c5888d637c935, type: 3}

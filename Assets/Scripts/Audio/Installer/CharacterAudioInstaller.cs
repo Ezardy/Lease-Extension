@@ -12,15 +12,14 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Installer
 {
-    internal class MainAudioInstaller : MonoInstaller
+    internal class CharacterAudioInstaller : MonoInstaller
     {
         [SerializeField] private VolumeGeneratorPair _punch;
         [SerializeField] private VolumeGeneratorPair _obstacle;
         [SerializeField] private VolumeGeneratorPair _floor;
         [SerializeField] private VolumeGeneratorPair _tooth;
-        [SerializeField, Space] private VolumeGeneratorPair _sign;
-        [SerializeField, Space] private VolumeGeneratorPair _weightSwing;
-        [SerializeField] private OneShotAudioBehaviourPlayer _swingPlayer;
+        [SerializeField] private VolumeGeneratorPair _sign;
+        [SerializeField] private VolumeGeneratorPair _weightSwing;
 
         public override void InstallBindings()
         {
@@ -62,7 +61,6 @@ namespace LeaseExtension.Audio.Installer
             container.Decorate<IObjectPool<AudioSource>>().With<ReusingAudioSourcePool>().WithArguments(1);
             container.BindInterfacesTo<OneShotAudioPlayer>().AsSingle();
             container.BindInstance(_weightSwing.ToParameters());
-            container.QueueForInject(_swingPlayer);
         }
 
         private void InstallCharacterPunchAudio(DiContainer container)
