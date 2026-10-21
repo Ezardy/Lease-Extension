@@ -11,7 +11,7 @@ namespace LeaseExtension.SceneManagement.Installer
     {
         [SerializeField] private FocusedScene _scene;
         [SerializeField] private List<Object> _prefabs;
-        
+
         public override void InstallBindings()
         {
             Container.BindInstance(_scene);

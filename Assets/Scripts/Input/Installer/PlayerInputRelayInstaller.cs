@@ -9,7 +9,8 @@ namespace LeaseExtension.Input.Installer
     {
         public override void InstallBindings()
         {
-            Container.Bind<LeaseExtensionInput.PlayerActions>().FromResolveGetter<LeaseExtensionInput>(input => input.Player);
+            Container.Bind<LeaseExtensionInput.PlayerActions>()
+                .FromResolveGetter<LeaseExtensionInput>(input => input.Player);
             Container.BindInterfacesTo<PlayerInputRelay>().AsSingle();
         }
     }

@@ -11,14 +11,6 @@ namespace LeaseExtension.Cosmetics.Model
         [SerializeField] private List<CosmeticsItemModel> _variants;
         private Dictionary<string, CosmeticsItemModel> _variantsDict;
 
-        private void OnEnable()
-        {
-            if (_variants != null)
-            {
-                _variantsDict = _variants.ToDictionary(p => p.Id);
-            }
-        }
-
         public ICosmeticsItemModel GetCosmeticsItemModel(string id)
         {
             return _variantsDict[id];
@@ -27,6 +19,14 @@ namespace LeaseExtension.Cosmetics.Model
         public IEnumerable<ICosmeticsItemModel> GetCosmeticsItemModels()
         {
             return _variants;
+        }
+
+        private void OnEnable()
+        {
+            if (_variants != null)
+            {
+                _variantsDict = _variants.ToDictionary(p => p.Id);
+            }
         }
     }
 }

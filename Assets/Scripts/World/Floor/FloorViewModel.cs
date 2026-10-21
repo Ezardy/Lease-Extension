@@ -18,11 +18,6 @@ namespace LeaseExtension.World.Floor
         private IDisposable _runSubscription;
         private Animator _animator;
 
-        private void OnDestroy()
-        {
-            _runSubscription?.Dispose();
-        }
-
         [Inject]
         public void Init(
             IWorldModel worldModel,
@@ -82,6 +77,11 @@ namespace LeaseExtension.World.Floor
             {
                 _animator.SetTrigger(_floorHash);
             }
+        }
+
+        private void OnDestroy()
+        {
+            _runSubscription?.Dispose();
         }
     }
 }

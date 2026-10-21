@@ -19,20 +19,6 @@ namespace LeaseExtension.Audio.Background
         private IDisposable _disposable;
         private bool _isFirst;
 
-        private void Start()
-        {
-            IDisposable d1 = Observable.EveryValueChanged(this, c => c._transition).Skip(1)
-                .Subscribe(t => SetAudioSources(t, _volume.CurrentValue));
-            IDisposable d2 = _volume.Subscribe(v => SetAudioSources(_transition, v));
-            IDisposable d3 = Observable.EveryValueChanged(this, c => c._clip).Skip(1).Subscribe(SetClip);
-            _disposable = Disposable.Combine(d1, d2, d3);
-        }
-
-        private void OnDestroy()
-        {
-            _disposable.Dispose();
-        }
-
         private void SetClip(AudioClip clip)
         {
             if (_isFirst)
@@ -88,6 +74,20 @@ namespace LeaseExtension.Audio.Background
             }
 
             a2.volume = v * (1 - t);
+        }
+
+        private void Start()
+        {
+            IDisposable d1 = Observable.EveryValueChanged(this, c => c._transition).Skip(1)
+                .Subscribe(t => SetAudioSources(t, _volume.CurrentValue));
+            IDisposable d2 = _volume.Subscribe(v => SetAudioSources(_transition, v));
+            IDisposable d3 = Observable.EveryValueChanged(this, c => c._clip).Skip(1).Subscribe(SetClip);
+            _disposable = Disposable.Combine(d1, d2, d3);
+        }
+
+        private void OnDestroy()
+        {
+            _disposable.Dispose();
         }
     }
 }

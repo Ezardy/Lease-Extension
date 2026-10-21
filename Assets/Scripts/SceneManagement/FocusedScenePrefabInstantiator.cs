@@ -12,8 +12,9 @@ namespace LeaseExtension.SceneManagement
     internal class FocusedScenePrefabInstantiator : IDisposable
     {
         private readonly IDisposable _disposable;
-        
-        public FocusedScenePrefabInstantiator(FocusedScene scene, Observable<FocusedScene> sceneObservable, PrefabFactory.Factory sceneFactory, List<Object> prefabs)
+
+        public FocusedScenePrefabInstantiator(FocusedScene scene, Observable<FocusedScene> sceneObservable,
+            PrefabFactory.Factory sceneFactory, List<Object> prefabs)
         {
             _disposable = sceneObservable.Subscribe(s =>
             {

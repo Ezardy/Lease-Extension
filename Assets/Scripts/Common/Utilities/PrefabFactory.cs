@@ -18,7 +18,7 @@ namespace LeaseExtension.Common.Utilities
         {
             return _container.InstantiatePrefab(prefab);
         }
-        
+
         [UsedImplicitly]
         public class Factory : PlaceholderFactory<Object, GameObject>
         {}

@@ -22,7 +22,7 @@ namespace LeaseExtension.SceneManagement.Installer
             InstallSceneParameters();
             InstallSceneStates();
         }
-        
+
         private void InstallSceneParameters()
         {
             Dictionary<FocusedScene, SceneParameters> uniqueParameters = new(_sceneParameters.Count);
@@ -30,6 +30,7 @@ namespace LeaseExtension.SceneManagement.Installer
             {
                 uniqueParameters.Add(parameters.Scene, parameters);
             }
+
             foreach (KeyValuePair<FocusedScene, SceneParameters> sceneParameters in uniqueParameters)
             {
                 Container.BindInstance(sceneParameters.Value.SceneReference).WithId(sceneParameters.Key);
