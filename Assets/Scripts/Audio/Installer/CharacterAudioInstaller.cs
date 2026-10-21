@@ -4,7 +4,6 @@ using LeaseExtension.Audio.Contract;
 using LeaseExtension.Audio.Player;
 using LeaseExtension.Audio.Pool;
 using LeaseExtension.Gameplay.Contract.Message;
-using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.World.Contract.Message;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,7 +11,8 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Installer
 {
-    internal class CharacterAudioInstaller : MonoInstaller
+    [CreateAssetMenu(fileName = "CharacterAudioInstaller", menuName = "Installers/Audio/Character")]
+    internal class CharacterAudioInstaller : ScriptableObjectInstaller<CharacterAudioInstaller>
     {
         [SerializeField] private VolumeGeneratorPair _punch;
         [SerializeField] private VolumeGeneratorPair _obstacle;
@@ -31,7 +31,7 @@ namespace LeaseExtension.Audio.Installer
         private void InstallStateAudio()
         {
             Container.BindInterfacesTo<CrossSceneAudioStateTransition<IdleAudioState, IdleAudioState.Factory>>()
-                .AsSingle().WithArguments(FocusedScene.Game);
+                .AsSingle();
             Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();

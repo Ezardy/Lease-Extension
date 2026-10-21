@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Installer
 {
-    [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio Installer")]
+    [CreateAssetMenu(fileName = "AudioInstaller", menuName = "Installers/Audio/Audio")]
     internal class AudioInstaller : ScriptableObjectInstaller<AudioInstaller>
     {
         [SerializeField] private AudioSource _poolPrefab;

@@ -8,17 +8,17 @@ namespace LeaseExtension.Audio.Background.States
     internal abstract class BackgroundAudioState<T> : State<IBackgroundAudioContext>, IPoolable<IMemoryPool>
         where T : BackgroundAudioState<T>
     {
-        protected readonly int TriggerHash;
+        private readonly int _triggerHash;
         private IMemoryPool _pool;
 
         protected BackgroundAudioState(IBackgroundAudioContext context, string animatorStateName) : base(context)
         {
-            TriggerHash = Animator.StringToHash(animatorStateName);
+            _triggerHash = Animator.StringToHash(animatorStateName);
         }
 
         public override void Start()
         {
-            Context.Animator.SetTrigger(TriggerHash);
+            Context.Animator.SetTrigger(_triggerHash);
         }
 
         public void OnDespawned()
