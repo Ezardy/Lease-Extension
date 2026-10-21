@@ -31,7 +31,7 @@ namespace LeaseExtension.Audio.Installer
         private void InstallStateAudio()
         {
             Container.BindInterfacesTo<CrossSceneAudioStateTransition<IdleAudioState, IdleAudioState.Factory>>()
-                .AsSingle().WithArguments(FocusedScene.Main);
+                .AsSingle().WithArguments(FocusedScene.Game);
             Container.BindFactory<IdleAudioState, IdleAudioState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<RunAudioState, RunAudioState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<ResultAudioState, ResultAudioState.Factory>().FromPoolableMemoryPool();

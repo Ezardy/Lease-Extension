@@ -39,7 +39,7 @@ namespace LeaseExtension.UI.Welcome
             UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Root.dataSource = this).Forget();
             _isVertical = screenSize.x > screenSize.y;
             IDisposable d1 = screenSizeObserver.SizeChanged.Subscribe(SetSprite);
-            IDisposable d2 = submitSubscriber.Subscribe(_ => sceneRequestPublisher.Publish(FocusedScene.Main));
+            IDisposable d2 = submitSubscriber.Subscribe(_ => sceneRequestPublisher.Publish(FocusedScene.Game));
             _disposable = Disposable.Combine(d1, d2);
         }
 

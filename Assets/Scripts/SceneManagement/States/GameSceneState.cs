@@ -9,14 +9,14 @@ using Zenject;
 namespace LeaseExtension.SceneManagement.States
 {
     [UsedImplicitly]
-    internal class MainSceneState : PoolablePublishingState<AsyncOperationHandle<SceneInstance>, MainSceneState,
+    internal class GameSceneState : PoolablePublishingState<AsyncOperationHandle<SceneInstance>, GameSceneState,
         ISceneContext, FocusedScene>
     {
         private AsyncOperationHandle<SceneInstance> _sceneHandle;
 
-        public MainSceneState(
+        public GameSceneState(
             ISceneContext context,
-            ReactiveProperty<FocusedScene> statePublisher) : base(context, statePublisher, FocusedScene.Main)
+            ReactiveProperty<FocusedScene> statePublisher) : base(context, statePublisher, FocusedScene.Game)
         {}
 
         public override void OnSpawned(AsyncOperationHandle<SceneInstance> sceneHandle, IMemoryPool pool)

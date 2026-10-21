@@ -18,10 +18,10 @@ namespace LeaseExtension.SceneManagement.States
     [UsedImplicitly]
     internal class WelcomeSceneState : PoolablePublishingState<WelcomeSceneState, ISceneContext, FocusedScene>
     {
-        private static readonly FocusedSceneFilter _filter = new(FocusedScene.Main);
+        private static readonly FocusedSceneFilter _filter = new(FocusedScene.Game);
         private readonly Scene _welcomeScene;
         private readonly AssetReference _mainScene;
-        private readonly MainSceneState.Factory _mainFactory;
+        private readonly GameSceneState.Factory _mainFactory;
         private readonly CancellationTokenSource _cts = new();
         private readonly IDisposable _disposable;
         private bool _ready;
@@ -32,8 +32,8 @@ namespace LeaseExtension.SceneManagement.States
             Scene welcomeScene,
             ReactiveProperty<FocusedScene> statePublisher,
             ISubscriber<FocusedScene> requestSubscriber,
-            [Inject(Id = FocusedScene.Main)] AssetReference mainScene,
-            MainSceneState.Factory mainFactory) : base(context, statePublisher, FocusedScene.Welcome)
+            [Inject(Id = FocusedScene.Game)] AssetReference mainScene,
+            GameSceneState.Factory mainFactory) : base(context, statePublisher, FocusedScene.Welcome)
         {
             _welcomeScene = welcomeScene;
             _mainScene = mainScene;

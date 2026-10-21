@@ -43,7 +43,7 @@ namespace LeaseExtension.SceneManagement.Installer
             Container.Bind<Observable<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
-            Container.BindFactory<AsyncOperationHandle<SceneInstance>, MainSceneState, MainSceneState.Factory>()
+            Container.BindFactory<AsyncOperationHandle<SceneInstance>, GameSceneState, GameSceneState.Factory>()
                 .FromPoolableMemoryPool();
             Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }
