@@ -53,9 +53,12 @@ namespace LeaseExtension.Audio.Pool
             _isQuiting = true;
         }
 
-        private void OnDestroy(AudioSource instance)
+        private static void OnDestroy(AudioSource instance)
         {
-            UnityEngine.Object.Destroy(instance.gameObject);
+            if (instance != null)
+            {
+                UnityEngine.Object.Destroy(instance.gameObject);
+            }
         }
 
         private AudioSource Create()

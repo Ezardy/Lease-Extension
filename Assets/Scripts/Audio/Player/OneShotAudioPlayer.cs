@@ -13,10 +13,12 @@ namespace LeaseExtension.Audio.Player
     {
         private readonly IObjectPool<AudioSource> _pool;
         private readonly CancellationTokenSource _tokenSource = new();
+        private readonly CancellationToken _token;
 
         public OneShotAudioPlayer(IObjectPool<AudioSource> pool)
         {
             _pool = pool;
+            _token = _tokenSource.Token;
         }
 
         public void Play(AudioPlayerParameters parameters)
@@ -27,6 +29,7 @@ namespace LeaseExtension.Audio.Player
         public void Dispose()
         {
             _tokenSource.Cancel();
+            _tokenSource.Dispose();
         }
 
         private async UniTaskVoid PlayAsync(AudioPlayerParameters parameters)
@@ -34,9 +37,12 @@ namespace LeaseExtension.Audio.Player
             AudioSource audioSource = _pool.Get();
             parameters.ApplyTo(audioSource);
             audioSource.Play();
-            await UniTask.WaitWhile(() => audioSource.isPlaying, cancellationToken: _tokenSource.Token);
-            AudioPlayerParameters.Default.ApplyTo(audioSource);
-            _pool.Release(audioSource);
+            await UniTask.WaitWhile(() => audioSource != null && audioSource.isPlaying, cancellationToken: _token).SuppressCancellationThrow();
+            if (audioSource != null && !_token.IsCancellationRequested)
+            {
+                AudioPlayerParameters.Default.ApplyTo(audioSource);
+                _pool.Release(audioSource);
+            }
         }
     }
 }
