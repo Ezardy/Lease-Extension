@@ -6,7 +6,7 @@ using Zenject;
 
 namespace LeaseExtension.Audio.Installer
 {
-    [CreateAssetMenu(fileName = "Installers/Audio/Shop")]
+    [CreateAssetMenu(fileName = "ShopAudioInstaller", menuName = "Installers/Audio/Shop")]
     internal class
         ShopAudioInstaller : ScriptableObjectInstaller<ShopAudioInstaller>
     {
