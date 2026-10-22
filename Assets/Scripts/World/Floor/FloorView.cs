@@ -48,7 +48,7 @@ namespace LeaseExtension.World.Floor
 
         public void Dispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
         }
 
         private void Rescale(Vector2Int size)
