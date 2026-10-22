@@ -43,6 +43,7 @@ namespace LeaseExtension.SceneManagement.Installer
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<GameSceneState, GameSceneState.Factory>()
                 .FromPoolableMemoryPool();
+            Container.BindFactory<ShopSceneState, ShopSceneState.Factory>().FromPoolableMemoryPool();
             Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }
 

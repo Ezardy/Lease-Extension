@@ -18,7 +18,9 @@ namespace LeaseExtension.SceneManagement.States
         private readonly Scene _welcomeScene;
         private readonly GameSceneState.Factory _mainFactory;
         private readonly CancellationTokenSource _cts = new();
+        private readonly CancellationToken _token;
         private readonly IDisposable _disposable;
+        private IState _awaitingState;
         private bool _ready;
 
         public WelcomeSceneState(
@@ -30,6 +32,7 @@ namespace LeaseExtension.SceneManagement.States
         {
             _welcomeScene = welcomeScene;
             _mainFactory = mainFactory;
+            _token = _cts.Token;
             _disposable = requestSubscriber.Subscribe(_ =>
             {
                 _ready = true;
@@ -46,6 +49,7 @@ namespace LeaseExtension.SceneManagement.States
         public override void Dispose()
         {
             _cts.Cancel();
+            _awaitingState?.Dispose();
             _disposable?.Dispose();
             SceneManager.UnloadSceneAsync(_welcomeScene);
             base.Dispose();
@@ -53,9 +57,9 @@ namespace LeaseExtension.SceneManagement.States
 
         private async UniTaskVoid StartAsync()
         {
-            IState context = await _mainFactory.CreateAsync();
-            await UniTask.WaitUntil(() => _ready, cancellationToken: _cts.Token);
-            Context.State = context;
+            _awaitingState = await _mainFactory.CreateAsync();
+            await UniTask.WaitUntil(() => _ready, cancellationToken: _token);
+            Context.State = _awaitingState;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace LeaseExtension.SceneManagement.States
 
         public override void Dispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
             _disposable = null;
             base.Dispose();
         }

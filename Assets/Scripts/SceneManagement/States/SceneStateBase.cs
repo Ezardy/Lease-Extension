@@ -11,7 +11,8 @@ using UnityEngine.SceneManagement;
 
 namespace LeaseExtension.SceneManagement.States
 {
-    internal abstract class SceneStateBase<T> : AsyncPoolablePublishingState<SceneStateBase<T>, ISceneContext, FocusedScene>, IAsyncLoadable
+    internal abstract class SceneStateBase<T> : AsyncPoolablePublishingState<T, ISceneContext, FocusedScene>, IAsyncLoadable
+        where T : SceneStateBase<T>
     {
         private readonly AssetReference _scene;
         private CancellationTokenSource _cts;
@@ -31,16 +32,17 @@ namespace LeaseExtension.SceneManagement.States
             _token = _cts.Token;
         }
 
-        public UniTask LoadAsync()
+        public async UniTask LoadAsync()
         {
-            return _sceneHandle.ToUniTask(cancellationToken: _token).SuppressCancellationThrow();
+            await _sceneHandle.WithCancellation(_token).SuppressCancellationThrow();
+            _cts.Dispose();
+            _cts = null;
         }
 
         public override void Dispose()
         {
             Addressables.UnloadSceneAsync(_sceneHandle);
-            _cts.Cancel();
-            _cts.Dispose();
+            _cts?.Cancel();
             base.Dispose();
         }
     }
