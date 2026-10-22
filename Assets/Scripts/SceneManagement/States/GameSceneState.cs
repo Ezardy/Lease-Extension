@@ -1,39 +1,30 @@
 using System;
 using JetBrains.Annotations;
 using LeaseExtension.SceneManagement.Contract.Message;
-using LeaseExtension.State;
 using MessagePipe;
 using R3;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace LeaseExtension.SceneManagement.States
 {
     [UsedImplicitly]
-    internal class GameSceneState : PoolablePublishingState<AsyncOperationHandle<SceneInstance>, GameSceneState,
-        ISceneContext, FocusedScene>
+    internal class GameSceneState : SceneStateBase<GameSceneState>
     {
         private static readonly FocusedSceneFilter _filter = new(FocusedScene.Shop);
         private readonly ISubscriber<FocusedScene> _sceneRequestSubscriber;
         private readonly ShopSceneState.Factory _shopStateFactory;
-        private AsyncOperationHandle<SceneInstance> _sceneHandle;
         private IDisposable _disposable;
 
         public GameSceneState(
             ISceneContext context,
+            [Inject(Id = FocusedScene.Game)] AssetReference scene,
             ISubscriber<FocusedScene> sceneRequestSubscriber,
             ShopSceneState.Factory shopStateFactory,
-            ReactiveProperty<FocusedScene> statePublisher) : base(context, statePublisher, FocusedScene.Game)
+            ReactiveProperty<FocusedScene> statePublisher) : base(context, scene, statePublisher, FocusedScene.Game)
         {
             _sceneRequestSubscriber = sceneRequestSubscriber;
             _shopStateFactory = shopStateFactory;
-        }
-
-        public override void OnSpawned(AsyncOperationHandle<SceneInstance> sceneHandle, IMemoryPool pool)
-        {
-            base.OnSpawned(sceneHandle, pool);
-            _sceneHandle = sceneHandle;
         }
 
         public override void Start()
@@ -46,8 +37,6 @@ namespace LeaseExtension.SceneManagement.States
         {
             _disposable.Dispose();
             _disposable = null;
-            _sceneHandle.Release();
-            _sceneHandle = new();
             base.Dispose();
         }
     }

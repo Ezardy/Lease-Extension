@@ -30,7 +30,7 @@ namespace LeaseExtension.SceneManagement.States
         public override void Start()
         {
             base.Start();
-            _disposable = _sceneRequestSubscriber.Subscribe(_ => Context.State = _gameStateFactory.Create(new()), _filter);
+            _disposable = _sceneRequestSubscriber.Subscribe(_ => Context.State = _gameStateFactory.Create(), _filter);
             
         }
     }

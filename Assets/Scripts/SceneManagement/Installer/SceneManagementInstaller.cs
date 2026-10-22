@@ -5,8 +5,6 @@ using LeaseExtension.SceneManagement.States;
 using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -43,7 +41,7 @@ namespace LeaseExtension.SceneManagement.Installer
             Container.Bind<Observable<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
-            Container.BindFactory<AsyncOperationHandle<SceneInstance>, GameSceneState, GameSceneState.Factory>()
+            Container.BindFactory<GameSceneState, GameSceneState.Factory>()
                 .FromPoolableMemoryPool();
             Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }

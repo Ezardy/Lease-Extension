@@ -6,14 +6,14 @@ using Zenject;
 
 namespace LeaseExtension.State
 {
-    public abstract class PoolablePublishingState<TContext, TState> : State<TContext>
+    public abstract class PoolablePublishingStateBase<TContext, TState> : State<TContext>
         where TContext : IContext where TState : Enum
     {
         private readonly ReactiveProperty<TState> _statePublisher;
         private readonly TState _state;
         private IMemoryPool _pool;
 
-        protected PoolablePublishingState(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
+        protected PoolablePublishingStateBase(TContext context, ReactiveProperty<TState> statePublisher, TState state) :
             base(context)
         {
             _state = state;
@@ -41,7 +41,7 @@ namespace LeaseExtension.State
         }
     }
 
-    public abstract class PoolablePublishingState<T, TContext, TState> : PoolablePublishingState<TContext, TState>,
+    public abstract class PoolablePublishingState<T, TContext, TState> : PoolablePublishingStateBase<TContext, TState>,
         IPoolable<IMemoryPool> where T : PoolablePublishingState<T, TContext, TState>
         where TContext : IContext
         where TState : Enum
@@ -61,7 +61,7 @@ namespace LeaseExtension.State
     }
 
     public abstract class PoolablePublishingState<TP, T, TContext, TState> :
-        PoolablePublishingState<TContext, TState>,
+        PoolablePublishingStateBase<TContext, TState>,
         IPoolable<TP, IMemoryPool> where T : PoolablePublishingState<TP, T, TContext, TState>
         where TContext : IContext
         where TState : Enum
