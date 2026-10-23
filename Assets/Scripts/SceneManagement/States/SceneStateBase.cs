@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using LeaseExtension.Common.Contract;
+using LeaseExtension.Common.Utilities;
 using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State;
 using R3;
@@ -25,6 +26,11 @@ namespace LeaseExtension.SceneManagement.States
             _scene = scene;
         }
 
+        protected async UniTask SwitchState<TSceneState>(AsyncPlaceholderFactory<TSceneState> sceneFactory) where TSceneState : SceneStateBase<TSceneState>
+        {
+            Context.State = await sceneFactory.CreateAsync();
+        }
+
         protected override void StartLoad()
         {
             _sceneHandle = Addressables.LoadSceneAsync(_scene, LoadSceneMode.Additive);
@@ -32,11 +38,17 @@ namespace LeaseExtension.SceneManagement.States
             _token = _cts.Token;
         }
 
-        public async UniTask LoadAsync()
+        public async UniTask<bool> LoadAsync()
         {
             await _sceneHandle.WithCancellation(_token).SuppressCancellationThrow();
+            bool failed = _token.IsCancellationRequested;
+            if (failed)
+            {
+                Dispose();
+            }
             _cts.Dispose();
             _cts = null;
+            return !failed;
         }
 
         public override void Dispose()

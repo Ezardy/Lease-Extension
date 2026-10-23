@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using LeaseExtension.SceneManagement.Contract.Message;
 using MessagePipe;
 using R3;
@@ -24,7 +25,7 @@ namespace LeaseExtension.SceneManagement.States
         public override void Start()
         {
             base.Start();
-            _disposable = _sceneRequestSubscriber.Subscribe(_ => Context.State = _gameStateFactory.Create(), _filter);
+            _disposable = _sceneRequestSubscriber.Subscribe(_ => SwitchState(_gameStateFactory).Forget(), _filter);
         }
 
         public override void Dispose()

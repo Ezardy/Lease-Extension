@@ -4,6 +4,6 @@ namespace LeaseExtension.Common.Contract
 {
     public interface IAsyncLoadable
     {
-        public UniTask LoadAsync();
+        public UniTask<bool> LoadAsync();
     }
 }

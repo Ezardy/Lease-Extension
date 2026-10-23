@@ -9,8 +9,8 @@ namespace LeaseExtension.Common.Utilities
         public override async UniTask<T> CreateAsync()
         {
             T instance = Create();
-            await instance.LoadAsync();
-            return instance;
+            bool succeed = await instance.LoadAsync();
+            return succeed ? instance : default;
         }
     }
 }
