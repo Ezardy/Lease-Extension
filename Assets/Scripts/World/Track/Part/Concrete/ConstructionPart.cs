@@ -7,19 +7,20 @@ namespace LeaseExtension.World.Track.Part.Concrete
 {
     internal class ConstructionPart : IConstructionPart, IPoolable<IConstructionPartBlueprint, IMemoryPool>
     {
-        protected readonly Transform PoolTransform;
         protected readonly Transform Transform;
-        protected readonly Vector3 InitScale;
+        
+        private readonly Transform _poolTransform;
+        private readonly Vector3 _initScale;
         private IMemoryPool _pool;
 
         public IConstructionPartBlueprint Blueprint { get; private set; }
         public float X => Transform.position.x;
 
-        public ConstructionPart(Transform transform)
+        protected ConstructionPart(Transform transform)
         {
             Transform = transform;
-            PoolTransform = transform.parent;
-            InitScale = transform.localScale;
+            _poolTransform = transform.parent;
+            _initScale = transform.localScale;
         }
 
         public virtual void Place(Vector3 position, float scale, float s, int order)
@@ -35,24 +36,22 @@ namespace LeaseExtension.World.Track.Part.Concrete
             _pool.Despawn(this);
         }
 
-        public virtual void OnDespawned()
+        public void OnDespawned()
         {
-            Transform.parent = PoolTransform;
-            Transform.gameObject.SetActive(false);
-            Transform.localScale = InitScale;
+            if (Transform && Transform.parent)
+            {
+                Transform.parent = _poolTransform;
+                Transform.gameObject.SetActive(false);
+                Transform.localScale = _initScale;
+            }
             Blueprint = null;
             _pool = null;
         }
 
-        public void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
+        public virtual void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
         {
             Blueprint = blueprint;
             _pool = pool;
-        }
-
-        public void Dispose()
-        {
-            Object.Destroy(Transform.gameObject);
         }
 
         public void Move(float shift)

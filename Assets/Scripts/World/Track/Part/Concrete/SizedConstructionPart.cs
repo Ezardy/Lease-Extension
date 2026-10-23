@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
 using UnityEngine;
+using Zenject;
 
 namespace LeaseExtension.World.Track.Part.Concrete
 {
+    [UsedImplicitly]
     internal class SizedConstructionPart : ConstructionPart
     {
         private readonly ISize _sizer;
@@ -31,11 +34,11 @@ namespace LeaseExtension.World.Track.Part.Concrete
             _orderer.Order = order;
         }
 
-        public override void OnDespawned()
+        public override void OnSpawned(IConstructionPartBlueprint blueprint, IMemoryPool pool)
         {
+            base.OnSpawned(blueprint, pool);
             _sizer.Size = _initialSize;
             _orderer.Order = 0;
-            base.OnDespawned();
         }
     }
 }

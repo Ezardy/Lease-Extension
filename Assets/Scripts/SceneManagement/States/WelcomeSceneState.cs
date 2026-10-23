@@ -51,10 +51,7 @@ namespace LeaseExtension.SceneManagement.States
             _cts.Cancel();
             _awaitingState?.Dispose();
             _disposable?.Dispose();
-            if (_welcomeScene.IsValid() && _welcomeScene.isLoaded && SceneManager.loadedSceneCount > 1)
-            {
-                SceneManager.UnloadSceneAsync(_welcomeScene);
-            }
+            SceneManager.UnloadSceneAsync(_welcomeScene);
             base.Dispose();
         }
 

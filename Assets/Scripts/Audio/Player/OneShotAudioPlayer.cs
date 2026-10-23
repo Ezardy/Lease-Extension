@@ -39,7 +39,7 @@ namespace LeaseExtension.Audio.Player
             audioSource.Play();
             await UniTask.WaitWhile(() => audioSource != null && audioSource.isPlaying, cancellationToken: _token)
                 .SuppressCancellationThrow();
-            if (audioSource != null && !_token.IsCancellationRequested)
+            if (audioSource && !_token.IsCancellationRequested)
             {
                 AudioPlayerParameters.Default.ApplyTo(audioSource);
                 _pool.Release(audioSource);
