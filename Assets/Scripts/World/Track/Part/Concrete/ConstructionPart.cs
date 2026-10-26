@@ -38,12 +38,9 @@ namespace LeaseExtension.World.Track.Part.Concrete
 
         public void OnDespawned()
         {
-            if (Transform && Transform.parent)
-            {
-                Transform.parent = _poolTransform;
-                Transform.gameObject.SetActive(false);
-                Transform.localScale = _initScale;
-            }
+            Transform.SetParent(_poolTransform);
+            Transform.gameObject.SetActive(false);
+            Transform.localScale = _initScale;
             Blueprint = null;
             _pool = null;
         }

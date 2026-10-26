@@ -89,10 +89,6 @@ namespace LeaseExtension.World.Track
 
         public void Dispose()
         {
-            foreach (ITrack track in _tracks)
-            {
-                track.WipeOut();
-            }
             _disposable?.Dispose();
         }
 

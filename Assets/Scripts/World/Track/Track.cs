@@ -50,9 +50,8 @@ namespace LeaseExtension.World.Track
 
         public void Construct(IConstructionBlank blank)
         {
-            IConstructionPart part;
             _lastPartOrder = _parts.Count == 0 ? _order : _lastPartOrder + 1;
-            part = blank.Construct(new(StartX, _y), _scaler, _lastPartOrder);
+            IConstructionPart part = blank.Construct(new(StartX, _y), _scaler, _lastPartOrder);
             _parts.Enqueue(part);
             _lastPartOffset = part.Blueprint.InterfereWidth * _scaler;
         }
@@ -73,9 +72,7 @@ namespace LeaseExtension.World.Track
             for (;
                  _parts.TryPeek(out IConstructionPart part) && part.X + part.Blueprint.Width * _scaler < EndX;
                  _parts.Dequeue(), part.WipeOut())
-            {
-                ;
-            }
+            {}
         }
     }
 }
