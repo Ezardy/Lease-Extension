@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using LeaseExtension.World.Contract;
@@ -12,9 +13,10 @@ namespace LeaseExtension.World.Track
         private readonly float _scaler;
         private readonly int _order;
         private readonly byte _maxConstructions;
-        private readonly Queue<IConstructionPart> _parts = new();
+        private readonly SortedList<float, IConstructionPart> _parts = new();
         private float _speed;
         private float _lastPartOffset;
+        private float _firstPartMovedDistance;
         private int _lastPartOrder;
 
         public float StartX { get; set; }
@@ -39,11 +41,12 @@ namespace LeaseExtension.World.Track
         public void Move()
         {
             float shift = -_speed * Time.deltaTime;
-            foreach (IConstructionPart part in _parts)
+            foreach (KeyValuePair<float, IConstructionPart> part in _parts)
             {
-                part.Move(shift);
+                part.Value.Move(shift);
             }
 
+            _firstPartMovedDistance = _parts.Count > 0 ? _firstPartMovedDistance - shift : 0;
             _lastPartOffset += shift;
             WipeOutPart();
         }
@@ -52,15 +55,19 @@ namespace LeaseExtension.World.Track
         {
             _lastPartOrder = _parts.Count == 0 ? _order : _lastPartOrder + 1;
             IConstructionPart part = blank.Construct(new(StartX, _y), _scaler, _lastPartOrder);
-            _parts.Enqueue(part);
+            float tail = part.Blueprint.Width * _scaler + _firstPartMovedDistance;
+            while (!_parts.TryAdd(tail, part))
+            {
+                tail = BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(tail) + 1);
+            }
             _lastPartOffset = part.Blueprint.InterfereWidth * _scaler;
         }
 
         public void WipeOut()
         {
-            foreach (IConstructionPart part in _parts)
+            foreach (KeyValuePair<float, IConstructionPart> part in _parts)
             {
-                part.WipeOut();
+                part.Value.WipeOut();
             }
 
             _parts.Clear();
@@ -69,10 +76,11 @@ namespace LeaseExtension.World.Track
 
         private void WipeOutPart()
         {
-            for (;
-                 _parts.TryPeek(out IConstructionPart part) && part.X + part.Blueprint.Width * _scaler < EndX;
-                 _parts.Dequeue(), part.WipeOut())
-            {}
+            while (_parts.Count > 0 && _parts.Values[0] is {X: var x, Blueprint: { Width: var width } } part && x + width * _scaler < EndX)
+            {
+                part.WipeOut();
+                _parts.RemoveAt(0);
+            }
         }
     }
 }
