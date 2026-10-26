@@ -12,6 +12,7 @@ namespace LeaseExtension.Audio.Installer
     {
         public override void InstallBindings()
         {
+            Container.BindFactory<ShopAudioState, ShopAudioState.Factory>().FromPoolableMemoryPool();
             Container.BindInterfacesTo<CrossSceneAudioStateTransition<ShopAudioState, ShopAudioState.Factory>>()
                 .AsSingle().WithArguments(FocusedScene.Shop);
         }

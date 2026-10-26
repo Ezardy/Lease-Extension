@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LeaseExtension.UI.Contract
+namespace LeaseExtension.UI.Welcome
 {
     internal interface IWelcomeViewModel
     {

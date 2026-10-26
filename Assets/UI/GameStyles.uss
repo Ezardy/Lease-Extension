@@ -94,7 +94,6 @@
 
 .record-group {
     flex-direction: row;
-    justify-content: flex-start;
     border-top-left-radius: 0;
     -unity-text-auto-size: best-fit 10px 100px;
     width: auto;
@@ -102,6 +101,7 @@
     -unity-font-definition: url("project://database/Assets/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
     color: rgb(191, 203, 199);
     -unity-text-align: middle-center;
+    justify-content: center;
 }
 
 .game-stats-group {

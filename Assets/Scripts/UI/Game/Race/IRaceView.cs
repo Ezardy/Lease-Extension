@@ -1,6 +1,7 @@
+using LeaseExtension.UI.Contract;
 using UnityEngine;
 
-namespace LeaseExtension.UI.Contract
+namespace LeaseExtension.UI.Game.Race
 {
     internal interface IRaceView : IView
     {

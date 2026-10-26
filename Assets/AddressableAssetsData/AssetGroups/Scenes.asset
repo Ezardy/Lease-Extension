@@ -15,8 +15,8 @@ MonoBehaviour:
   m_GroupName: Scenes
   m_GUID: c3b98b9e070743843aa201c842d59b3a
   m_SerializeEntries:
-  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
-    m_Address: Assets/Scenes/MainScene.unity
+  - m_GUID: e35ba8c4cd636ac4aac1451b759da0b5
+    m_Address: Assets/Scenes/Runtime
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

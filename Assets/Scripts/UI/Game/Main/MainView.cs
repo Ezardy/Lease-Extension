@@ -7,7 +7,7 @@ namespace LeaseExtension.UI.Game.Main
     [UsedImplicitly]
     internal class MainView : View, IMainView
     {
-        public Button StoreButton { get; private set; }
+        public Button Store { get; private set; }
         public VisualElement EarnedGroup { get; private set; }
 
         public MainView(PanelRenderer panelRenderer) : base(panelRenderer, "main")
@@ -16,7 +16,7 @@ namespace LeaseExtension.UI.Game.Main
         protected override void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
         {
             base.OnGUIReload(panelRenderer, root, version);
-            StoreButton = root.Q<Button>("store-button");
+            Store = root.Q<Button>("store-button");
             EarnedGroup = root.Q<VisualElement>("game-stats__earned-group");
         }
     }

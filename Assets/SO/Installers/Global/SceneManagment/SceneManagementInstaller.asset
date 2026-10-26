@@ -20,5 +20,10 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
-    Prefabs:
-    - {fileID: 8372950798764470383, guid: 9fbd832b8c9243545a4410835210af8b, type: 3}
+  - Scene: 2
+    SceneReference:
+      m_AssetGUID: 77c0de41f6715c041a3f2071ad1cc042
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

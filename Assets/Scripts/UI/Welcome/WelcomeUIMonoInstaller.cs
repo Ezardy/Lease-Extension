@@ -5,7 +5,7 @@ using Zenject;
 
 namespace LeaseExtension.UI.Welcome
 {
-    internal class WelcomeMonoInstaller : MonoInstaller
+    internal class WelcomeUIMonoInstaller : MonoInstaller
     {
         [SerializeField] private PanelRenderer _panelRenderer;
         [SerializeField] private AssetReferenceSprite _horizontalWelcome;

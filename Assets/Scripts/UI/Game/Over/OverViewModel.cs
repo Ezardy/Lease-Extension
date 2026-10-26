@@ -53,14 +53,14 @@ namespace LeaseExtension.UI.Game.Over
         {
             if (_view.Root != null)
             {
-                _view.AcceptButton.clicked -= OnClick;
+                _view.Accept.clicked -= OnClick;
             }
         }
 
         private void Initialize()
         {
             _view.Root.dataSource = this;
-            _view.AcceptButton.clicked += OnClick;
+            _view.Accept.clicked += OnClick;
         }
 
         private void OnClick()

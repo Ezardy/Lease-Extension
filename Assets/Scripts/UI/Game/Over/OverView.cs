@@ -7,7 +7,7 @@ namespace LeaseExtension.UI.Game.Over
     [UsedImplicitly]
     internal class OverView : View, IOverView
     {
-        public Button AcceptButton { get; private set; }
+        public Button Accept { get; private set; }
 
         public OverView(PanelRenderer panelRenderer) : base(panelRenderer, "over")
         {}
@@ -15,7 +15,7 @@ namespace LeaseExtension.UI.Game.Over
         protected override void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
         {
             base.OnGUIReload(panelRenderer, root, version);
-            AcceptButton = root.Q<Button>("over__accept-button");
+            Accept = root.Q<Button>("over__accept-button");
         }
     }
 }

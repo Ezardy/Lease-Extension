@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-namespace LeaseExtension.UI.Contract
+namespace LeaseExtension.UI.Game.Over
 {
     internal interface IOverViewModel
     {
