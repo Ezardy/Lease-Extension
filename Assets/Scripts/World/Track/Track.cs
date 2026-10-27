@@ -55,7 +55,7 @@ namespace LeaseExtension.World.Track
         {
             _lastPartOrder = _parts.Count == 0 ? _order : _lastPartOrder + 1;
             IConstructionPart part = blank.Construct(new(StartX, _y), _scaler, _lastPartOrder);
-            float tail = part.Blueprint.Width * _scaler + _firstPartMovedDistance;
+            float tail = part.Blueprint.Margin + part.Blueprint.Width * _scaler + _firstPartMovedDistance;
             while (!_parts.TryAdd(tail, part))
             {
                 tail = BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(tail) + 1);
