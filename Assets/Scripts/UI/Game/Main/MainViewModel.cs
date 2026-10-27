@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
 using LeaseExtension.SceneManagement.Contract.Message;
-using LeaseExtension.UI.Contract;
 using LeaseExtension.Wallet.Contract;
 using MessagePipe;
 using R3;
@@ -46,17 +45,17 @@ namespace LeaseExtension.UI.Game.Main
             }).Forget();
         }
 
-        private void OnStoreButtonClicked()
-        {
-            _sceneRequestPublisher.Publish(FocusedScene.Shop);
-        }
-
         public void Dispose()
         {
             if (_view.Root is { dataSource: not null })
             {
                 _view.Store.clicked -= OnStoreButtonClicked;
             }
+        }
+
+        private void OnStoreButtonClicked()
+        {
+            _sceneRequestPublisher.Publish(FocusedScene.Shop);
         }
     }
 }

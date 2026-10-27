@@ -10,8 +10,8 @@ namespace LeaseExtension.Common.Editor
     [InitializeOnLoad]
     internal static class ZenjectPoolCleanup
     {
-        private static readonly HashSet<IMemoryPool> _pools = new HashSet<IMemoryPool>();
-        private static readonly HashSet<DiContainer> _containers = new HashSet<DiContainer>();
+        private static readonly HashSet<IMemoryPool> _pools = new();
+        private static readonly HashSet<DiContainer> _containers = new();
         private static readonly FieldInfo _childBindingsField = typeof(DiContainer).GetField(
             "_childBindings", BindingFlags.Instance | BindingFlags.NonPublic);
         private static readonly FieldInfo _currentBindingsField = typeof(DiContainer).GetField(
@@ -56,7 +56,6 @@ namespace LeaseExtension.Common.Editor
             }
             else if (state == PlayModeStateChange.EnteredPlayMode || state == PlayModeStateChange.ExitingPlayMode)
             {
-                // ProjectContext clears its static events at the start of every Play session.
                 TrackProjectContainer();
             }
             else if (state == PlayModeStateChange.EnteredEditMode)
@@ -67,7 +66,6 @@ namespace LeaseExtension.Common.Editor
 
         private static void DisposePools()
         {
-            // Preserve the previous session's counts until the next Play session starts.
             IMemoryPool[] pools = new IMemoryPool[_pools.Count];
             _pools.CopyTo(pools);
             _pools.Clear();
@@ -91,7 +89,6 @@ namespace LeaseExtension.Common.Editor
             {
                 try
                 {
-                    // Zenject has no public API to release inherited or unfinished bindings.
                     List<BindStatement> childBindings = (List<BindStatement>)_childBindingsField.GetValue(container);
                     Queue<BindStatement> currentBindings =
                         (Queue<BindStatement>)_currentBindingsField.GetValue(container);
@@ -128,7 +125,7 @@ namespace LeaseExtension.Common.Editor
                 {
                     Type genericType = type.GetGenericTypeDefinition();
                     isContainerPool = genericType == typeof(MemoryPoolBase<>) ||
-                        genericType == typeof(MemoryPoolBaseAsync<>);
+                                      genericType == typeof(MemoryPoolBaseAsync<>);
                 }
 
                 type = type.BaseType;

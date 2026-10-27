@@ -60,6 +60,7 @@ namespace LeaseExtension.World.Track
             {
                 tail = BitConverter.Int32BitsToSingle(BitConverter.SingleToInt32Bits(tail) + 1);
             }
+
             _lastPartOffset = part.Blueprint.InterfereWidth * _scaler;
         }
 
@@ -76,7 +77,8 @@ namespace LeaseExtension.World.Track
 
         private void WipeOutPart()
         {
-            while (_parts.Count > 0 && _parts.Values[0] is {X: var x, Blueprint: { Width: var width } } part && x + width * _scaler < EndX)
+            while (_parts.Count > 0 && _parts.Values[0] is { X: var x, Blueprint: { Width: var width } } part &&
+                   x + width * _scaler < EndX)
             {
                 part.WipeOut();
                 _parts.RemoveAt(0);

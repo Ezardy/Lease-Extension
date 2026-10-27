@@ -11,12 +11,13 @@ namespace LeaseExtension.UI.Shop
     {
         private readonly IShopView _view;
         private readonly IPublisher<FocusedScene> _sceneRequestPublisher;
-        
+
         public ShopViewModel(IShopView view, IPublisher<FocusedScene> sceneRequestPublisher)
         {
             _view = view;
             _sceneRequestPublisher = sceneRequestPublisher;
-            UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Close.clicked += OnCloseClicked).Forget();
+            UniTask.WaitWhile(() => view.Root == null).ContinueWith(() => view.Close.clicked += OnCloseClicked)
+                .Forget();
         }
 
         public void Dispose()

@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Game.Main

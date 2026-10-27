@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using LeaseExtension.Gameplay.Contract.Message;
 using LeaseExtension.Record.Contract;
-using LeaseExtension.UI.Contract;
 using LeaseExtension.Wallet.Contract;
 using MessagePipe;
 using R3;

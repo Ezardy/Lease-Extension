@@ -8,7 +8,7 @@ namespace LeaseExtension.World.Track.Part.Concrete
     internal class ConstructionPart : IConstructionPart, IPoolable<IConstructionPartBlueprint, IMemoryPool>
     {
         protected readonly Transform Transform;
-        
+
         private readonly Transform _poolTransform;
         private readonly Vector3 _initScale;
         private IMemoryPool _pool;

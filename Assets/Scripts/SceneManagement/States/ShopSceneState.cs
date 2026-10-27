@@ -14,8 +14,10 @@ namespace LeaseExtension.SceneManagement.States
         private readonly ISubscriber<FocusedScene> _sceneRequestSubscriber;
         private readonly GameSceneState.Factory _gameStateFactory;
         private IDisposable _disposable;
-        
-        public ShopSceneState(ISceneContext context, [Inject(Id = FocusedScene.Shop)] AssetReference shopScene, ReactiveProperty<FocusedScene> statePublisher, ISubscriber<FocusedScene> sceneRequestSubscriber, GameSceneState.Factory gameStateFactory) : base(context, shopScene,
+
+        public ShopSceneState(ISceneContext context, [Inject(Id = FocusedScene.Shop)] AssetReference shopScene,
+            ReactiveProperty<FocusedScene> statePublisher, ISubscriber<FocusedScene> sceneRequestSubscriber,
+            GameSceneState.Factory gameStateFactory) : base(context, shopScene,
             statePublisher, FocusedScene.Shop)
         {
             _sceneRequestSubscriber = sceneRequestSubscriber;

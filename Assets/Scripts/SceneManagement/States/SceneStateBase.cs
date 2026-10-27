@@ -12,7 +12,8 @@ using UnityEngine.SceneManagement;
 
 namespace LeaseExtension.SceneManagement.States
 {
-    internal abstract class SceneStateBase<T> : AsyncPoolablePublishingState<T, ISceneContext, FocusedScene>, IAsyncLoadable
+    internal abstract class SceneStateBase<T> : AsyncPoolablePublishingState<T, ISceneContext, FocusedScene>,
+        IAsyncLoadable
         where T : SceneStateBase<T>
     {
         private readonly AssetReference _scene;
@@ -26,18 +27,6 @@ namespace LeaseExtension.SceneManagement.States
             _scene = scene;
         }
 
-        protected async UniTask SwitchState<TSceneState>(AsyncPlaceholderFactory<TSceneState> sceneFactory) where TSceneState : SceneStateBase<TSceneState>
-        {
-            Context.State = await sceneFactory.CreateAsync();
-        }
-
-        protected override void StartLoad()
-        {
-            _sceneHandle = Addressables.LoadSceneAsync(_scene, LoadSceneMode.Additive);
-            _cts = new();
-            _token = _cts.Token;
-        }
-
         public async UniTask<bool> LoadAsync()
         {
             await _sceneHandle.WithCancellation(_token).SuppressCancellationThrow();
@@ -46,6 +35,7 @@ namespace LeaseExtension.SceneManagement.States
             {
                 Dispose();
             }
+
             _cts.Dispose();
             _cts = null;
             return !failed;
@@ -56,6 +46,19 @@ namespace LeaseExtension.SceneManagement.States
             Addressables.UnloadSceneAsync(_sceneHandle);
             _cts?.Cancel();
             base.Dispose();
+        }
+
+        protected async UniTask SwitchState<TSceneState>(AsyncPlaceholderFactory<TSceneState> sceneFactory)
+            where TSceneState : SceneStateBase<TSceneState>
+        {
+            Context.State = await sceneFactory.CreateAsync();
+        }
+
+        protected override void StartLoad()
+        {
+            _sceneHandle = Addressables.LoadSceneAsync(_scene, LoadSceneMode.Additive);
+            _cts = new();
+            _token = _cts.Token;
         }
     }
 }

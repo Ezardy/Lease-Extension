@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using LeaseExtension.Common.Contract;
 using LeaseExtension.Input.Contract;
 using LeaseExtension.SceneManagement.Contract.Message;
-using LeaseExtension.UI.Contract;
 using MessagePipe;
 using R3;
 using Unity.Properties;
