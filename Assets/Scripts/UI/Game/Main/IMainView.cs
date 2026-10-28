@@ -5,6 +5,6 @@ namespace LeaseExtension.UI.Game.Main
 {
     internal interface IMainView : IView
     {
-        public Button Store { get; }
+        public Button Shop { get; }
     }
 }

@@ -41,7 +41,7 @@ namespace LeaseExtension.UI.Game.Main
             UniTask.WaitWhile(() => view.Root == null).ContinueWith(() =>
             {
                 view.Root.dataSource = this;
-                view.Store.clicked += OnStoreButtonClicked;
+                view.Shop.clicked += OnShopButtonClicked;
             }).Forget();
         }
 
@@ -49,11 +49,11 @@ namespace LeaseExtension.UI.Game.Main
         {
             if (_view.Root is { dataSource: not null })
             {
-                _view.Store.clicked -= OnStoreButtonClicked;
+                _view.Shop.clicked -= OnShopButtonClicked;
             }
         }
 
-        private void OnStoreButtonClicked()
+        private void OnShopButtonClicked()
         {
             _sceneRequestPublisher.Publish(FocusedScene.Shop);
         }
