@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using LeaseExtension.Common.Contract;
+using LeaseExtension.Common.Factory;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.State;

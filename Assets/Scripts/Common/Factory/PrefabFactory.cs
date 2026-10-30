@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Common.Utilities
+namespace LeaseExtension.Common.Factory
 {
     [UsedImplicitly]
     public class PrefabFactory : IFactory<Object, GameObject>

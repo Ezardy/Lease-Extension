@@ -2,7 +2,7 @@
 using LeaseExtension.Common.Contract;
 using Zenject;
 
-namespace LeaseExtension.Common.Utilities
+namespace LeaseExtension.Common.Factory
 {
     public class AsyncPlaceholderFactory<T> : PlaceholderFactory<T> where T : IAsyncLoadable
     {
