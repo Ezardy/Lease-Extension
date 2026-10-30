@@ -1,0 +1,56 @@
+.lease-extension__button {
+    color: var(--text-color);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-auto-size: best-fit 10px 100px;
+    background-color: var(--button-color);
+    border-top-color: rgba(15, 52, 43, 0.38);
+    border-right-color: rgba(13, 44, 36, 0.38);
+    border-bottom-color: var(--button-border-color);
+    border-left-color: var(--button-border-color);
+    border-top-width: 6px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 6px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    filter: drop-shadow(-3 -3 0 rgba(0, 0, 0, 0.502));
+    backdrop-filter: blur(1.11) filter("project://database/Assets/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp" 5.21 2.89) contrast(1.24);
+}
+
+.lease-extension__button:hover {
+    backdrop-filter: blur(1.11) filter("project://database/Assets/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp" 5.21 2.89) contrast(1.5);
+}
+
+.lease-extension__button:active {
+    filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
+}
+
+.lease-extension__colors {
+    --text-color: rgb(190, 202, 198);
+    --button-color: rgba(49, 108, 101, 0.38);
+    --button-border-color: rgba(27, 90, 75, 0.38);
+    --button-icon-color: rgb(255, 232, 117);
+}
+
+.root-container {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
+.blink-2 {
+    -unity-material: url("project://database/Assets/Materials/UI/Blink/Blink%202.mat?fileID=2100000&guid=5deea5ac0e06d95488825b904ad7bc2a&type=2#Blink 2");
+}
+
+.prison-font {
+    -unity-font-definition: url("project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+}
