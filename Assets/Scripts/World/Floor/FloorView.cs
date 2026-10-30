@@ -11,12 +11,13 @@ namespace LeaseExtension.World.Floor
     [UsedImplicitly]
     internal class FloorView : IFloorView, IInitializable, ITickable, IDisposable
     {
-        private readonly ReactiveProperty<float> _perspective = new(0.15f);
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");
         private static readonly int _perspectiveScaleId = Shader.PropertyToID("_Perspective");
-        private float _offset;
+        private readonly Camera _camera;
+        private readonly ReactiveProperty<float> _perspective = new(0.15f);
         private readonly SpriteRenderer _spriteRenderer;
         private readonly IScreenSizeObserver _screenSizeObserver;
+        private float _offset;
         private IDisposable _disposable;
 
         public float Speed { get; set; }
@@ -27,8 +28,9 @@ namespace LeaseExtension.World.Floor
             set => _perspective.Value = value;
         }
 
-        public FloorView(SpriteRenderer spriteRenderer, IScreenSizeObserver screenSizeObserver)
+        public FloorView(Camera camera, SpriteRenderer spriteRenderer, IScreenSizeObserver screenSizeObserver)
         {
+            _camera = camera;
             _spriteRenderer = spriteRenderer;
             _screenSizeObserver = screenSizeObserver;
         }
@@ -53,7 +55,7 @@ namespace LeaseExtension.World.Floor
 
         private void Rescale(Vector2Int size)
         {
-            float worldWidth = Camera.main.orthographicSize * 2 * size.x / size.y;
+            float worldWidth = _camera.orthographicSize * 2 * size.x / size.y;
             float spriteWidth = _spriteRenderer.bounds.size.x;
             Vector3 scale = _spriteRenderer.transform.localScale;
             scale.x *= worldWidth / spriteWidth;

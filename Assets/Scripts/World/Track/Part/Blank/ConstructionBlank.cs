@@ -10,16 +10,22 @@ namespace LeaseExtension.World.Track.Part.Blank
     internal class ConstructionBlank : IConstructionBlank,
         IPoolable<IConstructionPartBlueprint, ConstructionPart.Factory, float, float, IMemoryPool>
     {
+        private readonly Camera _camera;
         private IConstructionPartBlueprint _blueprint;
         private ConstructionPart.Factory _partFactory;
         private IMemoryPool _pool;
         private float _height;
         private float _size;
 
+        public ConstructionBlank(Camera camera)
+        {
+            _camera = camera;
+        }
+
         public IConstructionPart Construct(Vector2 position, float scale, int order)
         {
             ConstructionPart instance = _partFactory.Create(_blueprint);
-            float worldHeight = Camera.main.transform.position.y + Camera.main.orthographicSize - position.y;
+            float worldHeight = _camera.transform.position.y + _camera.orthographicSize - position.y;
             instance.Place(position + worldHeight * _height * Vector2.up, scale, _size * worldHeight, order);
             _pool.Despawn(this);
             return instance;
