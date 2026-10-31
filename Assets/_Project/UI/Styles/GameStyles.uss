@@ -41,17 +41,17 @@
     flex-direction: row;
     justify-content: space-between;
     align-self: center;
-    -unity-font-definition: url("project://database/Assets/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
 }
 
 .protocol-label {
-    -unity-font-definition: url("project://database/Assets/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
 }
 
 .protocol-value {
-    -unity-font-definition: url("project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
     background-color: rgb(0, 0, 0);
     -unity-text-outline-color: rgb(255, 255, 255);
     -unity-text-outline-width: 0;
@@ -61,17 +61,17 @@
 
 .signature {
     color: rgb(0, 0, 0);
-    -unity-font-definition: url("project://database/Assets/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
 }
 
 .signature:hover {
     color: rgb(108, 100, 173);
-    -unity-font-definition: url("project://database/Assets/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
 }
 
 .signature:active {
     color: rgb(16, 4, 120);
-    -unity-font-definition: url("project://database/Assets/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/farewell.regular.ttf?fileID=12800000&guid=95a3fa8dd3e2ac943be051541eb154ad&type=3#farewell.regular");
 }
 
 .record-group {
@@ -79,7 +79,7 @@
     -unity-text-auto-size: best-fit 10px 100px;
     width: auto;
     height: 13%;
-    -unity-font-definition: url("project://database/Assets/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
     -unity-text-align: middle-center;
     justify-content: center;
 }

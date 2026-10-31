@@ -23,11 +23,11 @@
 }
 
 .prison-font {
-    -unity-font-definition: url("project://database/Assets/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
 }
 
 .blink-2 {
-    -unity-material: url("project://database/Assets/Materials/UI/Blink/Blink%202.mat?fileID=2100000&guid=5deea5ac0e06d95488825b904ad7bc2a&type=2#Blink 2");
+    -unity-material: url("project://database/Assets/_Project/Materials/UI/Blink/Blink%202.mat?fileID=2100000&guid=5deea5ac0e06d95488825b904ad7bc2a&type=2#Blink 2");
 }
 
 .lease-extension__button {
@@ -50,12 +50,12 @@
     border-bottom-right-radius: 13px;
     border-bottom-left-radius: 13px;
     filter: drop-shadow(-3 -3 0 rgba(0, 0, 0, 0.502));
-    backdrop-filter: blur(1.11) filter(url("project://database/Assets/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.24);
+    backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.24);
     border-top-color: var(--button-border-dark-color);
 }
 
 .lease-extension__button:hover {
-    backdrop-filter: blur(1.11) filter(url("project://database/Assets/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.5);
+    backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.5);
 }
 
 .lease-extension__button:active {
