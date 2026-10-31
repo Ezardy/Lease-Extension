@@ -13,15 +13,17 @@ namespace LeaseExtension.World.Wall
     {
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");
         private readonly SpriteRenderer _renderer;
+        private readonly Camera _camera;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private IDisposable _disposable;
         private float _offset;
 
         public float Speed { get; set; }
 
-        public WallView(SpriteRenderer renderer, IScreenSizeObserver screenSizeObserver)
+        public WallView(SpriteRenderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver)
         {
             _renderer = renderer;
+            _camera = camera;
             _screenSizeObserver = screenSizeObserver;
         }
 
@@ -34,7 +36,7 @@ namespace LeaseExtension.World.Wall
         public void Initialize()
         {
             _disposable = _screenSizeObserver.SizeChanged.Subscribe(s => _renderer.size = new(
-                Camera.main.orthographicSize * s.x / s.y * 2 / _renderer.transform.localScale.x,
+                _camera.orthographicSize * s.x / s.y * 2 / _renderer.transform.localScale.x,
                 _renderer.size.y));
         }
 

@@ -14,6 +14,7 @@ namespace LeaseExtension.World.Track
     internal class TrackOrchestrator : IInitializable, ITickable, IDisposable
     {
         private readonly IWorldModel _worldModel;
+        private readonly Camera _camera;
         private readonly IConstructionBlueprintDatabase _database;
         private readonly SortedList<float, IConstructionBlueprint> _constructionQueue;
         private readonly Dictionary<float, float> _oldToNewDistances;
@@ -33,12 +34,14 @@ namespace LeaseExtension.World.Track
             byte maxConstructions,
             byte reservedOrders,
             IWorldModel worldModel,
+            Camera camera,
             TrackFactory trackFactory,
             IConstructionBlueprintDatabase database,
             IScreenSizeObserver screenSizeObserver,
             Observable<GameplayState> stateSubscriber)
         {
             _worldModel = worldModel;
+            _camera = camera;
             _database = database;
             _screenSizeObserver = screenSizeObserver;
             _stateSubscriber = stateSubscriber;
@@ -244,9 +247,9 @@ namespace LeaseExtension.World.Track
             }
         }
 
-        private static float WorldX(Vector2Int size)
+        private float WorldX(Vector2Int size)
         {
-            return Camera.main.orthographicSize * size.x / size.y;
+            return _camera.orthographicSize * size.x / size.y;
         }
     }
 }
