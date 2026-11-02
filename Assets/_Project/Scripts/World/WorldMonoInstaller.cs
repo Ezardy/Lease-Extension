@@ -63,7 +63,7 @@ namespace LeaseExtension.World
         {
             Container.BindInstance(_floorAnimator).WhenInjectedInto<FloorViewModel>();
             Container.BindInterfacesTo<FloorView>().AsSingle().WithArguments(_floorSpriteRenderer);
-            Container.BindInterfacesTo<SpriteWidthRescaler>().AsSingle().WithArguments(_floorSpriteRenderer);
+            Container.BindInterfacesTo<RendererWidthResizer>().AsSingle().WithArguments(_floorSpriteRenderer);
             Container.QueueForInject(_floorViewModel);
         }
 
