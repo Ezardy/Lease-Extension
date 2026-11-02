@@ -1,3 +1,4 @@
+using LeaseExtension.Common.Service;
 using LeaseExtension.Common.Utilities;
 using LeaseExtension.World.Ceil;
 using LeaseExtension.World.Contract;
@@ -54,6 +55,7 @@ namespace LeaseExtension.World
         private void InstallWall()
         {
             Container.BindInterfacesTo<WallView>().AsSingle().WithArguments(_wallSpriteRenderer);
+            Container.BindInterfacesTo<SpriteWidthResizer>().AsSingle().WithArguments(_wallSpriteRenderer);
             Container.BindInterfacesTo<WallViewModel>().AsSingle();
         }
 
@@ -61,6 +63,7 @@ namespace LeaseExtension.World
         {
             Container.BindInstance(_floorAnimator).WhenInjectedInto<FloorViewModel>();
             Container.BindInterfacesTo<FloorView>().AsSingle().WithArguments(_floorSpriteRenderer);
+            Container.BindInterfacesTo<SpriteWidthRescaler>().AsSingle().WithArguments(_floorSpriteRenderer);
             Container.QueueForInject(_floorViewModel);
         }
 

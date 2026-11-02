@@ -1,48 +1,28 @@
-using System;
 using JetBrains.Annotations;
-using LeaseExtension.Common.Contract;
 using LeaseExtension.World.Contract;
-using R3;
 using UnityEngine;
 using Zenject;
 
 namespace LeaseExtension.World.Wall
 {
     [UsedImplicitly]
-    internal class WallView : IWallView, IInitializable, ITickable, IDisposable
+    internal class WallView : IWallView, ITickable
     {
         private static readonly int _offsetId = Shader.PropertyToID("_Offset");
         private readonly SpriteRenderer _renderer;
-        private readonly Camera _camera;
-        private readonly IScreenSizeObserver _screenSizeObserver;
-        private IDisposable _disposable;
         private float _offset;
 
         public float Speed { get; set; }
 
-        public WallView(SpriteRenderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver)
+        public WallView(SpriteRenderer renderer)
         {
             _renderer = renderer;
-            _camera = camera;
-            _screenSizeObserver = screenSizeObserver;
         }
 
         public void Tick()
         {
             _offset += Time.deltaTime * Speed;
             _renderer.material.SetFloat(_offsetId, _offset);
-        }
-
-        public void Initialize()
-        {
-            _disposable = _screenSizeObserver.SizeChanged.Subscribe(s => _renderer.size = new(
-                _camera.orthographicSize * s.x / s.y * 2 / _renderer.transform.localScale.x,
-                _renderer.size.y));
-        }
-
-        public void Dispose()
-        {
-            _disposable.Dispose();
         }
     }
 }
