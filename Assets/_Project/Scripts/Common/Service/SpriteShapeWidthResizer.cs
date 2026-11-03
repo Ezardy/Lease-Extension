@@ -8,15 +8,20 @@ namespace LeaseExtension.Common.Service
     [UsedImplicitly]
     public class SpriteShapeWidthResizer : RendererWidthResizer
     {
-        private readonly SpriteShapeRenderer _renderer;
+        private readonly SpriteShapeController _spriteShapeController;
         
-        public SpriteShapeWidthResizer(SpriteShapeRenderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver,
-            float width = 1, float minRatio = 0, float maxRatio = float.PositiveInfinity) : base(renderer, camera,
+        public SpriteShapeWidthResizer(SpriteShapeController spriteShapeController, Camera camera, IScreenSizeObserver screenSizeObserver,
+            float width = 1, float minRatio = 0, float maxRatio = float.PositiveInfinity) : base(spriteShapeController.spriteShapeRenderer, camera,
             screenSizeObserver, width, minRatio, maxRatio)
         {
-            _renderer = renderer;
+            _spriteShapeController = spriteShapeController;
         }
 
-        protected override Bounds Bounds => _renderer.GetBounds()[0];
+        public override void Initialize()
+        {
+            _spriteShapeController.BakeMesh().Complete();
+            _spriteShapeController.spriteShapeRenderer.SetLocalAABB(_spriteShapeController.spriteShapeRenderer.GetBounds()[0]);
+            base.Initialize();
+        }
     }
 }

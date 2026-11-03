@@ -17,7 +17,7 @@ namespace LeaseExtension.Common.Service
         private readonly float _maxRatio;
         private IDisposable _disposable;
 
-        protected virtual Bounds Bounds => _renderer.bounds;
+        private Bounds Bounds => _renderer.bounds;
 
         public RendererWidthResizer(Renderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver,
             [InjectOptional] float width = 1,
@@ -31,7 +31,7 @@ namespace LeaseExtension.Common.Service
             _maxRatio = maxRatio;
         }
         
-        public void Initialize()
+        public virtual void Initialize()
         {
             _disposable = _screenSizeObserver.SizeChanged.Subscribe(s =>
             {
@@ -66,7 +66,6 @@ namespace LeaseExtension.Common.Service
 
         protected virtual void ApplyInternalWidth(float width)
         {
-            Debug.Log(Bounds);
             Vector3 scale = _renderer.transform.localScale;
             scale.x = width;
             _renderer.transform.localScale = scale;

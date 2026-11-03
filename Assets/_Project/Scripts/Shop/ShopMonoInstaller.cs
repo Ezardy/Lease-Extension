@@ -1,5 +1,6 @@
 ﻿using LeaseExtension.Common.Service;
 using UnityEngine;
+using UnityEngine.U2D;
 using Zenject;
 
 namespace LeaseExtension.Shop
@@ -11,7 +12,7 @@ namespace LeaseExtension.Shop
         [Space, SerializeField]
         private SpriteRenderer _ruler;
         [SerializeField]
-        private Renderer _rulerShadow;
+        private SpriteShapeController _rulerShadow;
         [SerializeField, Range(0, 1)]
         private float _rulerWidth = 1;
         [SerializeField, Min(0)]

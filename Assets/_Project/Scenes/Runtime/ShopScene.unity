@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Shop::LeaseExtension.Shop.ShopMonoInstaller
   _wall: {fileID: 359778720}
   _ruler: {fileID: 4888107}
-  _rulerShadow: {fileID: 57537778}
+  _rulerShadow: {fileID: 57537777}
   _rulerWidth: 0.85
   _rulerMinRatio: 0.73
   _rulerMaxRatio: 1.5

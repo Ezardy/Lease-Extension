@@ -3,7 +3,8 @@
     "rootNamespace": "LeaseExtension",
     "references": [
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:e8bd2f4872af24d43842bf9b931b833e"
+        "GUID:e8bd2f4872af24d43842bf9b931b833e",
+        "GUID:caccfbdb442cdc64fa722b4c5585521f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
