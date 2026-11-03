@@ -25,7 +25,7 @@ namespace LeaseExtension.Shop
                 .WithArguments(_wall);
             Container.BindInterfacesTo<SpriteWidthResizer>().AsCached()
                 .WithArguments(_ruler, _rulerWidth, _rulerMinRatio, _rulerMaxRatio);
-            Container.BindInterfacesTo<RendererWidthResizer>().AsSingle()
+            Container.BindInterfacesTo<SpriteShapeWidthResizer>().AsSingle()
                 .WithArguments(_rulerShadow, _rulerWidth + 0.02f, _rulerMinRatio, _rulerMaxRatio);
         }
     }

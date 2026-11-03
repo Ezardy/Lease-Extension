@@ -17,6 +17,8 @@ namespace LeaseExtension.Common.Service
         private readonly float _maxRatio;
         private IDisposable _disposable;
 
+        protected virtual Bounds Bounds => _renderer.bounds;
+
         public RendererWidthResizer(Renderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver,
             [InjectOptional] float width = 1,
             [InjectOptional] float minRatio = 0, [InjectOptional] float maxRatio = float.PositiveInfinity)
@@ -33,12 +35,12 @@ namespace LeaseExtension.Common.Service
         {
             _disposable = _screenSizeObserver.SizeChanged.Subscribe(s =>
             {
-                float height = _renderer.bounds.size.y;
+                float height = Bounds.size.y;
                 float minWidth = _minRatio * height;
                 float maxWidth = _maxRatio * height;
                 float internalWidth = CalculateInternalWidth(s) * _width;
                 ApplyInternalWidth(internalWidth);
-                float width = _renderer.bounds.size.x;
+                float width = Bounds.size.x;
                 if (width < minWidth)
                 {
                     internalWidth *= minWidth / width;
@@ -59,11 +61,12 @@ namespace LeaseExtension.Common.Service
 
         protected virtual float CalculateInternalWidth(Vector2Int s)
         {
-            return _renderer.transform.localScale.x * Camera.orthographicSize * 2 * s.x / s.y / _renderer.bounds.size.x;
+            return _renderer.transform.localScale.x / Bounds.size.x * Camera.orthographicSize * 2 * s.x / s.y;
         }
 
         protected virtual void ApplyInternalWidth(float width)
         {
+            Debug.Log(Bounds);
             Vector3 scale = _renderer.transform.localScale;
             scale.x = width;
             _renderer.transform.localScale = scale;
