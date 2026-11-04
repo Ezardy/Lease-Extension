@@ -1,0 +1,35 @@
+:root {
+}
+
+.icon-label {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-grow: 1;
+    align-items: center;
+    height: 100%;
+}
+
+.icon-label__icon {
+    height: 100%;
+}
+
+.icon-label__label {
+    -unity-text-align: middle-left;
+    -unity-text-auto-size: best-fit 10px 100px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.icon-label__container {
+    align-self: stretch;
+    flex-grow: 1;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 1px;
+}
