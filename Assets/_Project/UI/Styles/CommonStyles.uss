@@ -13,6 +13,8 @@
     --button-color: rgba(49, 108, 101, 0.38);
     --button-border-bright-color: rgba(27, 90, 75, 0.38);
     --button-border-dark-color: rgba(15, 52, 43, 0.38);
+    --wallet-text-color: rgb(244, 185, 0);
+    --record-text-color: rgb(255, 255, 255);
 }
 
 .lease-extension__colors-purple {

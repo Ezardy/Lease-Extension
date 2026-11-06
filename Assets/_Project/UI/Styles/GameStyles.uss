@@ -44,13 +44,6 @@
     -unity-font-definition: url("project://database/Assets/_Project/Fonts/help-me.regular.ttf?fileID=12800000&guid=715ce423b9e910b4da86e5a5f9630623&type=3#help-me.regular");
 }
 
-.race-stats__sentence {
-    flex-shrink: 1;
-    flex-basis: auto;
-    min-width: 0;
-    align-self: stretch;
-}
-
 .protocol-label {
     -unity-font-definition: url("project://database/Assets/_Project/Fonts/Octin%20Vintage%20B%20Rg.otf?fileID=12800000&guid=c16efcf069cf4f847aea9cf9f9d17508&type=3#Octin Vintage B Rg");
     color: rgb(0, 0, 0);

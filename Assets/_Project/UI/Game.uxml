@@ -2,9 +2,9 @@
     <Style src="project://database/Assets/_Project/UI/Styles/GameStyles.uss?fileID=7433441132597879392&amp;guid=ee9a5807ee865a548a165d9265d0794f&amp;type=3#GameStyles"/>
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <Style src="project://database/Assets/_Project/Packages/Aniki.UI/Styles/Icon%20Label.uss?fileID=7433441132597879392&amp;guid=459a7587a282d2246bdbe8e148731f79&amp;type=3#Icon Label"/>
-    <ui:VisualElement name="main" picking-mode="Ignore" data-source-type="LeaseExtension.UI.Game.Main.IMainViewModel, LeaseExtension.UI" class="root-container" style="display: none; justify-content: space-between;">
+    <ui:VisualElement name="main" picking-mode="Ignore" data-source-type="LeaseExtension.UI.Game.Main.IMainViewModel, LeaseExtension.UI" class="root-container" style="display: flex; justify-content: space-between;">
         <ui:VisualElement name="logo-group" picking-mode="Ignore" style="flex-grow: 0; flex-direction: column-reverse; height: 60%;">
-            <ui:VisualElement name="record-group" picking-mode="Ignore" class="record-group lease-extension__colors" style="color: var(--text-color);">
+            <ui:VisualElement name="record-group" picking-mode="Ignore" class="record-group lease-extension__colors" style="color: var(--record-text-color);">
                 <ui:Label text="Record" name="record-label" picking-mode="Ignore" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" style="flex-shrink: 1; margin-right: 30px;"/>
                 <ui:Label text="1 m 28 d" name="record" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" style="flex-shrink: 1; margin-left: 30px;">
                     <Bindings>
@@ -27,12 +27,12 @@
                     <ui:DataBinding property="Label" data-source-path="BarsPassed" binding-mode="ToTarget"/>
                 </Bindings>
             </Aniki.UI.Elements.IconLabel>
-            <ui:Label text="12 y 12 m 30 d" name="race-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="race-stats__sentence" style="-unity-text-auto-size: best-fit 10px 100px; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(255, 255, 255);">
+            <ui:Label text="12 y 12 m 30 d" name="race-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="race-stats__sentence lease-extension__colors" style="-unity-text-auto-size: best-fit 10px 100px; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-shrink: 1; color: var(--record-text-color);">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="BarsPassed" binding-mode="ToTarget" source-to-ui-converters="Record"/>
                 </Bindings>
             </ui:Label>
-            <Aniki.UI.Elements.IconLabel name="race-stats__earned" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" style="justify-content: flex-end; flex-direction: row; color: rgb(244, 185, 0);">
+            <Aniki.UI.Elements.IconLabel name="race-stats__earned" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" class="lease-extension__colors" style="justify-content: flex-end; flex-direction: row; color: var(--wallet-text-color);">
                 <Bindings>
                     <ui:DataBinding property="Label" data-source-path="Earned" binding-mode="ToTarget"/>
                 </Bindings>
