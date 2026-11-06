@@ -21,14 +21,22 @@
         </Bindings>
     </ui:VisualElement>
     <ui:VisualElement name="race" data-source-type="LeaseExtension.UI.Game.Race.IRaceViewModel, LeaseExtension.UI" picking-mode="Ignore" class="root-container" style="flex-grow: 1; display: flex; justify-content: space-between;">
-        <ui:VisualElement name="race-stats" picking-mode="Ignore" class="game-stats-container">
-            <Aniki.UI.Elements.IconLabel name="race-stats__bars-passed" icon="project://database/Assets/_Project/Sprites/Parts/bar.png?fileID=5156776694448688124&amp;guid=ce644bb53df6fe142931432592f54e2c&amp;type=3#bar_0" label="58" class="lease-extension__colors game-stats__icon-label" style="flex-direction: row-reverse; color: var(--text-color); align-self: center; justify-content: flex-end;"/>
-            <ui:Label text="12 y 12 m 30 d" name="race-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="sentence" style="-unity-text-auto-size: best-fit 10px 100px; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; height: 65%; flex-shrink: 1; color: rgb(255, 255, 255);">
+        <ui:VisualElement name="race-stats" picking-mode="Ignore" class="race-stats">
+            <Aniki.UI.Elements.IconLabel name="race-stats__bars-passed" icon="project://database/Assets/_Project/Sprites/Parts/bar.png?fileID=5156776694448688124&amp;guid=ce644bb53df6fe142931432592f54e2c&amp;type=3#bar_0" label="58" class="lease-extension__colors" style="flex-direction: row-reverse; color: var(--text-color); align-self: center; justify-content: flex-end;">
+                <Bindings>
+                    <ui:DataBinding property="Label" data-source-path="BarsPassed" binding-mode="ToTarget"/>
+                </Bindings>
+            </Aniki.UI.Elements.IconLabel>
+            <ui:Label text="12 y 12 m 30 d" name="race-stats__sentence" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" picking-mode="Ignore" class="race-stats__sentence" style="-unity-text-auto-size: best-fit 10px 100px; margin-top: 0; margin-right: 2%; margin-bottom: 0; margin-left: 2%; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; color: rgb(255, 255, 255);">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="BarsPassed" binding-mode="ToTarget" source-to-ui-converters="Record"/>
                 </Bindings>
             </ui:Label>
-            <Aniki.UI.Elements.IconLabel name="race-stats__earned" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" class="game-stats__icon-label" style="flex-direction: row;"/>
+            <Aniki.UI.Elements.IconLabel name="race-stats__earned" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" style="justify-content: flex-end; flex-direction: row; color: rgb(244, 185, 0);">
+                <Bindings>
+                    <ui:DataBinding property="Label" data-source-path="Earned" binding-mode="ToTarget"/>
+                </Bindings>
+            </Aniki.UI.Elements.IconLabel>
         </ui:VisualElement>
         <ui:VisualElement name="effects" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row-reverse; height: 5%; align-items: flex-end; justify-content: flex-start; align-self: stretch; display: none;">
             <ui:Image source="project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2346436936791262179&amp;guid=dc00bbf4166ca274c86cdf3590f8c8b4&amp;type=3#console.warnicon@2x" picking-mode="Ignore" style="margin-right: 0%; aspect-ratio: 1.3; height: 100%;"/>

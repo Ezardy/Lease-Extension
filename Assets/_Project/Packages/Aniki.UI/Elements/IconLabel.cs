@@ -87,6 +87,7 @@ namespace Aniki.UI.Elements {
 			measurementLabel.AddToClassList(measurementUssClassName);
 			Add(measurementLabel);
 
+			measurementLabel.RegisterCallback<GeometryChangedEvent>(evt => UpdateLayout());
 			RegisterCallback<GeometryChangedEvent>(evt => UpdateLayout());
 			RegisterCallback<CustomStyleResolvedEvent>(evt => UpdateLayout());
 			RegisterCallback<AttachToPanelEvent>(evt => schedule.Execute(UpdateLayout));
