@@ -22,16 +22,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3678755356987935735, guid: c86b52af76f194f4e8efcf88219d052c, type: 3}
       propertyPath: m_Name
-      value: bar Variant
+      value: bar
       objectReference: {fileID: 0}
     - target: {fileID: 7120112206149999758, guid: c86b52af76f194f4e8efcf88219d052c, type: 3}
       propertyPath: m_Size.x
       value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 7120112206149999758, guid: c86b52af76f194f4e8efcf88219d052c, type: 3}
+      propertyPath: m_Size.y
+      value: 2.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120112206149999758, guid: c86b52af76f194f4e8efcf88219d052c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 5156776694448688124, guid: ce644bb53df6fe142931432592f54e2c, type: 3}
+      objectReference: {fileID: -7117086510893591147, guid: cdb686c921bb8e7439b4b9a4edd17cdc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

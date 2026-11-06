@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2d77ae8bda68405468aa338057200ea6
+guid: 7b9b2b656b359df448a091661e716eae
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6971899207070832252
-    second: melted bar_0
+      213: 1284324595089406109
+    second: melted bar reshaded_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,9 +40,9 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -56,7 +56,9 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationMethod: 0
   spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -96,11 +98,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: melted bar_0
+      name: melted bar reshaded_0
       rect:
         serializedVersion: 2
         x: 2
@@ -109,14 +124,14 @@ TextureImporter:
         height: 305
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 18, z: 0, w: 47}
+      border: {x: 0, y: 18, z: 0, w: 48}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c76d84fd36921c060800000000000000
-      internalID: 6971899207070832252
+      spriteID: d98f9922a66d2d110800000000000000
+      internalID: 1284324595089406109
       vertices: []
       indices: 
       edges: []
@@ -125,7 +140,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2f68211a7794d42468744318f5246001
+    spriteID: 6c628c4419686194a8313f182fb357ec
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +150,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      melted bar_0: 6971899207070832252
+      melted bar reshaded_0: 1284324595089406109
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

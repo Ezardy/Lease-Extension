@@ -22,7 +22,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="race" data-source-type="LeaseExtension.UI.Game.Race.IRaceViewModel, LeaseExtension.UI" picking-mode="Ignore" class="root-container" style="flex-grow: 1; display: flex; justify-content: space-between;">
         <ui:VisualElement name="race-stats" picking-mode="Ignore" class="race-stats">
-            <Aniki.UI.Elements.IconLabel name="race-stats__bars-passed" icon="project://database/Assets/_Project/Sprites/Parts/bar.png?fileID=5156776694448688124&amp;guid=ce644bb53df6fe142931432592f54e2c&amp;type=3#bar_0" label="58" class="lease-extension__colors" style="flex-direction: row-reverse; color: var(--text-color); align-self: center; justify-content: flex-end;">
+            <Aniki.UI.Elements.IconLabel name="race-stats__bars-passed" icon="project://database/Assets/_Project/Sprites/UI/bars%20passed.png?fileID=21300000&amp;guid=9071718c4a529e24b9a49bfc4583964a&amp;type=3#bars passed" label="58" class="lease-extension__colors" style="flex-direction: row-reverse; color: var(--text-color); align-self: center; justify-content: flex-end;">
                 <Bindings>
                     <ui:DataBinding property="Label" data-source-path="BarsPassed" binding-mode="ToTarget"/>
                 </Bindings>

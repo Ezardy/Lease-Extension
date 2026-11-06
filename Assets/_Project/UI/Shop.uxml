@@ -1,8 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <ui:VisualElement name="shop" data-source-type="LeaseExtension.UI.Shop.IShopViewModel, LeaseExtension.UI" class="root-container">
-        <ui:VisualElement name="shop__top-bar" style="height: 10%;">
+        <ui:VisualElement name="shop__top-bar" style="height: 10%; flex-direction: row;">
             <ui:Button text="X" name="shop__close-button" class="lease-extension__button prison-font lease-extension__colors-purple" style="aspect-ratio: 1; height: 100%;"/>
+            <Aniki.UI.Elements.IconLabel/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

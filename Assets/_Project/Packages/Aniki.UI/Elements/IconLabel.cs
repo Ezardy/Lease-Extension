@@ -18,6 +18,7 @@ namespace Aniki.UI.Elements {
 
 		private string		label;
 		private Background	icon;
+		private float	gap = 4;
 
 		[CreateProperty]
 		public Background	Icon {
@@ -49,6 +50,15 @@ namespace Aniki.UI.Elements {
 			set {
 				label = value;
 				labelElement.text = value;
+				RefreshMeasurement();
+			}
+		}
+
+		[UxmlAttribute, CreateProperty, Min(0)]
+		public float	Gap {
+			get => gap;
+			set {
+				gap = Mathf.Max(0, value);
 				RefreshMeasurement();
 			}
 		}
@@ -133,16 +143,21 @@ namespace Aniki.UI.Elements {
 			Vector2	textSize = MeasureLabel(fontSize);
 			float	aspectRatio = GetIconAspectRatio();
 			Vector2	iconSize = new(textSize.y * aspectRatio, aspectRatio > 0 ? textSize.y : 0);
+			float	spacing = GetGap(fontSize);
 
 			if (string.IsNullOrEmpty(label)) {
 				textSize = Vector2.zero;
 			}
 
 			Vector2	size = IsHorizontal()
-				? new(textSize.x + iconSize.x, Mathf.Max(textSize.y, iconSize.y))
-				: new(Mathf.Max(textSize.x, iconSize.x), textSize.y + iconSize.y);
+				? new(textSize.x + iconSize.x + spacing, Mathf.Max(textSize.y, iconSize.y))
+				: new(Mathf.Max(textSize.x, iconSize.x), textSize.y + iconSize.y + spacing);
 
 			return size;
+		}
+
+		private float GetGap(float fontSize) {
+			return fontSize > 0 && !string.IsNullOrEmpty(label) && GetIconAspectRatio() > 0 ? gap : 0;
 		}
 
 		private float GetFittedFontSize(float width, float height) {
@@ -177,6 +192,7 @@ namespace Aniki.UI.Elements {
 				float	aspectRatio = GetIconAspectRatio();
 				Vector2	iconSize = new(textSize.y * aspectRatio, aspectRatio > 0 ? textSize.y : 0);
 				Vector2	contentSize = MeasureContent(fontSize);
+				float	spacing = GetGap(fontSize);
 				bool	horizontal = IsHorizontal();
 				bool	reverse = resolvedStyle.flexDirection == FlexDirection.RowReverse || resolvedStyle.flexDirection == FlexDirection.ColumnReverse;
 				float	remaining = horizontal ? contentRect.width - contentSize.x : contentRect.height - contentSize.y;
@@ -189,12 +205,12 @@ namespace Aniki.UI.Elements {
 
 				if (horizontal) {
 					origin += new Vector2(reverse ? remaining - offset : offset, (contentRect.height - contentSize.y) * 0.5f);
-					SetBounds(iconElement, new(origin + new Vector2(reverse ? textSize.x : 0, 0), iconSize));
-					SetBounds(labelElement, new(origin + new Vector2(reverse ? 0 : iconSize.x, 0), textSize));
+					SetBounds(iconElement, new(origin + new Vector2(reverse ? textSize.x + spacing : 0, 0), iconSize));
+					SetBounds(labelElement, new(origin + new Vector2(reverse ? 0 : iconSize.x + spacing, 0), textSize));
 				} else {
 					origin += new Vector2((contentRect.width - contentSize.x) * 0.5f, reverse ? remaining - offset : offset);
-					SetBounds(iconElement, new(origin + new Vector2((contentSize.x - iconSize.x) * 0.5f, reverse ? textSize.y : 0), iconSize));
-					SetBounds(labelElement, new(origin + new Vector2((contentSize.x - textSize.x) * 0.5f, reverse ? 0 : iconSize.y), textSize));
+					SetBounds(iconElement, new(origin + new Vector2((contentSize.x - iconSize.x) * 0.5f, reverse ? textSize.y + spacing : 0), iconSize));
+					SetBounds(labelElement, new(origin + new Vector2((contentSize.x - textSize.x) * 0.5f, reverse ? 0 : iconSize.y + spacing), textSize));
 				}
 
 				labelElement.style.fontSize = fontSize;
