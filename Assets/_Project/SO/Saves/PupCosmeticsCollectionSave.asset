@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsCollectionSave
   SaveData:
     IdCollection:
-    - bowl
+    - Assets/_Project/SO/Hairstyles/PupVariants/BowlHairstyle.asset
   _doLoad: 1
   _filename: pup_cosmetics_collection.json

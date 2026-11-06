@@ -15,10 +15,7 @@ namespace LeaseExtension.Cosmetics.Installer
 
         public override void InstallBindings()
         {
-            Container.Bind<ICosmeticsElementModel>().FromResolveGetter<CharacterCosmetics>(
-                _target, c => c.Model).AsCached();
-            Container.Bind<ICosmeticsItemModelDatabase>().FromResolveGetter<CharacterCosmetics>(
-                _target, c => c.Database).AsCached();
+            Container.Bind<ICosmeticsElementModel>().FromResolve(_target);
             Container.Bind<ICosmeticsElementView>().To<CosmeticsElementView>().AsSingle()
                 .WithArguments(_backRenderer, _frontRenderer);
             Container.BindInterfacesTo<CosmeticsElementViewModel>().AsSingle();

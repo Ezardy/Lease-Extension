@@ -1,5 +1,5 @@
 using System;
-using LeaseExtension.Common.Utilities;
+using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Cosmetics.Model;
 using LeaseExtension.Cosmetics.Save;
@@ -22,9 +22,9 @@ namespace LeaseExtension.Cosmetics.Installer
 
         private void Install(CosmeticsTarget target, CosmeticsElementModelDependencies dependencies)
         {
-            Container.Bind<CharacterCosmetics>().WithId(target).FromSubContainerResolve()
+            Container.Bind<CosmeticsElementModelKernel>().WithId(target).FromSubContainerResolve()
                 .ByMethod(c => InstallCharacter(c, dependencies)).AsCached().NonLazy();
-            Container.BindInterfacesTo<CharacterCosmetics>().FromResolve(target).AsCached();
+            Container.Bind<ICosmeticsElementModel>().WithId(target).FromResolveGetter<CosmeticsElementModelKernel>(target, c => c.Model).AsCached();
         }
 
         private static void InstallCharacter(DiContainer container, CosmeticsElementModelDependencies dependencies)
@@ -38,8 +38,7 @@ namespace LeaseExtension.Cosmetics.Installer
             container.Bind<ICosmeticsElementModel>().To<CosmeticsElementModel>().AsSingle().WithArguments(
                 dependencies.CosmeticsSave.Data.Id,
                 dependencies.CosmeticsCollectionSave.Data.IdCollection);
-            container.BindInstance(dependencies.Database.I);
-            container.Bind<CharacterCosmetics>().AsSingle();
+            container.Bind<CosmeticsElementModelKernel>().AsSingle();
             container.BindInterfacesTo<CosmeticsSave>().FromInstance(dependencies.CosmeticsSave);
             container.BindInterfacesTo<CosmeticsCollectionSave>().FromInstance(dependencies.CosmeticsCollectionSave);
             container.QueueForInject(dependencies.CosmeticsSave);
@@ -51,7 +50,17 @@ namespace LeaseExtension.Cosmetics.Installer
         {
             public CosmeticsSave CosmeticsSave;
             public CosmeticsCollectionSave CosmeticsCollectionSave;
-            public Ref<ICosmeticsItemModelDatabase> Database;
+        }
+        
+        [UsedImplicitly]
+        private class CosmeticsElementModelKernel : Kernel
+        {
+            public ICosmeticsElementModel Model { get; }
+
+            public CosmeticsElementModelKernel(ICosmeticsElementModel model)
+            {
+                Model = model;
+            }
         }
     }
 }

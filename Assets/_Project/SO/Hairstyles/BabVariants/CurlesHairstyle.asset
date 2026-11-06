@@ -12,17 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
   m_Name: CurlesHairstyle
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsItemModel
-  _id: curles
+  guid: 2f61f703dfd1840408c2849fbd596e21
   _price: 0
-  _backSpriteAssetReference:
-    m_AssetGUID: a56f95af983f43440af49f6ead37b17b
-    m_SubObjectName: Back_0
-    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 1
-  _frontSpriteAssetReference:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
+  _back: {fileID: 5000927251509650613, guid: a56f95af983f43440af49f6ead37b17b, type: 3}
+  _front: {fileID: 0}

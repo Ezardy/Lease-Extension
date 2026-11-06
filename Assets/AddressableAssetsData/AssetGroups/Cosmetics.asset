@@ -15,18 +15,13 @@ MonoBehaviour:
   m_GroupName: Cosmetics
   m_GUID: 453c2eb7b94a8bb449a384f7a02a23bc
   m_SerializeEntries:
-  - m_GUID: 631eaf6bcd9d02c4f9556766e6244531
-    m_Address: Assets/Sprites/Characters/Hairs/Pup/Bowl/Front.png
+  - m_GUID: 17e840aa1058f88489ff1198a931a710
+    m_Address: Assets/_Project/SO/Hairstyles/BabVariants
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a56f95af983f43440af49f6ead37b17b
-    m_Address: Assets/Sprites/Characters/Hairs/Bab/Curls/Back.png
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c051cb4ad4d1fd04fa7e0b0d1f4d4864
-    m_Address: Assets/Sprites/Characters/Hairs/Pup/Bowl/Back.png
+  - m_GUID: 3f09ba19a35f2db468b3e8f93e4dece5
+    m_Address: Assets/_Project/SO/Hairstyles/PupVariants
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

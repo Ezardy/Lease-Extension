@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PupCosmeticsSave
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsSave
   SaveData:
-    Id: bowl
+    Id: Assets/_Project/SO/Hairstyles/PupVariants/BowlHairstyle.asset
   _doLoad: 1
   _filename: pup_cosmetics.json
