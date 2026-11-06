@@ -1,21 +1,22 @@
-:root {
-}
-
 .icon-label {
     flex-direction: row;
-    justify-content: flex-start;
-    flex-grow: 1;
-    align-items: center;
-    height: 100%;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+    align-items: stretch;
+    overflow: hidden;
+    font-size: 100px;
 }
 
 .icon-label__icon {
-    height: 100%;
+    position: absolute;
 }
 
 .icon-label__label {
+    position: absolute;
+    white-space: nowrap;
     -unity-text-align: middle-left;
-    -unity-text-auto-size: best-fit 10px 100px;
+    -unity-text-auto-size: none;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -26,10 +27,14 @@
     margin-left: 0;
 }
 
-.icon-label__container {
-    align-self: stretch;
+.icon-label__measurement {
+    visibility: hidden;
     flex-grow: 1;
-    justify-content: center;
-    padding-top: 2px;
-    padding-bottom: 1px;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+    white-space: nowrap;
+    -unity-text-auto-size: none;
+    margin: 0;
+    padding: 0;
 }
