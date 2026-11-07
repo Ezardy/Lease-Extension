@@ -10,19 +10,19 @@ namespace LeaseExtension.Cosmetics.Save
     [CreateAssetMenu(fileName = "CosmeticsSave", menuName = "Scriptable Objects/Saves/Cosmetics")]
     internal class CosmeticsSave : SaveBase<Cosmetics>, IInitializable, IDisposable
     {
-        private ICosmeticsElementModel _cosmetics;
+        private IAppliedCosmeticsModel _appliedCosmetics;
         private IDisposable _disposable;
 
         [Inject]
-        public void Init(ICosmeticsElementModel cosmetics)
+        public void Init(IAppliedCosmeticsModel appliedCosmetics)
         {
-            _cosmetics = cosmetics;
+            _appliedCosmetics = appliedCosmetics;
         }
 
         public void Initialize()
         {
             Init();
-            _disposable = _cosmetics.IdChanged.Skip(1).Subscribe(h =>
+            _disposable = _appliedCosmetics.IdChanged.Skip(1).Subscribe(h =>
             {
                 SaveData.Id = h;
                 Save();

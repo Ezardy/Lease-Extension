@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LeaseExtension.Cosmetics.Contract
+namespace LeaseExtension.Cosmetics.View
 {
     internal interface ICosmeticsElementView
     {

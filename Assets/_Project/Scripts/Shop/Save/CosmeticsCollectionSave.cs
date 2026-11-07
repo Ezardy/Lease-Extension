@@ -1,28 +1,28 @@
 using System;
-using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Save;
+using LeaseExtension.Shop.Contract;
 using R3;
 using UnityEngine;
 using Zenject;
 
-namespace LeaseExtension.Cosmetics.Save
+namespace LeaseExtension.Shop.Save
 {
     [CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
     internal class CosmeticsCollectionSave : SaveBase<CosmeticsCollection>, IInitializable, IDisposable
     {
-        private ICosmeticsElementModel _cosmetics;
+        private ITargetProductsModel _model;
         private IDisposable _disposable;
 
         [Inject]
-        public void Init(ICosmeticsElementModel cosmetics)
+        public void Init(ITargetProductsModel cosmetics)
         {
-            _cosmetics = cosmetics;
+            _model = cosmetics;
         }
 
         public void Initialize()
         {
             Init();
-            _disposable = _cosmetics.IdCollectionChanged.Subscribe(e =>
+            _disposable = _model.ProductOwned.Subscribe(e =>
             {
                 SaveData.IdCollection.Add(e.Value);
                 Save();

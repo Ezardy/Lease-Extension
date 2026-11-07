@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LeaseExtension.Cosmetics.Save
+namespace LeaseExtension.Shop.Save
 {
     [Serializable]
     internal struct CosmeticsCollection

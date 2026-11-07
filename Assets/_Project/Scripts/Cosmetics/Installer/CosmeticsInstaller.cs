@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Cosmetics.Model;
@@ -11,53 +11,42 @@ namespace LeaseExtension.Cosmetics.Installer
     [CreateAssetMenu(fileName = "CosmeticsInstaller", menuName = "Installers/Cosmetics Installer")]
     internal class CosmeticsInstaller : ScriptableObjectInstaller<CosmeticsInstaller>
     {
-        [SerializeField] private CosmeticsElementModelDependencies _babHairstyleModelDependencies;
-        [SerializeField] private CosmeticsElementModelDependencies _pupHairstyleModelDependencies;
+        [SerializeField] private Dictionary<CosmeticsTarget, CosmeticsSave> _saves;
 
         public override void InstallBindings()
         {
-            Install(CosmeticsTarget.BabHairstyle, _babHairstyleModelDependencies);
-            Install(CosmeticsTarget.PupHairstyle, _pupHairstyleModelDependencies);
+            foreach (KeyValuePair<CosmeticsTarget, CosmeticsSave> save in _saves)
+            {
+                Install(save.Key, save.Value);
+            }
         }
 
-        private void Install(CosmeticsTarget target, CosmeticsElementModelDependencies dependencies)
+        private void Install(CosmeticsTarget target, CosmeticsSave save)
         {
             Container.Bind<CosmeticsElementModelKernel>().WithId(target).FromSubContainerResolve()
-                .ByMethod(c => InstallCharacter(c, dependencies)).AsCached().NonLazy();
-            Container.Bind<ICosmeticsElementModel>().WithId(target).FromResolveGetter<CosmeticsElementModelKernel>(target, c => c.Model).AsCached();
+                .ByMethod(c => InstallCharacter(c, save)).AsCached().NonLazy();
+            Container.Bind<IAppliedCosmeticsModel>().WithId(target).FromResolveGetter<CosmeticsElementModelKernel>(target, c => c.Model).AsCached();
         }
 
-        private static void InstallCharacter(DiContainer container, CosmeticsElementModelDependencies dependencies)
+        private static void InstallCharacter(DiContainer container, CosmeticsSave save)
         {
             if (!container.IsValidating)
             {
-                dependencies.CosmeticsSave.Load();
-                dependencies.CosmeticsCollectionSave.Load();
+                save.Load();
             }
 
-            container.Bind<ICosmeticsElementModel>().To<CosmeticsElementModel>().AsSingle().WithArguments(
-                dependencies.CosmeticsSave.Data.Id,
-                dependencies.CosmeticsCollectionSave.Data.IdCollection);
+            container.Bind<IAppliedCosmeticsModel>().To<AppliedCosmeticsModel>().AsSingle().WithArguments(save.Data.Id);
             container.Bind<CosmeticsElementModelKernel>().AsSingle();
-            container.BindInterfacesTo<CosmeticsSave>().FromInstance(dependencies.CosmeticsSave);
-            container.BindInterfacesTo<CosmeticsCollectionSave>().FromInstance(dependencies.CosmeticsCollectionSave);
-            container.QueueForInject(dependencies.CosmeticsSave);
-            container.QueueForInject(dependencies.CosmeticsCollectionSave);
-        }
-
-        [Serializable]
-        private class CosmeticsElementModelDependencies
-        {
-            public CosmeticsSave CosmeticsSave;
-            public CosmeticsCollectionSave CosmeticsCollectionSave;
+            container.BindInterfacesTo<CosmeticsSave>().FromInstance(save);
+            container.QueueForInject(save);
         }
         
         [UsedImplicitly]
         private class CosmeticsElementModelKernel : Kernel
         {
-            public ICosmeticsElementModel Model { get; }
+            public IAppliedCosmeticsModel Model { get; }
 
-            public CosmeticsElementModelKernel(ICosmeticsElementModel model)
+            public CosmeticsElementModelKernel(IAppliedCosmeticsModel model)
             {
                 Model = model;
             }

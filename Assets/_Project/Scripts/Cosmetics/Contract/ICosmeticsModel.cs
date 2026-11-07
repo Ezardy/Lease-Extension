@@ -1,11 +1,10 @@
-using Aniki.Common;
+using LeaseExtension.Common.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.Cosmetics.Contract
 {
-    public interface ICosmeticsItemModel : IIdentifiable
+    public interface ICosmeticsModel : IIdentifiable
     {
-        public uint Price { get; }
         public Sprite Back { get; }
         public Sprite Front { get; }
     }

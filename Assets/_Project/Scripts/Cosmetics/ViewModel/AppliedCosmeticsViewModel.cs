@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
-using LeaseExtension.Cosmetics.Model;
+using LeaseExtension.Cosmetics.View;
 using R3;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -11,26 +11,26 @@ using Zenject;
 namespace LeaseExtension.Cosmetics.ViewModel
 {
     [UsedImplicitly]
-    internal class CosmeticsElementViewModel : ICosmeticsElementViewModel, IInitializable, IDisposable
+    internal class AppliedCosmeticsViewModel : ICosmeticsElementViewModel, IInitializable, IDisposable
     {
-        private readonly ICosmeticsElementModel _cosmeticsModel;
+        private readonly IAppliedCosmeticsModel _appliedCosmeticsModel;
         private readonly ICosmeticsElementView _cosmeticsView;
-        private AsyncOperationHandle<CosmeticsItemModel> _handle;
+        private AsyncOperationHandle<ICosmeticsModel> _handle;
         private IDisposable _disposable;
         private bool _isDisposed;
         private int _requestVersion;
 
-        public CosmeticsElementViewModel(
-            ICosmeticsElementModel cosmeticsModel,
+        public AppliedCosmeticsViewModel(
+            IAppliedCosmeticsModel appliedCosmeticsModel,
             ICosmeticsElementView cosmeticsView)
         {
-            _cosmeticsModel = cosmeticsModel;
+            _appliedCosmeticsModel = appliedCosmeticsModel;
             _cosmeticsView = cosmeticsView;
         }
 
         public void Initialize()
         {
-            _disposable = _cosmeticsModel.IdChanged.Subscribe(h => Set(h).Forget());
+            _disposable = _appliedCosmeticsModel.IdChanged.Subscribe(h => Set(h).Forget());
         }
 
         public void Dispose()
@@ -45,16 +45,16 @@ namespace LeaseExtension.Cosmetics.ViewModel
             }
         }
 
-        private async UniTask Set(string id)
+        private async UniTaskVoid Set(string id)
         {
             int requestVersion = ++_requestVersion;
             if (!_isDisposed)
             {
-                AsyncOperationHandle<CosmeticsItemModel> handle = Addressables.LoadAssetAsync<CosmeticsItemModel>(id);
+                AsyncOperationHandle<ICosmeticsModel> handle = Addressables.LoadAssetAsync<ICosmeticsModel>(id);
                 bool isRetained = false;
                 try
                 {
-                    ICosmeticsItemModel item = await handle.ToUniTask();
+                    ICosmeticsModel item = await handle.ToUniTask();
                     if (!_isDisposed && requestVersion == _requestVersion)
                     {
                         _cosmeticsView.Set(item.Back, item.Front);

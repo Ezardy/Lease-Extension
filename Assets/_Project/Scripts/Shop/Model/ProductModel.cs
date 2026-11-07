@@ -1,11 +1,11 @@
 using Aniki.Common;
-using LeaseExtension.Cosmetics.Contract;
+using LeaseExtension.Shop.Contract;
 using UnityEngine;
 
-namespace LeaseExtension.Cosmetics.Model
+namespace LeaseExtension.Shop.Model
 {
     [CreateAssetMenu(fileName = "CosmeticsVariant", menuName = "Scriptable Objects/Cosmetics Variant")]
-    internal class CosmeticsItemModel : SerializableScriptableObject, ICosmeticsItemModel
+    internal class ProductModel : SerializableScriptableObject, IProductModel
     {
         [SerializeField] private uint _price;
         [SerializeField] private Sprite _back;

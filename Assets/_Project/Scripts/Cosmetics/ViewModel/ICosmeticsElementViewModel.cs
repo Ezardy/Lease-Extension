@@ -1,4 +1,4 @@
-namespace LeaseExtension.Cosmetics.Contract
+namespace LeaseExtension.Cosmetics.ViewModel
 {
     internal interface ICosmeticsElementViewModel
     {}

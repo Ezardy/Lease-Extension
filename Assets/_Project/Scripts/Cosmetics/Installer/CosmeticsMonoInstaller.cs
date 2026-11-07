@@ -15,10 +15,10 @@ namespace LeaseExtension.Cosmetics.Installer
 
         public override void InstallBindings()
         {
-            Container.Bind<ICosmeticsElementModel>().FromResolve(_target);
+            Container.Bind<IAppliedCosmeticsModel>().FromResolve(_target);
             Container.Bind<ICosmeticsElementView>().To<CosmeticsElementView>().AsSingle()
                 .WithArguments(_backRenderer, _frontRenderer);
-            Container.BindInterfacesTo<CosmeticsElementViewModel>().AsSingle();
+            Container.BindInterfacesTo<AppliedCosmeticsViewModel>().AsSingle();
         }
     }
 }
