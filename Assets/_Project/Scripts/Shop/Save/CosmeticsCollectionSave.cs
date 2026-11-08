@@ -10,11 +10,11 @@ namespace LeaseExtension.Shop.Save
     [CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
     internal class CosmeticsCollectionSave : SaveBase<CosmeticsCollection>, IInitializable, IDisposable
     {
-        private ITargetProductsModel _model;
+        private ITargetProductListModel _model;
         private IDisposable _disposable;
 
         [Inject]
-        public void Init(ITargetProductsModel cosmetics)
+        public void Init(ITargetProductListModel cosmetics)
         {
             _model = cosmetics;
         }

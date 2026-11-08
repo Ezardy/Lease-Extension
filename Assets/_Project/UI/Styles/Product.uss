@@ -16,6 +16,8 @@
     filter: drop-shadow(-2.77 -3.55 0 rgba(0, 0, 0, 0.18));
 }
 
-.product__selected #product__background {
-    filter: hue-rotate(1.49) drop-shadow(-3 -3 0 rgba(0, 0, 0, 0.502));
+
+
+.unity-collection-view__item--selected #product__background {
+    filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
 }

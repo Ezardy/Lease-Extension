@@ -2,12 +2,12 @@
     <Style src="project://database/Assets/_Project/UI/Styles/Product.uss?fileID=7433441132597879392&amp;guid=ae1a4030caad6f74bb7b6823b1f16bee&amp;type=3#Product"/>
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <Style src="project://database/Assets/_Project/Packages/Aniki.UI/Styles/Icon%20Label.uss?fileID=7433441132597879392&amp;guid=459a7587a282d2246bdbe8e148731f79&amp;type=3#Icon Label"/>
-    <ui:VisualElement name="product" class="prison-font lease-extension__colors" style="aspect-ratio: 1; height: 100%; flex-direction: column-reverse;">
-        <ui:VisualElement name="product__background" class="lease-extension__button product__selected" style="flex-grow: 1; position: absolute; height: 100%; width: 100%;"/>
-        <ui:VisualElement name="product__preview" class="product__preview product__shadow" style="flex-grow: 1;">
-            <ui:Image source="project://database/Assets/_Project/Sprites/Characters/Hairs/Pup/Bowl/Back.png?fileID=2800000&amp;guid=c051cb4ad4d1fd04fa7e0b0d1f4d4864&amp;type=3#Back" name="product__preview-back" scale-mode="ScaleToFit" class="product__preview"/>
-            <ui:Image source="project://database/Assets/_Project/Sprites/Characters/Hairs/Pup/Bowl/Front.png?fileID=2800000&amp;guid=631eaf6bcd9d02c4f9556766e6244531&amp;type=3#Front" name="product__preview-front" class="product__preview"/>
+    <ui:VisualElement name="product" picking-mode="Position" class="prison-font" style="aspect-ratio: 1; height: 100%; flex-direction: column-reverse;">
+        <ui:VisualElement name="product__background" class="lease-extension__button" style="flex-grow: 1; position: absolute; height: 100%; width: 100%;"/>
+        <ui:VisualElement name="product__preview" picking-mode="Ignore" class="product__preview product__shadow" style="flex-grow: 1;">
+            <ui:Image source="project://database/Assets/_Project/Sprites/Characters/Hairs/Pup/Bowl/Back.png?fileID=2800000&amp;guid=c051cb4ad4d1fd04fa7e0b0d1f4d4864&amp;type=3#Back" name="product__preview-back" scale-mode="ScaleToFit" picking-mode="Ignore" class="product__preview"/>
+            <ui:Image source="project://database/Assets/_Project/Sprites/Characters/Hairs/Pup/Bowl/Front.png?fileID=2800000&amp;guid=631eaf6bcd9d02c4f9556766e6244531&amp;type=3#Front" name="product__preview-front" picking-mode="Ignore" class="product__preview"/>
         </ui:VisualElement>
-        <Aniki.UI.Elements.IconLabel name="product__price" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" class="product__shadow" style="height: 25%; color: var(--text-color); top: 6%; left: 6%;"/>
+        <Aniki.UI.Elements.IconLabel name="product__price" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" picking-mode="Ignore" class="product__shadow" style="height: 25%; color: var(--text-color); top: 6%; left: 6%;"/>
     </ui:VisualElement>
 </ui:UXML>

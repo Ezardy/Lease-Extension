@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace LeaseExtension.Shop.Contract
 {
-    public interface ITargetProductsModel
+    public interface ITargetProductListModel
     {
         public IReadOnlyCollection<AssetReference> Products { get; }
         public IReadOnlyCollection<string> OwnedProductIds { get; }

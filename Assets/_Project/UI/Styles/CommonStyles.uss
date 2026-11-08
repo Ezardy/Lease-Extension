@@ -1,3 +1,12 @@
+:root {
+    --text-color: rgb(190, 202, 198);
+    --button-color: rgba(49, 108, 101, 0.38);
+    --button-border-bright-color: rgba(27, 90, 75, 0.38);
+    --button-border-dark-color: rgba(15, 52, 43, 0.38);
+    --wallet-text-color: rgb(244, 185, 0);
+    --record-text-color: rgb(255, 255, 255);
+}
+
 .root-container {
     height: 100%;
     width: 100%;
@@ -6,15 +15,6 @@
     justify-content: flex-start;
     align-items: stretch;
     flex-shrink: 0;
-}
-
-.lease-extension__colors {
-    --text-color: rgb(190, 202, 198);
-    --button-color: rgba(49, 108, 101, 0.38);
-    --button-border-bright-color: rgba(27, 90, 75, 0.38);
-    --button-border-dark-color: rgba(15, 52, 43, 0.38);
-    --wallet-text-color: rgb(244, 185, 0);
-    --record-text-color: rgb(255, 255, 255);
 }
 
 .lease-extension__colors-purple {
@@ -64,4 +64,19 @@
     filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
 }
 
+.unity-enum-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 2px;
+}
 
+.unity-enum-field__text {
+    -unity-text-auto-size: best-fit 10px 100px;
+    flex-grow: 1;
+    margin-right: 7%;
+}
