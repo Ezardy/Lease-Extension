@@ -13,14 +13,14 @@ namespace LeaseExtension.Shop.Save
         private ITargetProductListModel _model;
         private IDisposable _disposable;
 
-        [Inject]
-        public void Init(ITargetProductListModel cosmetics)
+        public void Init(ITargetProductListModel model)
         {
-            _model = cosmetics;
+            _model = model;
         }
 
         public void Initialize()
         {
+            SaveData.Ids ??= new();
             Init();
             _disposable = _model.ProductOwned.Subscribe(e =>
             {
@@ -31,7 +31,9 @@ namespace LeaseExtension.Shop.Save
 
         public void Dispose()
         {
-            _disposable.Dispose();
+            _disposable?.Dispose();
+            _disposable = null;
+            _model = null;
         }
     }
 }

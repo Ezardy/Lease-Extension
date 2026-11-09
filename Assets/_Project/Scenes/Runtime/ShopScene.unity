@@ -474,6 +474,25 @@ MonoBehaviour:
   _rulerWidth: 0.85
   _rulerMinRatio: 0.73
   _rulerMaxRatio: 1.5
+  _productsByTarget:
+  - key: 0
+    value:
+      References:
+      - m_AssetGUID: 2f61f703dfd1840408c2849fbd596e21
+        m_SubObjectName:
+        m_SubObjectType:
+        m_SubObjectGUID:
+        m_EditorAssetChanged: 0
+      Save: {fileID: 11400000, guid: 91ba807f90b823141a4e625f6a0d4d73, type: 2}
+  - key: 1
+    value:
+      References:
+      - m_AssetGUID: 648f71ac336eb0a4ab8ee8edc3a19c16
+        m_SubObjectName:
+        m_SubObjectType:
+        m_SubObjectGUID:
+        m_EditorAssetChanged: 0
+      Save: {fileID: 11400000, guid: 478abc3bd6d63a34ebd91b5087132c19, type: 2}
 --- !u!1 &359778719
 GameObject:
   m_ObjectHideFlags: 0
