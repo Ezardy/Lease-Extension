@@ -1,4 +1,6 @@
-﻿using LeaseExtension.UI.Contract;
+﻿using System.Collections.Generic;
+using LeaseExtension.Shop.Contract;
+using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI.Shop
@@ -8,6 +10,7 @@ namespace LeaseExtension.UI.Shop
         public Button Close { get; }
         public EnumField CosmeticsTarget { get; }
         public Button Apply { get; }
-        public ScrollView ProductList { get; }
+        public void SetProducts(IEnumerable<IProductModel> products);
+        public void ClearProducts();
     }
 }

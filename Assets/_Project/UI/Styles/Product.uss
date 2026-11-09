@@ -16,8 +16,6 @@
     filter: drop-shadow(-2.77 -3.55 0 rgba(0, 0, 0, 0.18));
 }
 
-
-
-.shop__product-card--selected #product__background {
-    filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
+.selectable-scroll-view__item--selected #product__background {
+    filter: hue-rotate(3.86) drop-shadow(-3 -3 0 rgb(0, 0, 0));
 }

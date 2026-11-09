@@ -6,18 +6,10 @@
 }
 
 #shop__product-list {
-    flex-grow: 1;
     background-color: rgba(0, 0, 0, 0.118);
     backdrop-filter: blur(1.14);
 }
 
-#shop__product-list .unity-scroll-view__content-container {
-    height: 100%;
-    overflow: visible;
-}
-
-#shop__product-list .shop__product-card {
+#shop__product-list .selectable-scroll-view__item {
     height: 94%;
-    aspect-ratio: 1;
-    flex-shrink: 0;
 }

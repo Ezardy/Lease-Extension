@@ -1,5 +1,6 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:controls="LeaseExtension.UI.Control" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Project/UI/Styles/Shop.uss?fileID=7433441132597879392&amp;guid=32b8c5ceb512bd84b923b4cb2c936402&amp;type=3#Shop"/>
+    <Style src="Styles/SelectableScrollView.uss"/>
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <Style src="project://database/Assets/_Project/Packages/Aniki.UI/Styles/Icon%20Label.uss?fileID=7433441132597879392&amp;guid=459a7587a282d2246bdbe8e148731f79&amp;type=3#Icon Label"/>
     <ui:VisualElement name="shop" data-source-type="LeaseExtension.UI.Shop.IShopViewModel, LeaseExtension.UI" class="root-container" style="justify-content: space-between;">
@@ -10,7 +11,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="shop__bottom-bar" style="height: 35%; bottom: 4%;">
             <ui:Button text="Apply" name="shop__apply-button" class="lease-extension__button prison-font" style="align-self: flex-end; aspect-ratio: 2.1766; flex-shrink: 1; height: 28%;"/>
-            <ui:ScrollView name="shop__product-list" mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden"/>
+            <controls:SelectableScrollView name="shop__product-list" mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" item-template="project://database/Assets/_Project/UI/Elements/Product.uxml?fileID=9197481963319205126&amp;guid=7d79d2fd52d0a064e8026f92ed88800d&amp;type=3#Product"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

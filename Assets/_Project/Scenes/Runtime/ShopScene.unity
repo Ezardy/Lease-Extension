@@ -616,7 +616,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LeaseExtension.UI::LeaseExtension.UI.Shop.ShopUIMonoInstaller
   _panelRenderer: {fileID: 1363353432}
-  _productTemplate: {fileID: 9197481963319205126, guid: 7d79d2fd52d0a064e8026f92ed88800d, type: 3}
 --- !u!1931382934 &1363353432
 PanelRenderer:
   m_ObjectHideFlags: 0
