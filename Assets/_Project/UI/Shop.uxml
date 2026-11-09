@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/Styles/Shop.uss?fileID=7433441132597879392&amp;guid=32b8c5ceb512bd84b923b4cb2c936402&amp;type=3#Shop"/>
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <Style src="project://database/Assets/_Project/Packages/Aniki.UI/Styles/Icon%20Label.uss?fileID=7433441132597879392&amp;guid=459a7587a282d2246bdbe8e148731f79&amp;type=3#Icon Label"/>
     <ui:VisualElement name="shop" data-source-type="LeaseExtension.UI.Shop.IShopViewModel, LeaseExtension.UI" class="root-container" style="justify-content: space-between;">

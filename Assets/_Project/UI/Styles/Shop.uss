@@ -1,0 +1,6 @@
+:root {
+}
+
+#shop__cosmetics-target.lease-extension__button {
+    --text-color: rgb(12, 63, 51);
+}
