@@ -54,6 +54,7 @@
     filter: drop-shadow(-3 -3 0 rgba(0, 0, 0, 0.502));
     backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.24);
     border-top-color: var(--button-border-dark-color);
+    overflow: visible;
 }
 
 .lease-extension__button:hover {
