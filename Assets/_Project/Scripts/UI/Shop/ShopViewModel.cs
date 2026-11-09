@@ -9,6 +9,7 @@ using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.Shop.Contract;
 using MessagePipe;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
@@ -18,20 +19,27 @@ namespace LeaseExtension.UI.Shop
     [UsedImplicitly]
     internal class ShopViewModel : IShopViewModel, IDisposable
     {
+        private const string PRODUCT_CARD_CLASS = "shop__product-card";
+        private const string SELECTED_CARD_CLASS = "shop__product-card--selected";
+
         private readonly IShopView _view;
         private readonly IPublisher<FocusedScene> _sceneRequestPublisher;
         private readonly IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> _models;
+        private readonly VisualTreeAsset _productTemplate;
         private readonly CancellationTokenSource _viewInitialization = new();
         private AsyncOperationHandle<IList<IProductModel>> _productsHandle;
+        private VisualElement _selectedCard;
 
         public ShopViewModel(
             IShopView view,
             IPublisher<FocusedScene> sceneRequestPublisher,
-            IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> models)
+            IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> models,
+            VisualTreeAsset productTemplate)
         {
             _view = view;
             _sceneRequestPublisher = sceneRequestPublisher;
             _models = models;
+            _productTemplate = productTemplate;
             InitializeView().Forget();
         }
 
@@ -43,8 +51,7 @@ namespace LeaseExtension.UI.Shop
             {
                 _view.Close.clicked -= OnCloseClicked;
                 _view.CosmeticsTarget.UnregisterValueChangedCallback(OnCosmeticsTargetChanged);
-                _view.ProductList.itemsSource = null;
-                _view.ProductList.bindItem = null;
+                ClearProductList();
             }
 
             ReleaseProducts();
@@ -60,7 +67,6 @@ namespace LeaseExtension.UI.Shop
 
             _view.Close.clicked += OnCloseClicked;
             _view.CosmeticsTarget.RegisterValueChangedCallback(OnCosmeticsTargetChanged);
-            _view.ProductList.bindItem = BindProduct;
             UpdateProductList((CosmeticsTarget)_view.CosmeticsTarget.value);
         }
 
@@ -76,8 +82,7 @@ namespace LeaseExtension.UI.Shop
 
         private void UpdateProductList(CosmeticsTarget target)
         {
-            _view.ProductList.ClearSelection();
-            _view.ProductList.itemsSource = null;
+            ClearProductList();
             ReleaseProducts();
             IReadOnlyCollection<AssetReference> products = _models[target].Products;
             if (products.Count > 0)
@@ -92,20 +97,41 @@ namespace LeaseExtension.UI.Shop
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                _view.ProductList.itemsSource = handle.Result.ToArray();
+                foreach (IProductModel product in handle.Result)
+                {
+                    TemplateContainer card = _productTemplate.Instantiate();
+                    card.AddToClassList(PRODUCT_CARD_CLASS);
+                    card.focusable = true;
+                    card.AddManipulator(new Clickable(() => SelectCard(card)));
+                    card.RegisterCallback<NavigationSubmitEvent>(_ => SelectCard(card));
+                    BindProduct(card, product);
+                    _view.ProductList.Add(card);
+                }
             }
         }
 
-        private void BindProduct(VisualElement element, int index)
+        private static void BindProduct(VisualElement element, IProductModel product)
         {
-            IProductModel product = (IProductModel)_view.ProductList.itemsSource[index];
             Image back = element.Q<Image>("product__preview-back");
-            back.image = null;
-            back.sprite = product.Back;
+            back.image = product.Back ? product.Back.texture : null;
             Image front = element.Q<Image>("product__preview-front");
-            front.image = null;
-            front.sprite = product.Front;
+            front.image = product.Front ? product.Front.texture : null;
             element.Q<IconLabel>("product__price").Label = product.Price.ToString();
+        }
+
+        private void SelectCard(VisualElement card)
+        {
+            _selectedCard?.RemoveFromClassList(SELECTED_CARD_CLASS);
+            _selectedCard = card;
+            _selectedCard.AddToClassList(SELECTED_CARD_CLASS);
+            _view.ProductList.ScrollTo(card);
+        }
+
+        private void ClearProductList()
+        {
+            _selectedCard = null;
+            _view.ProductList.Clear();
+            _view.ProductList.scrollOffset = Vector2.zero;
         }
 
         private void ReleaseProducts()

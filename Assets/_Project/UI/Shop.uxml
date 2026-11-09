@@ -10,7 +10,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="shop__bottom-bar" style="height: 35%; bottom: 4%;">
             <ui:Button text="Apply" name="shop__apply-button" class="lease-extension__button prison-font" style="align-self: flex-end; aspect-ratio: 2.1766; flex-shrink: 1; height: 28%;"/>
-            <ui:ListView virtualization-method="DynamicHeight" horizontal-scrolling="true" allow-remove="false" name="shop__product-list" show-border="false" allow-add="false" item-template="project://database/Assets/_Project/UI/Elements/Product.uxml?fileID=9197481963319205126&amp;guid=7d79d2fd52d0a064e8026f92ed88800d&amp;type=3#Product" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.118); backdrop-filter: blur(1.14);"/>
+            <ui:ScrollView name="shop__product-list" mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

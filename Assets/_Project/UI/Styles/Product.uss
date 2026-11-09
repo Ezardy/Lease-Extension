@@ -18,6 +18,6 @@
 
 
 
-.unity-collection-view__item--selected #product__background {
+.shop__product-card--selected #product__background {
     filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
 }

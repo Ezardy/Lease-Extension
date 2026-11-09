@@ -8,6 +8,6 @@ namespace LeaseExtension.UI.Shop
         public Button Close { get; }
         public EnumField CosmeticsTarget { get; }
         public Button Apply { get; }
-        public ListView ProductList { get; }
+        public ScrollView ProductList { get; }
     }
 }
