@@ -4,8 +4,8 @@ using System.Collections.Generic;
 namespace LeaseExtension.Shop.Save
 {
     [Serializable]
-    internal struct CosmeticsCollection
+    internal struct OwnedProductCollection
     {
-        public List<string> IdCollection;
+        public List<string> Ids;
     }
 }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38718ee6a7f3d0742964a9894a45658d, type: 3}
-  m_Name: PupCosmeticsSave
+  m_Name: GrannyHairstyleSave
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsSave
   SaveData:
-    Id: Assets/_Project/SO/Hairstyles/PupVariants/BowlHairstyle.asset
+    Id: Assets/_Project/SO/Hairstyles/BabVariants/CurlesHairstyle.asset
   _doLoad: 1
-  _filename: pup_cosmetics.json
+  _filename: bab_cosmetics.json

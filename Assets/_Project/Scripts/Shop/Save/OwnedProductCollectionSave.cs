@@ -8,7 +8,7 @@ using Zenject;
 namespace LeaseExtension.Shop.Save
 {
     [CreateAssetMenu(fileName = "CosmeticsCollectionSave", menuName = "Scriptable Objects/Saves/Cosmetics Collection")]
-    internal class CosmeticsCollectionSave : SaveBase<CosmeticsCollection>, IInitializable, IDisposable
+    internal class OwnedProductCollectionSave : SaveBase<OwnedProductCollection>, IInitializable, IDisposable
     {
         private ITargetProductListModel _model;
         private IDisposable _disposable;
@@ -24,7 +24,7 @@ namespace LeaseExtension.Shop.Save
             Init();
             _disposable = _model.ProductOwned.Subscribe(e =>
             {
-                SaveData.IdCollection.Add(e.Value);
+                SaveData.Ids.Add(e.Value);
                 Save();
             });
         }

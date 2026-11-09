@@ -10,6 +10,6 @@ namespace LeaseExtension.Shop.Contract
         public IReadOnlyCollection<AssetReference> Products { get; }
         public IReadOnlyCollection<string> OwnedProductIds { get; }
         public Observable<CollectionAddEvent<string>> ProductOwned { get; }
-        public void Own(in string hair);
+        public void Own(in string productId);
     }
 }
