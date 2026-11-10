@@ -2,7 +2,7 @@ namespace LeaseExtension.Cosmetics.Contract
 {
     public enum CosmeticsTarget : byte
     {
-        GrannyHairstyle,
+        GranHairstyle,
         GrandsonHairstyle
     }
 }

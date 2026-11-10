@@ -11,5 +11,9 @@
 }
 
 #shop__product-list .selectable-scroll-view__item {
-    height: 94%;
+    height: 100%;
+}
+
+.unity-scroll-view__content-viewport--horizontal {
+    overflow: visible;
 }

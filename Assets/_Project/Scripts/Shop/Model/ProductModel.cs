@@ -7,10 +7,12 @@ namespace LeaseExtension.Shop.Model
     [CreateAssetMenu(fileName = "CosmeticsVariant", menuName = "Scriptable Objects/Cosmetics Variant")]
     internal class ProductModel : SerializableScriptableObject, IProductModel
     {
+        [SerializeField] private string _label;
         [SerializeField] private uint _price;
         [SerializeField] private Sprite _back;
         [SerializeField] private Sprite _front;
 
+        public string Label => _label;
         public uint Price => _price;
         public Sprite Back => _back;
         public Sprite Front => _front;

@@ -45,6 +45,7 @@ namespace LeaseExtension.UI.Shop
             Image front = element.Q<Image>("product__preview-front");
             front.image = product.Front ? product.Front.texture : null;
             element.Q<IconLabel>("product__price").Label = product.Price.ToString();
+            element.Q<Label>("product__label").text = product.Label;
         }
     }
 }

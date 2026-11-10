@@ -1,5 +1,6 @@
 :root {
     --text-color: rgb(190, 202, 198);
+    --text-dark-color: rgb(12, 63, 51);
     --button-color: rgba(49, 108, 101, 0.38);
     --button-border-bright-color: rgba(27, 90, 75, 0.38);
     --button-border-dark-color: rgba(15, 52, 43, 0.38);

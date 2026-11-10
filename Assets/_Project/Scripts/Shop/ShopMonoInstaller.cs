@@ -27,7 +27,7 @@ namespace LeaseExtension.Shop
         [SerializeField, Min(0)]
         private float _rulerMaxRatio = 1.8f;
         [SerializeField]
-        private Dictionary<CosmeticsTarget, TargetProducts> _productsByTarget = new();
+        private List<TargetProducts> _productsByTarget = new();
 
         public override void InstallBindings()
         {
@@ -43,31 +43,28 @@ namespace LeaseExtension.Shop
         private void InstallProductLists()
         {
             Dictionary<CosmeticsTarget, ITargetProductListModel> models = new();
-            foreach (CosmeticsTarget target in Enum.GetValues(typeof(CosmeticsTarget)))
+            foreach (TargetProducts targetProducts in _productsByTarget)
             {
-                _productsByTarget.TryGetValue(target, out TargetProducts products);
-                OwnedProductCollectionSave save = products.Save;
-                if (save != null && !Container.IsValidating)
+                OwnedProductCollectionSave save = targetProducts.Save;
+                if (!Container.IsValidating)
                 {
                     save.Load();
                 }
 
-                TargetProductListModel model = new(products.References, save?.Data.Ids);
-                models.Add(target, model);
-                if (save != null)
-                {
-                    save.Init(model);
-                    Container.BindInterfacesTo<OwnedProductCollectionSave>().FromInstance(save);
-                }
+                TargetProductListModel model = new(targetProducts.Products, save.Data.Ids);
+                models.Add(targetProducts.Target, model);
+                save.Init(model);
+                Container.BindInterfacesTo<OwnedProductCollectionSave>().FromInstance(save);
             }
 
             Container.BindInstance<IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel>>(models);
         }
 
         [Serializable]
-        private struct TargetProducts
+        private class TargetProducts
         {
-            public List<AssetReferenceT<ProductModel>> References;
+            public CosmeticsTarget Target;
+            public List<AssetReferenceT<ProductModel>> Products;
             public OwnedProductCollectionSave Save;
         }
     }

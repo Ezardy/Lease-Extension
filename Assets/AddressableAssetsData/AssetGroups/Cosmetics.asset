@@ -15,13 +15,8 @@ MonoBehaviour:
   m_GroupName: Cosmetics
   m_GUID: 453c2eb7b94a8bb449a384f7a02a23bc
   m_SerializeEntries:
-  - m_GUID: 17e840aa1058f88489ff1198a931a710
-    m_Address: Assets/_Project/SO/Hairstyles/BabVariants
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3f09ba19a35f2db468b3e8f93e4dece5
-    m_Address: Assets/_Project/SO/Hairstyles/PupVariants
+  - m_GUID: 62384e46e1f31ef46a6be046f591d899
+    m_Address: Assets/_Project/SO/Cosmetics
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

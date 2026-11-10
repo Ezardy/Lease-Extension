@@ -13,9 +13,25 @@
 }
 
 .product__shadow {
-    filter: drop-shadow(-2.77 -3.55 0 rgba(0, 0, 0, 0.18));
+    filter: drop-shadow(-2.77 -3.55 0 rgba(0, 0, 0, 0.365));
 }
 
 .selectable-scroll-view__item--selected #product__background {
     filter: hue-rotate(3.86) drop-shadow(-3 -3 0 rgb(0, 0, 0));
+}
+
+.product__label {
+    position: absolute;
+    top: -6%;
+    right: 0%;
+    -unity-text-auto-size: best-fit 10px 100px;
+    height: 26%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }
