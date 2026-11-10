@@ -141,7 +141,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pup Animator Controller
+  m_Name: Grandson Animator Controller
   serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: Over
