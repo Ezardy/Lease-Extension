@@ -9,7 +9,7 @@ namespace LeaseExtension.Shop.Model
 {
     internal class TargetProductListModel : ITargetProductListModel
     {
-        private readonly ObservableList<string> _ownedProductIds;
+        private readonly ObservableHashSet<string> _ownedProductIds;
 
         public IReadOnlyCollection<AssetReference> Products { get; }
         public IReadOnlyCollection<string> OwnedProductIds => _ownedProductIds;
@@ -25,10 +25,7 @@ namespace LeaseExtension.Shop.Model
 
         public void Own(in string productId)
         {
-            if (!_ownedProductIds.Contains(productId))
-            {
-                _ownedProductIds.Add(productId);
-            }
+            _ownedProductIds.Add(productId);
         }
     }
 }
