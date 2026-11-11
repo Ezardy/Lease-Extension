@@ -16,6 +16,7 @@ namespace LeaseExtension.UI.Control
         [UxmlAttribute("item-template")] public VisualTreeAsset ItemTemplate { get; set; }
         public VisualElement SelectedItem { get; private set; }
         public event Action<VisualElement> OnSelectionChanged;
+        public event Action OnSelectionCleared;
 
         public SelectableScrollView() : base(ScrollViewMode.Horizontal)
         {
@@ -45,8 +46,7 @@ namespace LeaseExtension.UI.Control
 
         public void ClearItems()
         {
-            SelectedItem?.RemoveFromClassList(SELECTED_ITEM_CLASS);
-            SelectedItem = null;
+            ClearSelection();
             if (childCount > 0)
             {
                 Clear();
@@ -58,13 +58,17 @@ namespace LeaseExtension.UI.Control
         {
             SelectedItem?.RemoveFromClassList(SELECTED_ITEM_CLASS);
             SelectedItem = element;
-            if (SelectedItem != null)
-            {
-                SelectedItem.AddToClassList(SELECTED_ITEM_CLASS);
-                ScrollTo(element);
-            }
+            SelectedItem.AddToClassList(SELECTED_ITEM_CLASS);
+            ScrollTo(element);
 
             OnSelectionChanged?.Invoke(element);
+        }
+
+        public void ClearSelection()
+        {
+            SelectedItem?.RemoveFromClassList(SELECTED_ITEM_CLASS);
+            SelectedItem = null;
+            OnSelectionCleared?.Invoke();
         }
     }
 }

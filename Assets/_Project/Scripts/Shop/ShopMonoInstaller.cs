@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LeaseExtension.Common.Service;
 using LeaseExtension.Cosmetics.Contract;
+using LeaseExtension.Cosmetics.Model;
 using LeaseExtension.Shop.Contract;
 using LeaseExtension.Shop.Model;
 using LeaseExtension.Shop.Save;
@@ -43,6 +45,8 @@ namespace LeaseExtension.Shop
             foreach (TargetProducts products in _productsByTarget)
             {
                 prefabs.Add(products.Target, products.PreviewPrefab);
+                Container.Bind<IAppliedCosmeticsModel>().WithId(products.Target)
+                    .FromMethod(CreatePreviewCosmeticsModel).AsCached();
             }
 
             Container.Bind<IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel>>()
@@ -76,10 +80,18 @@ namespace LeaseExtension.Shop
             Dictionary<CosmeticsTarget, IAppliedCosmeticsModel> applied = new();
             foreach (TargetProducts products in _productsByTarget)
             {
-                applied.Add(products.Target, context.Container.ResolveId<IAppliedCosmeticsModel>(products.Target));
+                applied.Add(products.Target, context.Container.ParentContainers.Single()
+                    .ResolveId<IAppliedCosmeticsModel>(products.Target));
             }
 
             return applied;
+        }
+
+        private IAppliedCosmeticsModel CreatePreviewCosmeticsModel(InjectContext context)
+        {
+            IAppliedCosmeticsModel applied = context.Container.ParentContainers.Single()
+                .ResolveId<IAppliedCosmeticsModel>(context.Identifier);
+            return new AppliedCosmeticsModel(applied.Id);
         }
 
         [Serializable]

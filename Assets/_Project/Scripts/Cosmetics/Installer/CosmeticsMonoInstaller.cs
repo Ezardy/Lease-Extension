@@ -7,26 +7,11 @@ using Zenject;
 namespace LeaseExtension.Cosmetics.Installer
 {
     [RequireComponent(typeof(GameObjectContext))]
-    internal class CosmeticsMonoInstaller : MonoInstaller, ICosmeticsPreview
+    internal class CosmeticsMonoInstaller : MonoInstaller
     {
         [SerializeField] private CosmeticsTarget _target;
         [SerializeField] private SpriteRenderer _backRenderer;
         [SerializeField] private SpriteRenderer _frontRenderer;
-
-        public CosmeticsTarget Target => _target;
-
-        public void SetPreview(ICosmeticsModel cosmetics)
-        {
-            if (_backRenderer)
-            {
-                _backRenderer.sprite = cosmetics.Back;
-            }
-
-            if (_frontRenderer)
-            {
-                _frontRenderer.sprite = cosmetics.Front;
-            }
-        }
 
         public override void InstallBindings()
         {

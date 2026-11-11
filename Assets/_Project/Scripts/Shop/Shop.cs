@@ -22,22 +22,21 @@ namespace LeaseExtension.Shop
             _wallet = wallet;
         }
 
-        public void ExchangeOrApply(CosmeticsTarget target, IProductModel product)
+        public void ExchangeOrApply(CosmeticsTarget target, IProductModel product, string productId)
         {
-            if (product != null && _products.TryGetValue(target, out ITargetProductListModel products)
-                && _applied.TryGetValue(target, out IAppliedCosmeticsModel applied)
-                && products.Products.Any(reference => reference.AssetGUID == product.GUID))
+            ITargetProductListModel products = _products[target];
+            if (products.Products.Any(reference => reference.AssetGUID == product.GUID))
             {
-                bool owned = product.IsOwnedBy(products);
+                bool owned = products.OwnedProductIds.Contains(productId);
                 if (!owned && _wallet.Withdraw(product.Price))
                 {
-                    products.Own(product.GUID);
+                    products.Own(productId);
                     owned = true;
                 }
 
                 if (owned)
                 {
-                    applied.Id = product.GUID;
+                    _applied[target].Id = productId;
                 }
             }
         }

@@ -12,8 +12,10 @@ namespace LeaseExtension.UI.Shop
         public EnumField CosmeticsTarget { get; }
         public Button Apply { get; }
         public event Action<IProductModel> OnProductSelected;
-        public void SetProducts(IEnumerable<IProductModel> products, IReadOnlyCollection<string> ownedProductIds, string selectedId);
-        public void RefreshProducts(IReadOnlyCollection<string> ownedProductIds);
+        public event Action OnProductSelectionCleared;
+        public void SetProducts(IEnumerable<IProductModel> products);
+        public void RefreshProducts(IReadOnlyCollection<IProductModel> ownedProducts);
+        public void SelectProduct(IProductModel product);
         public void ClearProducts();
     }
 }

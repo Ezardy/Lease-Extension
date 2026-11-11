@@ -18,28 +18,30 @@ namespace LeaseExtension.UI.Shop
         public EnumField CosmeticsTarget { get; private set; }
         public Button Apply { get; private set; }
         public event Action<IProductModel> OnProductSelected;
+        public event Action OnProductSelectionCleared;
 
         public ShopView(PanelRenderer panelRenderer) : base(panelRenderer, "shop")
         {}
 
-        public void SetProducts(IEnumerable<IProductModel> products, IReadOnlyCollection<string> ownedProductIds, string selectedId)
+        public void SetProducts(IEnumerable<IProductModel> products)
         {
             _productList.SetItems(products, BindProduct);
-            RefreshProducts(ownedProductIds);
-            VisualElement selected = _productList.Children().FirstOrDefault(element =>
-                element.userData is IProductModel product && product.IsIdentifiedBy(selectedId));
-            _productList.SelectItem(selected);
         }
 
-        public void RefreshProducts(IReadOnlyCollection<string> ownedProductIds)
+        public void RefreshProducts(IReadOnlyCollection<IProductModel> ownedProducts)
         {
             foreach (VisualElement element in _productList.Children())
             {
                 IProductModel product = (IProductModel)element.userData;
-                bool owned = ownedProductIds.Any(product.IsIdentifiedBy);
+                bool owned = ownedProducts.Contains(product);
                 element.Q<IconLabel>("product__price").style.display = owned ? DisplayStyle.None : DisplayStyle.Flex;
                 element.Q("product__preview").EnableInClassList("product__preview--not-acquired", !owned);
             }
+        }
+
+        public void SelectProduct(IProductModel product)
+        {
+            _productList.SelectItem(_productList.Children().Single(element => element.userData == product));
         }
 
         public void ClearProducts()
@@ -56,15 +58,22 @@ namespace LeaseExtension.UI.Shop
             if (_productList != null)
             {
                 _productList.OnSelectionChanged -= OnSelectionChanged;
+                _productList.OnSelectionCleared -= OnSelectionCleared;
             }
 
             _productList = root.Q<SelectableScrollView>("shop__product-list");
             _productList.OnSelectionChanged += OnSelectionChanged;
+            _productList.OnSelectionCleared += OnSelectionCleared;
         }
 
         private void OnSelectionChanged(VisualElement element)
         {
-            OnProductSelected?.Invoke(element?.userData as IProductModel);
+            OnProductSelected?.Invoke((IProductModel)element.userData);
+        }
+
+        private void OnSelectionCleared()
+        {
+            OnProductSelectionCleared?.Invoke();
         }
 
         private static void BindProduct(VisualElement element, IProductModel product)

@@ -4,7 +4,7 @@ namespace LeaseExtension.Shop.Contract
 {
     public interface IShopPreviewSpawner
     {
-        public void Show(CosmeticsTarget target, IProductModel product);
+        public void Show(CosmeticsTarget target, string productId);
         public void Clear();
     }
 }
