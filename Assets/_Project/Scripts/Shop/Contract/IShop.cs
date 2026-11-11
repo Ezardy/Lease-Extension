@@ -4,6 +4,6 @@ namespace LeaseExtension.Shop.Contract
 {
     public interface IShop
     {
-        public void ExchangeOrApply(CosmeticsTarget target, IProductModel product, string productId);
+        public bool TryAcquire(CosmeticsTarget target, IProductModel product, string productId);
     }
 }

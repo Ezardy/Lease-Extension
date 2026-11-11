@@ -25,7 +25,9 @@ namespace LeaseExtension.Cosmetics.Installer
         {
             Container.Bind<CosmeticsElementModelKernel>().WithId(target).FromSubContainerResolve()
                 .ByMethod(c => InstallCharacter(c, save)).AsCached().NonLazy();
+            Container.BindInterfacesTo<CosmeticsElementModelKernel>().FromResolve(target).AsCached();
             Container.Bind<IAppliedCosmeticsModel>().WithId(target).FromResolveGetter<CosmeticsElementModelKernel>(target, c => c.Model).AsCached();
+            Container.Bind<IAppliedProductModel>().WithId(target).FromResolveGetter<CosmeticsElementModelKernel>(target, c => c.Model).AsCached();
         }
 
         private static void InstallCharacter(DiContainer container, CosmeticsSave save)
@@ -35,7 +37,8 @@ namespace LeaseExtension.Cosmetics.Installer
                 save.Load();
             }
 
-            container.Bind<IAppliedCosmeticsModel>().To<AppliedCosmeticsModel>().AsSingle().WithArguments(save.Data.Id);
+            container.Bind<IAppliedProductModel>().To<AppliedCosmeticsModel>().AsSingle().WithArguments(save.Data.Id);
+            container.Bind<IAppliedCosmeticsModel>().To<IAppliedProductModel>().FromResolve();
             container.Bind<CosmeticsElementModelKernel>().AsSingle();
             container.BindInterfacesTo<CosmeticsSave>().FromInstance(save);
             container.QueueForInject(save);
@@ -44,9 +47,9 @@ namespace LeaseExtension.Cosmetics.Installer
         [UsedImplicitly]
         private class CosmeticsElementModelKernel : Kernel
         {
-            public IAppliedCosmeticsModel Model { get; }
+            public IAppliedProductModel Model { get; }
 
-            public CosmeticsElementModelKernel(IAppliedCosmeticsModel model)
+            public CosmeticsElementModelKernel(IAppliedProductModel model)
             {
                 Model = model;
             }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LeaseExtension.Common.Service;
 using LeaseExtension.Cosmetics.Contract;
-using LeaseExtension.Cosmetics.Model;
 using LeaseExtension.Shop.Contract;
 using LeaseExtension.Shop.Model;
 using LeaseExtension.Shop.Save;
@@ -50,9 +49,13 @@ namespace LeaseExtension.Shop
             }
 
             Container.Bind<IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel>>()
-                .FromMethod(CreateAppliedCosmeticsModels).AsSingle();
+                .FromMethod(CreatePreviewCosmeticsModels).AsSingle();
+            Container.Bind<IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel>>()
+                .FromMethod(CreateAppliedProductModels).AsSingle();
+            Container.Bind<IFactory<CosmeticsTarget, GameObject>>().To<ShopPreviewFactory>()
+                .AsSingle().WithArguments(_previewSpawnPoint, prefabs);
             Container.BindInterfacesTo<Shop>().AsSingle();
-            Container.BindInterfacesTo<ShopPreviewSpawner>().AsSingle().WithArguments(_previewSpawnPoint, prefabs);
+            Container.BindInterfacesTo<ShopPreviewSpawner>().AsSingle();
         }
 
         private void InstallProductLists()
@@ -75,13 +78,24 @@ namespace LeaseExtension.Shop
             Container.BindInstance<IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel>>(models);
         }
 
-        private IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> CreateAppliedCosmeticsModels(InjectContext context)
+        private IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> CreatePreviewCosmeticsModels(InjectContext context)
         {
             Dictionary<CosmeticsTarget, IAppliedCosmeticsModel> applied = new();
             foreach (TargetProducts products in _productsByTarget)
             {
+                applied.Add(products.Target, context.Container.ResolveId<IAppliedCosmeticsModel>(products.Target));
+            }
+
+            return applied;
+        }
+
+        private IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel> CreateAppliedProductModels(InjectContext context)
+        {
+            Dictionary<CosmeticsTarget, IAppliedProductModel> applied = new();
+            foreach (TargetProducts products in _productsByTarget)
+            {
                 applied.Add(products.Target, context.Container.ParentContainers.Single()
-                    .ResolveId<IAppliedCosmeticsModel>(products.Target));
+                    .ResolveId<IAppliedProductModel>(products.Target));
             }
 
             return applied;
@@ -89,9 +103,9 @@ namespace LeaseExtension.Shop
 
         private IAppliedCosmeticsModel CreatePreviewCosmeticsModel(InjectContext context)
         {
-            IAppliedCosmeticsModel applied = context.Container.ParentContainers.Single()
-                .ResolveId<IAppliedCosmeticsModel>(context.Identifier);
-            return new AppliedCosmeticsModel(applied.Id);
+            IAppliedProductModel applied = context.Container.ParentContainers.Single()
+                .ResolveId<IAppliedProductModel>(context.Identifier);
+            return new AppliedProductModel(applied.Id);
         }
 
         [Serializable]

@@ -22,7 +22,8 @@ namespace LeaseExtension.UI.Shop
         private readonly IShopView _view;
         private readonly IPublisher<FocusedScene> _sceneRequestPublisher;
         private readonly IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> _models;
-        private readonly IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> _applied;
+        private readonly IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> _appliedCosmetics;
+        private readonly IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel> _appliedProducts;
         private readonly IWalletModel _wallet;
         private readonly IShop _shop;
         private readonly IShopPreviewSpawner _preview;
@@ -39,7 +40,8 @@ namespace LeaseExtension.UI.Shop
             IShopView view,
             IPublisher<FocusedScene> sceneRequestPublisher,
             IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> models,
-            IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> applied,
+            IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> appliedCosmetics,
+            IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel> appliedProducts,
             IWalletModel wallet,
             IShop shop,
             IShopPreviewSpawner preview)
@@ -47,7 +49,8 @@ namespace LeaseExtension.UI.Shop
             _view = view;
             _sceneRequestPublisher = sceneRequestPublisher;
             _models = models;
-            _applied = applied;
+            _appliedCosmetics = appliedCosmetics;
+            _appliedProducts = appliedProducts;
             _wallet = wallet;
             _shop = shop;
             _preview = preview;
@@ -98,7 +101,7 @@ namespace LeaseExtension.UI.Shop
             {
                 CosmeticsTarget target = entry.Key;
                 _subscriptions.Add(entry.Value.ProductOwned.Subscribe(_ => OnProductsChanged(target)));
-                _subscriptions.Add(_applied[target].IdChanged.Subscribe(_ => OnProductsChanged(target)));
+                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnProductsChanged(target)));
             }
 
             UpdateProductList((CosmeticsTarget)_view.CosmeticsTarget.value);
@@ -131,7 +134,7 @@ namespace LeaseExtension.UI.Shop
             try
             {
                 IEnumerable<string> ids = _models[target].Products.Select(product => product.AssetGUID)
-                    .Concat(_models[target].OwnedProductIds).Append(_applied[target].Id).Distinct();
+                    .Concat(_models[target].OwnedProductIds).Append(_appliedProducts[target].Id).Distinct();
                 foreach (string id in ids)
                 {
                     products.Add(id, Addressables.LoadAssetAsync<IProductModel>(id));
@@ -158,7 +161,7 @@ namespace LeaseExtension.UI.Shop
 
                     _view.SetProducts(_productIds.Keys);
                     RefreshOwnership();
-                    IProductModel applied = products[_applied[target].Id].Result;
+                    IProductModel applied = products[_appliedProducts[target].Id].Result;
                     if (_productIds.ContainsKey(applied))
                     {
                         _view.SelectProduct(applied);
@@ -180,7 +183,8 @@ namespace LeaseExtension.UI.Shop
         private void OnProductSelected(IProductModel product)
         {
             _selected = product;
-            _preview.Show(_target, _productIds[product]);
+            _appliedCosmetics[_target].Id = _productIds[product];
+            _preview.Show(_target);
             UpdateButton();
         }
 
@@ -193,7 +197,12 @@ namespace LeaseExtension.UI.Shop
 
         private void OnApplyClicked()
         {
-            _shop.ExchangeOrApply(_target, _selected, _productIds[_selected]);
+            IProductModel product = _selected;
+            string productId = _productIds[product];
+            if (_shop.TryAcquire(_target, product, productId))
+            {
+                _appliedProducts[_target].Id = productId;
+            }
             UpdateButton();
         }
 
@@ -224,7 +233,7 @@ namespace LeaseExtension.UI.Shop
                 bool owned = _models[_target].OwnedProductIds.Contains(_productIds[_selected]);
                 _view.Apply.text = owned ? "Apply" : "Exchange";
                 _view.Apply.SetEnabled(owned
-                    ? _products[_applied[_target].Id].Result != _selected
+                    ? _products[_appliedProducts[_target].Id].Result != _selected
                     : _wallet.Balance >= _selected.Price);
             }
         }
