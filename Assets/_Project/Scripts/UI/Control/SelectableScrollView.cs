@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,6 +15,7 @@ namespace LeaseExtension.UI.Control
 
         [UxmlAttribute("item-template")] public VisualTreeAsset ItemTemplate { get; set; }
         public VisualElement SelectedItem { get; private set; }
+        public event Action<VisualElement> OnSelectionChanged;
 
         public SelectableScrollView() : base(ScrollViewMode.Horizontal)
         {
@@ -53,12 +54,17 @@ namespace LeaseExtension.UI.Control
             scrollOffset = Vector2.zero;
         }
 
-        private void SelectItem(VisualElement element)
+        public void SelectItem(VisualElement element)
         {
             SelectedItem?.RemoveFromClassList(SELECTED_ITEM_CLASS);
             SelectedItem = element;
-            SelectedItem.AddToClassList(SELECTED_ITEM_CLASS);
-            ScrollTo(element);
+            if (SelectedItem != null)
+            {
+                SelectedItem.AddToClassList(SELECTED_ITEM_CLASS);
+                ScrollTo(element);
+            }
+
+            OnSelectionChanged?.Invoke(element);
         }
     }
 }

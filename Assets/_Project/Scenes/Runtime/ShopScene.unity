@@ -483,6 +483,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     Save: {fileID: 11400000, guid: 91ba807f90b823141a4e625f6a0d4d73, type: 2}
+    PreviewPrefab: {fileID: 2788702227342050338, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
   - Target: 1
     Products:
     - m_AssetGUID: 648f71ac336eb0a4ab8ee8edc3a19c16
@@ -501,6 +502,8 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 1
     Save: {fileID: 11400000, guid: 478abc3bd6d63a34ebd91b5087132c19, type: 2}
+    PreviewPrefab: {fileID: 8378872229495326059, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+  _previewSpawnPoint: {fileID: 1781409054}
 --- !u!1 &359778719
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,6 +700,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1781409053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1781409054}
+  m_Layer: 0
+  m_Name: Cosmetics Preview Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1781409054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781409053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -15.7, z: 0}
+  m_LocalScale: {x: 2.08, y: 2.08, z: 2.08}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -706,3 +740,4 @@ SceneRoots:
   - {fileID: 4888108}
   - {fileID: 57537776}
   - {fileID: 359778721}
+  - {fileID: 1781409054}

@@ -28,6 +28,7 @@ namespace LeaseExtension.Shop
         private float _rulerMaxRatio = 1.8f;
         [SerializeField]
         private List<TargetProducts> _productsByTarget = new();
+        [SerializeField] private Transform _previewSpawnPoint;
 
         public override void InstallBindings()
         {
@@ -38,6 +39,16 @@ namespace LeaseExtension.Shop
             Container.BindInterfacesTo<SpriteShapeWidthResizer>().AsSingle()
                 .WithArguments(_rulerShadow, _rulerWidth + 0.02f, _rulerMinRatio, _rulerMaxRatio);
             InstallProductLists();
+            Dictionary<CosmeticsTarget, GameObject> prefabs = new();
+            foreach (TargetProducts products in _productsByTarget)
+            {
+                prefabs.Add(products.Target, products.PreviewPrefab);
+            }
+
+            Container.Bind<IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel>>()
+                .FromMethod(CreateAppliedCosmeticsModels).AsSingle();
+            Container.BindInterfacesTo<Shop>().AsSingle();
+            Container.BindInterfacesTo<ShopPreviewSpawner>().AsSingle().WithArguments(_previewSpawnPoint, prefabs);
         }
 
         private void InstallProductLists()
@@ -60,12 +71,24 @@ namespace LeaseExtension.Shop
             Container.BindInstance<IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel>>(models);
         }
 
+        private IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> CreateAppliedCosmeticsModels(InjectContext context)
+        {
+            Dictionary<CosmeticsTarget, IAppliedCosmeticsModel> applied = new();
+            foreach (TargetProducts products in _productsByTarget)
+            {
+                applied.Add(products.Target, context.Container.ResolveId<IAppliedCosmeticsModel>(products.Target));
+            }
+
+            return applied;
+        }
+
         [Serializable]
         private class TargetProducts
         {
             public CosmeticsTarget Target;
             public List<AssetReferenceT<ProductModel>> Products;
             public OwnedProductCollectionSave Save;
+            public GameObject PreviewPrefab;
         }
     }
 }
