@@ -27,8 +27,8 @@ namespace LeaseExtension.UI.Shop
         private readonly IWalletModel _wallet;
         private readonly IShop _shop;
         private readonly IShopPreviewSpawner _preview;
-        private readonly List<IDisposable> _subscriptions = new();
         private readonly CancellationTokenSource _viewInitialization = new();
+        private IDisposable _subscriptions;
         private AsyncOperationHandle<IList<IProductModel>> _productsHandle;
         private CosmeticsTarget _target;
         private VisualElement _selected;
@@ -62,10 +62,7 @@ namespace LeaseExtension.UI.Shop
             _requestVersion++;
             _viewInitialization.Cancel();
             _viewInitialization.Dispose();
-            foreach (IDisposable subscription in _subscriptions)
-            {
-                subscription.Dispose();
-            }
+            _subscriptions.Dispose();
 
             if (_view.Root != null)
             {
@@ -92,12 +89,7 @@ namespace LeaseExtension.UI.Shop
             _view.OnProductSelected += OnProductSelected;
             _view.OnProductDeselected += ClearSelection;
             _view.CosmeticsTarget.RegisterValueChangedCallback(OnCosmeticsTargetChanged);
-            _subscriptions.Add(_wallet.BalanceChanged.Subscribe(_ => UpdateButton()));
-            foreach ((CosmeticsTarget target, ITargetProductListModel model) in _models)
-            {
-                _subscriptions.Add(model.ProductOwned.Subscribe(_ => OnProductOwned(target))); // TODO: Use product owned ID
-                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnAppliedProductChanged(target))); // TODO: Use ID
-            }
+            _subscriptions = _wallet.BalanceChanged.Subscribe(_ => UpdateButton());
 
             UpdateProductList((CosmeticsTarget)_view.CosmeticsTarget.value);
         }
@@ -137,7 +129,7 @@ namespace LeaseExtension.UI.Shop
                 {
                     _productsHandle = handle;
                     isRetained = true;
-                    _view.SetProducts(products);
+                    _view.SetProducts(products, (v, m) => v.dataSource = m);
                     RefreshOwnership();
                     SelectAppliedProduct();
                 }
@@ -169,9 +161,18 @@ namespace LeaseExtension.UI.Shop
         private void OnApplyClicked()
         {
             IProductModel model = (IProductModel)_selected.dataSource;
+            bool owned = _shop.IsOwned(_target, model);
             if (_shop.TryAcquire(_target, model))
             {
                 _appliedProducts[_target].Id = model.GUID;
+                if (owned)
+                {
+                    ApplyProduct();
+                }
+                else
+                {
+                    OwnProduct();
+                }
             }
             UpdateButton();
         }
@@ -180,36 +181,26 @@ namespace LeaseExtension.UI.Shop
         {
             foreach (string id in _models[_target].OwnedProductIds)
             {
-                _view.OwnProduct(_view.Cards.Single(v => ((IProductModel)v.dataSource).GUID == id));
+                _view.OwnProduct(FindProductCard(id));
             }
             UpdateButton();
         }
 
-        private void OnProductOwned(CosmeticsTarget target)
+        private void OwnProduct()
         {
-            if (target == _target)
-            {
-                _view.OwnProduct(_selected);
-                UpdateButton();
-            }
+            _view.OwnProduct(_selected);
+            UpdateButton();
         }
 
-        private void OnAppliedProductChanged(CosmeticsTarget target)
+        private void ApplyProduct()
         {
-            if (target == _target && _productsHandle.IsValid())
-            {
-                SelectAppliedProduct();
-            }
+            _view.ApplyProductCard(_selected);
         }
 
         private void SelectAppliedProduct()
         {
-            string id = _appliedProducts[_target].Id;
-            IProductModel applied = _productsHandle.Result.FirstOrDefault(product => product.GUID == id);
-            if (applied != null)
-            {
-                _view.SelectProduct(applied);
-            }
+            _selected = FindProductCard(_appliedProducts[_target].Id);
+            ApplyProduct();
         }
 
         private void UpdateButton()
@@ -222,12 +213,17 @@ namespace LeaseExtension.UI.Shop
             else
             {
                 IProductModel model = (IProductModel)_selected.dataSource;
-                bool owned = _models[_target].OwnedProductIds.Contains(model.GUID);
+                bool owned = _shop.IsOwned(_target, model);
                 _view.Apply.text = owned ? "Apply" : "Exchange";
                 _view.Apply.SetEnabled(owned
                     ? _appliedProducts[_target].Id != model.GUID
                     : _wallet.Balance >= model.Price);
             }
+        }
+
+        private VisualElement FindProductCard(string id)
+        {
+            return _view.ProductCards.Single(v => ((IProductModel)v.dataSource).GUID == id);
         }
 
         private void ReleaseProducts()

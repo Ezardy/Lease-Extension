@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using Aniki.UI.Elements;
 using JetBrains.Annotations;
-using LeaseExtension.Shop.Contract;
 using LeaseExtension.UI.Control;
 using UnityEngine.UIElements;
 
@@ -17,7 +15,7 @@ namespace LeaseExtension.UI.Shop
         public Button Close { get; private set; }
         public EnumField CosmeticsTarget { get; private set; }
         public Button Apply { get; private set; }
-        public IEnumerable<VisualElement> Cards => _productList.Children();
+        public IEnumerable<VisualElement> ProductCards => _productList.Children();
         
         public event Action<VisualElement> OnProductSelected;
         public event Action OnProductDeselected;
@@ -25,9 +23,9 @@ namespace LeaseExtension.UI.Shop
         public ShopView(PanelRenderer panelRenderer) : base(panelRenderer, "shop")
         {}
 
-        public void SetProducts(IEnumerable<IProductModel> products)
+        public void SetProducts<T>(IEnumerable<T> products, Action<VisualElement, T> bindFunc)
         {
-            _productList.SetItems(products, BindProduct);
+            _productList.SetItems(products, bindFunc);
         }
 
         public void OwnProduct(VisualElement card)
@@ -36,9 +34,9 @@ namespace LeaseExtension.UI.Shop
             card.Q("product__preview").EnableInClassList("product__preview--not-acquired", false);
         }
 
-        public void SelectProduct(IProductModel product)
+        public void ApplyProductCard(VisualElement product)
         {
-            _productList.SelectItem(_productList.Children().Single(element => element.dataSource == product));
+            _productList.SelectItem(product);
         }
 
         public void ClearProducts()
@@ -66,11 +64,6 @@ namespace LeaseExtension.UI.Shop
         private void OnSelectionCleared()
         {
             OnProductDeselected?.Invoke();
-        }
-
-        private static void BindProduct(VisualElement element, IProductModel product)
-        {
-            element.dataSource = product;
         }
     }
 }

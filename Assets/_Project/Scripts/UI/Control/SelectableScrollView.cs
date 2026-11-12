@@ -26,7 +26,7 @@ namespace LeaseExtension.UI.Control
 
         public void SetItems<T>(IEnumerable<T> items, Action<VisualElement, T> bindItem)
         {
-            if (ItemTemplate == null)
+            if (!ItemTemplate)
             {
                 throw new InvalidOperationException("Assign an item template before setting items.");
             }

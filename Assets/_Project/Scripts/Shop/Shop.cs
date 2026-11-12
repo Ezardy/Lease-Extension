@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Shop.Contract;
 using LeaseExtension.Wallet.Contract;
 
 namespace LeaseExtension.Shop
 {
+    [UsedImplicitly]
     internal class Shop : IShop
     {
         private readonly IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel> _products;
@@ -17,6 +19,11 @@ namespace LeaseExtension.Shop
         {
             _products = products;
             _wallet = wallet;
+        }
+
+        public bool IsOwned(CosmeticsTarget target, IProductModel model)
+        {
+            return _products[target].OwnedProductIds.Contains(model.GUID);
         }
 
         public bool TryAcquire(CosmeticsTarget target, IProductModel product)
