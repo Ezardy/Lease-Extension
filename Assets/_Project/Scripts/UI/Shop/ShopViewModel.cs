@@ -27,10 +27,9 @@ namespace LeaseExtension.UI.Shop
         private readonly IWalletModel _wallet;
         private readonly IShop _shop;
         private readonly IShopPreviewSpawner _preview;
-        private readonly Dictionary<IProductModel, string> _productIds = new();
         private readonly List<IDisposable> _subscriptions = new();
         private readonly CancellationTokenSource _viewInitialization = new();
-        private Dictionary<string, AsyncOperationHandle<IProductModel>> _products = new();
+        private AsyncOperationHandle<IList<IProductModel>> _productsHandle;
         private CosmeticsTarget _target;
         private IProductModel _selected;
         private int _requestVersion;
@@ -121,58 +120,34 @@ namespace LeaseExtension.UI.Shop
             ClearSelection();
             _view.ClearProducts();
             ReleaseProducts();
-            LoadProducts(target, _requestVersion).Forget();
+            if (_models[target].Products.Count > 0)
+            {
+                LoadProducts(target, _requestVersion).Forget();
+            }
         }
 
         private async UniTask LoadProducts(CosmeticsTarget target, int requestVersion)
         {
-            Dictionary<string, AsyncOperationHandle<IProductModel>> products = new();
+            AsyncOperationHandle<IList<IProductModel>> handle =
+                Addressables.LoadAssetsAsync<IProductModel>(_models[target].Products, null, Addressables.MergeMode.Union);
             bool isRetained = false;
             try
             {
-                IEnumerable<string> ids = _models[target].Products.Select(product => product.AssetGUID)
-                    .Concat(_models[target].OwnedProductIds).Append(_appliedProducts[target].Id).Distinct();
-                foreach (string id in ids)
-                {
-                    products.Add(id, Addressables.LoadAssetAsync<IProductModel>(id));
-                }
-
-                await UniTask.WhenAll(products.Values.Select(handle => handle.ToUniTask()));
+                IList<IProductModel> products = await handle.ToUniTask();
                 if (!_isDisposed && requestVersion == _requestVersion)
                 {
-                    _products = products;
+                    _productsHandle = handle;
                     isRetained = true;
-                    foreach (AssetReference reference in _models[target].Products)
-                    {
-                        _productIds.Add(products[reference.AssetGUID].Result, reference.AssetGUID);
-                    }
-
-                    foreach (string id in _models[target].OwnedProductIds)
-                    {
-                        IProductModel product = products[id].Result;
-                        if (_productIds.ContainsKey(product))
-                        {
-                            _productIds[product] = id;
-                        }
-                    }
-
-                    _view.SetProducts(_productIds.Keys);
+                    _view.SetProducts(products);
                     RefreshOwnership();
-                    IProductModel applied = products[_appliedProducts[target].Id].Result;
-                    if (_productIds.ContainsKey(applied))
-                    {
-                        _view.SelectProduct(applied);
-                    }
+                    SelectAppliedProduct();
                 }
             }
             finally
             {
                 if (!isRetained)
                 {
-                    foreach (AsyncOperationHandle<IProductModel> handle in products.Values)
-                    {
-                        Addressables.Release(handle);
-                    }
+                    Addressables.Release(handle);
                 }
             }
         }
@@ -180,7 +155,7 @@ namespace LeaseExtension.UI.Shop
         private void OnProductSelected(IProductModel product)
         {
             _selected = product;
-            _appliedCosmetics[_target].Id = _productIds[product];
+            _appliedCosmetics[_target].Id = product.GUID;
             _preview.Show(_target);
             UpdateButton();
         }
@@ -195,24 +170,24 @@ namespace LeaseExtension.UI.Shop
         private void OnApplyClicked()
         {
             IProductModel product = _selected;
-            string productId = _productIds[product];
-            if (_shop.TryAcquire(_target, product, productId))
+            if (_shop.TryAcquire(_target, product))
             {
-                _appliedProducts[_target].Id = productId;
+                _appliedProducts[_target].Id = product.GUID;
             }
             UpdateButton();
         }
 
         private void RefreshOwnership()
         {
-            IProductModel[] owned = _models[_target].OwnedProductIds.Select(id => _products[id].Result).ToArray();
+            IProductModel[] owned = _productsHandle.Result
+                .Where(product => _models[_target].OwnedProductIds.Contains(product.GUID)).ToArray();
             _view.RefreshProducts(owned);
             UpdateButton();
         }
 
         private void OnProductOwned(CosmeticsTarget target)
         {
-            if (target == _target && _products.Count > 0)
+            if (target == _target && _productsHandle.IsValid())
             {
                 RefreshOwnership();
             }
@@ -220,13 +195,19 @@ namespace LeaseExtension.UI.Shop
 
         private void OnAppliedProductChanged(CosmeticsTarget target)
         {
-            if (target == _target && _products.Count > 0)
+            if (target == _target && _productsHandle.IsValid())
             {
-                IProductModel applied = _products[_appliedProducts[target].Id].Result;
-                if (_productIds.ContainsKey(applied))
-                {
-                    _view.SelectProduct(applied);
-                }
+                SelectAppliedProduct();
+            }
+        }
+
+        private void SelectAppliedProduct()
+        {
+            string id = _appliedProducts[_target].Id;
+            IProductModel applied = _productsHandle.Result.FirstOrDefault(product => product.GUID == id);
+            if (applied != null)
+            {
+                _view.SelectProduct(applied);
             }
         }
 
@@ -239,23 +220,21 @@ namespace LeaseExtension.UI.Shop
             }
             else
             {
-                bool owned = _models[_target].OwnedProductIds.Contains(_productIds[_selected]);
+                bool owned = _models[_target].OwnedProductIds.Contains(_selected.GUID);
                 _view.Apply.text = owned ? "Apply" : "Exchange";
                 _view.Apply.SetEnabled(owned
-                    ? _products[_appliedProducts[_target].Id].Result != _selected
+                    ? _appliedProducts[_target].Id != _selected.GUID
                     : _wallet.Balance >= _selected.Price);
             }
         }
 
         private void ReleaseProducts()
         {
-            foreach (AsyncOperationHandle<IProductModel> handle in _products.Values)
+            if (_productsHandle.IsValid())
             {
-                Addressables.Release(handle);
+                Addressables.Release(_productsHandle);
+                _productsHandle = default;
             }
-
-            _products.Clear();
-            _productIds.Clear();
         }
     }
 }

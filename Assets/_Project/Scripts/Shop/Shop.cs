@@ -19,13 +19,13 @@ namespace LeaseExtension.Shop
             _wallet = wallet;
         }
 
-        public bool TryAcquire(CosmeticsTarget target, IProductModel product, string productId)
+        public bool TryAcquire(CosmeticsTarget target, IProductModel product)
         {
             ITargetProductListModel products = _products[target];
-            bool acquired = products.OwnedProductIds.Contains(productId);
+            bool acquired = products.OwnedProductIds.Contains(product.GUID);
             if (!acquired && _wallet.Withdraw(product.Price))
             {
-                products.Own(productId);
+                products.Own(product.GUID);
                 acquired = true;
             }
 
