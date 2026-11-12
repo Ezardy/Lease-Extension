@@ -32,7 +32,7 @@ namespace LeaseExtension.UI.Shop
         {
             foreach (VisualElement element in _productList.Children())
             {
-                IProductModel product = (IProductModel)element.userData;
+                IProductModel product = (IProductModel)element.dataSource;
                 bool owned = ownedProducts.Contains(product);
                 element.Q<IconLabel>("product__price").style.display = owned ? DisplayStyle.None : DisplayStyle.Flex;
                 element.Q("product__preview").EnableInClassList("product__preview--not-acquired", !owned);
@@ -41,7 +41,7 @@ namespace LeaseExtension.UI.Shop
 
         public void SelectProduct(IProductModel product)
         {
-            _productList.SelectItem(_productList.Children().Single(element => element.userData == product));
+            _productList.SelectItem(_productList.Children().Single(element => element.dataSource == product));
         }
 
         public void ClearProducts()
@@ -63,7 +63,7 @@ namespace LeaseExtension.UI.Shop
 
         private void OnSelectionChanged(VisualElement element)
         {
-            OnProductSelected?.Invoke((IProductModel)element.userData);
+            OnProductSelected?.Invoke((IProductModel)element.dataSource);
         }
 
         private void OnSelectionCleared()
@@ -73,15 +73,7 @@ namespace LeaseExtension.UI.Shop
 
         private static void BindProduct(VisualElement element, IProductModel product)
         {
-            element.userData = product;
             element.dataSource = product;
-            /*Image back = element.Q<Image>("product__preview-back");
-            back.image = product.Back ? product.Back.texture : null;
-            Image front = element.Q<Image>("product__preview-front");
-            front.image = product.Front ? product.Front.texture : null;
-            element.Q<IconLabel>("product__price").Label = product.Price.ToString();
-            element.Q<Label>("product__label").text = product.Label;
-            */
         }
     }
 }
