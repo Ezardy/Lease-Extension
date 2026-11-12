@@ -93,11 +93,10 @@ namespace LeaseExtension.UI.Shop
             _view.OnProductSelectionCleared += ClearSelection;
             _view.CosmeticsTarget.RegisterValueChangedCallback(OnCosmeticsTargetChanged);
             _subscriptions.Add(_wallet.BalanceChanged.Subscribe(_ => UpdateButton()));
-            foreach (KeyValuePair<CosmeticsTarget, ITargetProductListModel> entry in _models)
+            foreach ((CosmeticsTarget target, ITargetProductListModel model) in _models)
             {
-                CosmeticsTarget target = entry.Key;
-                _subscriptions.Add(entry.Value.ProductOwned.Subscribe(_ => OnProductOwned(target)));
-                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnAppliedProductChanged(target)));
+                _subscriptions.Add(model.ProductOwned.Subscribe(_ => OnProductOwned(target))); // TODO: Use product owned ID
+                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnAppliedProductChanged(target))); // TODO: Use ID
             }
 
             UpdateProductList((CosmeticsTarget)_view.CosmeticsTarget.value);

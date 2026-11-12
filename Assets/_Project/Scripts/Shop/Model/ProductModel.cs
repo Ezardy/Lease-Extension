@@ -1,5 +1,6 @@
-using Aniki.Common;
+using LeaseExtension.Common.Utilities;
 using LeaseExtension.Shop.Contract;
+using Unity.Properties;
 using UnityEngine;
 
 namespace LeaseExtension.Shop.Model
@@ -12,9 +13,9 @@ namespace LeaseExtension.Shop.Model
         [SerializeField] private Sprite _back;
         [SerializeField] private Sprite _front;
 
-        public string Label => _label;
-        public uint Price => _price;
-        public Sprite Back => _back;
-        public Sprite Front => _front;
+        [CreateProperty] public string Label => _label;
+        [CreateProperty] public uint Price => _price;
+        [CreateProperty] public Sprite Back => _back;
+        [CreateProperty] public Sprite Front => _front;
     }
 }

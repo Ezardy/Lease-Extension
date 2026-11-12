@@ -74,12 +74,14 @@ namespace LeaseExtension.UI.Shop
         private static void BindProduct(VisualElement element, IProductModel product)
         {
             element.userData = product;
-            Image back = element.Q<Image>("product__preview-back");
+            element.dataSource = product;
+            /*Image back = element.Q<Image>("product__preview-back");
             back.image = product.Back ? product.Back.texture : null;
             Image front = element.Q<Image>("product__preview-front");
             front.image = product.Front ? product.Front.texture : null;
             element.Q<IconLabel>("product__price").Label = product.Price.ToString();
             element.Q<Label>("product__label").text = product.Label;
+            */
         }
     }
 }

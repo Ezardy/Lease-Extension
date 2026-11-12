@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsCollectionSave
   SaveData:
     Ids:
-    - Assets/_Project/SO/Cosmetics/Grandson Hairstyle Variants/BowlHairstyle.asset
+    - 648f71ac336eb0a4ab8ee8edc3a19c16
   _doLoad: 1
   _filename: pup_cosmetics_collection.json

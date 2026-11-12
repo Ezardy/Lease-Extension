@@ -1,13 +1,11 @@
-﻿using LeaseExtension.Common.Contract;
+﻿using Aniki.Inspector;
+using LeaseExtension.Common.Contract;
+using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-namespace Aniki.Common {
+namespace LeaseExtension.Common.Utilities {
 	public abstract class SerializableScriptableObject : ScriptableObject, IIdentifiable {
-		[SerializeField, HideInInspector] private string	guid;
+		[SerializeField, ReadOnly] private string	guid;
 		public string	GUID => guid;
 	
 	#if UNITY_EDITOR
