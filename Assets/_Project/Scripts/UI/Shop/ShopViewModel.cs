@@ -31,7 +31,7 @@ namespace LeaseExtension.UI.Shop
         private readonly CancellationTokenSource _viewInitialization = new();
         private AsyncOperationHandle<IList<IProductModel>> _productsHandle;
         private CosmeticsTarget _target;
-        private IProductModel _selected;
+        private VisualElement _selected;
         private int _requestVersion;
         private bool _isDisposed;
 
@@ -72,7 +72,7 @@ namespace LeaseExtension.UI.Shop
                 _view.Close.clicked -= OnCloseClicked;
                 _view.Apply.clicked -= OnApplyClicked;
                 _view.OnProductSelected -= OnProductSelected;
-                _view.OnProductSelectionCleared -= ClearSelection;
+                _view.OnProductDeselected -= ClearSelection;
                 _view.CosmeticsTarget.UnregisterValueChangedCallback(OnCosmeticsTargetChanged);
             }
 
@@ -90,7 +90,7 @@ namespace LeaseExtension.UI.Shop
             _view.Close.clicked += OnCloseClicked;
             _view.Apply.clicked += OnApplyClicked;
             _view.OnProductSelected += OnProductSelected;
-            _view.OnProductSelectionCleared += ClearSelection;
+            _view.OnProductDeselected += ClearSelection;
             _view.CosmeticsTarget.RegisterValueChangedCallback(OnCosmeticsTargetChanged);
             _subscriptions.Add(_wallet.BalanceChanged.Subscribe(_ => UpdateButton()));
             foreach ((CosmeticsTarget target, ITargetProductListModel model) in _models)
@@ -151,10 +151,10 @@ namespace LeaseExtension.UI.Shop
             }
         }
 
-        private void OnProductSelected(IProductModel product)
+        private void OnProductSelected(VisualElement card)
         {
-            _selected = product;
-            _appliedCosmetics[_target].Id = product.GUID;
+            _selected = card;
+            _appliedCosmetics[_target].Id = ((IProductModel)card.dataSource).GUID;
             _preview.Show(_target);
             UpdateButton();
         }
@@ -168,10 +168,10 @@ namespace LeaseExtension.UI.Shop
 
         private void OnApplyClicked()
         {
-            IProductModel product = _selected;
-            if (_shop.TryAcquire(_target, product))
+            IProductModel model = (IProductModel)_selected.dataSource;
+            if (_shop.TryAcquire(_target, model))
             {
-                _appliedProducts[_target].Id = product.GUID;
+                _appliedProducts[_target].Id = model.GUID;
             }
             UpdateButton();
         }
@@ -220,11 +220,12 @@ namespace LeaseExtension.UI.Shop
             }
             else
             {
-                bool owned = _models[_target].OwnedProductIds.Contains(_selected.GUID);
+                IProductModel model = (IProductModel)_selected.dataSource;
+                bool owned = _models[_target].OwnedProductIds.Contains(model.GUID);
                 _view.Apply.text = owned ? "Apply" : "Exchange";
                 _view.Apply.SetEnabled(owned
-                    ? _appliedProducts[_target].Id != _selected.GUID
-                    : _wallet.Balance >= _selected.Price);
+                    ? _appliedProducts[_target].Id != model.GUID
+                    : _wallet.Balance >= model.Price);
             }
         }
 

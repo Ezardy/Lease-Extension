@@ -19,8 +19,8 @@ namespace LeaseExtension.UI.Shop
         public Button Apply { get; private set; }
         public IEnumerable<VisualElement> Cards => _productList.Children();
         
-        public event Action<IProductModel> OnProductSelected;
-        public event Action OnProductSelectionCleared;
+        public event Action<VisualElement> OnProductSelected;
+        public event Action OnProductDeselected;
 
         public ShopView(PanelRenderer panelRenderer) : base(panelRenderer, "shop")
         {}
@@ -60,12 +60,12 @@ namespace LeaseExtension.UI.Shop
 
         private void OnSelectionChanged(VisualElement element)
         {
-            OnProductSelected?.Invoke((IProductModel)element.dataSource);
+            OnProductSelected?.Invoke(element);
         }
 
         private void OnSelectionCleared()
         {
-            OnProductSelectionCleared?.Invoke();
+            OnProductDeselected?.Invoke();
         }
 
         private static void BindProduct(VisualElement element, IProductModel product)
