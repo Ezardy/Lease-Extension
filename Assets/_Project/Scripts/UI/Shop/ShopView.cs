@@ -16,7 +16,7 @@ namespace LeaseExtension.UI.Shop
         public EnumField CosmeticsTarget { get; private set; }
         public Button Apply { get; private set; }
         public IEnumerable<VisualElement> ProductCards => _productList.Children();
-        
+
         public event Action<VisualElement> OnProductSelected;
         public event Action OnProductDeselected;
 

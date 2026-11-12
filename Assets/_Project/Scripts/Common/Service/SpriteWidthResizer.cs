@@ -9,7 +9,7 @@ namespace LeaseExtension.Common.Service
     public class SpriteWidthResizer : RendererWidthResizer
     {
         private readonly SpriteRenderer _renderer;
-        
+
 
         public SpriteWidthResizer(SpriteRenderer renderer, Camera camera, IScreenSizeObserver screenSizeObserver,
             [InjectOptional] float width = 1,

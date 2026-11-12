@@ -120,7 +120,8 @@ namespace LeaseExtension.UI.Shop
         private async UniTask LoadProducts(CosmeticsTarget target, int requestVersion)
         {
             AsyncOperationHandle<IList<IProductModel>> handle =
-                Addressables.LoadAssetsAsync<IProductModel>(_models[target].Products, null, Addressables.MergeMode.Union);
+                Addressables.LoadAssetsAsync<IProductModel>(_models[target].Products, null,
+                    Addressables.MergeMode.Union);
             bool isRetained = false;
             try
             {
@@ -174,6 +175,7 @@ namespace LeaseExtension.UI.Shop
                     OwnProduct();
                 }
             }
+
             UpdateButton();
         }
 
@@ -183,6 +185,7 @@ namespace LeaseExtension.UI.Shop
             {
                 _view.OwnProduct(FindProductCard(id));
             }
+
             UpdateButton();
         }
 

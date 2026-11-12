@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using LeaseExtension.Shop.Contract;
 using LeaseExtension.UI.Contract;
 using UnityEngine.UIElements;
 

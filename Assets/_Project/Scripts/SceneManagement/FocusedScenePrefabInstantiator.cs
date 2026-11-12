@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using LeaseExtension.Common.Factory;
-using LeaseExtension.Common.Utilities;
 using LeaseExtension.SceneManagement.Contract.Message;
 using R3;
 using Object = UnityEngine.Object;

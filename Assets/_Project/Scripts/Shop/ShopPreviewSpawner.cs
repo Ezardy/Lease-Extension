@@ -5,7 +5,6 @@ using LeaseExtension.Common.Factory;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Shop.Contract;
 using UnityEngine;
-using Zenject;
 using Object = UnityEngine.Object;
 
 namespace LeaseExtension.Shop
@@ -19,7 +18,8 @@ namespace LeaseExtension.Shop
         private GameObject _instance;
         private CosmeticsTarget? _target;
 
-        public ShopPreviewSpawner(Transform spawnPoint, IReadOnlyDictionary<CosmeticsTarget, GameObject> prefabs, PrefabFactory.Factory factory)
+        public ShopPreviewSpawner(Transform spawnPoint, IReadOnlyDictionary<CosmeticsTarget, GameObject> prefabs,
+            PrefabFactory.Factory factory)
         {
             _spawnPoint = spawnPoint;
             _prefabs = prefabs;

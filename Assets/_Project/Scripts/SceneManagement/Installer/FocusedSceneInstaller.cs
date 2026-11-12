@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using LeaseExtension.Common.Factory;
-using LeaseExtension.Common.Utilities;
 using LeaseExtension.SceneManagement.Contract.Message;
 using UnityEngine;
 using Zenject;

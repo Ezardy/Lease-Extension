@@ -89,7 +89,8 @@ namespace LeaseExtension.Shop
             Container.BindInstance<IReadOnlyDictionary<CosmeticsTarget, ITargetProductListModel>>(models);
         }
 
-        private IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> CreatePreviewCosmeticsModels(InjectContext context)
+        private IReadOnlyDictionary<CosmeticsTarget, IAppliedCosmeticsModel> CreatePreviewCosmeticsModels(
+            InjectContext context)
         {
             Dictionary<CosmeticsTarget, IAppliedCosmeticsModel> applied = new();
             foreach (TargetProducts products in _productsByTarget)
@@ -100,7 +101,8 @@ namespace LeaseExtension.Shop
             return applied;
         }
 
-        private IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel> CreateAppliedProductModels(InjectContext context)
+        private IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel> CreateAppliedProductModels(
+            InjectContext context)
         {
             Dictionary<CosmeticsTarget, IAppliedProductModel> applied = new();
             foreach (TargetProducts products in _productsByTarget)

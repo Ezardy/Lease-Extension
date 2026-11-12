@@ -9,7 +9,7 @@ namespace LeaseExtension.Common.Service
     public class RendererWidthResizer : IInitializable, IDisposable
     {
         protected readonly Camera Camera;
-        
+
         private readonly Renderer _renderer;
         private readonly IScreenSizeObserver _screenSizeObserver;
         private readonly float _width;
@@ -30,7 +30,7 @@ namespace LeaseExtension.Common.Service
             _minRatio = minRatio;
             _maxRatio = maxRatio;
         }
-        
+
         public virtual void Initialize()
         {
             _disposable = _screenSizeObserver.SizeChanged.Subscribe(s =>
@@ -53,7 +53,7 @@ namespace LeaseExtension.Common.Service
                 }
             });
         }
-        
+
         public void Dispose()
         {
             _disposable.Dispose();

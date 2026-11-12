@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using LeaseExtension.Cosmetics.Contract;
 using UnityEngine;
 
 namespace LeaseExtension.Cosmetics.View

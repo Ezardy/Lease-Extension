@@ -51,6 +51,7 @@ namespace LeaseExtension.UI.Control
             {
                 Clear();
             }
+
             scrollOffset = Vector2.zero;
         }
 
