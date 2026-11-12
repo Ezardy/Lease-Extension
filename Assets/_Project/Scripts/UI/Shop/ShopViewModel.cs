@@ -75,11 +75,8 @@ namespace LeaseExtension.UI.Shop
                 _view.OnProductSelected -= OnProductSelected;
                 _view.OnProductSelectionCleared -= ClearSelection;
                 _view.CosmeticsTarget.UnregisterValueChangedCallback(OnCosmeticsTargetChanged);
-                ClearSelection();
-                _view.ClearProducts();
             }
 
-            _preview.Clear();
             ReleaseProducts();
         }
 
@@ -100,8 +97,8 @@ namespace LeaseExtension.UI.Shop
             foreach (KeyValuePair<CosmeticsTarget, ITargetProductListModel> entry in _models)
             {
                 CosmeticsTarget target = entry.Key;
-                _subscriptions.Add(entry.Value.ProductOwned.Subscribe(_ => OnProductsChanged(target)));
-                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnProductsChanged(target)));
+                _subscriptions.Add(entry.Value.ProductOwned.Subscribe(_ => OnProductOwned(target)));
+                _subscriptions.Add(_appliedProducts[target].IdChanged.Subscribe(_ => OnAppliedProductChanged(target)));
             }
 
             UpdateProductList((CosmeticsTarget)_view.CosmeticsTarget.value);
@@ -213,11 +210,23 @@ namespace LeaseExtension.UI.Shop
             UpdateButton();
         }
 
-        private void OnProductsChanged(CosmeticsTarget target)
+        private void OnProductOwned(CosmeticsTarget target)
         {
             if (target == _target && _products.Count > 0)
             {
-                UpdateProductList(target);
+                RefreshOwnership();
+            }
+        }
+
+        private void OnAppliedProductChanged(CosmeticsTarget target)
+        {
+            if (target == _target && _products.Count > 0)
+            {
+                IProductModel applied = _products[_appliedProducts[target].Id].Result;
+                if (_productIds.ContainsKey(applied))
+                {
+                    _view.SelectProduct(applied);
+                }
             }
         }
 

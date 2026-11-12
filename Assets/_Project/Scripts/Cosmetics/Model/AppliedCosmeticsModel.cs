@@ -5,7 +5,7 @@ using R3;
 namespace LeaseExtension.Cosmetics.Model
 {
     [UsedImplicitly]
-    internal class AppliedCosmeticsModel : IAppliedProductModel
+    internal class AppliedCosmeticsModel : IAppliedCosmeticsModel
     {
         private readonly ReactiveProperty<string> _id;
 

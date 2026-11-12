@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LeaseExtension.Common.Factory;
 using LeaseExtension.Common.Service;
 using LeaseExtension.Cosmetics.Contract;
 using LeaseExtension.Shop.Contract;
@@ -10,6 +11,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.U2D;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace LeaseExtension.Shop
 {
@@ -33,13 +35,15 @@ namespace LeaseExtension.Shop
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<SpriteWidthResizer>().AsCached()
-                .WithArguments(_wall);
-            Container.BindInterfacesTo<SpriteWidthResizer>().AsCached()
-                .WithArguments(_ruler, _rulerWidth, _rulerMinRatio, _rulerMaxRatio);
-            Container.BindInterfacesTo<SpriteShapeWidthResizer>().AsSingle()
-                .WithArguments(_rulerShadow, _rulerWidth + 0.02f, _rulerMinRatio, _rulerMaxRatio);
+            InstallBackground();
             InstallProductLists();
+            InstallPreview();
+            Container.BindInterfacesTo<Shop>().AsSingle();
+        }
+
+        private void InstallPreview()
+        {
+            Container.BindFactory<Object, GameObject, PrefabFactory.Factory>().FromFactory<PrefabFactory>();
             Dictionary<CosmeticsTarget, GameObject> prefabs = new();
             foreach (TargetProducts products in _productsByTarget)
             {
@@ -52,10 +56,17 @@ namespace LeaseExtension.Shop
                 .FromMethod(CreatePreviewCosmeticsModels).AsSingle();
             Container.Bind<IReadOnlyDictionary<CosmeticsTarget, IAppliedProductModel>>()
                 .FromMethod(CreateAppliedProductModels).AsSingle();
-            Container.Bind<IFactory<CosmeticsTarget, GameObject>>().To<ShopPreviewFactory>()
-                .AsSingle().WithArguments(_previewSpawnPoint, prefabs);
-            Container.BindInterfacesTo<Shop>().AsSingle();
-            Container.BindInterfacesTo<ShopPreviewSpawner>().AsSingle();
+            Container.BindInterfacesTo<ShopPreviewSpawner>().AsSingle().WithArguments(_previewSpawnPoint, prefabs);
+        }
+
+        private void InstallBackground()
+        {
+            Container.BindInterfacesTo<SpriteWidthResizer>().AsCached()
+                .WithArguments(_wall);
+            Container.BindInterfacesTo<SpriteWidthResizer>().AsCached()
+                .WithArguments(_ruler, _rulerWidth, _rulerMinRatio, _rulerMaxRatio);
+            Container.BindInterfacesTo<SpriteShapeWidthResizer>().AsSingle()
+                .WithArguments(_rulerShadow, _rulerWidth + 0.02f, _rulerMinRatio, _rulerMaxRatio);
         }
 
         private void InstallProductLists()
@@ -94,8 +105,9 @@ namespace LeaseExtension.Shop
             Dictionary<CosmeticsTarget, IAppliedProductModel> applied = new();
             foreach (TargetProducts products in _productsByTarget)
             {
-                applied.Add(products.Target, context.Container.ParentContainers.Single()
-                    .ResolveId<IAppliedProductModel>(products.Target));
+                IAppliedCosmeticsModel cosmetics = context.Container.ParentContainers.Single()
+                    .ResolveId<IAppliedCosmeticsModel>(products.Target);
+                applied.Add(products.Target, new AppliedProductModel(cosmetics));
             }
 
             return applied;
@@ -103,9 +115,9 @@ namespace LeaseExtension.Shop
 
         private IAppliedCosmeticsModel CreatePreviewCosmeticsModel(InjectContext context)
         {
-            IAppliedProductModel applied = context.Container.ParentContainers.Single()
-                .ResolveId<IAppliedProductModel>(context.Identifier);
-            return new AppliedProductModel(applied.Id);
+            IAppliedCosmeticsModel applied = context.Container.ParentContainers.Single()
+                .ResolveId<IAppliedCosmeticsModel>(context.Identifier);
+            return new PreviewCosmeticsModel(applied.Id);
         }
 
         [Serializable]

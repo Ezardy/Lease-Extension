@@ -22,17 +22,11 @@ namespace LeaseExtension.Shop
         public bool TryAcquire(CosmeticsTarget target, IProductModel product, string productId)
         {
             ITargetProductListModel products = _products[target];
-            bool acquired = false;
-            if (products.Products.Any(reference => reference.AssetGUID == product.GUID))
+            bool acquired = products.OwnedProductIds.Contains(productId);
+            if (!acquired && _wallet.Withdraw(product.Price))
             {
-                bool owned = products.OwnedProductIds.Contains(productId);
-                if (!owned && _wallet.Withdraw(product.Price))
-                {
-                    products.Own(productId);
-                    owned = true;
-                }
-
-                acquired = owned;
+                products.Own(productId);
+                acquired = true;
             }
 
             return acquired;

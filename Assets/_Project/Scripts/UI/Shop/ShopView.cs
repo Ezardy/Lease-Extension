@@ -55,11 +55,6 @@ namespace LeaseExtension.UI.Shop
             Close = root.Q<Button>("shop__close-button");
             CosmeticsTarget = root.Q<EnumField>("shop__cosmetics-target");
             Apply = root.Q<Button>("shop__apply-button");
-            if (_productList != null)
-            {
-                _productList.OnSelectionChanged -= OnSelectionChanged;
-                _productList.OnSelectionCleared -= OnSelectionCleared;
-            }
 
             _productList = root.Q<SelectableScrollView>("shop__product-list");
             _productList.OnSelectionChanged += OnSelectionChanged;

@@ -1,5 +1,6 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using LeaseExtension.Cosmetics.Contract;
+using LeaseExtension.Shop.Contract;
 using R3;
 
 namespace LeaseExtension.Shop.Model
@@ -7,19 +8,19 @@ namespace LeaseExtension.Shop.Model
     [UsedImplicitly]
     internal class AppliedProductModel : IAppliedProductModel
     {
-        private readonly ReactiveProperty<string> _id;
+        private readonly IAppliedCosmeticsModel _cosmetics;
 
         public string Id
         {
-            get => _id.CurrentValue;
-            set => _id.Value = value;
+            get => _cosmetics.Id;
+            set => _cosmetics.Id = value;
         }
 
-        public Observable<string> IdChanged => _id;
+        public Observable<string> IdChanged => _cosmetics.IdChanged;
 
-        public AppliedProductModel(string id)
+        public AppliedProductModel(IAppliedCosmeticsModel cosmetics)
         {
-            _id = new(id);
+            _cosmetics = cosmetics;
         }
     }
 }
