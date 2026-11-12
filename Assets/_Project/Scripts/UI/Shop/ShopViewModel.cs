@@ -187,9 +187,10 @@ namespace LeaseExtension.UI.Shop
 
         private void OnProductOwned(CosmeticsTarget target)
         {
-            if (target == _target && _productsHandle.IsValid())
+            if (target == _target)
             {
-                RefreshOwnership(); // TODO: own explicitly
+                _view.OwnProduct(_selected);
+                UpdateButton();
             }
         }
 
