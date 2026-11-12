@@ -11,10 +11,11 @@ namespace LeaseExtension.UI.Shop
         public Button Close { get; }
         public EnumField CosmeticsTarget { get; }
         public Button Apply { get; }
+        public IEnumerable<VisualElement> Cards { get; }
         public event Action<IProductModel> OnProductSelected;
         public event Action OnProductSelectionCleared;
         public void SetProducts(IEnumerable<IProductModel> products);
-        public void RefreshProducts(IReadOnlyCollection<IProductModel> ownedProducts);
+        public void OwnProduct(VisualElement card);
         public void SelectProduct(IProductModel product);
         public void ClearProducts();
     }

@@ -178,9 +178,10 @@ namespace LeaseExtension.UI.Shop
 
         private void RefreshOwnership()
         {
-            IProductModel[] owned = _productsHandle.Result
-                .Where(product => _models[_target].OwnedProductIds.Contains(product.GUID)).ToArray();
-            _view.RefreshProducts(owned);
+            foreach (string id in _models[_target].OwnedProductIds)
+            {
+                _view.OwnProduct(_view.Cards.Single(v => ((IProductModel)v.dataSource).GUID == id));
+            }
             UpdateButton();
         }
 
@@ -188,7 +189,7 @@ namespace LeaseExtension.UI.Shop
         {
             if (target == _target && _productsHandle.IsValid())
             {
-                RefreshOwnership();
+                RefreshOwnership(); // TODO: own explicitly
             }
         }
 

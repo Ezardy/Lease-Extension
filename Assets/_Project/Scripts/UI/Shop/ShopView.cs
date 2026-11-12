@@ -17,6 +17,8 @@ namespace LeaseExtension.UI.Shop
         public Button Close { get; private set; }
         public EnumField CosmeticsTarget { get; private set; }
         public Button Apply { get; private set; }
+        public IEnumerable<VisualElement> Cards => _productList.Children();
+        
         public event Action<IProductModel> OnProductSelected;
         public event Action OnProductSelectionCleared;
 
@@ -28,15 +30,10 @@ namespace LeaseExtension.UI.Shop
             _productList.SetItems(products, BindProduct);
         }
 
-        public void RefreshProducts(IReadOnlyCollection<IProductModel> ownedProducts)
+        public void OwnProduct(VisualElement card)
         {
-            foreach (VisualElement element in _productList.Children())
-            {
-                IProductModel product = (IProductModel)element.dataSource;
-                bool owned = ownedProducts.Contains(product);
-                element.Q<IconLabel>("product__price").style.display = owned ? DisplayStyle.None : DisplayStyle.Flex;
-                element.Q("product__preview").EnableInClassList("product__preview--not-acquired", !owned);
-            }
+            card.Q<IconLabel>("product__price").style.display = DisplayStyle.None;
+            card.Q("product__preview").EnableInClassList("product__preview--not-acquired", false);
         }
 
         public void SelectProduct(IProductModel product)
