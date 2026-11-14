@@ -2,11 +2,10 @@
 }
 
 #shop__cosmetics-target.lease-extension__button {
-    --text-color: rgb(12, 63, 51);
 }
 
 #shop__product-list {
-    background-color: rgba(0, 0, 0, 0.118);
+    background-color: rgba(0, 0, 0, 0.263);
     backdrop-filter: blur(1.14);
 }
 
@@ -16,4 +15,11 @@
 
 .unity-scroll-view__content-viewport--horizontal {
     overflow: visible;
+}
+
+.shop__apply-button {
+    --text-color: rgb(255, 198, 119);
+    --button-color: rgba(156, 132, 0, 0.38);
+    --button-border-bright-color: rgba(130, 125, 15, 0.38);
+    --button-border-dark-color: rgba(71, 68, 14, 0.38);
 }

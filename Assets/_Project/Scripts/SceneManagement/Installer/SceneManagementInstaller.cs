@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using LeaseExtension.Common.Factory;
 using LeaseExtension.SceneManagement.Contract.Message;
 using LeaseExtension.SceneManagement.States;
 using R3;
@@ -7,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace LeaseExtension.SceneManagement.Installer
 {
@@ -17,11 +19,12 @@ namespace LeaseExtension.SceneManagement.Installer
 
         public override void InstallBindings()
         {
-            InstallSceneParameters();
-            InstallSceneStates();
+            Container.BindFactory<Object, GameObject, PrefabFactory.Factory>().FromFactory<PrefabFactory>();
+            Dictionary<FocusedScene, SceneParameters> parameters = InstallSceneParameters();
+            InstallSceneStates(parameters);
         }
 
-        private void InstallSceneParameters()
+        private Dictionary<FocusedScene, SceneParameters> InstallSceneParameters()
         {
             Dictionary<FocusedScene, SceneParameters> uniqueParameters = new(_sceneParameters.Count);
             foreach (SceneParameters parameters in _sceneParameters)
@@ -33,17 +36,20 @@ namespace LeaseExtension.SceneManagement.Installer
             {
                 Container.BindInstance(sceneParameters.Value.SceneReference).WithId(sceneParameters.Key);
             }
+
+            return uniqueParameters;
         }
 
-        private void InstallSceneStates()
+        private void InstallSceneStates(Dictionary<FocusedScene, SceneParameters> parameters)
         {
             Container.Bind<ReactiveProperty<FocusedScene>>().AsSingle();
             Container.Bind<Observable<FocusedScene>>().To<ReactiveProperty<FocusedScene>>().FromResolve();
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<GameSceneState, GameSceneState.Factory>()
-                .FromPoolableMemoryPool();
-            Container.BindFactory<ShopSceneState, ShopSceneState.Factory>().FromPoolableMemoryPool();
+                .FromPoolableMemoryPool(pool => pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Game].ConflictingScenePrefabs));
+            Container.BindFactory<ShopSceneState, ShopSceneState.Factory>()
+                .FromPoolableMemoryPool(pool => pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Shop].ConflictingScenePrefabs));
             Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }
 
@@ -52,6 +58,7 @@ namespace LeaseExtension.SceneManagement.Installer
         {
             public FocusedScene Scene;
             public AssetReference SceneReference;
+            public List<Object> ConflictingScenePrefabs;
         }
     }
 }

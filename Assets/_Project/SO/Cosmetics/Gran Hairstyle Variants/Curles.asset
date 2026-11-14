@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
-  m_Name: BowlHairstyle
+  m_Name: Curles
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsItemModel
-  guid: 648f71ac336eb0a4ab8ee8edc3a19c16
-  _label: Bowl
+  guid: 2f61f703dfd1840408c2849fbd596e21
+  _label: Curles
   _price: 0
-  _back: {fileID: 5000927251509650613, guid: c051cb4ad4d1fd04fa7e0b0d1f4d4864, type: 3}
-  _front: {fileID: 9040879190431018056, guid: 631eaf6bcd9d02c4f9556766e6244531, type: 3}
+  _back: {fileID: 5000927251509650613, guid: a56f95af983f43440af49f6ead37b17b, type: 3}
+  _front: {fileID: 9040879190431018056, guid: 3842cb3994b06c04380911b451b67c45, type: 3}

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
-  m_Name: BaldHairstyle
+  m_Name: Blonde
   m_EditorClassIdentifier: LeaseExtension.Shop::LeaseExtension.Shop.Model.ProductModel
-  guid: ca7b5be9d815afc4f83e32d83c69405f
-  _label: Bald
-  _price: 10
-  _back: {fileID: 0}
-  _front: {fileID: 0}
+  guid: 930cae2fc69012542a64021908999b22
+  _label: Blonde
+  _price: 40
+  _back: {fileID: 5000927251509650613, guid: 9f808a7e3cd095347b1430f094594937, type: 3}
+  _front: {fileID: 9040879190431018056, guid: f73f6bdbd214d9c489937724771e2542, type: 3}

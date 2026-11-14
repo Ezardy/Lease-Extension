@@ -6,15 +6,15 @@
     <ui:VisualElement name="shop" data-source-type="LeaseExtension.UI.Shop.IShopViewModel, LeaseExtension.UI" class="root-container" style="justify-content: space-between;">
         <ui:VisualElement name="shop__top-bar" style="height: 13%; flex-direction: row; justify-content: space-between;">
             <ui:Button text="X" name="shop__close-button" class="lease-extension__button prison-font lease-extension__colors-purple" style="aspect-ratio: 1; height: 100%;"/>
-            <ui:EnumField value="BabHairstyle" type="LeaseExtension.Cosmetics.Contract.CosmeticsTarget, LeaseExtension.Cosmetics.Contract" name="shop__cosmetics-target" class="prison-font lease-extension__button" style="flex-shrink: 1; flex-grow: 1; margin-left: 8%; margin-right: 4%; color: var(--text-dark-color);"/>
+            <ui:EnumField value="BabHairstyle" type="LeaseExtension.Cosmetics.Contract.CosmeticsTarget, LeaseExtension.Cosmetics.Contract" name="shop__cosmetics-target" class="prison-font lease-extension__button" style="flex-shrink: 1; flex-grow: 1; margin-left: 8%; margin-right: 4%;"/>
             <Aniki.UI.Elements.IconLabel icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" name="shop__wallet" class="prison-font lease-extension__colors" style="flex-direction: row; color: var(--wallet-text-color); text-shadow: -4.2px 5px 0 rgba(0, 0, 0, 0.506);">
                 <Bindings>
                     <ui:DataBinding property="Label" data-source="project://database/Assets/_Project/SO/Saves/WalletSave.asset?fileID=11400000&amp;guid=32ed5fc3fc589ad4fb25381faece47cc&amp;type=2#WalletSave" data-source-path="SaveData.Balance" binding-mode="ToTarget"/>
                 </Bindings>
             </Aniki.UI.Elements.IconLabel>
         </ui:VisualElement>
-        <ui:VisualElement name="shop__bottom-bar" style="height: 45%; bottom: 4%;">
-            <ui:Button text="Apply" name="shop__apply-button" class="lease-extension__button prison-font" style="align-self: flex-end; aspect-ratio: 2.1766; flex-shrink: 1; height: 27%;"/>
+        <ui:VisualElement name="shop__bottom-bar" style="height: 35%; bottom: 2%;">
+            <ui:Button text="Apply" name="shop__apply-button" class="lease-extension__button prison-font" style="align-self: center; aspect-ratio: 2.1766; flex-shrink: 1; height: 27%; bottom: 3%; color: var(--record-text-color);"/>
             <controls:SelectableScrollView name="shop__product-list" mode="Horizontal" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" item-template="project://database/Assets/_Project/UI/Elements/Product.uxml?fileID=9197481963319205126&amp;guid=7d79d2fd52d0a064e8026f92ed88800d&amp;type=3#Product"/>
         </ui:VisualElement>
     </ui:VisualElement>

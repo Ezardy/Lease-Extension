@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
-  m_Name: CurtainHairstyle
+  m_Name: Bob
   m_EditorClassIdentifier: LeaseExtension.Shop::LeaseExtension.Shop.Model.ProductModel
-  guid: 9f4754634e7fbce48bf9bb9d73d9edc3
-  _label: Curtain
+  guid: dcf64ce620c8b584baf9860db8dce21a
+  _label: Bob
   _price: 50
-  _back: {fileID: 0}
-  _front: {fileID: -1784205716024546507, guid: 731527fed65de684894ae017d38f5a9d, type: 3}
+  _back: {fileID: 5000927251509650613, guid: d196d564cbd954444b6aaadeda7da479, type: 3}
+  _front: {fileID: 9040879190431018056, guid: 62fdbcd6171848841bd3e742b59e4630, type: 3}

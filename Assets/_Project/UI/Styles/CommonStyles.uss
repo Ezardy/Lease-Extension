@@ -25,6 +25,8 @@
     --button-border-dark-color: rgba(48, 16, 50, 0.38);
 }
 
+
+
 .prison-font {
     -unity-font-definition: url("project://database/Assets/_Project/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
 }
@@ -60,6 +62,11 @@
 
 .lease-extension__button:hover:enabled {
     backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.5);
+}
+
+.lease-extension__button:disabled {
+    visibility: hidden;
+    backdrop-filter: blur(0) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 0 0) contrast(1);
 }
 
 .lease-extension__button:active {

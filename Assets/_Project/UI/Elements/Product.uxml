@@ -2,9 +2,9 @@
     <Style src="project://database/Assets/_Project/UI/Styles/Product.uss?fileID=7433441132597879392&amp;guid=ae1a4030caad6f74bb7b6823b1f16bee&amp;type=3#Product"/>
     <Style src="project://database/Assets/_Project/UI/Styles/CommonStyles.uss?fileID=7433441132597879392&amp;guid=71d9fd252e8d37c4894c58520a9356db&amp;type=3#CommonStyles"/>
     <Style src="project://database/Assets/_Project/Packages/Aniki.UI/Styles/Icon%20Label.uss?fileID=7433441132597879392&amp;guid=459a7587a282d2246bdbe8e148731f79&amp;type=3#Icon Label"/>
-    <ui:VisualElement name="product" picking-mode="Position" data-source-type="LeaseExtension.Shop.Contract.IProductModel, LeaseExtension.Shop.Contract" class="prison-font" style="aspect-ratio: 1; height: 100%; flex-direction: column-reverse;">
+    <ui:VisualElement name="product" picking-mode="Position" data-source-type="LeaseExtension.Shop.Contract.IProductModel, LeaseExtension.Shop.Contract" class="prison-font" style="aspect-ratio: 1; height: 100%; flex-direction: column-reverse; color: var(--text-color);">
         <ui:VisualElement name="product__background" class="lease-extension__button" style="flex-grow: 1; position: absolute; height: 100%; width: 100%;"/>
-        <ui:Label text="Label" name="product__label" class="product__label" style="color: var(--text-dark-color);">
+        <ui:Label text="Label" name="product__label" class="product__label">
             <Bindings>
                 <ui:DataBinding property="text" data-source-path="Label" binding-mode="ToTarget"/>
             </Bindings>
@@ -21,7 +21,7 @@
                 </Bindings>
             </ui:Image>
         </ui:VisualElement>
-        <Aniki.UI.Elements.IconLabel name="product__price" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" picking-mode="Ignore" class="product__shadow" style="height: 25%; top: 6%; left: 6%; color: var(--text-color);">
+        <Aniki.UI.Elements.IconLabel name="product__price" icon="project://database/Assets/_Project/Sprites/Parts/tooth.png?fileID=-3683004140809926483&amp;guid=aa34443700b33ba42be168db5f8137fe&amp;type=3#tooth_0" label="100" picking-mode="Ignore" class="product__shadow" style="height: 25%; top: 6%; left: 6%;">
             <Bindings>
                 <ui:DataBinding property="Label" data-source-path="Price" binding-mode="ToTarget"/>
             </Bindings>

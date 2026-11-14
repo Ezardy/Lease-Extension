@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using LeaseExtension.Common.Factory;
 using LeaseExtension.SceneManagement.Contract.Message;
 using MessagePipe;
 using R3;
 using UnityEngine.AddressableAssets;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace LeaseExtension.SceneManagement.States
 {
@@ -17,8 +20,8 @@ namespace LeaseExtension.SceneManagement.States
 
         public ShopSceneState(ISceneContext context, [Inject(Id = FocusedScene.Shop)] AssetReference shopScene,
             ReactiveProperty<FocusedScene> statePublisher, ISubscriber<FocusedScene> sceneRequestSubscriber,
-            GameSceneState.Factory gameStateFactory) : base(context, shopScene,
-            statePublisher, FocusedScene.Shop)
+            GameSceneState.Factory gameStateFactory, IReadOnlyCollection<Object> prefabs, PrefabFactory.Factory prefabFactory) : base(context, shopScene,
+            statePublisher, FocusedScene.Shop, prefabs, prefabFactory)
         {
             _sceneRequestSubscriber = sceneRequestSubscriber;
             _gameStateFactory = gameStateFactory;

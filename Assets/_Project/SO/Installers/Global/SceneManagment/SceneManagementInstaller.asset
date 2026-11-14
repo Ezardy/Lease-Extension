@@ -20,6 +20,8 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+    ConflictingScenePrefabs:
+    - {fileID: 3819673514233873888, guid: 12170d667a989f74fb68e0e265c81d42, type: 3}
   - Scene: 2
     SceneReference:
       m_AssetGUID: 77c0de41f6715c041a3f2071ad1cc042
@@ -27,3 +29,5 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+    ConflictingScenePrefabs:
+    - {fileID: 910270835976039874, guid: 66b70a2745e16d4479cc59f9a5feefe3, type: 3}
