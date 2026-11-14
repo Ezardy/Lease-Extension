@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: LeaseExtension.Record::LeaseExtension.Record.RecordSave
   SaveData:
     Value: 0
-  _doLoad: 1
   _filename: record.json
+  _doLoad: 1
+  _doSave: 1

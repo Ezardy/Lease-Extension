@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GranHairstyleSave
   m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsSave
   SaveData:
-    Id: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/CurlesHairstyle.asset
-  _doLoad: 1
+    Id: 2f61f703dfd1840408c2849fbd596e21
   _filename: bab_cosmetics.json
+  _doLoad: 1
+  _doSave: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: WalletSave
   m_EditorClassIdentifier: LeaseExtension.Wallet::LeaseExtension.Wallet.WalletSave
   SaveData:
-    Balance: 131
-  _doLoad: 1
+    Balance: 0
   _filename: wallet.json
+  _doLoad: 1
+  _doSave: 1

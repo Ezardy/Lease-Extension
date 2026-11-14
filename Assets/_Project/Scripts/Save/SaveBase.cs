@@ -11,14 +11,17 @@ namespace LeaseExtension.Save
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         private const string PERSISTENT_DATA_PATH =
-            "/idbfs/3dcd2e7bcb436cf4f1ac81d0c8ddf86a"; // MD5 hashed "Lease_Extension_1.0"
+            "/idbfs/9ce8c2e97e65868c85543b62f516aec1"; // MD5 hashed "Lease_Extension_1.1"
 #else
         private static string _persistentDataPath;
 #endif
 
         [SerializeField] protected TData SaveData;
-        [SerializeField] private bool _doLoad = true;
         [SerializeField] private string _filename;
+#if UNITY_EDITOR        
+        [SerializeField] private bool _doLoad = true;
+        [SerializeField] private bool _doSave = true;
+#endif        
 
         private string _path;
         public TData Data => SaveData;
@@ -55,7 +58,13 @@ namespace LeaseExtension.Save
 
         public void Load()
         {
-            if (_doLoad && File.Exists(_path))
+#if UNITY_EDITOR
+            if (!_doLoad)
+            {
+                return;
+            }
+#endif            
+            if (File.Exists(_path))
             {
                 try
                 {
@@ -70,6 +79,12 @@ namespace LeaseExtension.Save
 
         public void Save()
         {
+#if UNITY_EDITOR
+            if (!_doSave)
+            {
+                return;
+            }
+#endif            
             File.WriteAllText(_path, JsonUtility.ToJson(SaveData));
 #if UNITY_WEBGL && !UNITY_EDITOR
             Plugin.SyncFS();

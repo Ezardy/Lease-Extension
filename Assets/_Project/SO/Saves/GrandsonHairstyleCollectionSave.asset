@@ -15,5 +15,6 @@ MonoBehaviour:
   SaveData:
     Ids:
     - 648f71ac336eb0a4ab8ee8edc3a19c16
-  _doLoad: 1
   _filename: pup_cosmetics_collection.json
+  _doLoad: 1
+  _doSave: 1

@@ -15,5 +15,6 @@ MonoBehaviour:
   SaveData:
     Ids:
     - 2f61f703dfd1840408c2849fbd596e21
-  _doLoad: 1
   _filename: bab_cosmetics_collection.json
+  _doLoad: 1
+  _doSave: 1
