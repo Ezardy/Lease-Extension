@@ -172,13 +172,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gran
       objectReference: {fileID: 0}
+    - target: {fileID: 2910261550510172499, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910261550510172499, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910261550510172499, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6142945885320680770, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.7328957
       objectReference: {fileID: 0}
     - target: {fileID: 6142945885320680770, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23400068
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6142945885320680770, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -194,6 +206,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6142945885320680770, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405046157486688814, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405046157486688814, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405046157486688814, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2779878513563795138, guid: 542e8f18a7544fe4ea0fdc5ef59c15bc, type: 3}
+    - target: {fileID: 8405046157486688814, guid: 188994106080f8d478313c90e3e7fef6, type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -283,9 +311,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1326109285568252951, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760837353561230183, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.x
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760837353561230183, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.y
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760837353561230183, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8378872229495326059, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
       propertyPath: m_Name
       value: Grandson
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833702327560366106, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.x
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833702327560366106, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833702327560366106, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883767585378987507, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.x
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883767585378987507, guid: 9cef645b655564442b029bbe6b0d504f, type: 3}
+      propertyPath: m_Size.y
+      value: 4.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

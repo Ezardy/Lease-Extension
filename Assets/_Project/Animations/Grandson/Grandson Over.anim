@@ -19,7 +19,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 11.977}
+        value: {x: 0, y: 0, z: 21.423}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -35,7 +35,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0, z: 17.605}
+        value: {x: 0, y: 0, z: 26.4}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -68,7 +68,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.12999994, y: 3.5479999, z: 0}
+        value: {x: -0.088, y: 3.53, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -84,7 +84,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.14299995, y: 3.709, z: 0}
+        value: {x: -0.169, y: 3.649, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -101,9 +101,18 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 3682176603243820281, guid: 07c9df8e5fec49c439544cedcf19c878, type: 3}
+      value: {fileID: 3682176603243820281, guid: 6673db628e62fa241a4bda77cff44632, type: 3}
     attribute: m_Sprite
     path: Body
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 1040011941393589210, guid: 296ce29f2c2c5f04495b55dc113d41a1, type: 3}
+    attribute: m_Sprite
+    path: Brows
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -116,6 +125,16 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 2073732236
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+      metaData: 0
+    - serializedVersion: 2
+      path: 3487487881
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -175,7 +194,8 @@ AnimationClip:
       isSerializeReferenceCurve: 0
       metaData: 0
     pptrCurveMapping:
-    - {fileID: 3682176603243820281, guid: 07c9df8e5fec49c439544cedcf19c878, type: 3}
+    - {fileID: 3682176603243820281, guid: 6673db628e62fa241a4bda77cff44632, type: 3}
+    - {fileID: 1040011941393589210, guid: 296ce29f2c2c5f04495b55dc113d41a1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -266,7 +286,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.12999994
+        value: -0.088
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -287,7 +307,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 3.5479999
+        value: 3.53
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -371,7 +391,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 11.977
+        value: 21.423
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -392,7 +412,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.14299995
+        value: -0.169
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -413,7 +433,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 3.709
+        value: 3.649
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -497,7 +517,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 17.605
+        value: 26.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -520,7 +540,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: Hairs
     classID: 4
     script: {fileID: 0}
@@ -544,7 +564,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: Hairs
     classID: 4
     script: {fileID: 0}
