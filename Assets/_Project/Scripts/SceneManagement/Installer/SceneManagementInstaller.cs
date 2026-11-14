@@ -47,9 +47,13 @@ namespace LeaseExtension.SceneManagement.Installer
             Container.BindInstance(SceneManager.GetSceneAt(0));
             Container.BindFactory<WelcomeSceneState, WelcomeSceneState.Factory>().FromPoolableMemoryPool();
             Container.BindFactory<GameSceneState, GameSceneState.Factory>()
-                .FromPoolableMemoryPool(pool => pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Game].ConflictingScenePrefabs));
+                .FromPoolableMemoryPool(pool =>
+                    pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Game]
+                        .ConflictingScenePrefabs));
             Container.BindFactory<ShopSceneState, ShopSceneState.Factory>()
-                .FromPoolableMemoryPool(pool => pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Shop].ConflictingScenePrefabs));
+                .FromPoolableMemoryPool(pool =>
+                    pool.WithArguments<IReadOnlyCollection<Object>>(parameters[FocusedScene.Shop]
+                        .ConflictingScenePrefabs));
             Container.BindInterfacesTo<SceneManagementContext>().AsSingle();
         }
 

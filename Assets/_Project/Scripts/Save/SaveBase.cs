@@ -18,10 +18,10 @@ namespace LeaseExtension.Save
 
         [SerializeField] protected TData SaveData;
         [SerializeField] private string _filename;
-#if UNITY_EDITOR        
+#if UNITY_EDITOR
         [SerializeField] private bool _doLoad = true;
         [SerializeField] private bool _doSave = true;
-#endif        
+#endif
 
         private string _path;
         public TData Data => SaveData;
@@ -63,7 +63,7 @@ namespace LeaseExtension.Save
             {
                 return;
             }
-#endif            
+#endif
             if (File.Exists(_path))
             {
                 try
@@ -84,7 +84,7 @@ namespace LeaseExtension.Save
             {
                 return;
             }
-#endif            
+#endif
             File.WriteAllText(_path, JsonUtility.ToJson(SaveData));
 #if UNITY_WEBGL && !UNITY_EDITOR
             Plugin.SyncFS();

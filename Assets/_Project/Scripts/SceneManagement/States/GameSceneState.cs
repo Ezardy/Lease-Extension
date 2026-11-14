@@ -27,7 +27,8 @@ namespace LeaseExtension.SceneManagement.States
             ShopSceneState.Factory shopStateFactory,
             ReactiveProperty<FocusedScene> statePublisher,
             IReadOnlyCollection<Object> prefabs,
-            PrefabFactory.Factory prefabFactory) : base(context, scene, statePublisher, FocusedScene.Game, prefabs, prefabFactory)
+            PrefabFactory.Factory prefabFactory) : base(context, scene, statePublisher, FocusedScene.Game, prefabs,
+            prefabFactory)
         {
             _sceneRequestSubscriber = sceneRequestSubscriber;
             _shopStateFactory = shopStateFactory;

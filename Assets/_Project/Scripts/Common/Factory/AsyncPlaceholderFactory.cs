@@ -13,7 +13,7 @@ namespace LeaseExtension.Common.Factory
             return succeed ? instance : default;
         }
     }
-    
+
     public class AsyncPlaceholderFactory<TP, T> : PlaceholderFactory<TP, T> where T : IAsyncLoadable
     {
         public override async UniTask<T> CreateAsync(TP p)

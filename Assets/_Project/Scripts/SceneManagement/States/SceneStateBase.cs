@@ -27,7 +27,8 @@ namespace LeaseExtension.SceneManagement.States
         private AsyncOperationHandle<SceneInstance> _sceneHandle;
 
         protected SceneStateBase(ISceneContext context, AssetReference scene,
-            ReactiveProperty<FocusedScene> statePublisher, FocusedScene state, IReadOnlyCollection<Object> prefabs, PrefabFactory.Factory prefabFactory) : base(context, statePublisher, state)
+            ReactiveProperty<FocusedScene> statePublisher, FocusedScene state, IReadOnlyCollection<Object> prefabs,
+            PrefabFactory.Factory prefabFactory) : base(context, statePublisher, state)
         {
             _scene = scene;
             _prefabs = prefabs;
@@ -78,8 +79,10 @@ namespace LeaseExtension.SceneManagement.States
                 {
                     Object.Destroy(instance);
                 }
+
                 _instances.Clear();
             }
+
             Context.State = await sceneFactory.CreateAsync();
         }
 

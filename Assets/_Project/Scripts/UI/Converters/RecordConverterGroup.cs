@@ -2,6 +2,9 @@ using System.Text;
 using UnityEngine.UIElements;
 #if UNITY_EDITOR
 using UnityEditor;
+
+#else
+using UnityEngine;
 #endif
 
 namespace LeaseExtension.UI.Converters
