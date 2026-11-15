@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Shared Foundation
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Shared Foundation
+  m_GUID: 5476f7c7452749240947756f40c072e7
+  m_SerializeEntries:
+  - m_GUID: 16620308affc2b943b23249bb6811c3c
+    m_Address: Assets/_Project/Sprites/Wall/brick wall.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db7e080bb85510e4284f819eee03638e
+    m_Address: Assets/_Project/UI/Settings/Main Settings.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc00bbf4166ca274c86cdf3590f8c8b4
+    m_Address: Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 53210fea14d7b8c4a960f3ec4f592e70, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b64db1803168a2a4aa15ca88f3fb37a5, type: 2}
+    - {fileID: 11400000, guid: 74cf8aadc9fde8842bf5ebc6cdfa2eff, type: 2}

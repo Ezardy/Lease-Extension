@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Cosmetic Items
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Cosmetic Items
+  m_GUID: ed251062b7b40c04294fc941fd2fd1a9
+  m_SerializeEntries:
+  - m_GUID: 2f61f703dfd1840408c2849fbd596e21
+    m_Address: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/Curles.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6102eb58c07c4d244b88c6df90c52b4b
+    m_Address: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/Bald.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 648f71ac336eb0a4ab8ee8edc3a19c16
+    m_Address: Assets/_Project/SO/Cosmetics/Grandson Hairstyle Variants/Bowl.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 930cae2fc69012542a64021908999b22
+    m_Address: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/Blonde.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f4754634e7fbce48bf9bb9d73d9edc3
+    m_Address: Assets/_Project/SO/Cosmetics/Grandson Hairstyle Variants/Curtain.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca7b5be9d815afc4f83e32d83c69405f
+    m_Address: Assets/_Project/SO/Cosmetics/Grandson Hairstyle Variants/Bald.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf9922237fe785b46a0757e9f375cf5b
+    m_Address: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/Rock.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dcf64ce620c8b584baf9860db8dce21a
+    m_Address: Assets/_Project/SO/Cosmetics/Gran Hairstyle Variants/Bob.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 53210fea14d7b8c4a960f3ec4f592e70, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 7f0d47d178fc40c4cbb4e47f325dd4ea, type: 2}
+    - {fileID: 11400000, guid: f4036300b5d427d42b38f3c4d9b64c8a, type: 2}

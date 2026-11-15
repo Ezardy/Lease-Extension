@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Shared Game and Shop
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Shared Game and Shop
+  m_GUID: d7218573190a05349b5d7110c62c6bf2
+  m_SerializeEntries:
+  - m_GUID: 0f4eca886d562e54a911173de00dfd0c
+    m_Address: Assets/_Project/Sprites/Characters/Brows/Pup/Idle.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 126afe7123b6e704b8ac9d5ab66728dc
+    m_Address: Assets/_Project/UI/Filters/Warp.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 188994106080f8d478313c90e3e7fef6
+    m_Address: Assets/_Project/Prefabs/Character/Gran.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43f940d469c30e24c91c0b35f108399a
+    m_Address: Assets/_Project/Sprites/Characters/Brows/Bab/Brows.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 459a7587a282d2246bdbe8e148731f79
+    m_Address: Assets/_Project/Packages/Aniki.UI/Styles/Icon Label.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5deea5ac0e06d95488825b904ad7bc2a
+    m_Address: Assets/_Project/Materials/UI/Blink/Blink 2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 641023d8163ad2a4b814d341dfc18d47
+    m_Address: Assets/_Project/Materials/UI/Warp/Warp.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71d9fd252e8d37c4894c58520a9356db
+    m_Address: Assets/_Project/UI/Styles/CommonStyles.uss
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85d0bf1ae551f99488bc0d838034a094
+    m_Address: Assets/_Project/Fonts/octin-prison-free.regular.otf
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cef645b655564442b029bbe6b0d504f
+    m_Address: Assets/_Project/Prefabs/Character/Grandson.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a97c105638bdf8b4a8650670310a4cd3
+    m_Address: Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Lit-Default.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa34443700b33ba42be168db5f8137fe
+    m_Address: Assets/_Project/Sprites/Parts/tooth.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aebe0837445532448ae210638996c203
+    m_Address: Assets/_Project/Sprites/Characters/Items/Weight.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5e1b65bd59618f42826a6dc80cfa5fd
+    m_Address: Assets/_Project/Sprites/Characters/Body/Pup/Idle 1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9ca93285e63e9240bd7afaed778ba91
+    m_Address: Assets/_Project/Sprites/Characters/Body/Bab/Wait.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da07703fcc09f8d4799221050659bd55
+    m_Address: Packages/com.unity.shadergraph/Editor/Resources/Shaders/FallbackError.shader
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e260cfa7296ee7642b167f1eb5be5023
+    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/2D/Sprite-Lit-Default.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4e2b85b78e82c848821e5ada28d5bea
+    m_Address: Assets/_Project/Materials/UI/Warp/Warp.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6f6293c50f5043468fd8115ae413d32
+    m_Address: Assets/_Project/Materials/UI/Blink/Blink.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 53210fea14d7b8c4a960f3ec4f592e70, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 52a4ba8f7c5a6674ca189aafc047999c, type: 2}
+    - {fileID: 11400000, guid: 408ea8330e2fca24d85206cfb17ed7b4, type: 2}
