@@ -10,6 +10,7 @@ using LeaseExtension.Shop.Contract;
 using LeaseExtension.Wallet.Contract;
 using MessagePipe;
 using R3;
+using Unity.Properties;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
@@ -34,6 +35,8 @@ namespace LeaseExtension.UI.Shop
         private VisualElement _selected;
         private int _requestVersion;
         private bool _isDisposed;
+
+        [CreateProperty] public uint Balance => _wallet.Balance;
 
         public ShopViewModel(
             IShopView view,
@@ -84,6 +87,7 @@ namespace LeaseExtension.UI.Shop
                 _view.CosmeticsTarget.Init(default(CosmeticsTarget));
             }
 
+            _view.Root.dataSource = this;
             _view.Close.clicked += OnCloseClicked;
             _view.Apply.clicked += OnApplyClicked;
             _view.OnProductSelected += OnProductSelected;
