@@ -7,13 +7,14 @@ namespace LeaseExtension.UI.Welcome
 {
     internal class WelcomeUIMonoInstaller : MonoInstaller
     {
-        [SerializeField] private PanelRenderer _panelRenderer;
+        [SerializeField] private AssetReferenceGameObject _panelRendererPrefab;
         [SerializeField] private AssetReferenceSprite _horizontalWelcome;
         [SerializeField] private AssetReferenceSprite _verticalWelcome;
 
         public override void InstallBindings()
         {
-            Container.BindInstance(_panelRenderer);
+            Container.BindFactory<PanelRenderer, PanelRendererFactory>()
+                .FromComponentInAssetReference(_panelRendererPrefab);
             Container.BindInterfacesTo<WelcomeView>().AsSingle();
             Container.BindInterfacesTo<WelcomeViewModel>().AsSingle().WithArguments(
                 _horizontalWelcome,

@@ -3,22 +3,22 @@ using UnityEngine.UIElements;
 
 namespace LeaseExtension.UI
 {
-    internal abstract class View : IView
+    internal class View : IView
     {
-        protected readonly string RootName;
+        private readonly string _rootName;
 
         public VisualElement Root { get; private set; }
 
-        protected View(PanelRenderer panelRenderer, string rootName)
+        public View(PanelRenderer panelRenderer, string rootName)
         {
-            RootName = rootName;
+            _rootName = rootName;
             panelRenderer.RegisterUIReloadCallback(OnGUIReload);
         }
 
         protected virtual void OnGUIReload(PanelRenderer panelRenderer, VisualElement root, int version)
         {
             panelRenderer.UnregisterUIReloadCallback(OnGUIReload);
-            Root = root.Q<VisualElement>(RootName);
+            Root = root.Q<VisualElement>(_rootName);
         }
     }
 }
