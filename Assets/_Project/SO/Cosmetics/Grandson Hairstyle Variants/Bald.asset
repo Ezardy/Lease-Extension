@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c985e22323455d4aa34ba69258d8cbc, type: 3}
+  m_Name: Bald
+  m_EditorClassIdentifier: LeaseExtension.Shop::LeaseExtension.Shop.Model.ProductModel
+  guid: ca7b5be9d815afc4f83e32d83c69405f
+  _label: Bald
+  _price: 10
+  _back: {fileID: 0}
+  _front: {fileID: 0}

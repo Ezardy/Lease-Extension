@@ -1,0 +1,14 @@
+.read-only {
+    flex-direction: row;
+}
+
+.read-only__field {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.read-only__copy {
+    align-self: flex-start;
+    width: 45px;
+    margin-left: 4px;
+}

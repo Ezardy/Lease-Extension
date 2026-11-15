@@ -1,0 +1,14 @@
+.selectable-scroll-view {
+    flex-grow: 1;
+}
+
+.selectable-scroll-view__content.unity-scroll-view__content-container--horizontal {
+    height: 100%;
+    overflow: visible;
+}
+
+.selectable-scroll-view.unity-scroll-view--horizontal .selectable-scroll-view__item {
+    height: 100%;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+}

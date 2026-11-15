@@ -1,0 +1,39 @@
+.icon-label {
+    flex-direction: row;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    font-size: 100px;
+}
+
+.icon-label__icon {
+    position: absolute;
+}
+
+.icon-label__label {
+    position: absolute;
+    white-space: nowrap;
+    -unity-text-align: middle-left;
+    -unity-text-auto-size: none;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+}
+
+.icon-label__measurement {
+    visibility: hidden;
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+    white-space: nowrap;
+    -unity-text-auto-size: none;
+    margin: 0;
+    padding: 0;
+}

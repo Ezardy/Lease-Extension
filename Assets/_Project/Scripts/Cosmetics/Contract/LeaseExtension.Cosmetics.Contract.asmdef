@@ -1,0 +1,16 @@
+{
+    "name": "LeaseExtension.Cosmetics.Contract",
+    "rootNamespace": "LeaseExtension",
+    "references": [
+        "GUID:e8bd2f4872af24d43842bf9b931b833e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

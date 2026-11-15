@@ -1,0 +1,25 @@
+{
+    "name": "LeaseExtension.Shop",
+    "rootNamespace": "LeaseExtension",
+    "references": [
+        "GUID:caccfbdb442cdc64fa722b4c5585521f",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:08c558b7c518c4a4596c0ab62c9674b4",
+        "GUID:e8bd2f4872af24d43842bf9b931b833e",
+        "GUID:d5f08c9e41a07c24a97150d13fa0b7c7",
+        "GUID:5eb6977d055837a40843185997f022cc",
+        "GUID:d675251cc09940340b1a3c057ad037ca"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

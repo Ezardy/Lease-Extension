@@ -1,0 +1,91 @@
+:root {
+    --text-color: rgb(190, 202, 198);
+    --text-dark-color: rgb(12, 63, 51);
+    --button-color: rgba(49, 108, 101, 0.38);
+    --button-border-bright-color: rgba(27, 90, 75, 0.38);
+    --button-border-dark-color: rgba(15, 52, 43, 0.38);
+    --wallet-text-color: rgb(244, 185, 0);
+    --record-text-color: rgb(255, 255, 255);
+}
+
+.root-container {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+
+.lease-extension__colors-purple {
+    --text-color: rgb(180, 151, 182);
+    --button-color: rgba(76, 45, 78, 0.38);
+    --button-border-bright-color: rgba(75, 24, 78, 0.38);
+    --button-border-dark-color: rgba(48, 16, 50, 0.38);
+}
+
+
+
+.prison-font {
+    -unity-font-definition: url("project://database/Assets/_Project/Fonts/octin-prison-free.regular.otf?fileID=12800000&guid=85d0bf1ae551f99488bc0d838034a094&type=3#octin-prison-free.regular");
+}
+
+.blink-2 {
+    -unity-material: url("project://database/Assets/_Project/Materials/UI/Blink/Blink%202.mat?fileID=2100000&guid=5deea5ac0e06d95488825b904ad7bc2a&type=2#Blink 2");
+}
+
+.lease-extension__button {
+    color: var(--text-color);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-auto-size: best-fit 10px 100px;
+    background-color: var(--button-color);
+    border-right-color: var(--button-border-dark-color);
+    border-bottom-color: var(--button-border-bright-color);
+    border-left-color: var(--button-border-bright-color);
+    border-top-width: 6px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 6px;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    border-bottom-left-radius: 13px;
+    filter: drop-shadow(-3 -3 0 rgba(0, 0, 0, 0.502));
+    backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.24);
+    border-top-color: var(--button-border-dark-color);
+    overflow: visible;
+}
+
+.lease-extension__button:hover:enabled {
+    backdrop-filter: blur(1.11) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 5.21 2.89) contrast(1.5);
+}
+
+.lease-extension__button:disabled {
+    visibility: hidden;
+    backdrop-filter: blur(0) filter(url("project://database/Assets/_Project/UI/Filters/Warp.asset?fileID=11400000&guid=126afe7123b6e704b8ac9d5ab66728dc&type=2#Warp") 0 0) contrast(1);
+}
+
+.lease-extension__button:active {
+    filter: drop-shadow(-3 -3 0 rgb(0, 0, 0));
+}
+
+.unity-enum-field__input {
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 2px;
+}
+
+.unity-enum-field__text {
+    -unity-text-auto-size: best-fit 10px 100px;
+    flex-grow: 1;
+    margin-right: 7%;
+}

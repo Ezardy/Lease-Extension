@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38718ee6a7f3d0742964a9894a45658d, type: 3}
+  m_Name: GrandsonHairstyleSave
+  m_EditorClassIdentifier: LeaseExtension.Cosmetics::LeaseExtension.Cosmetics.CosmeticsSave
+  SaveData:
+    Id: 648f71ac336eb0a4ab8ee8edc3a19c16
+  _filename: pup_cosmetics.json
+  _doLoad: 1
+  _doSave: 1
